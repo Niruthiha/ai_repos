@@ -1,0 +1,31 @@
+[
+  {
+    "issue_number": 3,
+    "title": "Why are the data provided by scaffold_datasets/qm9 different from the data downloaded from the moleculeNet official website? Has it been converted in some way?",
+    "author": "zyrlia1018",
+    "state": "closed",
+    "created_at": "2025-06-09T06:15:46Z",
+    "updated_at": "2025-06-12T06:28:31Z",
+    "labels": [],
+    "body": "Why are the data provided by scaffold_datasets/qm9 different from the data downloaded from the moleculeNet official website? Has it been converted in some way?",
+    "comments": [
+      {
+        "user": "zyzisastudyreallyhardguy",
+        "body": "Hi Zyrlia1018, \n\nThank you for the interest to our paper.\n\nYes, we have adopted random splitting to create the dataset split. The detailed description is mentioned in the \"Method\" section \"Experimental settings\"--\"Splitting datasets.\" We follow the same setting as MolCLR \"https://www.nature.com/articles/s42256-022-00447-x\"."
+      }
+    ],
+    "repository": "zyzisastudyreallyhardguy/LLM4SD"
+  },
+  {
+    "issue_number": 2,
+    "title": "Unable to reproduce the results for the HIV dataset.",
+    "author": "HHW-zhou",
+    "state": "open",
+    "created_at": "2025-05-13T03:16:31Z",
+    "updated_at": "2025-05-13T03:16:31Z",
+    "labels": [],
+    "body": "Thank you for your intriguing work. However, based on the provided code, I am unable to reproduce the results for the HIV dataset. Could you please provide the experimental setup for the HIV dataset?",
+    "comments": [],
+    "repository": "zyzisastudyreallyhardguy/LLM4SD"
+  }
+]

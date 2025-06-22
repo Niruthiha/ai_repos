@@ -1,0 +1,181 @@
+[
+  {
+    "issue_number": 211,
+    "title": "BUG - Error occured - \"parts\"",
+    "author": "phreakwenci",
+    "state": "open",
+    "created_at": "2025-03-24T21:18:31Z",
+    "updated_at": "2025-04-28T03:44:03Z",
+    "labels": [],
+    "body": "**Before bringing up issue, check here: https://github.com/yjg30737/pyqt-openai?tab=readme-ov-file#troubleshooting**\n\n**Describe the bug**\nERROR\n\nTraceback (most recent call last):\nFile \"/Users/User/pyqt-openai/pyqt_openai/chat_widget/left_sidebar/chatNavWidget.py\", line 200, in _import\ndata = chatlmportDialog.getData)\nFile \"/Users/User/pyqt-openai/pyqt_openai/chat_widget/left_sidebar/importDialog.py\", line 189, in getData\nself. data = get_chatgpt_data_for_import(\nWANNAAAAAAAAAAAAAAAAAAAAAAAA\n[self. data[r] for r in checked_rows],\nЛААААААААААААААААААААААААААААААААААЛЛАЛ\nFile \"/Users/User/pyqt-openai/pyqt_openai/util/common.py\", line 285, in get_chatgpt_data_for _import\ncontent_parts = \"In\". join([str(c) for c in content|\"parts\"]])\nUNNAAAAAAA\nKeyError: 'parts'\n\n**Expected behavior**\n\nI expected the conversations.json file to load, instead I got this error\n\n\n**Desktop (please complete the following information):**\n - OS: MacOS\n \n\n**Additional context**\nTried this right after updating to 1.9.1",
+    "comments": [
+      {
+        "user": "phreakwenci",
+        "body": "Any update on this?"
+      },
+      {
+        "user": "yjg30737",
+        "body": "Sorry 😥\nI've been seriously busy lately because of my office work, so i can't even manage to fix it.\nI don't know when I'll have the time to fix this"
+      }
+    ],
+    "repository": "yjg30737/pyqt-openai"
+  },
+  {
+    "issue_number": 210,
+    "title": "Error : file is not a zip file",
+    "author": "hanicraft",
+    "state": "open",
+    "created_at": "2025-03-24T20:32:24Z",
+    "updated_at": "2025-03-24T20:32:24Z",
+    "labels": [],
+    "body": "im trying to run this but no matter how hard i try it wont work, i tested it on both binary and source code and still the same error\n\ni attached the full error here\n\n[error.txt](https://github.com/user-attachments/files/19437729/error.txt)",
+    "comments": [],
+    "repository": "yjg30737/pyqt-openai"
+  },
+  {
+    "issue_number": 207,
+    "title": "BUG - Can't Import JSON conversations",
+    "author": "phreakwenci",
+    "state": "closed",
+    "created_at": "2025-03-11T20:06:38Z",
+    "updated_at": "2025-03-24T16:18:19Z",
+    "labels": [],
+    "body": "Before bringing up issue, check here:\nhttps://github.com/yjg30737/pyqt-openai?tab=readme-ov-file#troubleshooting\n\nDescribe the bug:\nWhen I load my exported JSON conversation files into VividNode, the app acts as if there are no conversations present. The interface doesn’t display any of the chats that I know are contained in the JSON files.\n\nExpected behavior:\nI expected the app to parse and display all the conversations from my JSON files, showing a list of chats that I can review or interact with. Instead, it appears to load an empty view, even though the JSON files have valid data.\n\nScreenshots:\n(If you have any screenshots showing the empty state or error messages, please attach them here.)\n\n<img width=\"1283\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/9d9f331b-6dba-4163-8c56-1cff059717b5\" />\n<img width=\"1282\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/6e4515a5-9243-457c-8edd-d75d288f0334\" />\n\nDesktop (please complete the following information):\n\n    OS: macOS (e.g., macOS 13.3)\n    Python Version: 3.13 (installed via the official Python website)\n\nAdditional context:\n\n    I confirmed that my JSON files contain valid data by opening them in a text editor.\n    I have followed the troubleshooting guidelines in the README, but the issue persists.\n    The bug seems to occur when using the “Load JSON” feature—the app does not recognize the conversations.\n    I have tried reimporting the JSON files multiple times and even with different files, but none load correctly.\n    This issue started after the latest update to the app, and I’m running the app on my MacBook Pro.",
+    "comments": [
+      {
+        "user": "yjg30737",
+        "body": "Can you give the json file to me?\nI will check that out!\nIf the conversation is personal (quite possibly) then just give me the part of that  :)"
+      },
+      {
+        "user": "phreakwenci",
+        "body": "The JSON file does have personal info on it. I put it thru a JSON validation website to confirm it was valid and it was. It’s 90mb in size so i’m not sure if the size is the issue?\n\nYou’re saying that a portion of the Conversations.JSON will do? You don’t need the whole thing?"
+      },
+      {
+        "user": "phreakwenci",
+        "body": "I have a sanitizied version of the json file. It also doesn't load in VividNode. but it won't let me upload it here. Github keeps giving me this error. \n\"Failed to upload \"conversations-2.json\" I believe it's too large to upload Here's a google drive link: https://drive.google.com/file/d/1BMLgprFLOPh7svxswx0xj-5IZd_Lr4rG/view?usp=sharing\n"
+      }
+    ],
+    "repository": "yjg30737/pyqt-openai"
+  },
+  {
+    "issue_number": 201,
+    "title": "RAG / Second Brain Request",
+    "author": "petervflocke",
+    "state": "open",
+    "created_at": "2024-12-16T19:44:33Z",
+    "updated_at": "2024-12-16T19:44:33Z",
+    "labels": [],
+    "body": "Hi Gyu Yoon,\r\n\r\n**Is your feature request related to a problem? Please describe.**\r\nWhile your app's chat layout and functionality are highly mature, existing plugins for features like document interaction and RAG systems are not as flexible or customizable as I’d like. This makes it difficult to explore advanced use cases such as second brain systems, personalized document interaction (e.g., for Obsidian vaults), or sophisticated context summarization and metadata handling.\r\n\r\n**Describe the solution you'd like**  \r\nI propose adding a dedicated feature or tab—such as \"Chat with My Docs\"—to your app, inspired by solutions like [[NotebookLM by Google](https://notebooklm.google/)](https://notebooklm.google/). This tab would support:  \r\n- Integration with ChromaDB, Qdrant, or similar databases.  \r\n- Advanced chunking and summarization options for documents.  \r\n- Enhanced metadata handling.  \r\n- Customizable embeddings for specific use cases.  \r\n- Personalized document interaction for user-stored files, such as those in Obsidian vaults.  \r\n\r\nThis would offer a more hackable and flexible approach than current plugins.  \r\n\r\n**Describe alternatives you've considered**  \r\n- Using existing plugins, but these lack the flexibility and depth required for advanced use cases.  \r\n- Relying on external tools or forks, but these often fall short of integration and seamless user experience.  \r\n\r\n**Additional context**  \r\nI've been exploring areas like second brain systems and Retrieval-Augmented Generation (RAG). A feature like this could elevate the usability of your app for such purposes. Your progress since I last checked in 1.5 years ago has been remarkable, and I believe this addition would align well with the app's evolution.  \r\n",
+    "comments": [],
+    "repository": "yjg30737/pyqt-openai"
+  },
+  {
+    "issue_number": 172,
+    "title": "Feature knowledge",
+    "author": "ddarji1409",
+    "state": "closed",
+    "created_at": "2024-10-22T02:38:51Z",
+    "updated_at": "2024-11-01T23:11:17Z",
+    "labels": [],
+    "body": "I am still trying to understand the concrete use case of this module.\r\n\r\nThe SW doesn't know anything going on my PC yet.\r\n\r\nWhat is the point of integrating this QT gui with my PC?\r\n\r\n",
+    "comments": [
+      {
+        "user": "yjg30737",
+        "body": "Python QT gui is one of the things i'm very good at. So i chose that one.\r\nAlso it can be used broadly in Windows, MacOS, Linux, and embedded device such as Raspberry Pi.\r\nOne of the ultimate goal of this is adapting this into embedded device."
+      }
+    ],
+    "repository": "yjg30737/pyqt-openai"
+  },
+  {
+    "issue_number": 173,
+    "title": "Free TTS",
+    "author": "Space-00",
+    "state": "closed",
+    "created_at": "2024-10-23T13:56:16Z",
+    "updated_at": "2024-11-01T23:11:02Z",
+    "labels": [],
+    "body": "You are using OpenAI TTS models as the app TTS which needs API, this app was created to give free access to AI models, right? so I have a suggestion for you, instead of using OpenAI TTS for generating AI responses to voice, use this free project that gives free access to Microsoft edge TTS inside python\r\n\r\nThe project link: https://github.com/rany2/edge-tts\r\n\r\nAnd the best model is \"en-US-AvaMultilingualNeural (Female)\" in my opinion",
+    "comments": [
+      {
+        "user": "yjg30737",
+        "body": "Thanks for suggestion, i will try it out"
+      },
+      {
+        "user": "yjg30737",
+        "body": "This is a little example for you, and seems like i successfully implemented it to pyqt-openai. (Still working for other features to make a new release though)\r\n\r\nI've never tried in other OS such as Linux and MacOS and i'm using Linux in VirtrualBox and MacOS in MacInCloud, so i might not able to do sound test such as tts in both. It works in Windows though.\r\n\r\nhttps://github.com/yjg30737/edge-tts-gui"
+      },
+      {
+        "user": "Space-00",
+        "body": "Amazing, nice job man, I knew you would get something great out of it"
+      }
+    ],
+    "repository": "yjg30737/pyqt-openai"
+  },
+  {
+    "issue_number": 24,
+    "title": "is it possible to autocomplete text using openai in pyqt?",
+    "author": "thiswillbeyourgithub",
+    "state": "closed",
+    "created_at": "2023-05-12T16:17:30Z",
+    "updated_at": "2024-10-08T00:26:28Z",
+    "labels": [],
+    "body": "Hi,\r\n\r\nI'm looking for options to implement an autocompletion plugin in an application that uses PyQT. The completion would be using openai's codex (and ultimately be extended to other models).\r\n\r\nIt would really help me if I saw an implementation in your app I think :) do you have any idea how this would be coded? Any plan to do it? It looks like code completion is the only openai API you have not implemented.\r\n\r\nThanks and have a nice day!",
+    "comments": [
+      {
+        "user": "yjg30737",
+        "body": "Sorry to my belated reply.\r\n\r\nYou mean like this? https://openai.com/blog/openai-codex\r\n\r\nIf so, generating code is possible. Based of the video the page provided, we need just a prompt and result text browser(with highlighting feature).\r\n\r\nBut in the case of preview screen, it is only possible when it comes to two case: webpage or desktop application (pyqt only).\r\n\r\nWeb preview can be accomplished by using Qt WebEngine, PyQt preview can be accomplished by using QMdiArea.\r\n\r\nThank you for that, and i will include it my TODO list after i've updated prompt feature"
+      },
+      {
+        "user": "thiswillbeyourgithub",
+        "body": "> Sorry to my belated reply.\r\n\r\nNo worries, FOSS is at the pace of the owner :)\r\n\r\n> You mean like this? https://openai.com/blog/openai-codex\r\n\r\n> If so, generating code is possible. Based of the video the page provided, we need just a prompt and result text browser(with highlighting feature).\r\n\r\nI actually don't mean that, I just mean regular autocompletion of text and not specifically code. I see it more like \"regular autocompletion on steroids thanks to AI\" if that makes sense.\r\n\r\nMy issue is more on how to connect Qt's autocomplete features with an LLM.\r\n\r\nWhat do you think?"
+      },
+      {
+        "user": "yjg30737",
+        "body": "Hmm.. Could you be more specific? I need an example of it\r\n\r\nSorry to keep asking to you 😥"
+      }
+    ],
+    "repository": "yjg30737/pyqt-openai"
+  },
+  {
+    "issue_number": 99,
+    "title": "No module named 'llama_index.response'",
+    "author": "laurenceanthony",
+    "state": "closed",
+    "created_at": "2024-02-22T12:43:21Z",
+    "updated_at": "2024-10-08T00:26:09Z",
+    "labels": [],
+    "body": "After installing everything from the requirements.txt file, I'm running into the following problem:\r\nNo module named 'llama_index.response'\r\n\r\nIs the code set up for an old version of llama_index?",
+    "comments": [
+      {
+        "user": "yjg30737",
+        "body": "As a temporary measure, I've just removed llama-index package in pyqt-openai which causes error because as you said, the code is old version. Usage of llama-index is significantly changed. \r\n\r\nI will create tag to figure out how to implement \"new\" llama-index in this package."
+      },
+      {
+        "user": "laurenceanthony",
+        "body": "Sounds good. Once I get a working version here, I'll see if I can contribute to it. "
+      },
+      {
+        "user": "yjg30737",
+        "body": "It is bit too late (which is an understatement) but i applied new llamaindex codes into feature/llamaindex branch just a couple of days ago. If there are no issues, I will merge it this weekend."
+      }
+    ],
+    "repository": "yjg30737/pyqt-openai"
+  },
+  {
+    "issue_number": 128,
+    "title": "Error when importing chats from ChatGPT when user uploaded files.",
+    "author": "rolandf",
+    "state": "closed",
+    "created_at": "2024-07-25T18:22:28Z",
+    "updated_at": "2024-07-26T05:50:22Z",
+    "labels": [],
+    "body": "Type of content found in a dict instead of the expected string:\r\n\r\n{\r\n    \"asset_pointer\": \"file-service://file-XXXXXXXXXXXXXXXXXXXXXXXX\",\r\n    \"content_type\": \"image_asset_pointer\",\r\n    \"fovea\": null,\r\n    \"height\": 482,\r\n    \"metadata\": {\r\n        \"dalle\": null,\r\n        \"gizmo\": null,\r\n        \"sanitized\": true\r\n    },\r\n    \"size_bytes\": 26664,\r\n    \"width\": 802\r\n}\r\n\r\n\r\nRevised function that work from util script.py\r\n\r\n```\r\ndef get_chatgpt_data(conv_arr):\r\n    for conv in conv_arr:\r\n        # Initialize the messages list for each conversation\r\n        conv['messages'] = []\r\n\r\n        for k, v in conv['mapping'].items():\r\n            obj = {}\r\n            message = v['message']\r\n            \r\n            if message:\r\n                metadata = message['metadata']\r\n                role = message['author']['role']\r\n                create_time = datetime.fromtimestamp(message['create_time']).strftime('%Y-%m-%d %H:%M:%S') if message['create_time'] else None\r\n                update_time = datetime.fromtimestamp(message['update_time']).strftime('%Y-%m-%d %H:%M:%S') if message['update_time'] else None\r\n                content = message['content']\r\n\r\n                obj['role'] = role\r\n                obj['insert_dt'] = create_time\r\n                obj['update_dt'] = update_time\r\n\r\n                if role == 'user':\r\n                    # Handle the parts of user content\r\n                    content_parts = []\r\n                    for part in content['parts']:\r\n                        if isinstance(part, str):\r\n                            content_parts.append(part)\r\n                        elif isinstance(part, dict):\r\n                            print(f\"Encountered a dict in user content parts: {part}\")\r\n                            # Handle dict appropriately\r\n                            # Example: content_parts.append(str(part)) or another approach\r\n                            content_parts.append(str(part))  # Convert dict to string for now\r\n                            print (json.dumps(part, sort_keys=True, indent=4))\r\n                        else:\r\n                            print(f\"Unknown content type in user content parts: {type(part)}\")\r\n                    obj['content'] = '\\n'.join(content_parts)\r\n                    conv['messages'].append(obj)\r\n                else:\r\n                    if role == 'tool':\r\n                        # Skip tool role as it's for internal use only\r\n                        continue\r\n                    elif role == 'assistant':\r\n                        model_slug = metadata.get('model_slug', None)\r\n                        obj['model'] = model_slug\r\n                        content_type = content['content_type']\r\n                        \r\n                        if content_type == 'text':\r\n                            # Handle the parts of assistant's text content\r\n                            content_parts = []\r\n                            for part in content['parts']:\r\n                                if isinstance(part, str):\r\n                                    content_parts.append(part)\r\n                                elif isinstance(part, dict):\r\n                                    print(f\"Encountered a dict in assistant content parts: {part}\")\r\n                                    # Handle dict appropriately\r\n                                    # Example: content_parts.append(str(part)) or another approach\r\n                                    content_parts.append(str(part))  # Convert dict to string for now\r\n                                    print(json.dumps(part, sort_keys=True, indent=4))\r\n\r\n                                else:\r\n                                    print(f\"Unknown content type in assistant content parts: {type(part)}\")\r\n                            obj['content'] = '\\n'.join(content_parts)\r\n                            conv['messages'].append(obj)\r\n                        elif content_type == 'code':\r\n                            # Handle code content type appropriately if needed\r\n                            pass\r\n                    elif role == 'system':\r\n                        # Skip system role\r\n                        continue\r\n        \r\n        # Remove mapping key from the conversation\r\n        del conv['mapping']\r\n\r\n    return conv_arr\r\n```",
+    "comments": [
+      {
+        "user": "rolandf",
+        "body": "I was wrong in my asumption that it was when Dall-e generated images. This structure appear in the user side of the chat when files have been uploaded."
+      }
+    ],
+    "repository": "yjg30737/pyqt-openai"
+  }
+]

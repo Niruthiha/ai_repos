@@ -1,0 +1,140 @@
+[
+  {
+    "issue_number": 119,
+    "title": "Can You update the xtekky/gpt4free to use all models of blackbox.ai",
+    "author": "Niansuh",
+    "state": "closed",
+    "created_at": "2024-10-08T13:59:33Z",
+    "updated_at": "2025-03-06T08:26:08Z",
+    "labels": [],
+    "body": "Can You update the xtekky/gpt4free to use all models of blackbox.ai\r\n\r\nThanks",
+    "comments": [],
+    "repository": "RockChinQ/free-one-api"
+  },
+  {
+    "issue_number": 115,
+    "title": "huggingface逆向库已经弃用Query方法",
+    "author": "DuominuoAiEr",
+    "state": "closed",
+    "created_at": "2024-08-15T16:37:53Z",
+    "updated_at": "2024-08-18T20:32:46Z",
+    "labels": [],
+    "body": "### huggingface逆向库已经弃用Query方法\r\n\r\nhuggingface逆向库已经弃用Query方法，希望更新使用Chat方法，如图:\r\n![image](https://github.com/user-attachments/assets/9b29918d-b315-4ccb-8245-55c34fe7e35a)",
+    "comments": [
+      {
+        "user": "DuominuoAiEr",
+        "body": "我已经提交PR请求合并以修复该问题"
+      }
+    ],
+    "repository": "RockChinQ/free-one-api"
+  },
+  {
+    "issue_number": 113,
+    "title": "huggingface chat失效了吗？",
+    "author": "foxdodo",
+    "state": "open",
+    "created_at": "2024-07-15T19:13:33Z",
+    "updated_at": "2024-08-15T16:43:43Z",
+    "labels": [],
+    "body": "这个报错什么意思？已经按格式填了huggingface的账号密码\r\n```\r\n024-07-15T19:10:07.810655642Z [2024-07-16 03:10:07.810] /usr/local/lib/python3.10/site-packages/hugchat/hugchat.py (727) - [ERROR] :\r\n\r\n2024-07-15T19:10:07.810872021Z No `type` found in response: {'message': 'An error occurred', 'errorId': '129d6973-9a07-4e83-8003-xxxxxx'}\r\n\r\n2024-07-15T19:10:07.811143232Z Traceback (most recent call last):\r\n\r\n2024-07-15T19:10:07.811202007Z   File \"/app/free_one_api/impls/adapter/hugchat.py\", line 84, in test\r\n\r\n2024-07-15T19:10:07.811234275Z     for data in self.chatbot.query(\r\n\r\n2024-07-15T19:10:07.811271781Z   File \"/usr/local/lib/python3.10/site-packages/hugchat/message.py\", line 154, in __next__\r\n\r\n2024-07-15T19:10:07.811314093Z     raise self.error\r\n\r\n2024-07-15T19:10:07.811346961Z   File \"/usr/local/lib/python3.10/site-packages/hugchat/message.py\", line 100, in __next__\r\n\r\n2024-07-15T19:10:07.811372762Z     self._filterResponse(a)\r\n\r\n2024-07-15T19:10:07.811443488Z   File \"/usr/local/lib/python3.10/site-packages/hugchat/message.py\", line 84, in _filterResponse\r\n\r\n2024-07-15T19:10:07.811475774Z     raise ChatError(f\"Server returns an error: {obj['message']}\")\r\n\r\n2024-07-15T19:10:07.811565193Z hugchat.exceptions.ChatError: Server returns an error: An error occurred\r\n\r\n2024-07-15T19:10:07.812841307Z Traceback (most recent call last):\r\n\r\n2024-07-15T19:10:07.813034077Z   File \"/app/free_one_api/impls/channel/mgr.py\", line 114, in test_channel\r\n\r\n2024-07-15T19:10:07.813078087Z     raise ValueError(error)\r\n\r\n2024-07-15T19:10:07.813287627Z ValueError: Server returns an error: An error occurred\r\n\r\n2024-07-15T19:10:07.813386714Z \r\n\r\n2024-07-15T19:10:07.813412323Z The above exception was the direct cause of the following exception:\r\n\r\n2024-07-15T19:10:07.813439253Z \r\n\r\n2024-07-15T19:10:07.813532468Z Traceback (most recent call last):\r\n\r\n2024-07-15T19:10:07.813634058Z   File \"/app/free_one_api/impls/router/api.py\", line 147, in channel_test\r\n\r\n2024-07-15T19:10:07.813667724Z     latency = await self.chanmgr.test_channel(chan_id)\r\n\r\n2024-07-15T19:10:07.813756570Z   File \"/app/free_one_api/impls/channel/mgr.py\", line 117, in test_channel\r\n\r\n2024-07-15T19:10:07.813790169Z     raise ValueError(\"Test failed.\") from e\r\n\r\n2024-07-15T19:10:07.813867164Z ValueError: Test failed.\r\n```",
+    "comments": [
+      {
+        "user": "DuominuoAiEr",
+        "body": "[参考此issues手动解决，或者等待作者更新该库](https://github.com/RockChinQ/free-one-api/issues/115)"
+      }
+    ],
+    "repository": "RockChinQ/free-one-api"
+  },
+  {
+    "issue_number": 99,
+    "title": "g4f也要gg了吗",
+    "author": "codersyn",
+    "state": "open",
+    "created_at": "2024-04-17T16:36:01Z",
+    "updated_at": "2024-07-21T07:03:03Z",
+    "labels": [],
+    "body": "测试渠道的时候连接200多秒，更多时候是N/A，是本项目的问题还是逆向库的问题呢",
+    "comments": [
+      {
+        "user": "RockChinQ",
+        "body": "首次测试g4f渠道，会从前往后测试各个g4f逆向网站，直到找到一个可用的。最好是用境外主机，网络好一点。"
+      },
+      {
+        "user": "codersyn",
+        "body": "> 首次测试g4f渠道，会从前往后测试各个g4f逆向网站，直到找到一个可用的。最好是用境外主机，网络好一点。\r\n\r\n香港的主机，刚开始的时候还行，就这两天开始延迟200s的，而且好像其他的Adapter也不可用了，包括最新的那个re_gpt，按照原作者的方法添加了session_token也不行，提示Failed: Test failed"
+      },
+      {
+        "user": "taiyi747",
+        "body": "到此一游，现在没精力给g4f推代码了，g4f模型太多太复杂了"
+      }
+    ],
+    "repository": "RockChinQ/free-one-api"
+  },
+  {
+    "issue_number": 114,
+    "title": "搭配QChatGPT时提示模型请求失败",
+    "author": "huangzi0721",
+    "state": "closed",
+    "created_at": "2024-07-17T15:35:56Z",
+    "updated_at": "2024-07-17T18:31:09Z",
+    "labels": [],
+    "body": "在./data/metadata/llm-models.json已经添加通义千问的模型,qwen和qwen-turbo都试过了,报错如图,llm-models.json配置如图,不知道哪里有问题,求助\r\n<img width=\"1784\" alt=\"截屏2024-07-17 下午11 34 33\" src=\"https://github.com/user-attachments/assets/6587d46f-2c06-471c-8b39-d3588b222d55\">\r\n\r\n<img width=\"1784\" alt=\"截屏2024-07-17 下午11 28 37\" src=\"https://github.com/user-attachments/assets/3d6c6e22-70a3-48a9-b212-04b92552fdc3\">\r\n",
+    "comments": [
+      {
+        "user": "RockChinQ",
+        "body": "foa转出的模型名称都是gpt-3.5-turbo"
+      },
+      {
+        "user": "huangzi0721",
+        "body": "> foa转出的模型名称都是gpt-3.5-turbo\r\n\r\n感谢,跑通了"
+      }
+    ],
+    "repository": "RockChinQ/free-one-api"
+  },
+  {
+    "issue_number": 112,
+    "title": "请问token是什么",
+    "author": "dengsyao",
+    "state": "closed",
+    "created_at": "2024-07-15T13:30:54Z",
+    "updated_at": "2024-07-17T09:44:16Z",
+    "labels": [],
+    "body": "纯小白，登录网站后需要填写token,但是不知道怎么填。求大佬教一下",
+    "comments": [
+      {
+        "user": "RockChinQ",
+        "body": "默认是 12345678，可以到配置文件修改，具体看文档"
+      }
+    ],
+    "repository": "RockChinQ/free-one-api"
+  },
+  {
+    "issue_number": 110,
+    "title": "返回的内容中包含类似“$@$v=v1.13-rv1$@$” 这样的内容，有办法加个过滤功能吗？",
+    "author": "struggler2020",
+    "state": "open",
+    "created_at": "2024-07-06T04:01:26Z",
+    "updated_at": "2024-07-13T07:58:25Z",
+    "labels": [],
+    "body": "\r\ndata: {\"id\": \"chatcmpl-001GPT4FptQnpkopbcKwzv91mF46y\", \"object\": \"chat.completion.chunk\", \"created\": 1720235265, \"model\": \"gpt-3.5-turbo\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"$@$v=v1.13-rv1$@$Hello! It's nice to meet you. Is there something I can help you with, or would you like to chat?\"}, \"finish_reason\": null}]}\r\n\r\ndata: {\"id\": \"chatcmpl-001GPT4FptQnpkopbcKwzv91mF46y\", \"object\": \"chat.completion.chunk\", \"created\": 1720235265, \"model\": \"gpt-3.5-turbo\", \"choices\": [{\"index\": 0, \"delta\": {}, \"finish_reason\": \"stop\"}]}\r\n\r\ndata: [DONE]\r\n\r\n以上是测试返回结果，每次返回的内容中都带有”$@$v=v1.13-rv1$@$“，测试适配器是xtekky/gpt4free",
+    "comments": [
+      {
+        "user": "foxdodo",
+        "body": "这一串代码挡住了lobe-chat右侧的话题栏的标题，导致所有标题都多了个前缀，就算切换成非free-one-api的模型也一样，属实难受🤣"
+      }
+    ],
+    "repository": "RockChinQ/free-one-api"
+  },
+  {
+    "issue_number": 109,
+    "title": "报错提示No module named 'pkg_resources'",
+    "author": "huangzi0721",
+    "state": "closed",
+    "created_at": "2024-06-24T14:37:06Z",
+    "updated_at": "2024-06-24T14:50:51Z",
+    "labels": [],
+    "body": "`PS C:\\free-one-api> python main.py\r\nTraceback (most recent call last):\r\n  File \"C:\\free-one-api\\main.py\", line 11, in <module>\r\n    from free_one_api.impls import app\r\n  File \"C:\\free-one-api\\free_one_api\\impls\\app.py\", line 22, in <module>\r\n    from .adapter import gpt4free\r\n  File \"C:\\free-one-api\\free_one_api\\impls\\adapter\\gpt4free.py\", line 7, in <module>\r\n    import pkg_resources\r\nModuleNotFoundError: No module named 'pkg_resources'\r\nPS C:\\free-one-api> python main.py`\r\n小白看不懂，劳烦解答",
+    "comments": [],
+    "repository": "RockChinQ/free-one-api"
+  }
+]

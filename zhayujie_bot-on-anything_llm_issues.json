@@ -1,0 +1,138 @@
+[
+  {
+    "issue_number": 465,
+    "title": "Ubuntu 22.04和Windows部署 python命令行正常连接openai的api，但是在配置WeChat公众号之后会出现网络无法连接的情况",
+    "author": "UncleshoesXR",
+    "state": "open",
+    "created_at": "2025-05-02T14:54:41Z",
+    "updated_at": "2025-05-02T14:54:41Z",
+    "labels": [],
+    "body": null,
+    "comments": [],
+    "repository": "zhayujie/bot-on-anything"
+  },
+  {
+    "issue_number": 324,
+    "title": "使用终端能够访问，但是用订阅号则访问失败",
+    "author": "txjy",
+    "state": "open",
+    "created_at": "2023-04-18T07:35:53Z",
+    "updated_at": "2025-05-02T14:46:19Z",
+    "labels": [],
+    "body": "![image](https://user-images.githubusercontent.com/51149961/232704867-e2261f8f-62a2-4931-ab6a-02b5cd332c07.png)\r\n![image](https://user-images.githubusercontent.com/51149961/232705070-430ca59e-41d2-46a8-9912-f7d947f2f9d3.png)\r\n使用proxychains和代理访问，用命令行终端没问题，用订阅号则超时，请问这个问题怎么解决",
+    "comments": [
+      {
+        "user": "txjy",
+        "body": "![image](https://user-images.githubusercontent.com/51149961/232706680-930ea9a2-4ff2-4bc9-a40f-f99d3950500a.png)\r\n![image](https://user-images.githubusercontent.com/51149961/232706760-ddd9bd63-f806-4404-9d42-2dca7cfe3f28.png)\r\n![image](https://user-images.githubusercontent.com/51149961/232706879-0bac0807-10e8-4298-ac2e-00a163031776.png)\r\n"
+      },
+      {
+        "user": "txjy",
+        "body": "换了一个apikey可以使用了"
+      },
+      {
+        "user": "UncleshoesXR",
+        "body": "碰到了同样的问题，换了不起作用"
+      }
+    ],
+    "repository": "zhayujie/bot-on-anything"
+  },
+  {
+    "issue_number": 464,
+    "title": "请问怎样接入Gemini",
+    "author": "sesegu",
+    "state": "open",
+    "created_at": "2025-01-09T07:01:15Z",
+    "updated_at": "2025-01-09T07:01:15Z",
+    "labels": [],
+    "body": "请问怎样接入Gemini",
+    "comments": [],
+    "repository": "zhayujie/bot-on-anything"
+  },
+  {
+    "issue_number": 462,
+    "title": "用Openai接入到Telegram，运行正常，在Telegram发送信息，无回复",
+    "author": "ThorinChen",
+    "state": "open",
+    "created_at": "2024-11-10T09:44:49Z",
+    "updated_at": "2024-11-10T09:44:49Z",
+    "labels": [],
+    "body": "\r\n![Snipaste_2024-11-10_17-38-02](https://github.com/user-attachments/assets/82da8d07-4d23-4f41-b58d-3e7b5bc32b90)\r\n![Snipaste_2024-11-10_17-41-34](https://github.com/user-attachments/assets/218db04f-385d-495b-9218-80bf114a67e1)\r\n\r\n\r\n运行的后台没有报错。\r\n![Uploading image.png…]()\r\n\r\n\r\n现在发送聊天，机器人没有自动回复，请问一下，怎么解决？\r\n\r\n\r\n\r\n\r\n",
+    "comments": [],
+    "repository": "zhayujie/bot-on-anything"
+  },
+  {
+    "issue_number": 456,
+    "title": "OpenAI接口没返回消息啊 我是新加坡的服务器 理论上是不需要挂代理的",
+    "author": "LumingMelody",
+    "state": "open",
+    "created_at": "2024-04-06T08:52:28Z",
+    "updated_at": "2024-10-25T15:02:05Z",
+    "labels": [],
+    "body": "![676677180](https://github.com/zhayujie/bot-on-anything/assets/49914805/671ca86b-69d3-4ea9-beba-c05c7adcc339)\r\n为什么我这个OpenAI接口没返回消息啊 我是新加坡的服务器 理论上是不需要挂代理的",
+    "comments": [
+      {
+        "user": "Lance-He",
+        "body": "搞定了么？我的现在也是这样"
+      },
+      {
+        "user": "DreamWenzhe",
+        "body": "我的都正常啊。。"
+      }
+    ],
+    "repository": "zhayujie/bot-on-anything"
+  },
+  {
+    "issue_number": 461,
+    "title": "openai库版本最新版报错，需要降版本到0.28",
+    "author": "lonrencn",
+    "state": "open",
+    "created_at": "2024-09-27T13:58:22Z",
+    "updated_at": "2024-09-27T13:58:22Z",
+    "labels": [],
+    "body": "回复报错：\r\nAttributeError: module 'openai' has no attribute 'error'\r\n\r\n降到\r\npip install openai==0.28.1 可以正常使用了",
+    "comments": [],
+    "repository": "zhayujie/bot-on-anything"
+  },
+  {
+    "issue_number": 458,
+    "title": "LinkAI bot 连接上 Slack 但无法回复",
+    "author": "henrikclh",
+    "state": "open",
+    "created_at": "2024-08-19T11:59:46Z",
+    "updated_at": "2024-08-19T12:33:56Z",
+    "labels": [],
+    "body": "你好，我成功把LinkAI bot 连接到 Slack app, @完发信息后，后台显示 “Bolt app is running” 和信息 (query) 也成功收到\r\n但是之后报错无法回复，LinkAI的后台也没显示收到信息，我也问了LinkAI客服，他们说这项目测试过微信和web都可以的，slack确实没试过，请问该如何解决？谢谢\r\n\r\n![issue0](https://github.com/user-attachments/assets/e23640a6-a878-4b3b-a6d8-8207f43c66e8)\r\n![issue1](https://github.com/user-attachments/assets/45fd183a-3cd5-44e4-990c-47d77451a136)\r\n",
+    "comments": [
+      {
+        "user": "henrikclh",
+        "body": "442 行開始, 有三個OPEN_AI參數, 改為LINKAI後, 便成功了!\r\n\r\n![issue_resolved1](https://github.com/user-attachments/assets/6a9bf307-974e-468d-89ca-42014255773a)\r\n\r\n![issue_resolved2](https://github.com/user-attachments/assets/93cb568c-88be-4359-8f62-a028f7a7517f)\r\n\r\n"
+      }
+    ],
+    "repository": "zhayujie/bot-on-anything"
+  },
+  {
+    "issue_number": 56,
+    "title": "OpenAI接口连接失败问题在这讨论",
+    "author": "Brightpan",
+    "state": "open",
+    "created_at": "2023-03-02T15:49:56Z",
+    "updated_at": "2024-06-22T03:58:10Z",
+    "labels": [],
+    "body": "不挂代理请求报错，应该是openAI那边对IP地址加限制了，限制大陆IP。在此求证下。",
+    "comments": [
+      {
+        "user": "lijinyuljy",
+        "body": "同，今天服务器运行没有回复"
+      },
+      {
+        "user": "zhayujie",
+        "body": "是的，需要代理"
+      },
+      {
+        "user": "615806159",
+        "body": "可以使用反代api，但是api的地址怎么更改，已经反代出来了"
+      }
+    ],
+    "repository": "zhayujie/bot-on-anything"
+  }
+]

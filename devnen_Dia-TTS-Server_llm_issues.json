@@ -1,0 +1,290 @@
+[
+  {
+    "issue_number": 21,
+    "title": "Feature request: implement more /v1/ api endpoints",
+    "author": "abcd678",
+    "state": "open",
+    "created_at": "2025-06-17T14:00:26Z",
+    "updated_at": "2025-06-17T14:00:26Z",
+    "labels": [],
+    "body": "As the title says, could you implement endpoints such as /v1/audio/voices and v1/audio/models ? Projects such as open webUI seem to fully break when trying to access these when they are missing.",
+    "comments": [],
+    "repository": "devnen/Dia-TTS-Server"
+  },
+  {
+    "issue_number": 14,
+    "title": "Speed benchmarking",
+    "author": "tarunravi",
+    "state": "open",
+    "created_at": "2025-05-04T01:44:06Z",
+    "updated_at": "2025-05-27T19:02:51Z",
+    "labels": [],
+    "body": "I'm interested in seeing generation speed benchmarks. For me generating the following text:\n```\nThe fluorescent lights above hummed in unison with your racing thoughts as you sat across from Jax, his rugged face a mask of concentration\n```\nTook ~30 seconds on my NVIDIA 3060. This feels a bit slow. Im curious if yall are getting the same speeds or not.",
+    "comments": [
+      {
+        "user": "greatmate98",
+        "body": "36 seconds for me on 12GB 4080 laptop.  Strangely, this is slower than using the main fork and pf32 model, which took 26 seconds.  I am not sold on the benefits of this fork - i wanted to test it because of the built in speakers, but find that it doesnt adhere to the speaker (sometimes the voice for S1 or S2 just takes over and says everything rather than taking turns) and things like (laughs) (gasps) etc. are always cut short.  Wonder if its the fp16 model causing this.  But right now this is slower and poorer quality than the main fork, with the additional stuff not working as expected.  Its a nice interface and was easy to install though. \n\nEdit - i turned off breaking it down into chunks and it did 28 seconds, so similar to original repo.  I figured breaking it into chunks was for performance."
+      },
+      {
+        "user": "devnen",
+        "body": "Thank you for the update. The quality or speed should not be different than the official repo. If you keep the chunking/splitting option enabled, however, this may introduce additional delays due to the postprocessing like silence removal, merging chunks and similar. But, about 30 seconds for your sample sentence sounds about right."
+      },
+      {
+        "user": "GoudaCouda",
+        "body": "I am having the same issues now after Dia made changes to their code it is much faster. On the original repo I get almost .8x rt but on this I am at about .35x. I am using a 3090 with cuda 12.4"
+      }
+    ],
+    "repository": "devnen/Dia-TTS-Server"
+  },
+  {
+    "issue_number": 20,
+    "title": "Error when installing the requirements.txt",
+    "author": "rev47",
+    "state": "open",
+    "created_at": "2025-05-24T12:33:56Z",
+    "updated_at": "2025-05-24T15:46:37Z",
+    "labels": [],
+    "body": "Everything was going pretty smooth, following the guide, but the step to run \"pip install -r requirements.txt\" seems to be running into a 'slight' issue. I have a feeling it's a simple thing, but I am not a smart person...\n\n```\n(venv) C:\\LLM\\TTS\\nari labs dia\\dia-tts-server>pip install -r requirements.txt\nCollecting fastapi (from -r requirements.txt (line 4))\n  Using cached fastapi-0.115.12-py3-none-any.whl.metadata (27 kB)\nRequirement already satisfied: torch in c:\\llm\\tts\\nari labs dia\\dia-tts-server\\venv\\lib\\site-packages (from -r requirements.txt (line 8)) (2.7.0+cu126)\nRequirement already satisfied: torchaudio in c:\\llm\\tts\\nari labs dia\\dia-tts-server\\venv\\lib\\site-packages (from -r requirements.txt (line 9)) (2.7.0+cu126)\nRequirement already satisfied: numpy in c:\\llm\\tts\\nari labs dia\\dia-tts-server\\venv\\lib\\site-packages (from -r requirements.txt (line 10)) (2.1.2)\nCollecting soundfile (from -r requirements.txt (line 11))\n  Using cached soundfile-0.13.1-py2.py3-none-win_amd64.whl.metadata (16 kB)\nCollecting huggingface_hub (from -r requirements.txt (line 12))\n  Using cached huggingface_hub-0.32.0-py3-none-any.whl.metadata (14 kB)\nCollecting descript-audio-codec (from -r requirements.txt (line 13))\n  Using cached descript_audio_codec-1.0.0-py3-none-any.whl.metadata (7.8 kB)\nCollecting safetensors (from -r requirements.txt (line 14))\n  Using cached safetensors-0.5.3-cp38-abi3-win_amd64.whl.metadata (3.9 kB)\nCollecting openai-whisper (from -r requirements.txt (line 15))\n  Using cached openai-whisper-20240930.tar.gz (800 kB)\n  Installing build dependencies ... done\n  Getting requirements to build wheel ... error\n  error: subprocess-exited-with-error\n\n  × Getting requirements to build wheel did not run successfully.\n  │ exit code: 1\n  ╰─> [25 lines of output]\n      <string>:5: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html\n      Traceback (most recent call last):\n        File \"C:\\LLM\\TTS\\nari labs dia\\dia-tts-server\\venv\\Lib\\site-packages\\pip\\_vendor\\pyproject_hooks\\_in_process\\_in_process.py\", line 389, in <module>\n          main()\n          ~~~~^^\n        File \"C:\\LLM\\TTS\\nari labs dia\\dia-tts-server\\venv\\Lib\\site-packages\\pip\\_vendor\\pyproject_hooks\\_in_process\\_in_process.py\", line 373, in main\n          json_out[\"return_val\"] = hook(**hook_input[\"kwargs\"])\n                                   ~~~~^^^^^^^^^^^^^^^^^^^^^^^^\n        File \"C:\\LLM\\TTS\\nari labs dia\\dia-tts-server\\venv\\Lib\\site-packages\\pip\\_vendor\\pyproject_hooks\\_in_process\\_in_process.py\", line 143, in get_requires_for_build_wheel\n          return hook(config_settings)\n        File \"C:\\Users\\Human\\AppData\\Local\\Temp\\pip-build-env-9e4nxbun\\overlay\\Lib\\site-packages\\setuptools\\build_meta.py\", line 331, in get_requires_for_build_wheel\n          return self._get_build_requires(config_settings, requirements=[])\n                 ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        File \"C:\\Users\\Human\\AppData\\Local\\Temp\\pip-build-env-9e4nxbun\\overlay\\Lib\\site-packages\\setuptools\\build_meta.py\", line 301, in _get_build_requires\n          self.run_setup()\n          ~~~~~~~~~~~~~~^^\n        File \"C:\\Users\\Human\\AppData\\Local\\Temp\\pip-build-env-9e4nxbun\\overlay\\Lib\\site-packages\\setuptools\\build_meta.py\", line 512, in run_setup\n          super().run_setup(setup_script=setup_script)\n          ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        File \"C:\\Users\\Human\\AppData\\Local\\Temp\\pip-build-env-9e4nxbun\\overlay\\Lib\\site-packages\\setuptools\\build_meta.py\", line 317, in run_setup\n          exec(code, locals())\n          ~~~~^^^^^^^^^^^^^^^^\n        File \"<string>\", line 21, in <module>\n        File \"<string>\", line 11, in read_version\n      KeyError: '__version__'\n      [end of output]\n\n  note: This error originates from a subprocess, and is likely not a problem with pip.\nerror: subprocess-exited-with-error\n\n× Getting requirements to build wheel did not run successfully.\n│ exit code: 1\n╰─> See above for output.\n\nnote: This error originates from a subprocess, and is likely not a problem with pip.\n\n(venv) C:\\LLM\\TTS\\nari labs dia\\dia-tts-server>\n```",
+    "comments": [
+      {
+        "user": "devnen",
+        "body": "The app does not need `openai-whisper` package in order to run. Here's a quick fix:\n\nOpen `requirements.txt` and delete or comment out this line:\n```\nopenai-whisper\n```\n\nRun the install again:\n```bash\npip install -r requirements.txt\n```\n\nYou can install whisper separately later if needed:\n```bash\npip install git+https://github.com/openai/whisper.git\n```\n\nThis should get you up and running! The main TTS functionality will work fine without whisper.\n"
+      }
+    ],
+    "repository": "devnen/Dia-TTS-Server"
+  },
+  {
+    "issue_number": 19,
+    "title": "Token generation speed is faster on RTX 3090 than H100 (cuda 12.8 on both)",
+    "author": "tanyav2",
+    "state": "open",
+    "created_at": "2025-05-21T05:41:30Z",
+    "updated_at": "2025-05-21T05:41:30Z",
+    "labels": [],
+    "body": "I'm running the server like so:\n```\ndocker run -d   --name dia-tts-server   -p 8003:8003   -v ./model_cache:/app/model_cache   -v ./reference_audio:/app/reference_audio   -v ./outputs:/app/outputs   -v ./voices:/app/voices  --gpus all   ghcr.io/devnen/dia-tts-server:latest\n```\n\nI am using the following test request:\n```\ncurl -X POST \"http://localhost:8003/v1/audio/speech\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"input\": \"Hello, this is a test of the Dia text to speech system.\",\n    \"voice\": \"dialogue\",\n    \"response_format\": \"wav\",\n    \"speed\": 1.0,\n    \"seed\": 42\n  }' \\\n  --output output.wav\n```\n\nOn RTX 3090 I get the following speeds:\n```\n2025-05-21 05:33:46,389 [INFO] server: Received OpenAI request: voice='dialogue', speed=1.0, format='wav', seed=42\n2025-05-21 05:33:46,389 [INFO] utils: Found 0 predefined voices in /app/voices\n2025-05-21 05:33:46,437 [INFO] engine: Generating speech (simple method) with params: {'mode': 'dialogue', 'seed': 42, 'split': False, 'chunk_size': 120, 'max_tokens': 'ModelDefault', 'cfg': 3.0, 'temp': 1.3, 'top_p': 0.95, 'top_k': 35, 'speed': 1.0, 'clone_ref': 'N/A', 'transcript_provided': False, 'text_snippet': \"'Hello, this is a test of the Dia text to speech system....'\"}\n2025-05-21 05:33:46,437 [INFO] engine: Using generation seed: 42\n2025-05-21 05:33:46,437 [INFO] engine: Text splitting disabled. Processing text as a single chunk.\n2025-05-21 05:33:46,437 [INFO] engine: Starting generation loop for 1 chunks using model.generate() per chunk.\n2025-05-21 05:33:46,437 [INFO] engine: Processing chunk 1/1 with model.generate()...\nUsing seed: 42 for generation\ngenerate: data loaded\ngenerate: starting generation loop\ngenerate step 86: speed=88.590 tokens/s, realtime factor=1.030x\ngenerate step 172: speed=92.708 tokens/s, realtime factor=1.078x\ngenerate step 258: speed=92.104 tokens/s, realtime factor=1.071x\n2025-05-21 05:33:49,524 [INFO] engine: Chunk 1 generated successfully in 3.09s. Audio shape: (130560,)\n2025-05-21 05:33:49,566 [INFO] engine: Concatenated audio shape (simple method): (130560,)\n2025-05-21 05:33:49,566 [INFO] engine: Speed factor is 1.0, no speed adjustment needed.\n2025-05-21 05:33:49,566 [INFO] engine: Applying final audio post-processing...\n2025-05-21 05:33:49,572 [INFO] engine:   → No significant changes from final audio post-processing\n2025-05-21 05:33:49,572 [INFO] engine: Final audio ready (simple method). Shape: (130560,), dtype: float32\n2025-05-21 05:33:49,615 [INFO] utils: Encoded 261164 bytes to wav in 0.000 seconds.\n2025-05-21 05:33:49,615 [INFO] server: Successfully generated 261164 bytes in format wav\n```\n```\n$ nvidia-smi\nTue May 20 22:38:33 2025       \n+-----------------------------------------------------------------------------------------+\n| NVIDIA-SMI 570.133.20             Driver Version: 570.133.20     CUDA Version: 12.8     |\n|-----------------------------------------+------------------------+----------------------+\n| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |\n| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |\n|                                         |                        |               MIG M. |\n|=========================================+========================+======================|\n|   0  NVIDIA GeForce RTX 3090        On  |   00000000:01:00.0  On |                  N/A |\n|  0%   30C    P8             25W /  390W |    4254MiB /  24576MiB |      0%      Default |\n|                                         |                        |                  N/A |\n+-----------------------------------------+------------------------+----------------------+\n                                                                                         \n+-----------------------------------------------------------------------------------------+\n| Processes:                                                                              |\n|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |\n|        ID   ID                                                               Usage      |\n|=========================================================================================|\n|    0   N/A  N/A            1480      G   /usr/lib/xorg/Xorg                      175MiB |\n|    0   N/A  N/A            1734      G   /usr/bin/gnome-shell                     10MiB |\n|    0   N/A  N/A           29368      C   python3                                4038MiB |\n+-----------------------------------------------------------------------------------------+\n```\n\nOn H100 I get the following slower speeds:\n```\n2025-05-21 05:33:59,450 [INFO] server: Received OpenAI request: voice='dialogue', speed=1.0, format='wav', seed=42\n2025-05-21 05:33:59,452 [INFO] utils: Found 43 predefined voices in /app/voices\n2025-05-21 05:33:59,557 [INFO] engine: Generating speech (simple method) with params: {'mode': 'dialogue', 'seed': 42, 'split': False, 'chunk_size': 120, 'max_tokens': 'ModelDefault', 'cfg': 3.0, 'temp': 1.3, 'top_p': 0.95, 'top_k': 35, 'speed': 1.0, 'clone_ref': 'N/A', 'transcript_provided': False, 'text_snippet': \"'Hello, this is a test of the Dia text to speech system....'\"}\n2025-05-21 05:33:59,557 [INFO] engine: Using generation seed: 42\n2025-05-21 05:33:59,558 [INFO] engine: Text splitting disabled. Processing text as a single chunk.\n2025-05-21 05:33:59,558 [INFO] engine: Starting generation loop for 1 chunks using model.generate() per chunk.\n2025-05-21 05:33:59,558 [INFO] engine: Processing chunk 1/1 with model.generate()...\nUsing seed: 42 for generation\ngenerate: data loaded\ngenerate: starting generation loop\ngenerate step 86: speed=38.971 tokens/s, realtime factor=0.453x\ngenerate step 172: speed=37.989 tokens/s, realtime factor=0.442x\ngenerate step 258: speed=38.864 tokens/s, realtime factor=0.452x\n2025-05-21 05:34:06,960 [INFO] engine: Chunk 1 generated successfully in 7.40s. Audio shape: (135168,)\n2025-05-21 05:34:07,016 [INFO] engine: Concatenated audio shape (simple method): (135168,)\n2025-05-21 05:34:07,016 [INFO] engine: Speed factor is 1.0, no speed adjustment needed.\n2025-05-21 05:34:07,017 [INFO] engine: Applying final audio post-processing...\n2025-05-21 05:34:07,033 [INFO] engine:   → No significant changes from final audio post-processing\n2025-05-21 05:34:07,034 [INFO] engine: Final audio ready (simple method). Shape: (135168,), dtype: float32\n2025-05-21 05:34:07,090 [INFO] utils: Encoded 270380 bytes to wav in 0.001 seconds.\n2025-05-21 05:34:07,090 [INFO] server: Successfully generated 270380 bytes in format wav\n```\n```\n$ nvidia-smi\nWed May 21 05:37:48 2025       \n+-----------------------------------------------------------------------------------------+\n| NVIDIA-SMI 570.124.06             Driver Version: 570.124.06     CUDA Version: 12.8     |\n|-----------------------------------------+------------------------+----------------------+\n| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |\n| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |\n|                                         |                        |               MIG M. |\n|=========================================+========================+======================|\n|   0  NVIDIA H100 PCIe               On  |   00000000:06:00.0 Off |                    0 |\n| N/A   45C    P0             86W /  350W |    4306MiB /  81559MiB |      0%      Default |\n|                                         |                        |             Disabled |\n+-----------------------------------------+------------------------+----------------------+\n                                                                                         \n+-----------------------------------------------------------------------------------------+\n| Processes:                                                                              |\n|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |\n|        ID   ID                                                               Usage      |\n|=========================================================================================|\n|    0   N/A  N/A          730991      C   python3                                4296MiB |\n+-----------------------------------------------------------------------------------------+\n```\nWhy are the speeds faster on the 3090 vs the H100?",
+    "comments": [],
+    "repository": "devnen/Dia-TTS-Server"
+  },
+  {
+    "issue_number": 18,
+    "title": "UI forgets the light mode after generation",
+    "author": "progmars",
+    "state": "open",
+    "created_at": "2025-05-19T16:19:47Z",
+    "updated_at": "2025-05-19T16:19:47Z",
+    "labels": [],
+    "body": "I set the mode to light because my eyes do not like dark mode at all. However, when the UI reloads after the generation, it switches back to dark mode.",
+    "comments": [],
+    "repository": "devnen/Dia-TTS-Server"
+  },
+  {
+    "issue_number": 16,
+    "title": "Dia Multilanguage support",
+    "author": "tilllt",
+    "state": "open",
+    "created_at": "2025-05-06T07:36:43Z",
+    "updated_at": "2025-05-06T07:36:43Z",
+    "labels": [],
+    "body": "Are you planning to integrate support for Multilingual Dia, like this Project?\nhttps://github.com/anan235/dia-multilingual\n\nOr maybe join forces? each of your projects has a great USP unfortunetaly they dont come in one project ;)\n\n\n",
+    "comments": [],
+    "repository": "devnen/Dia-TTS-Server"
+  },
+  {
+    "issue_number": 15,
+    "title": "config.yaml missing",
+    "author": "Halilman04",
+    "state": "open",
+    "created_at": "2025-05-05T12:35:47Z",
+    "updated_at": "2025-05-06T06:28:06Z",
+    "labels": [],
+    "body": "I'm not very experienced with GitHub or coding yet. I managed to set everything up until the point where I launch the server (or whatever it's called), but there's one problem: I can't get the YAML. I’ll include the error code below.\n\nI’m not even trying to do anything fancy with this cool tech, i just wanted to try it out, and I’d be really grateful for any help with this issue.\nBy the way, this project looks amazing\n\nHere’s the error I’m getting:\n`\\dia-tts-server> python server.py\nTraceback (most recent call last):\n  File \"C:\\Users\\halil\\dia-tts-server\\server.py\", line 11, in <module>\n    import yaml  # Keep yaml import for potential future use, though config handles it now\n    ^^^^^^^^^^^\nModuleNotFoundError: No module named 'yaml'`\n\nI’ll be checking this thread all day, so if there’s any missing info in my issue, let me know and I’ll be glad to clarify",
+    "comments": [
+      {
+        "user": "devnen",
+        "body": "Thank you for the kind words. I am assuming that you are on Windows. \n\nUsing Command Prompt go to the installation folder and enter these two command lines to create and activate virtual environment:\npython -m venv venv\n.\\venv\\Scripts\\activate\n\nThen install project requirements (yaml and other):\npip install -r requirements.txt\n\nNow, if you have nvidia GPU:\npip uninstall torch torchvision torchaudio -y\n\nand then:\npip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121\n"
+      },
+      {
+        "user": "Halilman04",
+        "body": "I’ve already followed those steps, but since I don’t have an NVIDIA GPU, I’m still stuck at the same point. I’ve installed all the requirements and activated a virtual environment, but I’m still missing the config.yaml file. Am I doing something wrong?\n\nIf it helps, I can provide screenshots or a screen recording to better illustrate the issue. Let me know what details would be useful."
+      }
+    ],
+    "repository": "devnen/Dia-TTS-Server"
+  },
+  {
+    "issue_number": 11,
+    "title": "Getting this error \"Could not load waveform.\"",
+    "author": "maxbizz",
+    "state": "open",
+    "created_at": "2025-05-01T13:21:39Z",
+    "updated_at": "2025-05-04T17:24:03Z",
+    "labels": [],
+    "body": "Hi,\nIm getting this error \"Could not load waveform.\" and unable to play the generated audio inside the webui. Although the audio is generated successfully.\n\n![Image](https://github.com/user-attachments/assets/ceb9f448-5df4-4526-b7a6-91f230891f92)",
+    "comments": [
+      {
+        "user": "devnen",
+        "body": "Thank you for reporting the problem. Perhaps there are permission issues? The javascript running inside the page may not be able to fetch the generated file from the outputs folder. Try relaxing the permissions for the outputs folder and see if that helps.\n\nFor Windows:\nicacls \"C:\\path\\to\\outputs\" /grant Everyone:F\n\nFor Linux:\nchmod 777 /path/to/outputs\n\nThese commands will grant full access permissions to everyone for the outputs folder. "
+      }
+    ],
+    "repository": "devnen/Dia-TTS-Server"
+  },
+  {
+    "issue_number": 7,
+    "title": "Humble Request!",
+    "author": "danhigham",
+    "state": "closed",
+    "created_at": "2025-04-29T22:38:49Z",
+    "updated_at": "2025-05-04T16:21:50Z",
+    "labels": [],
+    "body": "Hello! This is an awesome project and right out of the gate is getting amazing results! One thing that would be really cool, would be the ability to use more than one GPU for chunked encoding. I would love to help anyway I can, but I would definitely need an outline of how I could do this and then submit you a PR.",
+    "comments": [
+      {
+        "user": "l4b4r4b4b4",
+        "body": "@danhigham that sould already be possible! its simply not exposed by the API. Same goes for torch.compiling the model ;)"
+      },
+      {
+        "user": "danhigham",
+        "body": "@l4b4r4b4b4 Any hints as to how to achieve this would be gratefully received. 😃 "
+      },
+      {
+        "user": "devnen",
+        "body": "Thanks for the great ideas on using multiple GPUs. Speeding up generation is definitely something I want to look into for the next version, as it could make a big difference.\n\nRight now, the server code is set up to load just one copy of the model globally. Getting it to run across multiple GPUs for parallel chunk processing isn't a quick switch – it needs some deeper changes to how the model is handled.\n\nI've brainstormed two ways this could be done:\n\nIntegrated parallelism: This means changing the main server code (engine.py and server.py) quite a bit. I'd need to remove the single global model instance and build a new system inside the server to load and manage multiple model copies, potentially even more than one per GPU. This keeps everything in one place but requires significant refactoring of the current structure.\n\nOrchestration: This approach avoids changing the current server code much. I could run multiple, separate instances of the existing server, each locked to a specific GPU using standard tools (CUDA_VISIBLE_DEVICES). Then, I'd create a new, separate \"coordinator\" script that takes the user's request, splits the text, sends chunks to the different running servers, and stitches the audio back together. From the client's perspective everything remains the same. This coordinator will act as a regular server using the same port, endpoints and parameters.\n\nBoth options are pretty involved and would take significant time and effort to build and test properly. I think the second approach is better. It's definitely a valuable direction for future improvements, though. Thanks again for the input."
+      }
+    ],
+    "repository": "devnen/Dia-TTS-Server"
+  },
+  {
+    "issue_number": 8,
+    "title": "Apple Silicon error",
+    "author": "xybernaut",
+    "state": "open",
+    "created_at": "2025-04-30T03:02:41Z",
+    "updated_at": "2025-05-04T13:46:38Z",
+    "labels": [],
+    "body": "Hello,\n\nI am getting the error below when generating speech on Apple Silicon MPS. Anyone able to get it working on Apple Silicon?\n\nHardware: M4 Max, 128GB RAM\nSoftware: Sequoia 15.4.1, Torch/Torchaudio 2.7.0\n\n`Error in decode method: Calculated padded input size per channel: (0). Kernel size: (1). Kernel size can't be greater than actual input size\n2025-04-29 22:47:45,620 [ERROR] engine: Error calling model.generate() for chunk 4: Calculated padded input size per channel: (0). Kernel size: (1). Kernel size can't be greater than actual input size\nTraceback (most recent call last):\n  File \"/Users/Py/dia-tts-server/engine.py\", line 782, in generate_speech\n    chunk_output_np = dia_model.generate(\n                      ^^^^^^^^^^^^^^^^^^^\n  File \"/Users/Py/miniconda3/envs/dia-tts/lib/python3.12/site-packages/torch/utils/_contextlib.py\", line 116, in decorate_context\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/Py/dia-tts-server/dia/model.py\", line 621, in generate\n    output = self._generate_output(generated_codes)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/Py/dia-tts-server/dia/model.py\", line 400, in _generate_output\n    audio = decode(self.dac_model, codebook.transpose(1, 2))\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/Py/miniconda3/envs/dia-tts/lib/python3.12/site-packages/torch/utils/_contextlib.py\", line 116, in decorate_context\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/Py/miniconda3/envs/dia-tts/lib/python3.12/site-packages/torch/utils/_contextlib.py\", line 116, in decorate_context\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/Py/dia-tts-server/dia/audio.py\", line 197, in decode\n    audio_values = model.quantizer.from_codes(audio_codes)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/Py/miniconda3/envs/dia-tts/lib/python3.12/site-packages/dac/nn/quantize.py\", line 218, in from_codes\n    z_q_i = self.quantizers[i].out_proj(z_p_i)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/Py/miniconda3/envs/dia-tts/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1751, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/Py/miniconda3/envs/dia-tts/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1857, in _call_impl\n    return inner()\n           ^^^^^^^\n  File \"/Users/Py/miniconda3/envs/dia-tts/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1805, in inner\n    result = forward_call(*args, **kwargs)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/Py/miniconda3/envs/dia-tts/lib/python3.12/site-packages/torch/nn/modules/conv.py\", line 375, in forward\n    return self._conv_forward(input, self.weight, self.bias)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/Py/miniconda3/envs/dia-tts/lib/python3.12/site-packages/torch/nn/modules/conv.py\", line 370, in _conv_forward\n    return F.conv1d(\n           ^^^^^^^^^\nRuntimeError: Calculated padded input size per channel: (0). Kernel size: (1). Kernel size can't be greater than actual input size`",
+    "comments": [
+      {
+        "user": "devnen",
+        "body": "Thanks for the detailed report and error log. This Kernel size can't be greater than actual input size error during the DAC decoding step seems specific to running on Apple Silicon (MPS).\n\nUnfortunately, I don't have M-series hardware to test and debug this MPS issue directly.\n\nWe'll keep this issue open in case others in the community using Apple Silicon have encountered this and can share insights or potential fixes. If anyone else on MPS has ideas, please chime in.\n\nThanks again for reporting it."
+      }
+    ],
+    "repository": "devnen/Dia-TTS-Server"
+  },
+  {
+    "issue_number": 10,
+    "title": "ISSUE: full precision model",
+    "author": "l4b4r4b4b4",
+    "state": "closed",
+    "created_at": "2025-04-30T15:46:55Z",
+    "updated_at": "2025-05-04T13:40:43Z",
+    "labels": [],
+    "body": "Are you sure the FP model is loaded correctly? When I changed it, the `get_compute_dtype` still sets the `dtype=bf16`, and ultimately the generated speech output is completely scrambled.",
+    "comments": [
+      {
+        "user": "devnen",
+        "body": "Thanks so much for reporting that model loading issue.\n\nBasically, the code in engine.py was ignoring the model file type you selected and just using the fastest math your GPU supported, causing a mismatch.\n\nI have fixed the get_compute_dtype function so that it now respects the model file type you choose, ensuring the math matches the model. Everything should work correctly now."
+      }
+    ],
+    "repository": "devnen/Dia-TTS-Server"
+  },
+  {
+    "issue_number": 12,
+    "title": "Sample Rate issue when integrating with Open WebUI",
+    "author": "TheBToby",
+    "state": "closed",
+    "created_at": "2025-05-03T18:53:53Z",
+    "updated_at": "2025-05-04T06:37:56Z",
+    "labels": [],
+    "body": "Thx for this great project. The server is running fine. However, when integrating with Open WebUI, I got the following error message and could not find a way to define another default sample rate or audio encoding format, e.g. mp3.\n\n```\n2025-05-03 18:49:55,896 [ERROR] utils: Error encoding audio to opus: Error opening <_io.BytesIO object at 0x709416dcc360>: Error : Opus only supports sample rates of 8000, 12000, 16000, 24000, and 48000.\nTraceback (most recent call last):\n  File \"/app/utils.py\", line 210, in encode_audio\n    sf.write(\n  File \"/usr/local/lib/python3.10/dist-packages/soundfile.py\", line 363, in write\n    with SoundFile(file, 'w', samplerate, channels,\n  File \"/usr/local/lib/python3.10/dist-packages/soundfile.py\", line 690, in __init__\n    self._file = self._open(file, mode_int, closefd)\n  File \"/usr/local/lib/python3.10/dist-packages/soundfile.py\", line 1265, in _open\n    raise LibsndfileError(err, prefix=\"Error opening {0!r}: \".format(self.name))\nsoundfile.LibsndfileError: Error opening <_io.BytesIO object at 0x709416dcc360>: Error : Opus only supports sample rates of 8000, 12000, 16000, 24000, and 48000.\n2025-05-03 18:49:55,896 [ERROR] server: Failed to encode audio to format: opus\n2025-05-03 18:49:55,896 [ERROR] server: HTTP exception during OpenAI request: Failed to encode audio to opus\n``` ",
+    "comments": [
+      {
+        "user": "bisonbet",
+        "body": "So, I had this issue, so I rewrote the utils.py.  I submitted a pull request - https://github.com/devnen/Dia-TTS-Server/pull/13 - hoping people will review"
+      },
+      {
+        "user": "TheBToby",
+        "body": "@bisonbet Your PR worked perfectly well. Thx. However, I'm not an IT expert. Please let me know if you still want me to review your RP."
+      }
+    ],
+    "repository": "devnen/Dia-TTS-Server"
+  },
+  {
+    "issue_number": 4,
+    "title": "Output longer than 25 seconds",
+    "author": "bisonbet",
+    "state": "closed",
+    "created_at": "2025-04-23T19:19:18Z",
+    "updated_at": "2025-04-29T02:02:27Z",
+    "labels": [],
+    "body": "I am reviewing the code and trying to understand the limit of 25 seconds.  Is that due to the original 'dia' code being limited in how it runs?  It doesn't seem to be a resource issue, per se.",
+    "comments": [
+      {
+        "user": "devnen",
+        "body": "There is an issue on their Github with a suggested fix:\nhttps://github.com/nari-labs/dia/issues/35\n\nThe script takes text from an input file, splits it into manageable chunks, converts each chunk to speech independently, and then concatenates them into a single audio file. This chunking approach allows for processing longer texts.\n"
+      },
+      {
+        "user": "devnen",
+        "body": "This has been fixed using the new large text chunking/splitting feature in version 1.4."
+      }
+    ],
+    "repository": "devnen/Dia-TTS-Server"
+  },
+  {
+    "issue_number": 6,
+    "title": "Can't get voice cloning to work",
+    "author": "Zaazu",
+    "state": "closed",
+    "created_at": "2025-04-25T09:48:45Z",
+    "updated_at": "2025-04-25T12:38:31Z",
+    "labels": [],
+    "body": "Hi, I'm not able to get voice cloning to work, I get the following error:  `Speech generation failed (engine returned None).`\n\nI'm running this on an RTX 5090 with cu128. Thanks.\n\nConsole:\n```\n2025-04-25 10:39:55,986 [INFO] __main__: Registering configuration routes (/get_config, /save_config, /restart_server, /save_generation_defaults).\n2025-04-25 10:39:55,989 [INFO] __main__: Starting Dia TTS server on 0.0.0.0:8003\n2025-04-25 10:39:55,989 [INFO] __main__: Model Repository: ttj/dia-1.6b-safetensors\n2025-04-25 10:39:55,989 [INFO] __main__: Model Config File: config.json\n2025-04-25 10:39:55,989 [INFO] __main__: Model Weights File: dia-v0_1_bf16.safetensors\n2025-04-25 10:39:55,989 [INFO] __main__: Model Cache Path: D:\\Software\\AI Stuff\\dia-tts-server\\model_cache\n2025-04-25 10:39:55,989 [INFO] __main__: Reference Audio Path: D:\\Software\\AI Stuff\\dia-tts-server\\reference_audio\n2025-04-25 10:39:55,989 [INFO] __main__: Output Path: D:\\Software\\AI Stuff\\dia-tts-server\\outputs\n2025-04-25 10:39:55,989 [INFO] __main__: Web UI will be available at http://localhost:8003/\n2025-04-25 10:39:55,989 [INFO] __main__: API Docs available at http://localhost:8003/docs\n2025-04-25 10:39:56,004 [INFO] server: Registering configuration routes (/get_config, /save_config, /restart_server, /save_generation_defaults).\nINFO:     Started server process [956]\nINFO:     Waiting for application startup.\n2025-04-25 10:39:56,007 [INFO] server: Starting Dia TTS server initialization...\n2025-04-25 10:39:56,009 [INFO] server: Successfully loaded 5 presets from ui/presets.yaml.\n2025-04-25 10:39:56,009 [INFO] engine: CUDA is available, using GPU.\n2025-04-25 10:39:56,009 [INFO] engine: Attempting to load Dia model:\n2025-04-25 10:39:56,009 [INFO] engine:   Repo ID: ttj/dia-1.6b-safetensors\n2025-04-25 10:39:56,009 [INFO] engine:   Config File: config.json\n2025-04-25 10:39:56,009 [INFO] engine:   Weights File: dia-v0_1_bf16.safetensors\n2025-04-25 10:39:56,009 [INFO] engine:   Cache Directory: D:\\Software\\AI Stuff\\dia-tts-server\\model_cache\n2025-04-25 10:39:56,009 [INFO] engine:   Target Device: cuda\n2025-04-25 10:39:56,009 [INFO] engine: Downloading/finding configuration file 'config.json' from repo 'ttj/dia-1.6b-safetensors'...\n2025-04-25 10:39:56,278 [INFO] engine: Configuration file path: D:\\Software\\AI Stuff\\dia-tts-server\\model_cache\\models--ttj--dia-1.6b-safetensors\\snapshots\\bf7f4911736c60264029b2b49f394aaad6541df2\\config.json\n2025-04-25 10:39:56,279 [INFO] engine: Downloading/finding weights file 'dia-v0_1_bf16.safetensors' from repo 'ttj/dia-1.6b-safetensors'...\n2025-04-25 10:39:56,384 [INFO] engine: Weights file path: D:\\Software\\AI Stuff\\dia-tts-server\\model_cache\\models--ttj--dia-1.6b-safetensors\\snapshots\\bf7f4911736c60264029b2b49f394aaad6541df2\\dia-v0_1_bf16.safetensors\n2025-04-25 10:39:56,408 [INFO] dia.model: Loading Dia model from local files:\n2025-04-25 10:39:56,413 [INFO] dia.model:   Config: D:\\Software\\AI Stuff\\dia-tts-server\\model_cache\\models--ttj--dia-1.6b-safetensors\\snapshots\\bf7f4911736c60264029b2b49f394aaad6541df2\\config.json\n2025-04-25 10:39:56,417 [INFO] dia.model:   Weights: D:\\Software\\AI Stuff\\dia-tts-server\\model_cache\\models--ttj--dia-1.6b-safetensors\\snapshots\\bf7f4911736c60264029b2b49f394aaad6541df2\\dia-v0_1_bf16.safetensors\n2025-04-25 10:39:56,418 [INFO] dia.model:   Target Device: cuda\n2025-04-25 10:39:56,446 [INFO] dia.model: Configuration loaded successfully.\n2025-04-25 10:39:56,450 [INFO] dia.model: Initializing Dia model structure with config version: 0.1\n2025-04-25 10:39:57,641 [INFO] dia.model: Dia model structure initialized.\n2025-04-25 10:39:57,656 [INFO] dia.model: Loading weights from: D:\\Software\\AI Stuff\\dia-tts-server\\model_cache\\models--ttj--dia-1.6b-safetensors\\snapshots\\bf7f4911736c60264029b2b49f394aaad6541df2\\dia-v0_1_bf16.safetensors\n2025-04-25 10:39:57,674 [INFO] dia.model: Detected .safetensors format. Loading using safetensors library.\n2025-04-25 10:39:59,556 [INFO] dia.model: Safetensors weights loaded.\n2025-04-25 10:39:59,557 [INFO] dia.model: Applying loaded weights to the model structure...\n2025-04-25 10:40:02,073 [INFO] dia.model: Weights applied successfully.\n2025-04-25 10:40:02,106 [INFO] dia.model: Moving model to device: cuda...\n2025-04-25 10:40:03,434 [INFO] dia.model: Setting model to evaluation mode...\n2025-04-25 10:40:03,447 [INFO] dia.model: Loading associated DAC model...\n2025-04-25 10:40:03,458 [INFO] dia.model: Downloading/finding DAC model using dac.utils.download()...\n2025-04-25 10:40:03,459 [INFO] dia.model: DAC model path determined: C:\\Users\\Ryan\\.cache\\descript\\dac\\weights_44khz_8kbps_0.0.1.pth\n2025-04-25 10:40:03,459 [INFO] dia.model: Loading DAC model from path...\nD:\\Software\\AI Stuff\\dia-tts-server\\venv\\Lib\\site-packages\\torch\\nn\\utils\\weight_norm.py:143: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.\n  WeightNorm.apply(module, name, dim)\n2025-04-25 10:40:05,432 [INFO] dia.model: DAC model loaded successfully.\n2025-04-25 10:40:05,436 [INFO] dia.model: Dia model fully loaded and ready.\n2025-04-25 10:40:05,462 [INFO] engine: Dia model loaded successfully in 9.45 seconds.\n2025-04-25 10:40:05,481 [INFO] server: Dia model loaded successfully.\n2025-04-25 10:40:05,514 [INFO] server: Application startup sequence finished. Signaling readiness.\nINFO:     Application startup complete.\nINFO:     Uvicorn running on http://0.0.0.0:8003 (Press CTRL+C to quit)\n2025-04-25 10:40:07,514 [INFO] server: Opening browser at http://localhost:8003/\n2025-04-25 10:40:07,934 [INFO] server: Serving TTS Web UI (index.html)\nINFO:     127.0.0.1:55641 - \"GET / HTTP/1.1\" 200 OK\nINFO:     127.0.0.1:55641 - \"GET /ui/script.js HTTP/1.1\" 304 Not Modified\n2025-04-25 10:40:48,490 [INFO] server: Web UI generation request: mode='clone'\n2025-04-25 10:40:48,500 [INFO] server: Using selected reference file: LGR_Small.wav\n2025-04-25 10:40:48,506 [INFO] engine: Generating speech with mode: clone\n2025-04-25 10:40:48,508 [INFO] engine: Using audio prompt for cloning: D:\\Software\\AI Stuff\\dia-tts-server\\reference_audio\\LGR_Small.wav\n2025-04-25 10:40:48,520 [WARNING] engine: Clone mode active. Ensure the 'text' input includes the transcript of the reference audio for best results (e.g., '[S1] Reference transcript. [S1] Target text...').\n2025-04-25 10:40:48,527 [INFO] engine: Calling Dia model generate method...\n2025-04-25 10:40:48,527 [INFO] dia.model: Starting audio generation...\n2025-04-25 10:40:48,527 [INFO] dia.model:   Text (start): '[S1] Hello this is a test\n[S1] This is also a test thanks...'\n2025-04-25 10:40:48,528 [INFO] dia.model:   Max tokens: Model Default\n2025-04-25 10:40:48,528 [INFO] dia.model:   CFG Scale: 3.0\n2025-04-25 10:40:48,528 [INFO] dia.model:   Temperature: 1.3\n2025-04-25 10:40:48,528 [INFO] dia.model:   Top P: 0.95\n2025-04-25 10:40:48,528 [INFO] dia.model:   Use CFG Filter: True, Top K: 35\n2025-04-25 10:40:48,530 [INFO] dia.model:   Audio Prompt: D:\\Software\\AI Stuff\\dia-tts-server\\reference_audio\\LGR_Small.wav\n2025-04-25 10:40:48,530 [INFO] dia.model:   Use torch.compile: False\n2025-04-25 10:40:48,530 [INFO] dia.model:   Target Device: cuda\n2025-04-25 10:40:48,530 [INFO] dia.model:   Effective max_tokens for generation: 3072\n2025-04-25 10:40:48,532 [INFO] dia.model: Preparing text inputs for conditional and unconditional generation...\n2025-04-25 10:40:48,606 [INFO] dia.model: Text inputs prepared (batch size 2 for CFG).\n2025-04-25 10:40:48,606 [INFO] dia.model: Running encoder pass...\n2025-04-25 10:40:48,945 [INFO] dia.model: Encoder pass completed in 0.339s. Output shape: torch.Size([2, 1024, 1024])\n2025-04-25 10:40:48,950 [INFO] dia.model: Preparing decoder inputs and KV cache...\n2025-04-25 10:40:48,967 [INFO] dia.model: KV cache preparation completed in 0.014s.\n2025-04-25 10:40:48,976 [INFO] dia.model: Processing audio prompt for prefilling...\n2025-04-25 10:40:48,997 [INFO] dia.model: Resampling audio prompt from 48000Hz to 44100Hz\n2025-04-25 10:40:49,097 [INFO] dia.model: Encoding audio prompt to codes using DAC...\n2025-04-25 10:40:49,102 [ERROR] dia.model: Error processing audio prompt: Given groups=1, weight of size [64, 1, 7], expected input[1, 2, 360960] to have 1 channels, but got 2 channels instead\nTraceback (most recent call last):\n  File \"D:\\Software\\AI Stuff\\dia-tts-server\\dia\\model.py\", line 635, in generate\n    audio_prompt_codes = audio_to_codebook(\n        self.dac_model, audio_prompt_waveform, data_config=self.config.data\n    )  # Shape [1, T_codes, C]\n  File \"D:\\Software\\AI Stuff\\dia-tts-server\\venv\\Lib\\site-packages\\torch\\utils\\_contextlib.py\", line 116, in decorate_context\n    return func(*args, **kwargs)\n  File \"D:\\Software\\AI Stuff\\dia-tts-server\\venv\\Lib\\site-packages\\torch\\utils\\_contextlib.py\", line 116, in decorate_context\n    return func(*args, **kwargs)\n  File \"D:\\Software\\AI Stuff\\dia-tts-server\\dia\\audio.py\", line 123, in audio_to_codebook\n    _, encoded_frame, _, _, _ = model.encode(audio_data, n_quantizers=None)  # 1, C, T\n                                ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\Software\\AI Stuff\\dia-tts-server\\venv\\Lib\\site-packages\\dac\\model\\dac.py\", line 243, in encode\n    z = self.encoder(audio_data)\n  File \"D:\\Software\\AI Stuff\\dia-tts-server\\venv\\Lib\\site-packages\\torch\\nn\\modules\\module.py\", line 1751, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"D:\\Software\\AI Stuff\\dia-tts-server\\venv\\Lib\\site-packages\\torch\\nn\\modules\\module.py\", line 1762, in _call_impl\n    return forward_call(*args, **kwargs)\n  File \"D:\\Software\\AI Stuff\\dia-tts-server\\venv\\Lib\\site-packages\\dac\\model\\dac.py\", line 91, in forward\n    return self.block(x)\n           ~~~~~~~~~~^^^\n  File \"D:\\Software\\AI Stuff\\dia-tts-server\\venv\\Lib\\site-packages\\torch\\nn\\modules\\module.py\", line 1751, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"D:\\Software\\AI Stuff\\dia-tts-server\\venv\\Lib\\site-packages\\torch\\nn\\modules\\module.py\", line 1762, in _call_impl\n    return forward_call(*args, **kwargs)\n  File \"D:\\Software\\AI Stuff\\dia-tts-server\\venv\\Lib\\site-packages\\torch\\nn\\modules\\container.py\", line 240, in forward\n    input = module(input)\n  File \"D:\\Software\\AI Stuff\\dia-tts-server\\venv\\Lib\\site-packages\\torch\\nn\\modules\\module.py\", line 1751, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"D:\\Software\\AI Stuff\\dia-tts-server\\venv\\Lib\\site-packages\\torch\\nn\\modules\\module.py\", line 1857, in _call_impl\n    return inner()\n  File \"D:\\Software\\AI Stuff\\dia-tts-server\\venv\\Lib\\site-packages\\torch\\nn\\modules\\module.py\", line 1805, in inner\n    result = forward_call(*args, **kwargs)\n  File \"D:\\Software\\AI Stuff\\dia-tts-server\\venv\\Lib\\site-packages\\torch\\nn\\modules\\conv.py\", line 375, in forward\n    return self._conv_forward(input, self.weight, self.bias)\n           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\Software\\AI Stuff\\dia-tts-server\\venv\\Lib\\site-packages\\torch\\nn\\modules\\conv.py\", line 370, in _conv_forward\n    return F.conv1d(\n           ~~~~~~~~^\n        input, weight, bias, self.stride, self.padding, self.dilation, self.groups\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\nRuntimeError: Given groups=1, weight of size [64, 1, 7], expected input[1, 2, 360960] to have 1 channels, but got 2 channels instead\n2025-04-25 10:40:49,109 [ERROR] engine: Error during Dia generation or post-processing: Failed to process audio prompt\nTraceback (most recent call last):\n  File \"D:\\Software\\AI Stuff\\dia-tts-server\\dia\\model.py\", line 635, in generate\n    audio_prompt_codes = audio_to_codebook(\n        self.dac_model, audio_prompt_waveform, data_config=self.config.data\n    )  # Shape [1, T_codes, C]\n  File \"D:\\Software\\AI Stuff\\dia-tts-server\\venv\\Lib\\site-packages\\torch\\utils\\_contextlib.py\", line 116, in decorate_context\n    return func(*args, **kwargs)\n  File \"D:\\Software\\AI Stuff\\dia-tts-server\\venv\\Lib\\site-packages\\torch\\utils\\_contextlib.py\", line 116, in decorate_context\n    return func(*args, **kwargs)\n  File \"D:\\Software\\AI Stuff\\dia-tts-server\\dia\\audio.py\", line 123, in audio_to_codebook\n    _, encoded_frame, _, _, _ = model.encode(audio_data, n_quantizers=None)  # 1, C, T\n                                ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\Software\\AI Stuff\\dia-tts-server\\venv\\Lib\\site-packages\\dac\\model\\dac.py\", line 243, in encode\n    z = self.encoder(audio_data)\n  File \"D:\\Software\\AI Stuff\\dia-tts-server\\venv\\Lib\\site-packages\\torch\\nn\\modules\\module.py\", line 1751, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"D:\\Software\\AI Stuff\\dia-tts-server\\venv\\Lib\\site-packages\\torch\\nn\\modules\\module.py\", line 1762, in _call_impl\n    return forward_call(*args, **kwargs)\n  File \"D:\\Software\\AI Stuff\\dia-tts-server\\venv\\Lib\\site-packages\\dac\\model\\dac.py\", line 91, in forward\n    return self.block(x)\n           ~~~~~~~~~~^^^\n  File \"D:\\Software\\AI Stuff\\dia-tts-server\\venv\\Lib\\site-packages\\torch\\nn\\modules\\module.py\", line 1751, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"D:\\Software\\AI Stuff\\dia-tts-server\\venv\\Lib\\site-packages\\torch\\nn\\modules\\module.py\", line 1762, in _call_impl\n    return forward_call(*args, **kwargs)\n  File \"D:\\Software\\AI Stuff\\dia-tts-server\\venv\\Lib\\site-packages\\torch\\nn\\modules\\container.py\", line 240, in forward\n    input = module(input)\n  File \"D:\\Software\\AI Stuff\\dia-tts-server\\venv\\Lib\\site-packages\\torch\\nn\\modules\\module.py\", line 1751, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"D:\\Software\\AI Stuff\\dia-tts-server\\venv\\Lib\\site-packages\\torch\\nn\\modules\\module.py\", line 1857, in _call_impl\n    return inner()\n  File \"D:\\Software\\AI Stuff\\dia-tts-server\\venv\\Lib\\site-packages\\torch\\nn\\modules\\module.py\", line 1805, in inner\n    result = forward_call(*args, **kwargs)\n  File \"D:\\Software\\AI Stuff\\dia-tts-server\\venv\\Lib\\site-packages\\torch\\nn\\modules\\conv.py\", line 375, in forward\n    return self._conv_forward(input, self.weight, self.bias)\n           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\Software\\AI Stuff\\dia-tts-server\\venv\\Lib\\site-packages\\torch\\nn\\modules\\conv.py\", line 370, in _conv_forward\n    return F.conv1d(\n           ~~~~~~~~^\n        input, weight, bias, self.stride, self.padding, self.dilation, self.groups\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\nRuntimeError: Given groups=1, weight of size [64, 1, 7], expected input[1, 2, 360960] to have 1 channels, but got 2 channels instead\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"D:\\Software\\AI Stuff\\dia-tts-server\\engine.py\", line 287, in generate_speech\n    generated_audio_np = dia_model.generate(\n        text=processed_text,\n    ...<7 lines>...\n        use_torch_compile=False,  # Keep False for stability unless specifically tested/enabled\n    )\n  File \"D:\\Software\\AI Stuff\\dia-tts-server\\venv\\Lib\\site-packages\\torch\\utils\\_contextlib.py\", line 116, in decorate_context\n    return func(*args, **kwargs)\n  File \"D:\\Software\\AI Stuff\\dia-tts-server\\dia\\model.py\", line 707, in generate\n    raise RuntimeError(\"Failed to process audio prompt\") from e\nRuntimeError: Failed to process audio prompt\n2025-04-25 10:40:49,111 [ERROR] server: Speech generation failed for web UI request.\nINFO:     127.0.0.1:55642 - \"POST /web/generate HTTP/1.1\" 200 OK\n```\n",
+    "comments": [
+      {
+        "user": "Zaazu",
+        "body": "I figured it out. In case anyone else is having issues, make sure the audio sample is mono, not stereo."
+      },
+      {
+        "user": "devnen",
+        "body": "Thank you for letting me know. I am going to add this verification in the code"
+      }
+    ],
+    "repository": "devnen/Dia-TTS-Server"
+  },
+  {
+    "issue_number": 3,
+    "title": "Removal of docker install instructions",
+    "author": "bisonbet",
+    "state": "closed",
+    "created_at": "2025-04-23T17:51:46Z",
+    "updated_at": "2025-04-23T18:25:06Z",
+    "labels": [],
+    "body": "Hello!  I was able to build this as a docker container and find that to be VERY convenient.  I noticed the directions for that were removed from the README.  Was curious if those were coming back and that if the docker stuff would stay included.  Thanks!",
+    "comments": [
+      {
+        "user": "devnen",
+        "body": "The section was removed by mistake. Thank you very much for reporting the problem."
+      }
+    ],
+    "repository": "devnen/Dia-TTS-Server"
+  },
+  {
+    "issue_number": 1,
+    "title": "Expected query, key, and value to have the same dtype",
+    "author": "sbstratos79",
+    "state": "closed",
+    "created_at": "2025-04-23T06:15:08Z",
+    "updated_at": "2025-04-23T17:46:49Z",
+    "labels": [],
+    "body": "I am getting this error while generating audio:\n`Expected query, key, and value to have the same dtype, but got query.dtype: c10::BFloat16 key.dtype: float and value.dtype: float instead.`\n\nMicromamba for python environment (3.12.0), Arch Linux, RTX 4080, Cuda 12.8\n\nFull error:\n```\n[ERROR] engine: Error during Dia generation or post-processing: Expected query, key, and value to have the same dtype, but got query.dtype: c10::BFloat16 key.dtype: float and value.dtype: float instead.\nTraceback (most recent call last):\n  File \"/home/sbstratos79/Applications/Git/dia-tts-server/engine.py\", line 287, in generate_speech\n    generated_audio_np = dia_model.generate(\n                         ^^^^^^^^^^^^^^^^^^^\n  File \"/home/sbstratos79/.local/share/mamba/envs/tts/lib/python3.12/site-packages/torch/utils/_contextlib.py\", line 116, in decorate_context\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/sbstratos79/Applications/Git/dia-tts-server/dia/model.py\", line 785, in generate\n    logits_Bx1xCxV, new_self_kv_cache_list = decode_step_fn(\n                                             ^^^^^^^^^^^^^^^\n  File \"/home/sbstratos79/Applications/Git/dia-tts-server/dia/layers.py\", line 743, in decode_step\n    x, new_kv_cache = layer(\n                      ^^^^^^\n  File \"/home/sbstratos79/.local/share/mamba/envs/tts/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1751, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/sbstratos79/.local/share/mamba/envs/tts/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1762, in _call_impl\n    return forward_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/sbstratos79/Applications/Git/dia-tts-server/dia/layers.py\", line 605, in forward\n    sa_out, new_kv_cache = self.self_attention(\n                           ^^^^^^^^^^^^^^^^^^^^\n  File \"/home/sbstratos79/.local/share/mamba/envs/tts/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1751, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/sbstratos79/.local/share/mamba/envs/tts/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1762, in _call_impl\n    return forward_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/sbstratos79/Applications/Git/dia-tts-server/dia/layers.py\", line 392, in forward\n    attn_output = F.scaled_dot_product_attention(\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: Expected query, key, and value to have the same dtype, but got query.dtype: c10::BFloat16 key.dtype: float and value.dtype: float instead.\n2025-04-23 11:40:43,788 [ERROR] server: Speech generation failed for web UI request.\n```",
+    "comments": [
+      {
+        "user": "szymonwlochowski",
+        "body": "I had the same problem, adding those in /dia/layers.py at line 392 helps:\n```python\nif attn_k is not None and attn_v is not None:\n    attn_k = attn_k.to(Xq_BxNxTxH.dtype)\n    attn_v = attn_v.to(Xq_BxNxTxH.dtype)\n```\n"
+      },
+      {
+        "user": "devnen",
+        "body": "Thank you for reporting this issue and providing the solution. I've implemented the fix by adding dtype conversion before the scaled_dot_product_attention call. The changes have been committed directly to the repository. This should resolve the error with mismatched dtypes between query, key, and value tensors. I'm closing this issue as fixed. Thanks again for your contribution."
+      }
+    ],
+    "repository": "devnen/Dia-TTS-Server"
+  }
+]

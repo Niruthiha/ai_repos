@@ -1,0 +1,14 @@
+[
+  {
+    "issue_number": 8,
+    "title": "RateLimitError: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}",
+    "author": "YashBur",
+    "state": "open",
+    "created_at": "2024-08-25T11:42:03Z",
+    "updated_at": "2024-08-25T11:42:03Z",
+    "labels": [],
+    "body": "from where I can get open AI api keys for free",
+    "comments": [],
+    "repository": "rahul2002m/ChatPDF"
+  }
+]

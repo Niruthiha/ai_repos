@@ -1,0 +1,14 @@
+[
+  {
+    "issue_number": 7,
+    "title": "ImportError: cannot import name 'ModelMetaclass' from 'pydantic.main' ",
+    "author": "yvanblanchard",
+    "state": "open",
+    "created_at": "2024-09-19T07:12:18Z",
+    "updated_at": "2024-09-19T07:12:18Z",
+    "labels": [],
+    "body": "Hello,\r\n\r\nI have this error when running app.py script:\r\n\r\n> ImportError: cannot import name 'ModelMetaclass' from 'pydantic.main' (c:\\xxx\\venv\\lib\\site-packages\\pydantic\\main.py)\r\n\r\nAny idea ?\r\nthank you.",
+    "comments": [],
+    "repository": "sunilkumardash9/Pdf-GPT"
+  }
+]

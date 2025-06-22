@@ -1,0 +1,44 @@
+[
+  {
+    "issue_number": 6,
+    "title": "Is it possible to stream output?",
+    "author": "asmith26",
+    "state": "closed",
+    "created_at": "2024-04-02T16:42:28Z",
+    "updated_at": "2024-08-30T06:37:31Z",
+    "labels": [],
+    "body": "Hi Taipy/ @AlexandreSajus ,\r\n\r\nJust wondering is it possible to stream the output from an LLM to the GUI/chat message?\r\n\r\nMany thanks for any help, and this lib! :)",
+    "comments": [
+      {
+        "user": "AlexandreSajus",
+        "body": "It should be possible. What is your exact use case? If the use case is sending prompts and receiving responses from an LLM hosted somewhere, take a look at this tutorial: https://docs.taipy.io/en/latest/tutorials/visuals/5_multithreading/"
+      },
+      {
+        "user": "DeveloperVaibhav1",
+        "body": "check the about for more details read exact dcumentation such as taipylib usecases in py ...\r\n"
+      },
+      {
+        "user": "DeveloperVaibhav1",
+        "body": "TAIPY is very good library . Its has lots of work cases. "
+      }
+    ],
+    "repository": "Avaiga/demo-chatbot"
+  },
+  {
+    "issue_number": 3,
+    "title": "Adapt to other APIs than OpenAI",
+    "author": "AlexandreSajus",
+    "state": "open",
+    "created_at": "2023-12-11T09:18:51Z",
+    "updated_at": "2024-08-30T02:14:31Z",
+    "labels": [],
+    "body": null,
+    "comments": [
+      {
+        "user": "DeveloperVaibhav1",
+        "body": "Yeah there are multiple ai api such as blackbox ai but they are not such useful though there  are many bugs . And they havent fix any of them . "
+      }
+    ],
+    "repository": "Avaiga/demo-chatbot"
+  }
+]

@@ -1,0 +1,101 @@
+[
+  {
+    "issue_number": 46,
+    "title": "Implement unified group-chat context and optional GROUP_ADMINS setting",
+    "author": "s-nagaev",
+    "state": "closed",
+    "created_at": "2025-04-21T19:44:41Z",
+    "updated_at": "2025-04-25T11:25:40Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": "## Goal\nEnable Chibi to maintain a single, unified conversation context in group chats and introduce an optional GROUP_ADMINS setting to control who can change the model and reset the chat.\n\n## Motivation\n- In group chats, Chibi currently treats each mention or reply as a separate conversation, losing context between participants.\n- Defining group-bot administrators allows granular control over critical commands (e.g. changing the LLM or resetting history) and prevents misuse.\n\n## Tasks\n1. Unified group context\n   - Detect messages in a group chat where Chibi is addressed (mentions or replies).\n   - Append all such messages into one shared conversation history per chat (instead of per-user).\n   - Ensure replies and mentions both feed into and read from this global context.\n\n2. GROUP_ADMINS setting\n   - Introduce an env-var or config key GROUP_ADMINS (e.g. list of user IDs).\n   - Only users in GROUP_ADMINS may use /set_model and /reset commands in group chats.\n   - Others receive a “permission denied” message if they attempt those commands.\n\n## Example\nIn .env or config:\n```\nGROUP_ADMINS=\"123456789,987654321\"\n```\n\n## Reference\nSimilar implementation in Hiroshi: https://github.com/s-nagaev/hiroshi/pull/16",
+    "comments": [],
+    "repository": "s-nagaev/chibi"
+  },
+  {
+    "issue_number": 42,
+    "title": "Add function-calling support for providers that are not OpenAI-compatible",
+    "author": "s-nagaev",
+    "state": "open",
+    "created_at": "2025-04-21T19:02:29Z",
+    "updated_at": "2025-04-21T20:07:49Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": "## Goal\nEnable the “tool / function calling” feature for models whose APIs are **not** wire‑compatible with OpenAI’s function‑calling schema (e.g. Anthropic, BigModel, Gemini).\n\n## Motivation\nSeveral providers expose their own JSON schemas or parameter blocks for calling external tools. Supporting them will:\n* unlock richer agent workflows (retrieval‑augmented generation, code execution, etc.);\n* decouple the feature from the OpenAI‑specific message format.\n\n## Tasks\n1. Architecture / abstraction layer  \n   1.1 Investigate whether a provider‑agnostic implementation can be placed in the shared base `Provider` class. If that proves infeasible, fall back to provider‑specific implementations.  \n   1.2 Define a neutral data model (`FunctionCallRequest` / `FunctionCallResponse`) and map it to each provider’s native schema via thin adapters.  \n   1.3 Explore switching from raw REST calls to official provider SDKs (where available) to simplify maintenance and feature parity.\n\n2. Provider implementations  \n   • Anthropic\n   • Google Gemini  \n   • MistralAI",
+    "comments": [],
+    "repository": "s-nagaev/chibi"
+  },
+  {
+    "issue_number": 45,
+    "title": "Implement unified group‑chat context and optional GROUP_ADMINS setting",
+    "author": "s-nagaev",
+    "state": "open",
+    "created_at": "2025-04-21T19:43:28Z",
+    "updated_at": "2025-04-21T19:45:39Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": "## Goal\nEnable Chibi to maintain a single, unified conversation context in group chats and introduce an optional `GROUP_ADMINS` setting to control who can change the model and reset the chat.\n\n## Motivation\n- In group chats, Chibi currently treats each mention or reply as a separate conversation, losing context between participants.  \n- Defining group‑bot administrators allows granular control over critical commands (e.g. changing the LLM or resetting history) and prevents misuse.\n\n## Tasks\n1. Unified group context  \n   - Detect messages in a group chat where Chibi is addressed (mentions or replies).  \n   - Append all such messages into one shared conversation history per chat (instead of per‑user).  \n   - Ensure replies and mentions both feed into and read from this global context.\n\n2. GROUP_ADMINS setting  \n   - Introduce an env‑var or config key `GROUP_ADMINS` (e.g. list of user IDs).  \n   - Only users in `GROUP_ADMINS` may use `/set_model` and `/reset` commands in group chats.  \n   - Others receive a “permission denied” message if they attempt those commands.\n\n\n## Reference\nSimilar implementation in Hiroshi: https://github.com/s-nagaev/hiroshi/pull/16\n",
+    "comments": [],
+    "repository": "s-nagaev/chibi"
+  },
+  {
+    "issue_number": 44,
+    "title": "Pass replied-to message text to LLM",
+    "author": "s-nagaev",
+    "state": "open",
+    "created_at": "2025-04-21T19:33:18Z",
+    "updated_at": "2025-04-21T19:33:18Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": "## Goal\nWhen a user talks to the bot via the **reply** feature, the text of the replied-to message must be included in the prompt that is sent to the LLM.  \nRight now only the user’s own message reaches the provider, so important context is lost.\n\n## Motivation\n• Preserves conversational context (especially in busy group chats).  \n• Aligns behaviour with Hiroshi implementation (see s-nagaev/hiroshi#24).\n\n## Tasks\n1. Update message-building logic  \n   • Detect `message.reply_to_message` in the incoming Telegram update.  \n   • Concatenate the original text and the user’s reply into one prompt, e.g.:\n\n     ```\n     > {replied_to_message.text}\n\n     {user_message.text}\n     ```\n\n2. Provider-agnostic  \n   • Ensure the combined prompt is passed unchanged to any LLM provider (OpenAI, BigModel, etc.).\n\n## Reference\nSimilar fix in Hiroshi: https://github.com/s-nagaev/hiroshi/pull/24",
+    "comments": [],
+    "repository": "s-nagaev/chibi"
+  },
+  {
+    "issue_number": 43,
+    "title": "Add function‑calling support for BigModel.cn provider",
+    "author": "s-nagaev",
+    "state": "open",
+    "created_at": "2025-04-21T19:15:16Z",
+    "updated_at": "2025-04-21T19:15:16Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": "## Goal\nImplement BigModel‑specific “tool / function calling” so the bot can trigger local functions (RAG, code exec, etc.) when chatting via BigModel.cn.\n\n## Motivation\nBigModel exposes its own JSON schema for tool calls; supporting it will bring feature parity with OpenAI and unlock advanced agent workflows for users who prefer BigModel.\n\n## Tasks\n1. Research  \n   1.1 Study BigModel’s docs / playground to understand how function calling is represented in both request and response payloads.  \n   1.2 Assess whether the shared `Provider` base class can host a neutral implementation; if not, proceed with a BigModel‑specific handler.\n\n2. Data model  \n   • Define / reuse a neutral `FunctionCallRequest` and `FunctionCallResponse` and map them to BigModel’s fields.\n\n3. Implementation  \n   • Extend `chibi/services/providers/bigmodel.py` (or create a new file) to:  \n     – serialize our neutral request into BigModel’s expected JSON;  \n     – parse BigModel’s response back into `FunctionCallResponse`;  \n     – surface the result to the rest of the app.",
+    "comments": [],
+    "repository": "s-nagaev/chibi"
+  },
+  {
+    "issue_number": 41,
+    "title": "Add basic BigModel.cn provider support",
+    "author": "s-nagaev",
+    "state": "open",
+    "created_at": "2025-04-21T18:54:41Z",
+    "updated_at": "2025-04-21T18:56:35Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": "## Goal\nProvide first‑cut support for the [BigModel.cn](https://bigmodel.cn) API so users can choose it like any other provider.\n\n## Tasks\n1. Provider skeleton  \n   • Add `BIGMODEL` to the provider enum / registry.  \n   • Introduce env‑var `BIGMODEL_API_KEY` (documented in `.env`).\n\n2. REST client  \n   • Minimal async wrapper (`chibi/services/providers/bigmodel.py`) calling BigModel’s `/chat/completions` (or equivalent).  \n   • Must match the current `Provider` interface: prompt → text.\n\n3. README update  \n   • Add BigModel to the “Supported providers” list.  \n   • Document `BIGMODEL_API_KEY` in the “Environment variables” section.\n",
+    "comments": [],
+    "repository": "s-nagaev/chibi"
+  },
+  {
+    "issue_number": 26,
+    "title": "Implementing an Optional Chatbot Integration with Monitoring Systems",
+    "author": "s-nagaev",
+    "state": "closed",
+    "created_at": "2024-03-04T12:29:43Z",
+    "updated_at": "2025-04-20T21:55:37Z",
+    "labels": [
+      "enhancement",
+      "good first issue"
+    ],
+    "body": "### Description:\r\n\r\nThe objective of this task is to enhance our chatbot application by providing an optional feature that allows it to connect with monitoring systems. This will enable the chatbot application to periodically report its operational status to the monitoring system by invoking a specific webhook.\r\n\r\n### Detailed Requirements:\r\n\r\n1. Environment Variable Configuration:\r\n   - Introduce two environment variables: MONITORING_URL and MONITORING_FREQUENCY_CALL.\r\n   - The MONITORING_FREQUENCY_CALL variable should have a default value of 5 (the unit of time this refers to should be defined, e.g., minutes).\r\n\r\n2. Operational Behavior:\r\n   - Upon startup, if the MONITORING_URL variable is set, the chatbot application should begin making calls to the specified URL at intervals determined by the MONITORING_FREQUENCY_CALL.\r\n   - These calls should commence immediately upon the application’s launch and continue at the specified frequency for as long as the application runs.\r\n   \r\n3. Logging:\r\n   - Failed attempts to invoke the webhook should be logged, including the response code or type of error encountered. This will assist in troubleshooting and ensure transparency regarding the integration's functionality.\r\n   - Successful calls need not be logged, to prevent cluttering the log files with routine operational entries.\r\n   \r\n4. Startup Notification:\r\n   - At application startup, include a log entry that indicates the status of this monitoring feature. This should clearly state whether the feature is active (and if so, the configured values) or inactive. This initial log will serve as immediate feedback on the application’s configuration regarding its integration with external monitoring solutions.\r\n\r\n### Objective:\r\n\r\nBy accomplishing this task, we aim to improve the reliability and observability of our chatbot application. This feature will facilitate proactive maintenance and issue resolution by ensuring continuous communication between the chatbot and integrated monitoring systems.\r\n",
+    "comments": [],
+    "repository": "s-nagaev/chibi"
+  }
+]

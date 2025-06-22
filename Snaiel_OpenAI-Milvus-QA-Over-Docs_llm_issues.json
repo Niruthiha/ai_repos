@@ -1,0 +1,14 @@
+[
+  {
+    "issue_number": 2,
+    "title": "qa_over_docs",
+    "author": "jayjungit",
+    "state": "open",
+    "created_at": "2024-07-25T15:53:28Z",
+    "updated_at": "2024-07-25T15:53:28Z",
+    "labels": [],
+    "body": "Where does from qa_over_docs import r_db come from?",
+    "comments": [],
+    "repository": "Snaiel/OpenAI-Milvus-QA-Over-Docs"
+  }
+]

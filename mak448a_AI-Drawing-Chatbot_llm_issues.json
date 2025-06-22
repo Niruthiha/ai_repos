@@ -1,0 +1,146 @@
+[
+  {
+    "issue_number": 69,
+    "title": "Add Prodia",
+    "author": "mishl-dev",
+    "state": "closed",
+    "created_at": "2023-09-28T01:50:59Z",
+    "updated_at": "2025-04-25T18:31:15Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": "\r\nhttps://prodia.com/\r\nhttps://docs.prodia.com/reference/getting-started",
+    "comments": [
+      {
+        "user": "mak448a",
+        "body": "This actually looks like it might be worth to add :) However, I have other projects I want to work on"
+      },
+      {
+        "user": "mishl-dev",
+        "body": "> This actually looks like it might be worth to add :) However, I have other projects I want to work on\r\n\r\ni got shit loads of api keys if you want"
+      },
+      {
+        "user": "mak448a",
+        "body": "I can't find out how to download. I found out, however, that I can use https://api.prodia.com/job/{JOB_ID} to see if the image was finished. Supposedly, you can also [download from here](https://github.com/zenafey/prodiapy/blob/main/prodia/async_prodia.py#L130C29-L130C75), but I couldn't get that to work, since there was no field for that in the returned json."
+      }
+    ],
+    "repository": "mak448a/AI-Drawing-Chatbot"
+  },
+  {
+    "issue_number": 92,
+    "title": "Fix dependencies",
+    "author": "mak448a",
+    "state": "open",
+    "created_at": "2025-02-10T01:09:14Z",
+    "updated_at": "2025-02-10T01:09:14Z",
+    "labels": [],
+    "body": "I should update the dependencies in requirements.txt. Probably no extra intervention is needed, so anyone can submit a pull request for this if I don't get around to it. Or just ask me here",
+    "comments": [],
+    "repository": "mak448a/AI-Drawing-Chatbot"
+  },
+  {
+    "issue_number": 65,
+    "title": "GUI",
+    "author": "mak448a",
+    "state": "closed",
+    "created_at": "2023-07-19T23:56:30Z",
+    "updated_at": "2024-12-08T03:25:40Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": "Maybe add a gui with pyside6\r\nIt would have a `run bot` button\r\nAnd a settings pane for entering in credentials\r\n\r\nNot very high on priorities.",
+    "comments": [
+      {
+        "user": "mak448a",
+        "body": "There's not really a need for this. That's a bit excessive for a Discord bot. If you would like it, comment on this thread."
+      }
+    ],
+    "repository": "mak448a/AI-Drawing-Chatbot"
+  },
+  {
+    "issue_number": 86,
+    "title": "Looking for Maintainers",
+    "author": "mak448a",
+    "state": "open",
+    "created_at": "2024-08-09T02:47:03Z",
+    "updated_at": "2024-12-08T03:24:41Z",
+    "labels": [],
+    "body": "I don't use Discord that much anymore, because I prefer to use privacy respecting messengers. If anyone likes this project, please consider maintaining it!",
+    "comments": [],
+    "repository": "mak448a/AI-Drawing-Chatbot"
+  },
+  {
+    "issue_number": 87,
+    "title": "Allow executing without horde module",
+    "author": "mak448a",
+    "state": "closed",
+    "created_at": "2024-08-11T15:16:16Z",
+    "updated_at": "2024-12-08T03:23:48Z",
+    "labels": [],
+    "body": "I have horde module which is licensed under GPL, but this project is MIT. I'd like to try to decouple the two as much as possible.",
+    "comments": [],
+    "repository": "mak448a/AI-Drawing-Chatbot"
+  },
+  {
+    "issue_number": 88,
+    "title": "Docker containers are broken",
+    "author": "mak448a",
+    "state": "closed",
+    "created_at": "2024-12-06T14:07:50Z",
+    "updated_at": "2024-12-08T03:01:56Z",
+    "labels": [
+      "bug"
+    ],
+    "body": null,
+    "comments": [],
+    "repository": "mak448a/AI-Drawing-Chatbot"
+  },
+  {
+    "issue_number": 78,
+    "title": "More llms: Llama3 & Mixtral with Groq api ",
+    "author": "mak448a",
+    "state": "closed",
+    "created_at": "2024-05-23T20:29:49Z",
+    "updated_at": "2024-07-19T13:59:39Z",
+    "labels": [
+      "enhancement",
+      "code improvements"
+    ],
+    "body": "Add more llms and llama 3 in addition to ChatGPT. Maybe even some reworks in the llm modules.",
+    "comments": [
+      {
+        "user": "mak448a",
+        "body": "No mixtral yet. Open issue if you need it."
+      }
+    ],
+    "repository": "mak448a/AI-Drawing-Chatbot"
+  },
+  {
+    "issue_number": 51,
+    "title": "Imaginepy is broken",
+    "author": "mak448a",
+    "state": "closed",
+    "created_at": "2023-06-21T20:17:42Z",
+    "updated_at": "2024-06-25T13:17:33Z",
+    "labels": [
+      "bug",
+      "confirmed"
+    ],
+    "body": "**Describe the bug**\r\nUsing /imaginepy doesn't work\r\nhttps://github.com/ItsCEED/Imaginepy/issues/7\r\n\r\n**To Reproduce**\r\nJust run /imaginepy on Discord\r\n\r\n**Workaround**\r\nManually install imaginepy from https://github.com/ItsCEED/Imaginepy\r\n\r\n**Desktop (please complete the following information):**\r\n - Python Version: 3.10",
+    "comments": [
+      {
+        "user": "mak448a",
+        "body": "The latest version of Imaginepy is out, which fixes this issue."
+      },
+      {
+        "user": "mishl-dev",
+        "body": "> The latest version of Imaginepy is out, which fixes this issue.\r\n\r\nbrother are you sure ?"
+      },
+      {
+        "user": "mak448a",
+        "body": "I'll try it out and reopen if it's not working"
+      }
+    ],
+    "repository": "mak448a/AI-Drawing-Chatbot"
+  }
+]

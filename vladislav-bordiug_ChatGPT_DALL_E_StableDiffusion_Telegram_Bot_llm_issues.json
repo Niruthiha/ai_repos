@@ -1,0 +1,19 @@
+[
+  {
+    "issue_number": 3,
+    "title": "Thank you for sharing, that’s great,",
+    "author": "vtayh",
+    "state": "open",
+    "created_at": "2024-07-20T00:58:57Z",
+    "updated_at": "2024-07-20T11:47:52Z",
+    "labels": [],
+    "body": "I have only used the MONGODB database. Is there any functional difference between it and your current database? Another problem is cost saving. OPENAI has recently released the 4o mini version. I think it is more suitable for use on TELEGRAM. How to make the robot automatically match the best model? Are there any such plans in the future? ty",
+    "comments": [
+      {
+        "user": "vladislav-bordiug",
+        "body": "1) I only used the commands SELECT, UPDATE, INSERT, DELETE, their analogues are in MONGODB. You will just need to rewrite the 'db.py' file to use MONGODB instead of PostgreSQL.\r\n2) Yes, you are right. I updated line 23 with \"gpt-4o-mini\" in 'openaitools.py'. GPT-4o-mini is 25 times cheaper."
+      }
+    ],
+    "repository": "vladislav-bordiug/ChatGPT_DALL_E_StableDiffusion_Telegram_Bot"
+  }
+]

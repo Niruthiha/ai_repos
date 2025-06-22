@@ -1,0 +1,27 @@
+[
+  {
+    "issue_number": 6,
+    "title": "PydanticUserError: If you use `@root_validator` with pre=False (the default) you MUST specify `skip_on_failure=True`.",
+    "author": "lolliuym",
+    "state": "open",
+    "created_at": "2023-07-12T10:05:29Z",
+    "updated_at": "2024-07-28T21:28:45Z",
+    "labels": [],
+    "body": "The error message you're seeing indicates that there is an issue with the usage of the @root_validator decorator from the Pydantic library. Starting from version 2.0.2, if you use @root_validator with pre=False (which is the default behavior), you must specify skip_on_failure=True to avoid this error.\r\n\r\nFile containing root_validator not found !\r\n\r\n![image](https://github.com/cirediatpl/FigmaChain/assets/10941111/bf48965d-9348-493c-a840-d5a3f9bbfc19)\r\n",
+    "comments": [
+      {
+        "user": "lolliuym",
+        "body": "the tips below didn't help:\r\n\r\nTo resolve this issue, you have a few options:\r\n\r\n1. Update Pydantic: Make sure you have the latest version of Pydantic installed. You can use pip install --upgrade pydantic to upgrade to the latest version.\r\n\r\n2. Replace @root_validator with @model_validator: As mentioned in the error message, @root_validator is deprecated and should be replaced with @model_validator. Update your code to use @model_validator instead.\r\n\r\n3. Specify skip_on_failure=True: If you want to continue using @root_validator, you can add the skip_on_failure=True parameter to the decorator. This will prevent the error from occurring. For example:\r\n\r\n@root_validator(pre=False, skip_on_failure=True)\r\ndef my_validator(cls, values):\r\n    # Your validation logic here\r\n    return values\r\n\r\nSomeone please help me in fixing this.\r\n\r\nThanks in advance :).\r\n\r\n"
+      },
+      {
+        "user": "JhdChk",
+        "body": "I keep getting the same error. Does anyone have a solution please?"
+      },
+      {
+        "user": "Shaon2221",
+        "body": "Use pydantic following version Pydantic==1.10.7"
+      }
+    ],
+    "repository": "cirediatpl/FigmaChain"
+  }
+]

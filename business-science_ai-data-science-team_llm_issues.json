@@ -1,0 +1,906 @@
+[
+  {
+    "issue_number": 58,
+    "title": "Ancient script ",
+    "author": "Vq13sixsuperpowers",
+    "state": "open",
+    "created_at": "2025-06-02T11:05:20Z",
+    "updated_at": "2025-06-02T11:05:20Z",
+    "labels": [],
+    "body": "https://app.diagrams.net/",
+    "comments": [],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 57,
+    "title": "Website builder - Durable",
+    "author": "Vq13sixsuperpowers",
+    "state": "open",
+    "created_at": "2025-05-27T14:57:39Z",
+    "updated_at": "2025-05-27T14:57:53Z",
+    "labels": [],
+    "body": "https://app.durable.co/website/builder?signup=truehttps://app.durable.co/website/builder?signup=true\n.macpermission also together linux Mac ios OS with well and detailed past to till World wide licenced open access to necesserly permanner to to request you. ",
+    "comments": [],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 56,
+    "title": "Trying to create a streamlit app from ai-data-science-team (sql_database_agent.py) however the agent's output is gibberish..",
+    "author": "HeinrichMuller",
+    "state": "open",
+    "created_at": "2025-05-02T13:42:01Z",
+    "updated_at": "2025-05-02T13:43:36Z",
+    "labels": [],
+    "body": "Hi,..\n\nI am part of the GenAI Bootcamp (cohort 4) and we have just completed clinic #2.  I have tried to take the script that Matt gave us (10_ai_data_science_team.py) and make a streamlit web app from it.  I do get the web app up and running, however the output is total nonsense, not matter what prompt i give, it just runs the exact same sql query every time:                                                                                                                  \n\n\n![Image](https://github.com/user-attachments/assets/cff1f707-f0f4-4685-8f60-7a0dae6dc426)\n\n\n I believe i have made all the necessary changes to the code so that it correctly takes the Langgraph dictionary outputs from the agent and incorporates it correctly into the \"Render current messages from StreamlitChatMessageHistory\" section of the streamlit app.  Please find my code below:\n\n\n\n``` python\n# Import Libraries\nimport sqlalchemy as sql\nimport pandas as pd\n\nfrom langchain_openai import ChatOpenAI\nimport os\nimport yaml\n\nfrom ai_data_science_team.multiagents import SQLDataAnalyst\nfrom ai_data_science_team.agents import SQLDatabaseAgent, DataVisualizationAgent\n\nfrom pprint import pprint\nfrom IPython.display import display, Markdown\nimport sqlparse\n\nimport streamlit as st\nfrom langchain_community.chat_message_histories import StreamlitChatMessageHistory\n\nimport plotly.io as pio\n\n\n# * Setup\n# this SQL Agent has logging capabilities but it is turned off by default\n\nMODEL =  'gpt-4.1-mini'\nLOG      = False\nLOG_PATH = os.path.join(os.getcwd(), \"logs/\")\n\n\n\n\n# Setup AI\n\nos.environ[\"OPENAI_API_KEY\"] = yaml.safe_load(open('credentials.yml'))['openai']\n\nllm = ChatOpenAI(model = MODEL)\n\nsql_engine = sql.create_engine(\"sqlite:///database/leads_scored.db\")\n\nconn = sql_engine.connect()\n\n\n\n\n\n# * STREAMLIT APP SETUP ----\n\nst.set_page_config(page_title=\"Your Business Intelligence AI Copilot\")\nst.title(\"Your Business Intelligence AI Copilot\")\n\nst.markdown(\"\"\"\n            I'm a handy business intelligence agent that connects to a selected SQLite database mimicking an ERP system. You can ask me Business Intelligence, Customer Analytics, and Data Visualization Questions, and I will report the results. If I accidentally output a table where I should have output a chart, please select a higher performance LLM model and try again.\n            \"\"\")\n\n\n\n\n# * Make the agent\n\nsql_data_analyst = SQLDataAnalyst(\n    model = llm,\n    sql_database_agent = SQLDatabaseAgent(\n        model = llm,\n        connection = conn,\n        n_samples = 1,\n        log = LOG,\n        log_path = LOG_PATH,\n        bypass_recommended_steps=True,\n    ),\n    data_visualization_agent = DataVisualizationAgent(\n        model = llm,\n        n_samples = 1000,\n        log = LOG,\n        log_path = LOG_PATH,\n    )\n)\n\n\n\n\n# * STREAMLIT \nexample_questions = st.expander(\"Try out these example questions\")\n\nwith example_questions:\n    \"\"\"\n    Example Questions:\n \n    5. What are the fields in the leads_scored table?\n\n    6. What is the average p1 lead score of leads in the database?\n\n    7. What is the average p1 lead score of leads by member rating in the database?\n\n    8. Calculate the average p1 lead score of leads by member rating. Return a scatter plot. Show member rating on the x-axis. Include a linear regression line in orange. Show the formula for the linear regression in black font on a white background.\n\n    9. Which 10 customers have the highest p1 probability of purchase who have NOT purchased \"Learning Labs Pro - Paid Course\"?\n\n    10. What are the top 5 products for sales revenue, group by product name? Make a donut chart. Use suggested price for the sales revenue and a unit quantity of 1 for all transactions. Make sure each donut slice is a different colour. Make sure the legend is on the right, middle.\n\n    \"\"\"\n    \n\n\n\n# Set up memory\nmsgs = StreamlitChatMessageHistory(key=\"langchain_messages\")\nif len(msgs.messages) == 0:\n    msgs.add_ai_message(\"How can I help you?\")\n\n\n# Initialize plot storage in session state\nif \"plots\" not in st.session_state:\n    st.session_state.plots = []\n\n\n# Initialize dataframe storage in session state\nif \"dataframes\" not in st.session_state:\n    st.session_state.dataframes = []\n\n\n# Function to display chat messages including Plotly charts and dataframes\ndef display_chat_history():\n    for i, msg in enumerate(msgs.messages):\n        with st.chat_message(msg.type):\n            if \"PLOT_INDEX:\" in msg.content:\n                plot_index = int(msg.content.split(\"PLOT_INDEX:\")[1])\n                st.plotly_chart(st.session_state.plots[plot_index], key=f\"history_plot_{plot_index}\")\n            elif \"DATAFRAME_INDEX:\" in msg.content:\n                df_index = int(msg.content.split(\"DATAFRAME_INDEX:\")[1])\n                st.dataframe(st.session_state.dataframes[df_index], key=f\"history_dataframe_{df_index}\")\n            else:\n                st.write(msg.content)\n\n\n\n\n# Render current messages from StreamlitChatMessageHistory\ndisplay_chat_history()\n\n\n\nif question := st.chat_input(\"Enter your question here:\", key=\"query_input\"):\n    with st.spinner(\"Thinking...\"):\n        \n        st.chat_message(\"human\").write(question)\n        msgs.add_user_message(question)\n        \n        # Run the app\n        inputs = {\"user_question\": question}\n        \n        error_occured = False\n        try: \n            result = sql_data_analyst.invoke(inputs)\n        except Exception as e:\n            error_occured = True\n            print(e)\n        \n        if not error_occured:\n\n            if result['routing_preprocessor_decision'] == 'table':\n                # Table was requested\n                \n                response_text = f\"Returning the table...\\n\\nSQL Query:\\n```sql\\n{result['sql_database_function']}\\n```\"\n                \n                response_df = pd.DataFrame(result['data_sql'])\n\n                # Store the dataframe and keep its index\n                df_index = len(st.session_state.dataframes)\n                \n                st.session_state.dataframes.append(response_df)\n\n                # Store the response text and dataframe index in the messages\n                msgs.add_ai_message(response_text)\n                msgs.add_ai_message(f\"DATAFRAME_INDEX:{df_index}\")\n\n                st.chat_message(\"ai\").write(response_text)\n                st.dataframe(response_df)\n                \n\n\n            elif result['routing_preprocessor_decision'] == 'chart' and result['chart_plotly_error'] is False:\n                # Chart was requested and  produced correctly\n                \n                response_text = f\"Returning the plot...\\n\\nSQL Query:\\n```sql\\n{result['sql_database_function']}\\n```\"\n                \n                response_plot = pio.from_json(result[\"chart_plotly_json\"])\n\n                # Store the plot and keep its index\n                plot_index = len(st.session_state.plots)\n                st.session_state.plots.append(response_plot)\n\n                # Store the response text and plot index in the messages\n                msgs.add_ai_message(response_text)\n                msgs.add_ai_message(f\"PLOT_INDEX:{plot_index}\")\n\n                st.chat_message(\"ai\").write(response_text)\n                st.plotly_chart(response_plot)\n\n\n            else:\n                # Chart error occurred, return Table instead\n                response_text = f\"I apologize. There was an error during the plotting process. Returning the table instead...\\n\\nSQL \n               Query:\\n```sql\\n{result['sql_database_function']}\\n```\"\n                \n                df = pd.DataFrame(result['data_sql'])\n\n                # Store the dataframe and keep its index\n                df_index = len(st.session_state.dataframes)\n                \n                st.session_state.dataframes.append(df)\n\n                # Store the response text and dataframe index in the messages\n                msgs.add_ai_message(response_text)\n                msgs.add_ai_message(f\"DATAFRAME_INDEX:{df_index}\")\n\n                st.chat_message(\"ai\").write(response_text)\n                st.dataframe(df)\n\n\n        else:\n            # SQL error occurred\n            response_text = f\"An error occurred in generating the SQL. I apologize. Please try again or format the question differently and I'll try my \n            best to provide a helpful answer.\"\n            msgs.add_ai_message(response_text)\n            st.chat_message(\"ai\").write(response_text)\n         \n```\n",
+    "comments": [
+      {
+        "user": "mdancho84",
+        "body": "I'll take a look in a bit and see what I can find out. "
+      }
+    ],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 12,
+    "title": "[DOC] SQL agent to use non open AI models within langchain like LLama",
+    "author": "am5060",
+    "state": "open",
+    "created_at": "2025-01-05T00:25:33Z",
+    "updated_at": "2025-04-29T07:53:21Z",
+    "labels": [
+      "documentation"
+    ],
+    "body": "HI - Firstly thank you so much for putting such gems out. I feel directionally teams will want to move away from open ai given the compute costs and the other open models getting better over time. Having the opportunity to toggle to use other models within langchain will be a huge help for open source folks! ",
+    "comments": [
+      {
+        "user": "mdancho84",
+        "body": "Excellent! I'll include an example of how to use Ollama instead of OpenAI. "
+      },
+      {
+        "user": "Shubhrant05",
+        "body": "Hey @mdancho84 were you able to add the documentation to use Ollama instead of OpenAI ?"
+      },
+      {
+        "user": "Shubhrant05",
+        "body": "Hey @mdancho84 I was able to make use of the local LLM. Let me know if anyone needs any help"
+      }
+    ],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 52,
+    "title": "no report file path was return by the Sweetviz tool",
+    "author": "wildrewwildrew",
+    "state": "closed",
+    "created_at": "2025-03-11T12:04:00Z",
+    "updated_at": "2025-04-16T15:14:03Z",
+    "labels": [
+      "bug",
+      "question"
+    ],
+    "body": "Hi\n\nCan you help with this error:\n\nSweetviz Report\n\nNo report file path was returned by the Sweetviz tool",
+    "comments": [
+      {
+        "user": "wildrewwildrew",
+        "body": "i have all modules installed in a venv and have verified them"
+      },
+      {
+        "user": "Liam-Sutcliffe",
+        "body": "I'm also receiving this error, all modules are installed locally. Have tried in docker as well to omit for platform related issues and get the same results. "
+      },
+      {
+        "user": "mdancho84",
+        "body": "On break at the moment. But will look into once I get back. \n\nIn the meantime check out what the function is doing- it's storing the sweetviz report as a temp file. \n\nThis is relatively new. I don't store it in the local directory. \n\nAlso if you could share a complete error report or screenshot of what is happening. That would help. I need to try to reproduce it. And just saying it isn't working is insufficient. \n\nGive me as much information as you can to try to solve it. "
+      }
+    ],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 53,
+    "title": "Human In The Loop: Review functionality `ValueError: Found edge ending at unknown node explain_data_cleaner_code`",
+    "author": "jason-stratyfy",
+    "state": "open",
+    "created_at": "2025-03-12T20:23:20Z",
+    "updated_at": "2025-04-16T15:13:07Z",
+    "labels": [
+      "question"
+    ],
+    "body": "When using Human in the loop with data cleaning I get a `ValueError: Found edge ending at unknown node explain_data_cleaner_code`\n\nhere is the full traceback:\n```\n---------------------------------------------------------------------------\nValueError                                Traceback (most recent call last)\nCell In[8], line 1\n----> 1 data_cleaning_agent = DataCleaningAgent(\n      2     model = llm,\n      3     log=LOG,\n      4     log_path=LOG_PATH,\n      5     n_samples=100,\n      6     bypass_recommended_steps=True,\n      7     human_in_the_loop=True,\n      8 )\n     10 # data_cleaning_agent\n\nFile ~\\miniconda3\\envs\\llmtest\\lib\\site-packages\\ai_data_science_team\\agents\\data_cleaning_agent.py:181, in DataCleaningAgent.__init__(self, model, n_samples, log, log_path, file_name, function_name, overwrite, human_in_the_loop, bypass_recommended_steps, bypass_explain_code, checkpointer)\n    154 def __init__(\n    155     self, \n    156     model, \n   (...)\n    166     checkpointer: Checkpointer = None\n    167 ):\n    168     self._params = {\n    169         \"model\": model,\n    170         \"n_samples\": n_samples,\n   (...)\n    179         \"checkpointer\": checkpointer\n    180     }\n--> 181     self._compiled_graph = self._make_compiled_graph()\n    182     self.response = None\n\nFile ~\\miniconda3\\envs\\llmtest\\lib\\site-packages\\ai_data_science_team\\agents\\data_cleaning_agent.py:189, in DataCleaningAgent._make_compiled_graph(self)\n    185 \"\"\"\n    186 Create the compiled graph for the data cleaning agent. Running this method will reset the response to None.\n    187 \"\"\"\n    188 self.response=None\n--> 189 return make_data_cleaning_agent(**self._params)\n\nFile ~\\miniconda3\\envs\\llmtest\\lib\\site-packages\\ai_data_science_team\\agents\\data_cleaning_agent.py:685, in make_data_cleaning_agent(model, n_samples, log, log_path, file_name, function_name, overwrite, human_in_the_loop, bypass_recommended_steps, bypass_explain_code, checkpointer)\n    662     return node_func_report_agent_outputs(\n    663         state=state,\n    664         keys_to_include=[\n   (...)\n    673         custom_title=\"Data Cleaning Agent Outputs\"\n    674     )\n    676 node_functions = {\n    677     \"recommend_cleaning_steps\": recommend_cleaning_steps,\n    678     \"human_review\": human_review,\n   (...)\n    682     \"report_agent_outputs\": report_agent_outputs, \n    683 }\n--> 685 app = create_coding_agent_graph(\n    686     GraphState=GraphState,\n    687     node_functions=node_functions,\n    688     recommended_steps_node_name=\"recommend_cleaning_steps\",\n    689     create_code_node_name=\"create_data_cleaner_code\",\n    690     execute_code_node_name=\"execute_data_cleaner_code\",\n    691     fix_code_node_name=\"fix_data_cleaner_code\",\n    692     explain_code_node_name=\"report_agent_outputs\", \n    693     error_key=\"data_cleaner_error\",\n    694     human_in_the_loop=human_in_the_loop,\n    695     human_review_node_name=\"human_review\",\n    696     checkpointer=checkpointer,\n    697     bypass_recommended_steps=bypass_recommended_steps,\n    698     bypass_explain_code=bypass_explain_code,\n    699     agent_name=AGENT_NAME,\n    700 )\n    702 return app\n\nFile ~\\miniconda3\\envs\\llmtest\\lib\\site-packages\\ai_data_science_team\\templates\\agent_templates.py:405, in create_coding_agent_graph(GraphState, node_functions, recommended_steps_node_name, create_code_node_name, execute_code_node_name, fix_code_node_name, explain_code_node_name, error_key, max_retries_key, retry_count_key, human_in_the_loop, human_review_node_name, checkpointer, bypass_recommended_steps, bypass_explain_code, agent_name)\n    402     workflow.add_edge(explain_code_node_name, END)\n    404 # Finally, compile\n--> 405 app = workflow.compile(\n    406     checkpointer=checkpointer,\n    407     name=agent_name,\n    408 )\n    410 return app\n\nFile ~\\miniconda3\\envs\\llmtest\\lib\\site-packages\\langgraph\\graph\\state.py:599, in StateGraph.compile(self, checkpointer, store, interrupt_before, interrupt_after, debug, name)\n    596 interrupt_after = interrupt_after or []\n    598 # validate the graph\n--> 599 self.validate(\n    600     interrupt=(\n    601         (interrupt_before if interrupt_before != \"*\" else []) + interrupt_after\n    602         if interrupt_after != \"*\"\n    603         else []\n    604     )\n    605 )\n    607 # prepare output channels\n    608 output_channels = (\n    609     \"__root__\"\n    610     if len(self.schemas[self.output]) == 1\n   (...)\n    616     ]\n    617 )\n\nFile ~\\miniconda3\\envs\\llmtest\\lib\\site-packages\\langgraph\\graph\\graph.py:292, in Graph.validate(self, interrupt)\n    290 for target in all_targets:\n    291     if target not in self.nodes and target != END:\n--> 292         raise ValueError(f\"Found edge ending at unknown node `{target}`\")\n    293 # validate interrupts\n    294 if interrupt:\n\nValueError: Found edge ending at unknown node `explain_data_cleaner_code`\n```",
+    "comments": [
+      {
+        "user": "mdancho84",
+        "body": "Can you share what code your ran so I can quickly attempt to reproduce the error?"
+      },
+      {
+        "user": "azkalot1",
+        "body": "I think this issues is currently present at sql agent as well"
+      }
+    ],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 55,
+    "title": "Persistent Memory: Test Checkpointers For Single and Multi-Agents",
+    "author": "mdancho84",
+    "state": "open",
+    "created_at": "2025-04-16T15:11:34Z",
+    "updated_at": "2025-04-16T15:12:19Z",
+    "labels": [],
+    "body": null,
+    "comments": [],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 50,
+    "title": "Contribution",
+    "author": "DanielTobi0",
+    "state": "closed",
+    "created_at": "2025-02-28T07:05:42Z",
+    "updated_at": "2025-04-16T15:11:55Z",
+    "labels": [],
+    "body": "Hi Matt,\n\nI was reviewing the repo and noticed a few potential issues or areas for improvement that I believe could be addressed. would you be open to me submitting a pull request to resolve these issues? I’d be happy to help out in any way I can.\n\nPlease let me know if that would be helpful or if there are any specific guidelines or things I should consider before submitting.",
+    "comments": [
+      {
+        "user": "mdancho84",
+        "body": "Yes that's great. I'd love the help. \n\nIf they are significant let's discuss first. "
+      }
+    ],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 33,
+    "title": "[NEW APP] SQL Database Agent App",
+    "author": "mdancho84",
+    "state": "closed",
+    "created_at": "2025-01-18T02:25:44Z",
+    "updated_at": "2025-04-01T19:11:58Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": null,
+    "comments": [],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 35,
+    "title": "[NEW AGENT TEMPLATE] Tool Calling Agent Template",
+    "author": "mdancho84",
+    "state": "closed",
+    "created_at": "2025-01-21T14:03:41Z",
+    "updated_at": "2025-04-01T19:11:35Z",
+    "labels": [
+      "question"
+    ],
+    "body": null,
+    "comments": [
+      {
+        "user": "mdancho84",
+        "body": "LangGraph Prebuilt React Agent solves this: https://github.com/langchain-ai/langgraph/tree/main/libs/prebuilt\n\nUsage:\n\n``` python\nfrom langchain_anthropic import ChatAnthropic\nfrom langgraph.prebuilt import create_react_agent\n\n# Define the tools for the agent to use\ndef search(query: str):\n    \"\"\"Call to surf the web.\"\"\"\n    # This is a placeholder, but don't tell the LLM that...\n    if \"sf\" in query.lower() or \"san francisco\" in query.lower():\n        return \"It's 60 degrees and foggy.\"\n    return \"It's 90 degrees and sunny.\"\n\ntools = [search]\nmodel = ChatAnthropic(model=\"claude-3-7-sonnet-latest\")\n\napp = create_react_agent(model, tools)\n# run the agent\napp.invoke(\n    {\"messages\": [{\"role\": \"user\", \"content\": \"what is the weather in sf\"}]},\n)\n```"
+      }
+    ],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 34,
+    "title": "[NEW AGENT] Supervisor Agent",
+    "author": "mdancho84",
+    "state": "closed",
+    "created_at": "2025-01-21T14:02:33Z",
+    "updated_at": "2025-04-01T19:06:14Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": null,
+    "comments": [
+      {
+        "user": "mdancho84",
+        "body": "Looks like LanGraph Supervisor solves this with a prebuilt supervisor agent: https://github.com/langchain-ai/langgraph-supervisor-py"
+      }
+    ],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 51,
+    "title": "Cloning issue",
+    "author": "realsmak88",
+    "state": "closed",
+    "created_at": "2025-03-10T11:18:16Z",
+    "updated_at": "2025-04-01T19:05:07Z",
+    "labels": [],
+    "body": "Hi Matt,\nI was trying to clone the repo but it stops at 46% and generates this error message :\nCloning into '/Users/kamarel/Documents/GitHub/ai-data-science-team'...\nremote: Enumerating objects: 1777, done.        \nremote: Counting objects: 100% (255/255), done.        \nremote: Compressing objects: 100% (132/132), done.        \nerror: RPC failed; curl 92 HTTP/2 stream 5 was not closed cleanly: CANCEL (err 8)\nerror: 5898 bytes of body are still expected\nfetch-pack: unexpected disconnect while reading sideband packet\nfatal: early EOF\nfatal: fetch-pack: invalid index-pack output\n\nWould you like to retry cloning ?",
+    "comments": [
+      {
+        "user": "mdancho84",
+        "body": "This is what chatgpt recommends: https://chatgpt.com/share/67ec3869-6718-8004-bb27-74110adab23f\n\nSometimes, increasing the buffer size solves the issue:\n\n``` bash\ngit config --global http.postBuffer 524288000\n```\n\nThen retry cloning:\n\n``` bash\ngit clone https://github.com/your-repo-url\n```"
+      },
+      {
+        "user": "mdancho84",
+        "body": "Closing as this is likely a local issue due to the users git configuration. "
+      }
+    ],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 54,
+    "title": "Update Readme (refs langchain-ai/langgraph#3719)",
+    "author": "mdancho84",
+    "state": "closed",
+    "created_at": "2025-04-01T18:30:26Z",
+    "updated_at": "2025-04-01T18:57:46Z",
+    "labels": [],
+    "body": "- [x] Users will be expecting an install from pypi rather than git\n- [x] In the Usage the examples are quite unclear in terms of how to use stuff. Put a simple complete end to end example that has all the necessary imports. (i.e., don't rely on users navigating to the notebooks to find how to use)\n\nrefs langchain-ai/langgraph#3719",
+    "comments": [],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 49,
+    "title": "[FEAT] Allow users to pass checkpointers to agents",
+    "author": "mdancho84",
+    "state": "closed",
+    "created_at": "2025-02-21T21:26:03Z",
+    "updated_at": "2025-02-21T22:54:58Z",
+    "labels": [],
+    "body": null,
+    "comments": [],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 48,
+    "title": "[FEAT] app.compile(): Use new name arg to specify agent names",
+    "author": "mdancho84",
+    "state": "closed",
+    "created_at": "2025-02-21T21:25:42Z",
+    "updated_at": "2025-02-21T22:54:47Z",
+    "labels": [],
+    "body": null,
+    "comments": [],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 47,
+    "title": "first use issues",
+    "author": "wildrewwildrew",
+    "state": "closed",
+    "created_at": "2025-02-12T21:14:57Z",
+    "updated_at": "2025-02-21T21:24:43Z",
+    "labels": [],
+    "body": "File \"...ai-data-science-team\\apps\\exploratory-copilot-app\\app.py\", line 339, in <module> result = process_exploratory( question, llm, st.session_state[\"DATA_RAW\"] ) File \"...\\ai-data-science-team\\apps\\exploratory-copilot-app\\app.py\", line 237, in process_exploratory tool_calls = eda_agent.get_tool_calls() ^^^^^^^^^^^^^^^^^^^^^^^^ File \n\".....\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python313\\site-packages\\ai_data_science_team\\templates\\agent_templates.py\", line 70, in __getattr__ return getattr(self._compiled_graph, name)\n\n\nany ideas why it can load the method properly?",
+    "comments": [
+      {
+        "user": "mdancho84",
+        "body": "Are you trying to run the app interactively? \n\nStreamlit apps are meant to be run with `streamlit run path_to_app`\n\nThat could be why the error is happening "
+      },
+      {
+        "user": "wildrewwildrew",
+        "body": "That's right - after loading a CSV in the front end, i send a prompt and this error occurs\n\nI cd to the dir of the app and streamlit from there"
+      },
+      {
+        "user": "mdancho84",
+        "body": "I'm preparing a tutorial for YouTube today. Maybe wait until I share the tutorial. It will have a full set up. "
+      }
+    ],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 46,
+    "title": "[NEW APP] Exploratory Copilot",
+    "author": "mdancho84",
+    "state": "closed",
+    "created_at": "2025-02-08T15:30:07Z",
+    "updated_at": "2025-02-13T21:02:39Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": null,
+    "comments": [],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 43,
+    "title": "[NEW AGENT] Exploratory Data Analyst Agent",
+    "author": "mdancho84",
+    "state": "closed",
+    "created_at": "2025-02-01T10:20:37Z",
+    "updated_at": "2025-02-02T21:44:05Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": null,
+    "comments": [],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 44,
+    "title": "[NEW AGENT] Time Series Agent",
+    "author": "mdancho84",
+    "state": "open",
+    "created_at": "2025-02-01T13:52:07Z",
+    "updated_at": "2025-02-01T13:52:07Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": null,
+    "comments": [],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 40,
+    "title": "[NEW AGENT] Data Loader Agent",
+    "author": "mdancho84",
+    "state": "closed",
+    "created_at": "2025-01-25T17:29:49Z",
+    "updated_at": "2025-02-01T02:34:44Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": null,
+    "comments": [],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 30,
+    "title": "[NEW AGENT] MLflow Agent - Model Experiment Tracking, Performance Measurement, and Logging/Notes",
+    "author": "mdancho84",
+    "state": "closed",
+    "created_at": "2025-01-15T14:03:03Z",
+    "updated_at": "2025-01-28T01:03:30Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": "Private Thread: \nhttps://chatgpt.com/c/67870eff-4834-8004-bcd4-019d75075be4",
+    "comments": [],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 39,
+    "title": "[NEW AGENT] H2OMLToolsAgent: ReAct - Implement multiple modeling techniques (unsupervised, supervised)",
+    "author": "mdancho84",
+    "state": "open",
+    "created_at": "2025-01-25T00:11:38Z",
+    "updated_at": "2025-01-26T15:46:50Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": null,
+    "comments": [],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 42,
+    "title": "[R WRAPPER] Explore `reticulate` so R users can begin using the AI Data Science Team",
+    "author": "mdancho84",
+    "state": "open",
+    "created_at": "2025-01-26T15:46:25Z",
+    "updated_at": "2025-01-26T15:46:32Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": null,
+    "comments": [],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 38,
+    "title": "[BUG] asynchronous functionality - decide if invoke needs to be switched to ainvoke internally",
+    "author": "mdancho84",
+    "state": "open",
+    "created_at": "2025-01-25T00:06:51Z",
+    "updated_at": "2025-01-25T00:07:32Z",
+    "labels": [
+      "bug",
+      "question"
+    ],
+    "body": null,
+    "comments": [],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 37,
+    "title": "Checkpointer, Store, interrupt_before/after, debug - Decide how to handle",
+    "author": "mdancho84",
+    "state": "open",
+    "created_at": "2025-01-24T04:50:47Z",
+    "updated_at": "2025-01-24T04:51:02Z",
+    "labels": [
+      "question"
+    ],
+    "body": null,
+    "comments": [],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 36,
+    "title": "[BUG] Fix Async Functions: object NoneType can't be used in 'await' expression",
+    "author": "mdancho84",
+    "state": "closed",
+    "created_at": "2025-01-21T19:20:35Z",
+    "updated_at": "2025-01-21T19:30:36Z",
+    "labels": [],
+    "body": "Error being returned with `ainvoke_agent()` methods:\n\n```\nobject NoneType can't be used in 'await' expression\n```",
+    "comments": [],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 9,
+    "title": "[NEW AGENT TEMPLATE]: Turn a Github Repo into an RAG Agent",
+    "author": "mdancho84",
+    "state": "open",
+    "created_at": "2025-01-01T13:09:25Z",
+    "updated_at": "2025-01-21T14:05:47Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": "Examples:\n\n- https://github.com/patchy631/ai-engineering-hub/blob/main/github-rag/app.py",
+    "comments": [],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 18,
+    "title": "[FEAT] Visualization Agent: Make it easier to modify plotly themes",
+    "author": "mdancho84",
+    "state": "open",
+    "created_at": "2025-01-10T13:11:37Z",
+    "updated_at": "2025-01-21T14:04:25Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": null,
+    "comments": [],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 28,
+    "title": "[NEW AGENT] Machine Learning Agent",
+    "author": "mdancho84",
+    "state": "closed",
+    "created_at": "2025-01-14T04:17:29Z",
+    "updated_at": "2025-01-18T01:59:38Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": "Private Chat Thread: https://chatgpt.com/c/67870eff-4834-8004-bcd4-019d75075be4",
+    "comments": [],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 26,
+    "title": "[ISSUE] State messages should return a full log of code and attempt to answer question",
+    "author": "mdancho84",
+    "state": "closed",
+    "created_at": "2025-01-13T00:45:32Z",
+    "updated_at": "2025-01-18T00:57:06Z",
+    "labels": [
+      "enhancement",
+      "question"
+    ],
+    "body": "Analyze this - Determine how to improve to set up for full pipelines.\r\n\r\n### Problem with Current Process\r\n\r\nThe current functionality is to include and explain steps and add an AIMessage. This requires an extra LLM call that explains the function, which isn't really what's needed. \r\n\r\n### Proposed Solution\r\n\r\n- Optionally keep explain step that can be bypassed. \r\n- Add explain_step to state\r\n- State messages should return the code and where it's located if it was stored. \r\n- This can later be used to generate full pipelines",
+    "comments": [
+      {
+        "user": "mdancho84",
+        "body": "## Proposed solution:\n\n- **Explain Step Costs:** 1 LLM call is needed to summarize information from the code agent step. This is inefficient since we already have that with recommended steps. It also misses key information that an AI conversation might find important like where the function is located, what it's named, etc. \n\n- **Solution: Replace explain llm call with simple reporting step.** Report output step reports key information from the LangGraph as an AIMessage that can then be efficiently intepretted. "
+      }
+    ],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 32,
+    "title": "[BUG] Data Visualization Agent not fixing code when run inside SQL Data Analyst Agent",
+    "author": "mdancho84",
+    "state": "closed",
+    "created_at": "2025-01-18T00:37:45Z",
+    "updated_at": "2025-01-18T00:56:34Z",
+    "labels": [
+      "bug"
+    ],
+    "body": null,
+    "comments": [
+      {
+        "user": "mdancho84",
+        "body": "Solution: Needed to add max_retries and retry_count to multi-agent state.\n\nNote - We will need to set max_retries as the total number of retries for ALL agents involved in the workflow. If Agent 1 uses up 3 retries, and then goes to Agent 2, Agent 2 will have 0 retries to fix code (assuming default is 3 max retries).  "
+      }
+    ],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 31,
+    "title": "[BUG] Duplicated Messages From SQL Database Agent in SQL Data Analyst Agent",
+    "author": "mdancho84",
+    "state": "closed",
+    "created_at": "2025-01-17T23:47:02Z",
+    "updated_at": "2025-01-18T00:07:59Z",
+    "labels": [
+      "bug"
+    ],
+    "body": null,
+    "comments": [],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 22,
+    "title": "[NEW MULTI-AGENT] Structured Reporting Agent",
+    "author": "mdancho84",
+    "state": "open",
+    "created_at": "2025-01-11T03:40:19Z",
+    "updated_at": "2025-01-15T14:04:08Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": "Based on:\r\n- https://www.youtube.com/watch?v=E04rFNtwFcA\r\n- https://github.com/langchain-ai/langchain-nvidia/blob/main/cookbook/structured_report_generation.ipynb",
+    "comments": [],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 24,
+    "title": "[NEW MULTI-AGENT] Iterative Data Cleaner",
+    "author": "mdancho84",
+    "state": "open",
+    "created_at": "2025-01-12T15:51:41Z",
+    "updated_at": "2025-01-15T14:03:50Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": "Use combination of:\n- human in the loop \n- multiple data cleaning agent loop that tracks data cleaning steps\n\nOutput:\n- reproducible pipeline with multiple cleaning pipelines ",
+    "comments": [],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 29,
+    "title": "[NEW AGENT] Interpretability Agent",
+    "author": "mdancho84",
+    "state": "open",
+    "created_at": "2025-01-14T20:58:38Z",
+    "updated_at": "2025-01-15T14:02:32Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": "https://shap.readthedocs.io/en/latest/",
+    "comments": [],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 21,
+    "title": "[NEW AGENT] SQLDataAnalyst",
+    "author": "mdancho84",
+    "state": "closed",
+    "created_at": "2025-01-10T15:24:44Z",
+    "updated_at": "2025-01-14T01:22:23Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": null,
+    "comments": [],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 27,
+    "title": "[NEW AGENT] Research Agent",
+    "author": "MPongrac",
+    "state": "open",
+    "created_at": "2025-01-13T05:36:46Z",
+    "updated_at": "2025-01-14T01:21:33Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": "Matt, I love your AI Data Science Team process. \r\n\r\nIt would be great to have a research agent that can generate a limited list of websites to gather data based on a given topic. Then, it could gather the details of each site based upon provided parameters. Each result step should be stored in files to be re-used. The best result for further processing would be a database after cleaning.",
+    "comments": [
+      {
+        "user": "mdancho84",
+        "body": "Sounds great! I like the idea of having maybe a Tavily Search Tool agent available. "
+      }
+    ],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 23,
+    "title": "[ISSUE] Sand Boxed Python Execution",
+    "author": "mdancho84",
+    "state": "open",
+    "created_at": "2025-01-12T15:36:17Z",
+    "updated_at": "2025-01-13T00:56:31Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": "Sandboxing Python code execution involves creating an isolated environment where untrusted code can run without compromising the security of your system. Here are a few methods to achieve this: \n1. RestrictedPython: \n\n• What it is: A library that restricts the Python language features available to the sandboxed code. \n• How it works: It provides a safe subset of Python by disabling potentially dangerous features like file system access, system calls, and certain built-in functions. \n• Example: \n\nfrom RestrictedPython import safe_globals, safe_builtins\nfrom RestrictedPython.Eval import compile_restricted\n\ncode = \"\"\"\nprint(\"Hello, world!\")\n\"\"\"\n\nbyte_code = compile_restricted(code, filename='<string>', mode='exec')\nexec(byte_code, safe_globals, safe_builtins)\n\n2. PyPy Sandbox: \n\n• What it is: A sandboxed version of the PyPy Python interpreter. \n• How it works: It isolates the execution of Python code within a separate process and limits its access to system resources. \n• Example: \n\nimport pypy.interpreter.sandbox\n\ncode = \"\"\"\nprint(\"Hello, world!\")\n\"\"\"\n\npypy.interpreter.sandbox.run_in_sandbox(code)\n\n3. Docker containers: \n\n• What it is: A technology that allows you to run applications in isolated containers. \n• How it works: You can create a Docker container with a minimal Python environment and run untrusted code within it. This provides strong isolation as the container has its own file system and network namespace. \n• Example: \n\n# Dockerfile\nFROM python:3.9-slim\n\nWORKDIR /app\n\nCOPY code.py .\n\nCMD [\"python\", \"code.py\"]\n\n# Build the image\ndocker build -t my-sandbox .\n\n# Run the container\ndocker run --rm my-sandbox\n\n4. CodeJail: \n\n• What it is: A library specifically designed for sandboxing Python code. \n• How it works: It uses Linux namespaces and AppArmor profiles to restrict the capabilities of the sandboxed process. \n• Example: \n\nfrom codejail.jail import Jail\n\nwith Jail() as jail:\n    jail.execute(\"print('Hello from the sandbox!')\")\n\nChoosing the right method: \n\n• For simple use cases: RestrictedPython is a good starting point. \n• For stronger isolation: PyPy Sandbox or Docker containers provide more security. \n• For fine-grained control: CodeJail offers advanced capabilities like limiting CPU time and memory usage. \n\n\nGenerative AI is experimental.",
+    "comments": [],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 25,
+    "title": "[FEAT] Multi-Agents Return Reproducible Pipelines In Response",
+    "author": "mdancho84",
+    "state": "open",
+    "created_at": "2025-01-12T21:20:10Z",
+    "updated_at": "2025-01-12T21:20:10Z",
+    "labels": [],
+    "body": "Have multi-agents return full pipelines for reproducible data science",
+    "comments": [],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 16,
+    "title": "[Experimental] New Object Oriented Framework",
+    "author": "mdancho84",
+    "state": "closed",
+    "created_at": "2025-01-08T18:50:01Z",
+    "updated_at": "2025-01-12T02:02:12Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": "Use new OOP Framework to enhance ease of creating and using agents.\r\n\r\n## Upgrade these agents:\r\n- [x] Data Cleaning Agent\r\n- [x] Data Wrangling Agent\r\n- [x] Feature Engineering Agent\r\n- [x] Data Visualization Agent\r\n- [x] SQL Database Agent\r\n\r\n## Downstream tasks:\r\n- [x] #17 Use new method `invoke_agent()`\r\n- [x] #14 Add `function_name` as parameter",
+    "comments": [
+      {
+        "user": "mdancho84",
+        "body": "Updated Data Cleaning Example: https://github.com/business-science/ai-data-science-team/blob/master/examples/data_cleaning_agent.ipynb"
+      }
+    ],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 14,
+    "title": "Graph State: Clearly store the function path, function file name, and function name separately inside agent's state",
+    "author": "mdancho84",
+    "state": "closed",
+    "created_at": "2025-01-07T01:21:10Z",
+    "updated_at": "2025-01-11T14:29:12Z",
+    "labels": [],
+    "body": "## Tasks\r\n\r\n- [x] Data Cleaning Agent\r\n- [x] Data Wrangling Agent\r\n- [x] Data Visualization Agent\r\n- [x] Feature Engineering Agent\r\n- [x] SQL Database Agent\r\n\r\n## Change this:\r\n``` python\r\nreturn {\r\n            \"data_cleaner_function\" : response,\r\n            \"data_cleaner_function_path\": file_path,\r\n            \"data_cleaner_function_name\": file_name_2,\r\n            \"all_datasets_summary\": all_datasets_summary_str\r\n        }\r\n```\r\n\r\nTo this:\r\n``` python\r\nreturn {\r\n            \"data_cleaner_function\" : response,\r\n            \"data_cleaner_function_path\": file_path,\r\n            \"data_cleaner_function_filename\": file_name_2,\r\n            \"data_cleaner_function_name\":func_name,\r\n            \"all_datasets_summary\": all_datasets_summary_str\r\n        }\r\n```",
+    "comments": [],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 19,
+    "title": "[FUN] Make a cool logo",
+    "author": "mdancho84",
+    "state": "closed",
+    "created_at": "2025-01-10T13:24:32Z",
+    "updated_at": "2025-01-11T04:32:40Z",
+    "labels": [],
+    "body": null,
+    "comments": [],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 1,
+    "title": "[NEW AGENT] Full Stack Data Scientist Agent",
+    "author": "ChaithanyaVamshi",
+    "state": "open",
+    "created_at": "2024-12-19T13:53:08Z",
+    "updated_at": "2025-01-11T03:37:01Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": "Loved the Idea of creating a Data Science Agentic Team...How about extending this by replacing the supervisor agent to a Full Stack Data Scientist and adding Web Developer Agent for Front end UI (streamlit/Gradio) and, MLOps Agent for deploying ML Application.",
+    "comments": [
+      {
+        "user": "mdancho84",
+        "body": "Great idea. Let me make some progress on the foundational agents. \n\nIf you have any proposed modifications or new agents that you'd like to create feel free to make a PR on the meantime. \n\nI'll be working on this heavily over the next couple of weeks and months. "
+      }
+    ],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 10,
+    "title": "New Agent: Charting Agent",
+    "author": "mdancho84",
+    "state": "closed",
+    "created_at": "2025-01-04T14:43:30Z",
+    "updated_at": "2025-01-11T03:35:13Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": null,
+    "comments": [],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 15,
+    "title": "[BUG] Move Human in the loop after the coding step so user can review both recommended steps and code",
+    "author": "mdancho84",
+    "state": "closed",
+    "created_at": "2025-01-07T04:35:02Z",
+    "updated_at": "2025-01-11T03:34:18Z",
+    "labels": [
+      "bug"
+    ],
+    "body": "The update logic for the Human Review step will occur after the AI has created and executed the code, which is more useful. \r\n\r\n## Tasks:\r\n\r\n- [x] Update agent_template.py create_coding_agent_graph() - Refactor human review logic\r\n- [x] Update gent_template.py node_func_human_review() - Include code in the response\r\n- [x] Update Agents:\r\n    - [x] Feature Engineering Agent\r\n    - [x] Data Visualization Agent\r\n    - [x] Data Cleaning Agent\r\n    - [x] Data Wrangling Agent\r\n    - [x] SQL Database Agent\r\n- [x] Update Example (Human In The Loop)",
+    "comments": [],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 20,
+    "title": "[BUG] Wrap invoke, ainvoke, stream, astream in BaseAgent",
+    "author": "mdancho84",
+    "state": "closed",
+    "created_at": "2025-01-10T13:26:33Z",
+    "updated_at": "2025-01-11T00:56:07Z",
+    "labels": [
+      "bug"
+    ],
+    "body": "Make sure these methods update the self.response object.",
+    "comments": [],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 17,
+    "title": "[BUG] Don't overwrite `invoke`",
+    "author": "mdancho84",
+    "state": "closed",
+    "created_at": "2025-01-10T12:18:37Z",
+    "updated_at": "2025-01-10T13:21:37Z",
+    "labels": [
+      "bug"
+    ],
+    "body": "Don't overwrite `invoke`. Use a different method such as `invoke_agent()` in OOP methods #16. \r\n\r\n- [x] Data Cleaning Agent\r\n- [x] Data Visualization Agent\r\n- [x] Data Wrangling Agent\r\n- [x] Feature Engineering Agent\r\n- [x] SQL Database Agent\r\n- [x] Examples\r\n    - [x] SQL Database Agent\r\n    - [x]  Data Cleaning Agent\r\n    - [x] Data Visualization Agent\r\n    - [x] Data Wrangling Agent\r\n    - [x] Feature Engineering Agent\r\n- [x] Readme",
+    "comments": [],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 11,
+    "title": "Feature: Preprocessing Step",
+    "author": "mdancho84",
+    "state": "closed",
+    "created_at": "2025-01-04T14:46:49Z",
+    "updated_at": "2025-01-06T13:38:45Z",
+    "labels": [],
+    "body": "Add a \"bouncer\" to reformat questions and pass relevant information to agents.",
+    "comments": [
+      {
+        "user": "mdancho84",
+        "body": "We can use the recommend_steps stage for this. Essentially that's what the recommend stage is doing: preprocessing the information for the code generator stage."
+      }
+    ],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 6,
+    "title": "Improvements to the agents",
+    "author": "Rakesh-123-cryp",
+    "state": "closed",
+    "created_at": "2024-12-29T15:02:17Z",
+    "updated_at": "2025-01-06T13:37:05Z",
+    "labels": [
+      "question"
+    ],
+    "body": "1. Data inconsistencies not evident in the first 100 rows sampled.\r\n2. Tables decorated with text or multiple rows.",
+    "comments": [
+      {
+        "user": "mdancho84",
+        "body": "Can you provide any examples to help me test improvements on? I'd like to make sure my fixes resolve it. "
+      },
+      {
+        "user": "Rakesh-123-cryp",
+        "body": "Sorry for the late reply. Say the format of phone numbers are different after the first 100 rows. Incase we deal with phone numbers with different country codes. We should be able to standardise that. Some values may be +1 ...... or just their phone numbers. This is hard to figure out when only the first 100 rows are used as a sample. We need to chunk the table and pass it into the LLM. And if we are keen on data security we shouldn't use the gpt api, as they train their models using the data they receive from their customers."
+      },
+      {
+        "user": "mdancho84",
+        "body": "OK, let me think on this. "
+      }
+    ],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 13,
+    "title": "Data Governance Agents",
+    "author": "ghost",
+    "state": "open",
+    "created_at": "2025-01-05T01:19:11Z",
+    "updated_at": "2025-01-05T03:43:45Z",
+    "labels": [],
+    "body": "A series of agents which support data governance (classification, data quality, data lineage, disposal, etc). \r\n\r\nFor example - \r\n\r\n- A classification agent which accepts some data in Excel or SQL query from a database and classifies it according to the enterprise taxonomy. The enterprise taxonomy would be sourced from JSON \r\n- A data quality agent which assesses data for data quality (missing values, range errors, spelling errors), proposes resolutions and creates code to fix\r\n- An Orchestrator agent to string together agents to deliver an overall solution. ",
+    "comments": [
+      {
+        "user": "ghost",
+        "body": "Not sure if this is entirely in line with what you're thinking for data science, but as I work in data governance a lot now I thought I'd add it in - the boring stuff is about 80% of data governance and Gen AI will be very useful in automating it\r\n"
+      },
+      {
+        "user": "mdancho84",
+        "body": "Excellent ideas. Would love to get more information on how you see this being implemented specifically on data sets that suffer from issue and data process that require enhanced governance "
+      },
+      {
+        "user": "ghost",
+        "body": "> Excellent ideas. Would love to get more information on how you see this being implemented specifically on data sets that suffer from issue and data process that require enhanced governance\r\n\r\nThanks Matt, I'll put some more thought into it and write out some points over the next few days. \r\n"
+      }
+    ],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 7,
+    "title": "Enable agents to skip step to speed up processing (e.g. recommend steps, explain steps) ",
+    "author": "mdancho84",
+    "state": "closed",
+    "created_at": "2024-12-30T23:05:58Z",
+    "updated_at": "2024-12-31T02:14:05Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": null,
+    "comments": [],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 8,
+    "title": "Return dataframes instead of dictionaries in LangGraph Agents",
+    "author": "mdancho84",
+    "state": "closed",
+    "created_at": "2024-12-30T23:35:33Z",
+    "updated_at": "2024-12-31T01:15:42Z",
+    "labels": [],
+    "body": null,
+    "comments": [
+      {
+        "user": "mdancho84",
+        "body": "Upon further review, best practice is to standardize on dict which is serializable. Data frame is not serializable and runs into problems with threading. \r\n\r\nExample Error:\r\n\r\n```\r\n---------------------------------------------------------------------------\r\nTypeError                                 Traceback (most recent call last)\r\nCell In[19], [line 1](vscode-notebook-cell:?execution_count=19&line=1)\r\n----> [1](vscode-notebook-cell:?execution_count=19&line=1) response = data_cleaning_agent.invoke(Command(resume=\"Yes\"), config=config)\r\n\r\nFile ~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1936, in Pregel.invoke(self, input, config, stream_mode, output_keys, interrupt_before, interrupt_after, debug, **kwargs)\r\n   [1934](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1934) else:\r\n   [1935](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1935)     chunks = []\r\n-> [1936](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1936) for chunk in self.stream(\r\n   [1937](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1937)     input,\r\n   [1938](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1938)     config,\r\n   [1939](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1939)     stream_mode=stream_mode,\r\n   [1940](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1940)     output_keys=output_keys,\r\n   [1941](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1941)     interrupt_before=interrupt_before,\r\n   [1942](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1942)     interrupt_after=interrupt_after,\r\n   [1943](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1943)     debug=debug,\r\n   [1944](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1944)     **kwargs,\r\n   [1945](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1945) ):\r\n   [1946](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1946)     if stream_mode == \"values\":\r\n   [1947](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1947)         latest = chunk\r\n\r\nFile ~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1605, in Pregel.stream(self, input, config, stream_mode, output_keys, interrupt_before, interrupt_after, debug, subgraphs)\r\n   [1601](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1601) if \"custom\" in stream_modes:\r\n   [1602](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1602)     config[CONF][CONFIG_KEY_STREAM_WRITER] = lambda c: stream.put(\r\n   [1603](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1603)         ((), \"custom\", c)\r\n   [1604](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1604)     )\r\n-> [1605](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1605) with SyncPregelLoop(\r\n   [1606](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1606)     input,\r\n   [1607](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1607)     stream=StreamProtocol(stream.put, stream_modes),\r\n   [1608](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1608)     config=config,\r\n   [1609](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1609)     store=store,\r\n   [1610](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1610)     checkpointer=checkpointer,\r\n   [1611](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1611)     nodes=self.nodes,\r\n   [1612](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1612)     specs=self.channels,\r\n   [1613](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1613)     output_keys=output_keys,\r\n   [1614](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1614)     stream_keys=self.stream_channels_asis,\r\n   [1615](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1615)     interrupt_before=interrupt_before_,\r\n   [1616](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1616)     interrupt_after=interrupt_after_,\r\n   [1617](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1617)     manager=run_manager,\r\n   [1618](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1618)     debug=debug,\r\n   [1619](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1619) ) as loop:\r\n   [1620](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1620)     # create runner\r\n   [1621](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1621)     runner = PregelRunner(\r\n   [1622](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1622)         submit=loop.submit,\r\n   [1623](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1623)         put_writes=loop.put_writes,\r\n   [1624](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1624)         schedule_task=loop.accept_push,\r\n   [1625](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1625)         node_finished=config[CONF].get(CONFIG_KEY_NODE_FINISHED),\r\n   [1626](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1626)     )\r\n   [1627](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/__init__.py:1627)     # enable subgraph streaming\r\n\r\nFile ~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/loop.py:898, in SyncPregelLoop.__exit__(self, exc_type, exc_value, traceback)\r\n    [891](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/loop.py:891) def __exit__(\r\n    [892](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/loop.py:892)     self,\r\n    [893](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/loop.py:893)     exc_type: Optional[Type[BaseException]],\r\n   (...)\r\n    [896](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/loop.py:896) ) -> Optional[bool]:\r\n    [897](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/loop.py:897)     # unwind stack\r\n--> [898](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/loop.py:898)     return self.stack.__exit__(exc_type, exc_value, traceback)\r\n\r\nFile ~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/contextlib.py:576, in ExitStack.__exit__(self, *exc_details)\r\n    [572](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/contextlib.py:572) try:\r\n    [573](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/contextlib.py:573)     # bare \"raise exc_details[1]\" replaces our carefully\r\n    [574](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/contextlib.py:574)     # set-up context\r\n    [575](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/contextlib.py:575)     fixed_ctx = exc_details[1].__context__\r\n--> [576](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/contextlib.py:576)     raise exc_details[1]\r\n    [577](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/contextlib.py:577) except BaseException:\r\n    [578](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/contextlib.py:578)     exc_details[1].__context__ = fixed_ctx\r\n\r\nFile ~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/contextlib.py:561, in ExitStack.__exit__(self, *exc_details)\r\n    [559](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/contextlib.py:559) assert is_sync\r\n    [560](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/contextlib.py:560) try:\r\n--> [561](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/contextlib.py:561)     if cb(*exc_details):\r\n    [562](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/contextlib.py:562)         suppressed_exc = True\r\n    [563](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/contextlib.py:563)         pending_raise = False\r\n\r\nFile ~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/executor.py:113, in BackgroundExecutor.__exit__(self, exc_type, exc_value, traceback)\r\n    [111](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/executor.py:111)     continue\r\n    [112](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/executor.py:112) try:\r\n--> [113](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/executor.py:113)     task.result()\r\n    [114](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/executor.py:114) except concurrent.futures.CancelledError:\r\n    [115](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/executor.py:115)     pass\r\n\r\nFile ~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/concurrent/futures/_base.py:451, in Future.result(self, timeout)\r\n    [449](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/concurrent/futures/_base.py:449)     raise CancelledError()\r\n    [450](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/concurrent/futures/_base.py:450) elif self._state == FINISHED:\r\n--> [451](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/concurrent/futures/_base.py:451)     return self.__get_result()\r\n    [453](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/concurrent/futures/_base.py:453) self._condition.wait(timeout)\r\n    [455](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/concurrent/futures/_base.py:455) if self._state in [CANCELLED, CANCELLED_AND_NOTIFIED]:\r\n\r\nFile ~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/concurrent/futures/_base.py:403, in Future.__get_result(self)\r\n    [401](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/concurrent/futures/_base.py:401) if self._exception:\r\n    [402](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/concurrent/futures/_base.py:402)     try:\r\n--> [403](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/concurrent/futures/_base.py:403)         raise self._exception\r\n    [404](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/concurrent/futures/_base.py:404)     finally:\r\n    [405](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/concurrent/futures/_base.py:405)         # Break a reference cycle with the exception in self._exception\r\n    [406](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/concurrent/futures/_base.py:406)         self = None\r\n\r\nFile ~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/executor.py:76, in BackgroundExecutor.done(self, task)\r\n     [74](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/executor.py:74) def done(self, task: concurrent.futures.Future) -> None:\r\n     [75](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/executor.py:75)     try:\r\n---> [76](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/executor.py:76)         task.result()\r\n     [77](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/executor.py:77)     except GraphBubbleUp:\r\n     [78](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/executor.py:78)         # This exception is an interruption signal, not an error\r\n     [79](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/executor.py:79)         # so we don't want to re-raise it on exit\r\n     [80](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/pregel/executor.py:80)         self.tasks.pop(task)\r\n\r\nFile ~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/concurrent/futures/_base.py:451, in Future.result(self, timeout)\r\n    [449](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/concurrent/futures/_base.py:449)     raise CancelledError()\r\n    [450](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/concurrent/futures/_base.py:450) elif self._state == FINISHED:\r\n--> [451](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/concurrent/futures/_base.py:451)     return self.__get_result()\r\n    [453](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/concurrent/futures/_base.py:453) self._condition.wait(timeout)\r\n    [455](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/concurrent/futures/_base.py:455) if self._state in [CANCELLED, CANCELLED_AND_NOTIFIED]:\r\n\r\nFile ~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/concurrent/futures/_base.py:403, in Future.__get_result(self)\r\n    [401](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/concurrent/futures/_base.py:401) if self._exception:\r\n    [402](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/concurrent/futures/_base.py:402)     try:\r\n--> [403](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/concurrent/futures/_base.py:403)         raise self._exception\r\n    [404](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/concurrent/futures/_base.py:404)     finally:\r\n    [405](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/concurrent/futures/_base.py:405)         # Break a reference cycle with the exception in self._exception\r\n    [406](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/concurrent/futures/_base.py:406)         self = None\r\n\r\nFile ~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/concurrent/futures/thread.py:58, in _WorkItem.run(self)\r\n     [55](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/concurrent/futures/thread.py:55)     return\r\n     [57](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/concurrent/futures/thread.py:57) try:\r\n---> [58](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/concurrent/futures/thread.py:58)     result = self.fn(*self.args, **self.kwargs)\r\n     [59](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/concurrent/futures/thread.py:59) except BaseException as exc:\r\n     [60](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/concurrent/futures/thread.py:60)     self.future.set_exception(exc)\r\n\r\nFile ~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/checkpoint/memory/__init__.py:382, in MemorySaver.put_writes(self, config, writes, task_id)\r\n    [379](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/checkpoint/memory/__init__.py:379) if inner_key[1] >= 0 and outer_writes_ and inner_key in outer_writes_:\r\n    [380](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/checkpoint/memory/__init__.py:380)     continue\r\n--> [382](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/checkpoint/memory/__init__.py:382) self.writes[outer_key][inner_key] = (task_id, c, self.serde.dumps_typed(v))\r\n\r\nFile ~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/checkpoint/serde/jsonplus.py:193, in JsonPlusSerializer.dumps_typed(self, obj)\r\n    [191](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/checkpoint/serde/jsonplus.py:191) else:\r\n    [192](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/checkpoint/serde/jsonplus.py:192)     try:\r\n--> [193](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/checkpoint/serde/jsonplus.py:193)         return \"msgpack\", _msgpack_enc(obj)\r\n    [194](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/checkpoint/serde/jsonplus.py:194)     except UnicodeEncodeError:\r\n    [195](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/checkpoint/serde/jsonplus.py:195)         return \"json\", self.dumps(obj)\r\n\r\nFile ~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/checkpoint/serde/jsonplus.py:514, in _msgpack_enc(data)\r\n    [512](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/checkpoint/serde/jsonplus.py:512)     enc = msgpack.Packer(default=_msgpack_default)\r\n    [513](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/checkpoint/serde/jsonplus.py:513) try:\r\n--> [514](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/checkpoint/serde/jsonplus.py:514)     return enc.pack(data)\r\n    [515](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/checkpoint/serde/jsonplus.py:515) finally:\r\n    [516](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/checkpoint/serde/jsonplus.py:516)     ENC_POOL.append(enc)\r\n\r\nFile msgpack/_packer.pyx:279, in msgpack._cmsgpack.Packer.pack()\r\n\r\nFile msgpack/_packer.pyx:276, in msgpack._cmsgpack.Packer.pack()\r\n\r\nFile msgpack/_packer.pyx:267, in msgpack._cmsgpack.Packer._pack()\r\n\r\nFile ~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/checkpoint/serde/jsonplus.py:435, in _msgpack_default(obj)\r\n    [433](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/checkpoint/serde/jsonplus.py:433)     return repr(obj)\r\n    [434](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/checkpoint/serde/jsonplus.py:434) else:\r\n--> [435](https://file+.vscode-resource.vscode-cdn.net/Users/mdancho/Desktop/course_code/ai-data-science-team/~/opt/anaconda3/envs/ds4b_301p_dev/lib/python3.10/site-packages/langgraph/checkpoint/serde/jsonplus.py:435)     raise TypeError(f\"Object of type {obj.__class__.__name__} is not serializable\")\r\n\r\nTypeError: Object of type DataFrame is not serializable\r\n```"
+      }
+    ],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 4,
+    "title": "Logged AI Functions: Enable storing multiple functions with `overwrite = False` parameter",
+    "author": "mdancho84",
+    "state": "closed",
+    "created_at": "2024-12-28T16:12:28Z",
+    "updated_at": "2024-12-28T16:47:26Z",
+    "labels": [],
+    "body": "Enable storing functions without overwriting. This is useful to keep a history of the functions that the agent creates, and pull from these as needed:\r\n\r\n``` bash\r\ndata_wrangler_functions\r\n|-- data_wrangler_1.py\r\n|-- data_wrangler_2.py\r\n...\r\n```\r\n\r\n",
+    "comments": [
+      {
+        "user": "mdancho84",
+        "body": "`overwrite = False` now ensures functions are not overwritten. \r\n\r\n### How to use:\r\n\r\n``` python\r\ndata_cleaning_agent = make_data_cleaning_agent(\r\n    model = llm, \r\n    log=LOG, \r\n    log_path=LOG_PATH, \r\n    overwrite=False\r\n)\r\n```\r\n\r\n\r\n"
+      }
+    ],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 5,
+    "title": "AI Function Metadata: Add metadata to AI functions",
+    "author": "mdancho84",
+    "state": "closed",
+    "created_at": "2024-12-28T16:15:16Z",
+    "updated_at": "2024-12-28T16:38:01Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": "Add:\r\n- Disclaimer: This function was generated by AI. Review before using.\r\n- Agent Name\r\n- Time Created",
+    "comments": [
+      {
+        "user": "mdancho84",
+        "body": "Metadata is now added to AI-generated functions. Example:\r\n\r\n``` python\r\n# Disclaimer: This function was generated by AI. Please review before using.\r\n# Agent Name: data_cleaning_agent\r\n# Time Created: 2024-12-28 11:29:34\r\ndef data_cleaner(data_raw):\r\n    import pandas as pd\r\n    import numpy as np\r\n\r\n\r\n    # Step 1: Check for Missing Values\r\n    missing_value_percentage = data_raw.isnull().mean() * 100\r\n    columns_to_drop = missing_value_percentage[missing_value_percentage > 40].index\r\n    data_cleaned = data_raw.drop(columns=columns_to_drop)\r\n\r\n    # Step 3: Convert Data Types\r\n    data_cleaned['TotalCharges'] = pd.to_numeric(data_cleaned['TotalCharges'], errors='coerce')\r\n\r\n    # Step 4: Remove Duplicate Rows\r\n    data_cleaned = data_cleaned.drop_duplicates()\r\n\r\n    # Step 5: Remove Extreme Outliers using IQR\r\n    numeric_cols = ['MonthlyCharges', 'tenure']\r\n    for col in numeric_cols:\r\n        Q1 = data_cleaned[col].quantile(0.25)\r\n        Q3 = data_cleaned[col].quantile(0.75)\r\n        IQR = Q3 - Q1\r\n        lower_bound = Q1 - 3 * IQR\r\n        upper_bound = Q3 + 3 * IQR\r\n        data_cleaned = data_cleaned[(data_cleaned[col] >= lower_bound) & (data_cleaned[col] <= upper_bound)]\r\n\r\n    # Step 7: Categorical Encoding\r\n    categorical_cols = ['gender', 'Partner', 'Dependents', 'PhoneService', 'MultipleLines',\r\n                        'InternetService', 'OnlineSecurity', 'OnlineBackup', \r\n                        'DeviceProtection', 'TechSupport', 'StreamingTV', \r\n                        'StreamingMovies', 'Contract', 'PaperlessBilling', \r\n                        'PaymentMethod', 'Churn']\r\n    \r\n    data_cleaned = pd.get_dummies(data_cleaned, columns=categorical_cols, drop_first=True)\r\n\r\n    # Return the cleaned data\r\n    return data_cleaned\r\n```"
+      }
+    ],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 2,
+    "title": "Data Wrangling Agent",
+    "author": "mdancho84",
+    "state": "closed",
+    "created_at": "2024-12-24T16:46:03Z",
+    "updated_at": "2024-12-25T16:32:48Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": "Make an agent designed to handle multiple datasets as inputs. Handles:\r\n\r\n- Multiple datasets\r\n- Merging \r\n- Concatenation\r\n- Light preprocessing",
+    "comments": [
+      {
+        "user": "mdancho84",
+        "body": "Complete\r\n![image](https://github.com/user-attachments/assets/d04c71dc-b555-4688-aab1-b58366173b47)\r\n"
+      }
+    ],
+    "repository": "business-science/ai-data-science-team"
+  },
+  {
+    "issue_number": 3,
+    "title": "Data Analysis Tools: Improve Data Summaries in Agents to help them assess what steps to perform",
+    "author": "mdancho84",
+    "state": "closed",
+    "created_at": "2024-12-24T16:48:00Z",
+    "updated_at": "2024-12-24T17:36:16Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": "Improve the data summaries provided to each of the agents. Standard data analysis tools should include:\r\n\r\n- Shape of the DataFrame (rows, columns)\r\n- Column data types\r\n- Missing value percentage\r\n- Unique value counts\r\n- First 30 rows\r\n- Descriptive statistics\r\n- DataFrame `info` output\r\n\r\n",
+    "comments": [],
+    "repository": "business-science/ai-data-science-team"
+  }
+]

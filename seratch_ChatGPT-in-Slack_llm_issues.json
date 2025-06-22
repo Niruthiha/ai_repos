@@ -1,0 +1,214 @@
+[
+  {
+    "issue_number": 115,
+    "title": "Migration to/ support for Responses API?",
+    "author": "nss-ysasaki",
+    "state": "open",
+    "created_at": "2025-05-21T05:08:43Z",
+    "updated_at": "2025-05-21T08:30:39Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": "Hi, thanks a lot for publishing & maintaining this awesome app 🚀\n\nThe [Responses API](https://platform.openai.com/docs/api-reference/responses) is announced in March (superseding the Assistant API) and seems to be a promising alternative to the Chat Completion API.\n\nThe new API endpoint adds a number of interesting features:\n\n* Web Search\n* Computer Use\n* File search\netc.\n\nAny plan on migrating to/ adding supoprt for this API? Thanks!\n\nRelated: #96",
+    "comments": [
+      {
+        "user": "seratch",
+        "body": "There is no reason to avoid migrating to Responses API. User experience might be tricky though. Perhaps, passing built-in tools enabled by default when spinning up the app would be the easiest way to unlock tools."
+      },
+      {
+        "user": "nss-ysasaki",
+        "body": "Hi @seratch, thanks for your swift response!👋\n\n> User experience might be tricky though\n\nYou're absolutely right - I imagine a tool picker UI might be tough to implement given how this app works. Just allowing the model to use whatever it wants will be the easiest solution, and GPT-4o on chatgpt.com uses tools without the user telling it to do so anyway ¯\\_(ツ)_/¯\n\nTool handles like `/search` might be another option, but it's a rather messy hack and sacrifices discoverability...\n![Image](https://github.com/user-attachments/assets/f3518904-342a-424b-89b7-1eddf15695a8)\n\nAnyway, glad to hear that you see no significant blocker! I *might* be able to implement this (`client.chat.completions.create()` is called just four times in the codebase), but it totally depends on the amount of spare time available... ;)\n\n👍 "
+      }
+    ],
+    "repository": "seratch/ChatGPT-in-Slack"
+  },
+  {
+    "issue_number": 96,
+    "title": "[feature request] Connect Assistant",
+    "author": "Benwillski",
+    "state": "closed",
+    "created_at": "2024-08-20T18:27:05Z",
+    "updated_at": "2025-05-21T05:17:18Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": "I think this would be great if you could connect this to an openai assistant instead of just chatgpt.\r\n\r\nI'm pretty new so if anyone can help me do this I would appreciate the help.",
+    "comments": [
+      {
+        "user": "seratch",
+        "body": "The Assistant API is still in its beta, so I don't have immediate plans to utilize it in this project. Once the feature is GAed, I may consider doing something with it."
+      },
+      {
+        "user": "seratch",
+        "body": "Closing this in favor of #115 "
+      }
+    ],
+    "repository": "seratch/ChatGPT-in-Slack"
+  },
+  {
+    "issue_number": 111,
+    "title": "Installed the App but once i configured the API Key it stops working",
+    "author": "viktor-franz",
+    "state": "open",
+    "created_at": "2025-03-27T14:37:41Z",
+    "updated_at": "2025-03-28T06:16:31Z",
+    "labels": [
+      "question"
+    ],
+    "body": "![Image](https://github.com/user-attachments/assets/aade8557-ec73-4063-91dd-d00a5af03c25)\nis there anything I do wrong?\nI use the marketplace app.",
+    "comments": [
+      {
+        "user": "seratch",
+        "body": "Can you try it out again? The button click sometimes fails but retrying may help."
+      },
+      {
+        "user": "viktor-franz",
+        "body": "Thanks. I tried to click it again but nothing happens. I already deleted the app and reinstalled it, same error. Once I save the api key nothing happens. And if i try to chat with the bot, it doesnt answer…\n\nUpdate: I was able to save the api key, but the chat still doesnt respond and the configure button doesn‘t work once the key is saved"
+      }
+    ],
+    "repository": "seratch/ChatGPT-in-Slack"
+  },
+  {
+    "issue_number": 108,
+    "title": "Enterprise Grid Installation",
+    "author": "budbach",
+    "state": "open",
+    "created_at": "2025-02-10T18:34:05Z",
+    "updated_at": "2025-03-28T02:07:48Z",
+    "labels": [
+      "question"
+    ],
+    "body": "@seratch, We recently upgraded to Enterprise Grid and I'm struggling to get ChatGPT-in-Slack working again.\n\nDeploying with \"serverless\" on AWS.\n\nThe  log from CloudWatch are:\n\nFailed to find an installation data for enterprise: E08A..., team: T23KP...: An error occurred (NoSuchKey) when calling the GetObject operation: The specified key does not exist.\nFailed to find bot installation data for enterprise: E08A..., team: T23K...: An error occurred (NoSuchKey) when calling the GetObject operation: The specified key does not exist.\nAlthough the app should be installed into this workspace, the AuthorizeResult (returned value from authorize) for it was not found.\n\nThe app is approve for the workspace and the org.  Any idea on what I am missing?",
+    "comments": [
+      {
+        "user": "budbach",
+        "body": "I added some debugging and It looks like it is trying to get:\n\nhttps://{SLACK_INSTALLATION_S3_BUCKET_NAME}.s3.amazonaws.com/{SLACK_CLIENT_ID}/{enterprise-id}-none/installer-latest\n\nThe bucket exists but currently has no data in it.  How does the installation bucket get populated?"
+      },
+      {
+        "user": "budbach",
+        "body": "Getting closer, realized to get the content in the bucket, I needed to visit the \"install\" url for the app with a web browser and authenticate.  \n\n`https://{id}.execute-api.us-east-1.amazonaws.com/slack/install`\n\nSo the data was copied into the bucket but in this folder:\n\n`/{SLACK_CLIENT_ID}/{enterprise-id}-{workspace-id}`\n\nBut the app is looking for it in:\n\n`/{SLACK_CLIENT_ID}/{enterprise-id}-none`\n\nFor now, I just copied `/{SLACK_CLIENT_ID}/{enterprise-id}-{workspace-id}` to `/{SLACK_CLIENT_ID}/{enterprise-id}-none` which has me progressing.  Still haven't figured it all out."
+      },
+      {
+        "user": "seratch",
+        "body": "Sorry for my slow response here. In general, this app should work for org-wide installations but if there are any unsupported cases, the code should be modified to resolve them."
+      }
+    ],
+    "repository": "seratch/ChatGPT-in-Slack"
+  },
+  {
+    "issue_number": 103,
+    "title": "gpt-3.5-turbo-0613 has been deprecated",
+    "author": "Koki-Kazaore",
+    "state": "closed",
+    "created_at": "2024-10-09T15:18:03Z",
+    "updated_at": "2024-10-10T06:00:30Z",
+    "labels": [
+      "question"
+    ],
+    "body": "When I try to run the app on my local machine, there is an error regarding the default model of OpenAI to be used.\r\n```bash\r\n% python main.py\r\n\r\n    raise self._make_status_error_from_response(err.response) from None\r\nopenai.NotFoundError: Error code: 404 - {'error': {'message': 'The model `gpt-3.5-turbo-0613` has been deprecated, learn more here: https://platform.openai.com/docs/deprecations', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}\r\nDEBUG:slack_bolt.App:Responding with status: 500 body: \"\" (266 millis)\r\nINFO:slack_bolt.App:Unsuccessful Bolt execution result (status: 500, body: )\r\n```\r\n\r\nIn fact, according to [Deprecations - OpenAI API](https://platform.openai.com/docs/deprecations/2023-11-06-chat-model-updates), the default model appears to be shut down on 2024-09-13.\r\n\r\nSo, can I fix it?",
+    "comments": [
+      {
+        "user": "seratch",
+        "body": "Hi @Koki-Kazaore, the quickest fix would be using \"gpt-3.5-turbo\" instead. Also, it seems that newer dated ones such as \"gpt-3.5-turbo-1106\" are still available. Check what's available and decide which to go with. With that being said, there is no reason to use 3.5-turbo over 4o-mini now. I personally recommend switching to other models."
+      }
+    ],
+    "repository": "seratch/ChatGPT-in-Slack"
+  },
+  {
+    "issue_number": 101,
+    "title": "High Input Token Count",
+    "author": "ElwinShaji",
+    "state": "closed",
+    "created_at": "2024-09-23T11:08:48Z",
+    "updated_at": "2024-10-02T00:46:19Z",
+    "labels": [
+      "question"
+    ],
+    "body": "The input tokens count are way too high in comparison to the output. ~28K Input token by just 37 requests (Output only 1.7k). Is there a way to reduce the input tokens being sent?\r\n\r\nModifying the initial export OPENAI_SYSTEM_TEXT doesn't seem to have much effect. \r\n\r\n![image](https://github.com/user-attachments/assets/3707b3df-bf6c-471c-86b9-3af84394320a)\r\n",
+    "comments": [
+      {
+        "user": "seratch",
+        "body": "This app sends not only the prompt but also a few past messages in the same DM to let ChatGPT provide a better answer. This is crucial for response quality, but if you don't need this feature, you can fork the project and customize it accordingly."
+      },
+      {
+        "user": "seratch",
+        "body": "Hope this was helpful. Since this is inactive for a while, let me close it now."
+      }
+    ],
+    "repository": "seratch/ChatGPT-in-Slack"
+  },
+  {
+    "issue_number": 102,
+    "title": "Response can't be longer than 4000 characters?",
+    "author": "BigBerny",
+    "state": "closed",
+    "created_at": "2024-09-30T21:11:46Z",
+    "updated_at": "2024-10-02T00:45:53Z",
+    "labels": [
+      "question"
+    ],
+    "body": "Hey there\r\nDoes someone else have the issue that when posting a message with >4000 characters they get 'msg_too_long'? I don't understand it since Slack says they support up to 40'000 characters: https://api.slack.com/changelog/2018-04-truncating-really-long-messages\r\n\r\nAny idea what's going on?",
+    "comments": [
+      {
+        "user": "seratch",
+        "body": "Hi @BigBerny, the 40K truncation is an old requirement and the platform now has a smaller limit for the text data. If your app generates 4K text, indeed posting the message could result in the error. Adding something extra (e.g., your response must not exceed 3,000 characters) to the system prompt may help us avoid hitting the error, but I haven't verified if such an approach really works out with OpenAI LLM."
+      },
+      {
+        "user": "BigBerny",
+        "body": "But on https://api.slack.com/methods/chat.update it says it will truncate very long messages, so I don't understand why it's not doing in that case. Any idea?\r\n![CleanShot 2024-10-01 at 17 02 18](https://github.com/user-attachments/assets/7bc3495c-181a-4ae8-a9a5-cc358fbf0244)\r\n"
+      },
+      {
+        "user": "seratch",
+        "body": "The platform has been changing over time. It used to allow 40K a while ago but it may not be the case anymore. I believe that official document needs to be updated, so will escalate the issue. Since this is not an issue tracker for general questions/discussions about the platform, let me close this now. Thanks for sharing this!"
+      }
+    ],
+    "repository": "seratch/ChatGPT-in-Slack"
+  },
+  {
+    "issue_number": 100,
+    "title": "DM - Proofreading",
+    "author": "ElwinShaji",
+    "state": "closed",
+    "created_at": "2024-09-23T09:55:47Z",
+    "updated_at": "2024-09-23T11:07:51Z",
+    "labels": [
+      "question"
+    ],
+    "body": "The 1:1 DM is proofreading the text instead of a normal conversation with the GPT. ",
+    "comments": [
+      {
+        "user": "seratch",
+        "body": "The DM mode considers chat history when responding to your message. If you send a clear instruction in the DM, the bot should help you in the way. "
+      },
+      {
+        "user": "ElwinShaji",
+        "body": "Thanks, yes, you were right!\r\n\r\n"
+      }
+    ],
+    "repository": "seratch/ChatGPT-in-Slack"
+  },
+  {
+    "issue_number": 32,
+    "title": "[Feature Request] Ability to restrict bot usage to specific channels or users",
+    "author": "PeterDaveHello",
+    "state": "open",
+    "created_at": "2023-04-17T14:25:08Z",
+    "updated_at": "2024-09-05T11:03:22Z",
+    "labels": [
+      "enhancement",
+      "good first issue"
+    ],
+    "body": "Unrestricted access to a bot in large Slack workspaces can lead to cost issues. To mitigate this, an access control feature would be beneficial.\r\n\r\nThis feature would allow us to specify which channels or users are allowed to use the bot, providing a way to manage usage and control costs effectively.",
+    "comments": [
+      {
+        "user": "seratch",
+        "body": "Thanks for the suggestion. Indeed, the feature addition may be valuable in some situations. However, I won't use my time for the enhancement in the short term. Therefore, if you need it right now, please consider forking this project or make a pull request for it. \r\n\r\nAs I mentioned at https://github.com/seratch/ChatGPT-in-Slack/issues/26#issuecomment-1498247464, I'm down to avoid adding further inputs in the configuration modal. In other words, I am reluctant to add the feature to main_prod.py. Happy with having some env variables to customize main.py for the use case described here."
+      },
+      {
+        "user": "PeterDaveHello",
+        "body": "@seratch I hope you won't mind that I try to use GitHub's Copilot Workspace to create #94 and can take a look at it 😄 "
+      }
+    ],
+    "repository": "seratch/ChatGPT-in-Slack"
+  }
+]

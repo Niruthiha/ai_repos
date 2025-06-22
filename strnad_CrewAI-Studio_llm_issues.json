@@ -1,0 +1,629 @@
+[
+  {
+    "issue_number": 86,
+    "title": "Synched tasks contexts are not saved while import and exporting crews",
+    "author": "lezhumain",
+    "state": "closed",
+    "created_at": "2025-05-26T01:33:51Z",
+    "updated_at": "2025-06-18T13:34:38Z",
+    "labels": [],
+    "body": null,
+    "comments": [
+      {
+        "user": "lezhumain",
+        "body": "Handled in PR https://github.com/strnad/CrewAI-Studio/pull/84"
+      }
+    ],
+    "repository": "strnad/CrewAI-Studio"
+  },
+  {
+    "issue_number": 89,
+    "title": "[feature] Allow the user to provide multiline arguments when running a crew",
+    "author": "lezhumain",
+    "state": "closed",
+    "created_at": "2025-06-11T23:29:05Z",
+    "updated_at": "2025-06-18T13:34:12Z",
+    "labels": [],
+    "body": "Would need a `textarea` instead of a `textbox` for the placeholders",
+    "comments": [
+      {
+        "user": "strnad",
+        "body": "thx"
+      }
+    ],
+    "repository": "strnad/CrewAI-Studio"
+  },
+  {
+    "issue_number": 90,
+    "title": "[bug] exception when loading an old crew save where synced context is missing",
+    "author": "lezhumain",
+    "state": "closed",
+    "created_at": "2025-06-12T00:13:06Z",
+    "updated_at": "2025-06-18T13:33:55Z",
+    "labels": [],
+    "body": null,
+    "comments": [
+      {
+        "user": "strnad",
+        "body": "thanks"
+      }
+    ],
+    "repository": "strnad/CrewAI-Studio"
+  },
+  {
+    "issue_number": 93,
+    "title": "[feature] Show all tasks' outputs",
+    "author": "lezhumain",
+    "state": "open",
+    "created_at": "2025-06-14T20:14:36Z",
+    "updated_at": "2025-06-14T20:14:36Z",
+    "labels": [],
+    "body": "It would be useful to see a printable view of all tasks' outputs",
+    "comments": [],
+    "repository": "strnad/CrewAI-Studio"
+  },
+  {
+    "issue_number": 87,
+    "title": "Planning LLM cannot be selected",
+    "author": "lpennec",
+    "state": "open",
+    "created_at": "2025-05-26T20:34:04Z",
+    "updated_at": "2025-05-26T20:34:04Z",
+    "labels": [],
+    "body": "Hi guys,\nLove your work 💪.\n\nIssue: when the \"planning\" checkbox is checked in the crew page there is no way to select the LLM associated (like the manager LLM).\n\nTherefore when pressing Kick-Off!, if one is using ollama (like myself) without a gpt account, the process can only fail as the planning llm is always using some openai model.\n\nThe Crew object from crewAi library has a \"planning_llm\" property that could easily be set via the UI.\n",
+    "comments": [],
+    "repository": "strnad/CrewAI-Studio"
+  },
+  {
+    "issue_number": 22,
+    "title": "Custom Tools API",
+    "author": "N02SRT",
+    "state": "open",
+    "created_at": "2024-08-25T22:37:47Z",
+    "updated_at": "2025-05-20T12:58:11Z",
+    "labels": [],
+    "body": "Greetings! First of all thank you so much for the time and effort into this project. \r\n\r\nI have successfully connected to my local Ollama, but now I need the ability to send requests to CrewAI from an external call. I see in your Custom Tools there is a basic API built, but I cant quite figure it out. Do you have any documentation or some info I can use to start looking into this?\r\n\r\nMany thanks again!",
+    "comments": [
+      {
+        "user": "Floyz",
+        "body": "Hello, just to ask if you found how to that ?\ni'm trying to add a custom searxng plugin and Idk how to make it available on the Studio Web UI.\n"
+      }
+    ],
+    "repository": "strnad/CrewAI-Studio"
+  },
+  {
+    "issue_number": 78,
+    "title": "Error trying to use any non openai model on openrouter",
+    "author": "stabilus",
+    "state": "open",
+    "created_at": "2025-04-12T15:31:13Z",
+    "updated_at": "2025-04-12T15:31:13Z",
+    "labels": [],
+    "body": "OPENAI_API_BASE=\"https://openrouter.ai/api/v1\"\nOPENAI_PROXY_MODELS=\"gpt-4o-mini\" works as it's an openai model that gets routed/translated properly\n\nbut trying to use x-ai/grok-3-mini-beta on openrouter, the definition should be:\nOPENAI_PROXY_MODELS=\"openrouter/x-ai/grok-3-mini-beta\"\n\nyields this:\n\nFinal output\n\n{'result': 'Error running crew: litellm.AuthenticationError: AuthenticationError: OpenrouterException - {\"error\":{\"message\":\"No auth credentials found\",\"code\":401}}', 'stack_trace': 'Traceback (most recent call last):\\n File \"D:\\AI Software\\CrewAI-Studio\\venv\\Lib\\site-packages\\litellm\\llms\\openai_like\\chat\\handler.py\", line 372, in completion\\n response = client.post(\\n ^^^^^^^^^^^^\\n File \"D:\\AI Software\\CrewAI-Studio\\venv\\Lib\\site-packages\\litellm\\llms\\custom_httpx\\http_handler.py\", line 553, in post\\n raise e\\n File \"D:\\AI Software\\CrewAI-Studio\\venv\\Lib\\site-packages\\litellm\\llms\\custom_httpx\\http_handler.py\", line 534, in post\\n response.raise_for_status()\\n File \"D:\\AI Software\\CrewAI-Studio\\venv\\Lib\\site-packages\\httpx\\_models.py\", line 763, in raise_for_status\\n raise HTTPStatusError(message, request=request, response=self)\\nhttpx.HTTPStatusError: Client error '401 Unauthorized' for url '[https://openrouter.ai/api/v1/chat/completions\\'\\nFor](https://openrouter.ai/api/v1/chat/completions%5C'%5CnFor) more information check: [https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401\\n\\nDuring](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401%5Cn%5CnDuring) handling of the above exception, another exception occurred:\\n\\nTraceback (most recent call last):\\n File \"D:\\AI Software\\CrewAI-Studio\\venv\\Lib\\site-packages\\litellm\\main.py\", line 2237, in completion\\n response = openai_like_chat_completion.completion(\\n ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n File \"D:\\AI Software\\CrewAI-Studio\\venv\\Lib\\site-packages\\litellm\\llms\\openai_like\\chat\\handler.py\", line 378, in completion\\n raise OpenAILikeError(\\nlitellm.llms.openai_like.common_utils.OpenAILikeError: {\"error\":{\"message\":\"No auth credentials found\",\"code\":401}}\\n\\nDuring handling of the above exception, another exception occurred:\\n\\nTraceback (most recent call last):\\n File \"D:\\AI Software\\CrewAI-Studio\\app\\pg_crew_run.py\", line 62, in run_crew\\n result = crewai_crew.kickoff(inputs=inputs)\\n ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n File \"D:\\AI Software\\CrewAI-Studio\\venv\\Lib\\site-packages\\crewai\\crew.py\", line 646, in kickoff\\n result = self._run_sequential_process()\\n ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n File \"D:\\AI Software\\CrewAI-Studio\\venv\\Lib\\site-packages\\crewai\\crew.py\", line 758, in _run_sequential_process\\n return self._execute_tasks(self.tasks)\\n ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n File \"D:\\AI Software\\CrewAI-Studio\\venv\\Lib\\site-packages\\crewai\\crew.py\", line 861, in _execute_tasks\\n task_output = task.execute_sync(\\n ^^^^^^^^^^^^^^^^^^\\n File \"D:\\AI Software\\CrewAI-Studio\\venv\\Lib\\site-packages\\opentelemetry\\instrumentation\\crewai\\instrumentation.py\", line 61, in wrapper\\n return func(tracer, duration_histogram, token_histogram, wrapped, instance, args, kwargs)\\n ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n File \"D:\\AI Software\\CrewAI-Studio\\venv\\Lib\\site-packages\\opentelemetry\\instrumentation\\crewai\\instrumentation.py\", line 149, in wrap_task_execute\\n result = wrapped(*args, **kwargs)\\n ^^^^^^^^^^^^^^^^^^^^^^^^\\n File \"D:\\AI Software\\CrewAI-Studio\\venv\\Lib\\site-packages\\crewai\\task.py\", line 328, in execute_sync\\n return self._execute_core(agent, context, tools)\\n ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n File \"D:\\AI Software\\CrewAI-Studio\\venv\\Lib\\site-packages\\crewai\\task.py\", line 472, in _execute_core\\n raise e # Re-raise the exception after emitting the event\\n ^^^^^^^\\n File \"D:\\AI Software\\CrewAI-Studio\\venv\\Lib\\site-packages\\crewai\\task.py\", line 392, in _execute_core\\n result = agent.execute_task(\\n ^^^^^^^^^^^^^^^^^^^\\n File \"D:\\AI Software\\CrewAI-Studio\\venv\\Lib\\site-packages\\opentelemetry\\instrumentation\\crewai\\instrumentation.py\", line 61, in wrapper\\n return func(tracer, duration_histogram, token_histogram, wrapped, instance, args, kwargs)\\n ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n File \"D:\\AI Software\\CrewAI-Studio\\venv\\Lib\\site-packages\\opentelemetry\\instrumentation\\crewai\\instrumentation.py\", line 108, in wrap_agent_execute_task\\n result = wrapped(*args, **kwargs)\\n ^^^^^^^^^^^^^^^^^^^^^^^^\\n File \"D:\\AI Software\\CrewAI-Studio\\venv\\Lib\\site-packages\\crewai\\agent.py\", line 269, in execute_task\\n raise e\\n File \"D:\\AI Software\\CrewAI-Studio\\venv\\Lib\\site-packages\\crewai\\agent.py\", line 250, in execute_task\\n result = self.agent_executor.invoke(\\n ^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n File \"D:\\AI Software\\CrewAI-Studio\\venv\\Lib\\site-packages\\crewai\\agents\\crew_agent_executor.py\", line 123, in invoke\\n raise e\\n File \"D:\\AI Software\\CrewAI-Studio\\venv\\Lib\\site-packages\\crewai\\agents\\crew_agent_executor.py\", line 112, in invoke\\n formatted_answer = self._invoke_loop()\\n ^^^^^^^^^^^^^^^^^^^\\n File \"D:\\AI Software\\CrewAI-Studio\\venv\\Lib\\site-packages\\crewai\\agents\\crew_agent_executor.py\", line 208, in _invoke_loop\\n raise e\\n File \"D:\\AI Software\\CrewAI-Studio\\venv\\Lib\\site-packages\\crewai\\agents\\crew_agent_executor.py\", line 155, in _invoke_loop\\n answer = get_llm_response(\\n ^^^^^^^^^^^^^^^^^\\n File \"D:\\AI Software\\CrewAI-Studio\\venv\\Lib\\site-packages\\crewai\\utilities\\agent_utils.py\", line 157, in get_llm_response\\n raise e\\n File \"D:\\AI Software\\CrewAI-Studio\\venv\\Lib\\site-packages\\crewai\\utilities\\agent_utils.py\", line 148, in get_llm_response\\n answer = llm.call(\\n ^^^^^^^^^\\n File \"D:\\AI Software\\CrewAI-Studio\\venv\\Lib\\site-packages\\opentelemetry\\instrumentation\\crewai\\instrumentation.py\", line 61, in wrapper\\n return func(tracer, duration_histogram, token_histogram, wrapped, instance, args, kwargs)\\n ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n File \"D:\\AI Software\\CrewAI-Studio\\venv\\Lib\\site-packages\\opentelemetry\\instrumentation\\crewai\\instrumentation.py\", line 165, in wrap_llm_call\\n result = wrapped(*args, **kwargs)\\n ^^^^^^^^^^^^^^^^^^^^^^^^\\n File \"D:\\AI Software\\CrewAI-Studio\\venv\\Lib\\site-packages\\crewai\\llm.py\", line 794, in call\\n return self._handle_non_streaming_response(\\n ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n File \"D:\\AI Software\\CrewAI-Studio\\venv\\Lib\\site-packages\\crewai\\llm.py\", line 630, in _handle_non_streaming_response\\n response = litellm.completion(**params)\\n ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n File \"D:\\AI Software\\CrewAI-Studio\\venv\\Lib\\site-packages\\litellm\\utils.py\", line 1154, in wrapper\\n raise e\\n File \"D:\\AI Software\\CrewAI-Studio\\venv\\Lib\\site-packages\\litellm\\utils.py\", line 1032, in wrapper\\n result = original_function(*args, **kwargs)\\n ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n File \"D:\\AI Software\\CrewAI-Studio\\venv\\Lib\\site-packages\\litellm\\main.py\", line 3068, in completion\\n raise exception_type(\\n ^^^^^^^^^^^^^^^\\n File \"D:\\AI Software\\CrewAI-Studio\\venv\\Lib\\site-packages\\litellm\\litellm_core_utils\\exception_mapping_utils.py\", line 2201, in exception_type\\n raise e\\n File \"D:\\AI Software\\CrewAI-Studio\\venv\\Lib\\site-packages\\litellm\\litellm_core_utils\\exception_mapping_utils.py\", line 2073, in exception_type\\n raise AuthenticationError(\\nlitellm.exceptions.AuthenticationError: litellm.AuthenticationError: AuthenticationError: OpenrouterException - {\"error\":{\"message\":\"No auth credentials found\",\"code\":401}}\\n'}\n\n\nThe core issue is that LiteLLM needs to know explicitly that these are OpenRouter models, and the current code doesn't provide that information.\n\n\n",
+    "comments": [],
+    "repository": "strnad/CrewAI-Studio"
+  },
+  {
+    "issue_number": 34,
+    "title": "Flows",
+    "author": "vincentsider",
+    "state": "open",
+    "created_at": "2024-11-05T21:09:19Z",
+    "updated_at": "2025-04-06T05:29:33Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": "Hello!  First of,  thanks  so much for  this project. Question : will it support flows ?",
+    "comments": [
+      {
+        "user": "strnad",
+        "body": "Hello. Unfortunately I haven’t had much time to work on this project recently, and since its inception, CrewAI has grown significantly (including new features like Flows). I plan to get more involved with CrewAI again, and as soon as time allows, I’ll work on implementing the relevant new features into CrewAI Studio."
+      },
+      {
+        "user": "JaDenis",
+        "body": "bump, dude\r\nMerry Christmas!"
+      },
+      {
+        "user": "vincentsider",
+        "body": "merry!\r\n\r\nOn Sat, 21 Dec 2024 at 17:12, Denis Zhabbarov ***@***.***>\r\nwrote:\r\n\r\n> bump, dude\r\n> Merry Christmas!\r\n>\r\n> —\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/strnad/CrewAI-Studio/issues/34#issuecomment-2558162797>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/ALZRDB2FAEACRFP2U5AU2UT2GWHQBAVCNFSM6AAAAABRHNV45GVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZDKNJYGE3DENZZG4>\r\n> .\r\n> You are receiving this because you authored the thread.Message ID:\r\n> ***@***.***>\r\n>\r\n"
+      }
+    ],
+    "repository": "strnad/CrewAI-Studio"
+  },
+  {
+    "issue_number": 77,
+    "title": "Knowledge error",
+    "author": "ggblake",
+    "state": "open",
+    "created_at": "2025-04-05T15:33:19Z",
+    "updated_at": "2025-04-05T15:33:19Z",
+    "labels": [],
+    "body": "Error running crew: Invalid Knowledge Configuration: APIStatusError.init() missing 2 required keyword-only arguments: 'response' and 'body'\"\nI added a Knowledge source to an agent and got this error.\nThe Knowledge Source is a json file\nWhat is the correct way to add a KS",
+    "comments": [],
+    "repository": "strnad/CrewAI-Studio"
+  },
+  {
+    "issue_number": 76,
+    "title": "Unable to use Azure OpenAI resource as LLM while creating Agents",
+    "author": "shubham039",
+    "state": "open",
+    "created_at": "2025-04-04T14:16:02Z",
+    "updated_at": "2025-04-04T14:19:35Z",
+    "labels": [],
+    "body": "Hi, \n\nI want to use Azure Openai model as LLM in CrewAI studio. But I am unable to.\n\nI tried putting the following params in the .env file:\n\nAZURE_API_KEY=<azureopenaikey>\nAZURE_API_BASE = <azureendpoint>\nAZURE_API_VERSION = <version>\nOPENAI_PROXY_MODELS = \"azure/gpt-4o-mini\"\n\nI commented the \"OPENAI_API_KEY\" and \"OPENAI_API_BASE\" param\n\nWhile creating the Agents. I selected \"OpenAI: azure/gpt-4o-mini\"\nBut when I am running the crew I am getting the belowmentioned error:\n\n`ValueError: OpenAI API key not set in .env file`\n\nI then uncommented the OPENAI_API_KEY and OPENAI_API_BASE param, and put azure openai endpoint and azureopenaikey as values:\n OPENAI_API_KEY=<azureopenaikey>\nOPENAI_API_BASE=<azureendpoint>\n\nNow when I'm running the crew I am getting this error:\n\n`Error running crew: litellm.NotFoundError: NotFoundError: OpenAIException - Error code: 404 - {'error': {'code': '404', 'message': 'Resource not found'`\n\nTraceback:\n`\n{\n  'result': \"Error running crew: litellm.NotFoundError: NotFoundError: OpenAIException - Error code: 404 - {'error': {'code': '404', 'message': 'Resource not found'}}\",\n  'stack_trace': 'Traceback (most recent call last):\\n File \"C:\\Users\\TechHub2\\Documents\\CrewAI\\CrewAI-Studio\\venv\\Lib\\site-packages\\litellm\\llms\\openai\\openai.py\", line 711, in completion\\n raise e\\n File \"C:\\Users\\TechHub2\\Documents\\CrewAI\\CrewAI-Studio\\venv\\Lib\\site-packages\\litellm\\llms\\openai\\openai.py\", line 638, in completion\\n self.make_sync_openai_chat_completion_request(\\n File \"C:\\Users\\TechHub2\\Documents\\CrewAI\\CrewAI-Studio\\venv\\Lib\\site-packages\\litellm\\litellm_core_utils\\logging_utils.py\", line 145, in sync_wrapper\\n result = func(*args, **kwargs)\\n ^^^^^^^^^^^^^^^^^^^^^\\n File \"C:\\Users\\TechHub2\\Documents\\CrewAI\\CrewAI-Studio\\venv\\Lib\\site-packages\\litellm\\llms\\openai\\openai.py\", line 457, in make_sync_openai_chat_completion_request\\n raise e\\n File \"C:\\Users\\TechHub2\\Documents\\CrewAI\\CrewAI-Studio\\venv\\Lib\\site-packages\\litellm\\llms\\openai\\openai.py\", line 439, in make_sync_openai_chat_completion_request\\n raw_response = openai_client.chat.completions.with_raw_response.create(\\n ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n File \"C:\\Users\\TechHub2\\Documents\\CrewAI\\CrewAI-Studio\\venv\\Lib\\site-packages\\openai\\_legacy_response.py\", line 364, in wrapped\\n return cast(LegacyAPIResponse[R], func(*args, **kwargs))\\n ^^^^^^^^^^^^^^^^^^^^^\\n File \"C:\\Users\\TechHub2\\Documents\\CrewAI\\CrewAI-Studio\\venv\\Lib\\site-packages\\openai\\_utils\\_utils.py\", line 279, in wrapper\\n return func(*args, **kwargs)\\n ^^^^^^^^^^^^^^^^^^^^^\\n File \"C:\\Users\\TechHub2\\Documents\\CrewAI\\CrewAI-Studio\\venv\\Lib\\site-packages\\openai\\resources\\chat\\completions\\completions.py\", line 914, in create\\n return self._post(\\n ^^^^^^^^^^^\\n File \"C:\\Users\\TechHub2\\Documents\\CrewAI\\CrewAI-Studio\\venv\\Lib\\site-packages\\openai\\_base_client.py\", line 1242, in post\\n return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))\\n ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n File \"C:\\Users\\TechHub2\\Documents\\CrewAI\\CrewAI-Studio\\venv\\Lib\\site-packages\\openai\\_base_client.py\", line 919, in request\\n return self._request(\\n ^^^^^^^^^^^^^^\\n File \"C:\\Users\\TechHub2\\Documents\\CrewAI\\CrewAI-Studio\\venv\\Lib\\site-packages\\openai\\_base_client.py\", line 1023, in _request\\n raise self._make_status_error_from_response(err.response) from None\\nopenai.NotFoundError: Error code: 404 - {'error': {'code': '404', 'message': 'Resourcenotfound'}}\\n\\nDuring handling of the above exception, another exception occurred:\\n\\nTraceback (most recent call last):\\n File \"C:\\Users\\TechHub2\\Documents\\CrewAI\\CrewAI-Studio\\venv\\Lib\\site-packages\\litellm\\main.py\", line 1693, in completion\\n raise e\\n File \"C:\\Users\\TechHub2\\Documents\\CrewAI\\CrewAI-Studio\\venv\\Lib\\site-packages\\litellm\\main.py\", line 1666, in completion\\n response = openai_chat_completions.completion(\\n ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n File \"C:\\Users\\TechHub2\\Documents\\CrewAI\\CrewAI-Studio\\venv\\Lib\\site-packages\\litellm\\llms\\openai\\openai.py\", line 721, in completion\\n raise OpenAIError(\\nlitellm.llms.openai.common_utils.OpenAIError: Error code: 404 - {'error': {'code': '404', 'message': 'Resourcenotfound'}}\\n\\nDuring handling of the above exception, another exception occurred:\\n\\nTraceback (most recent call last):\\n File \"C:\\Users\\TechHub2\\Documents\\CrewAI\\CrewAI-Studio\\app\\pg_crew_run.py\", line 62, in run_crew\\n result = crewai_crew.kickoff(inputs=inputs)\\n ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n File \"C:\\Users\\TechHub2\\Documents\\CrewAI\\CrewAI-Studio\\venv\\Lib\\site-packages\\crewai\\crew.py\", line 640, in kickoff\\n result = self._run_sequential_process()\\n ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n File \"C:\\Users\\TechHub2\\Documents\\CrewAI\\CrewAI-Studio\\venv\\Lib\\site-packages\\crewai\\crew.py\", line 752, in _run_sequential_process\\n return self._execute_tasks(self.tasks)\\n ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n File \"C:\\Users\\TechHub2\\Documents\\CrewAI\\CrewAI-Studio\\venv\\Lib\\site-packages\\crewai\\crew.py\", line 850, in _execute_tasks\\n task_output = task.execute_sync(\\n ^^^^^^^^^^^^^^^^^^\\n File \"C:\\Users\\TechHub2\\Documents\\CrewAI\\CrewAI-Studio\\venv\\Lib\\site-packages\\crewai\\task.py\", line 310, in execute_sync\\n return self._execute_core(agent, context, tools)\\n ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n File \"C:\\Users\\TechHub2\\Documents\\CrewAI\\CrewAI-Studio\\venv\\Lib\\site-packages\\crewai\\task.py\", line 454, in _execute_core\\n raise e # Re-raise the exception after emitting the event\\n ^^^^^^^\\n File \"C:\\Users\\TechHub2\\Documents\\CrewAI\\CrewAI-Studio\\venv\\Lib\\site-packages\\crewai\\task.py\", line 374, in _execute_core\\n result = agent.execute_task(\\n ^^^^^^^^^^^^^^^^^^^\\n File \"C:\\Users\\TechHub2\\Documents\\CrewAI\\CrewAI-Studio\\venv\\Lib\\site-packages\\crewai\\agent.py\", line 266, in execute_task\\n raise e\\n File \"C:\\Users\\TechHub2\\Documents\\CrewAI\\CrewAI-Studio\\venv\\Lib\\site-packages\\crewai\\agent.py\", line 247, in execute_task\\n result = self.agent_executor.invoke(\\n ^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n File \"C:\\Users\\TechHub2\\Documents\\CrewAI\\CrewAI-Studio\\venv\\Lib\\site-packages\\crewai\\agents\\crew_agent_executor.py\", line 119, in invoke\\n raise e\\n File \"C:\\Users\\TechHub2\\Documents\\CrewAI\\CrewAI-Studio\\venv\\Lib\\site-packages\\crewai\\agents\\crew_agent_executor.py\", line 108, in invoke\\n formatted_answer = self._invoke_loop()\\n ^^^^^^^^^^^^^^^^^^^\\n File \"C:\\Users\\TechHub2\\Documents\\CrewAI\\CrewAI-Studio\\venv\\Lib\\site-packages\\crewai\\agents\\crew_agent_executor.py\", line 166, in _invoke_loop\\n raise e\\n File \"C:\\Users\\TechHub2\\Documents\\CrewAI\\CrewAI-Studio\\venv\\Lib\\site-packages\\crewai\\agents\\crew_agent_executor.py\", line 146, in _invoke_loop\\n answer = self._get_llm_response()\\n ^^^^^^^^^^^^^^^^^^^^^^^^\\n File \"C:\\Users\\TechHub2\\Documents\\CrewAI\\CrewAI-Studio\\venv\\Lib\\site-packages\\crewai\\agents\\crew_agent_executor.py\", line 216, in _get_llm_response\\n raise e\\n File \"C:\\Users\\TechHub2\\Documents\\CrewAI\\CrewAI-Studio\\venv\\Lib\\site-packages\\crewai\\agents\\crew_agent_executor.py\", line 207, in _get_llm_response\\n answer = self.llm.call(\\n ^^^^^^^^^^^^^^\\n File \"C:\\Users\\TechHub2\\Documents\\CrewAI\\CrewAI-Studio\\venv\\Lib\\site-packages\\crewai\\llm.py\", line 739, in call\\n return self._handle_non_streaming_response(\\n ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n File \"C:\\Users\\TechHub2\\Documents\\CrewAI\\CrewAI-Studio\\venv\\Lib\\site-packages\\crewai\\llm.py\", line 575, in _handle_non_streaming_response\\n response = litellm.completion(**params)\\n ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n File \"C:\\Users\\TechHub2\\Documents\\CrewAI\\CrewAI-Studio\\venv\\Lib\\site-packages\\litellm\\utils.py\", line 1154, in wrapper\\n raise e\\n File \"C:\\Users\\TechHub2\\Documents\\CrewAI\\CrewAI-Studio\\venv\\Lib\\site-packages\\litellm\\utils.py\", line 1032, in wrapper\\n result = original_function(*args, **kwargs)\\n ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n File \"C:\\Users\\TechHub2\\Documents\\CrewAI\\CrewAI-Studio\\venv\\Lib\\site-packages\\litellm\\main.py\", line 3069, in completion\\n raise exception_type(\\n ^^^^^^^^^^^^^^^\\n File \"C:\\Users\\TechHub2\\Documents\\CrewAI\\CrewAI-Studio\\venv\\Lib\\site-packages\\litellm\\litellm_core_utils\\exception_mapping_utils.py\", line 2201, in exception_type\\n raise e\\n File \"C:\\Users\\TechHub2\\Documents\\CrewAI\\CrewAI-Studio\\venv\\Lib\\site-packages\\litellm\\litellm_core_utils\\exception_mapping_utils.py\", line 399, in exception_type\\n raise NotFoundError(\\nlitellm.exceptions.NotFoundError: litellm.NotFoundError: NotFoundError: OpenAIException - Error code: 404 - {'error': {'code': '404', 'message': 'Resourcenotfound'}}\\n'\n}\n`\n\n",
+    "comments": [
+      {
+        "user": "shubham039",
+        "body": "@strnad Sir, Could you please let me know if the support for using Azure Openai is enabled yet or not?\n"
+      }
+    ],
+    "repository": "strnad/CrewAI-Studio"
+  },
+  {
+    "issue_number": 60,
+    "title": "ERROR: Error during short_term save: APIStatusError.__init__() missing 2 required keyword-only arguments: 'response' and 'body'",
+    "author": "MotherSoraka",
+    "state": "open",
+    "created_at": "2025-01-30T15:09:47Z",
+    "updated_at": "2025-04-02T05:05:06Z",
+    "labels": [],
+    "body": "ERROR: Error during short_term save: APIStatusError.__init__() missing 2 required keyword-only arguments: 'response' and 'body'\n\ni guess this is related to the Memory when enabled? at least in Hierarchical mode.\n\ni think i had the same error in LangFlow when using CrewAI.\nis this a CrewAi bug?",
+    "comments": [
+      {
+        "user": "strnad",
+        "body": "@MotherSoraka: I haven't encountered this problem, is it solved now?"
+      },
+      {
+        "user": "hamburger118",
+        "body": "I have encountered the problem too. But the code seems to run smoothly. How do you solve this problem?"
+      }
+    ],
+    "repository": "strnad/CrewAI-Studio"
+  },
+  {
+    "issue_number": 75,
+    "title": "Human as a tool",
+    "author": "droidXrobot",
+    "state": "open",
+    "created_at": "2025-04-02T03:04:02Z",
+    "updated_at": "2025-04-02T03:04:02Z",
+    "labels": [],
+    "body": "Is there a way to use CrewAI's Human Input feature or a human as a tool? I can't get the app to accept feedback. Seems to be due to a threading issue.",
+    "comments": [],
+    "repository": "strnad/CrewAI-Studio"
+  },
+  {
+    "issue_number": 56,
+    "title": "Default LLM for tools and context from async tasks",
+    "author": "Valdemar1863",
+    "state": "open",
+    "created_at": "2025-01-29T20:23:20Z",
+    "updated_at": "2025-03-28T11:46:50Z",
+    "labels": [],
+    "body": "1. I see that tools use OpenAI LLM by default. But how can I change an LLM provider for them?\n2. I can't write a context from async tasks myself, I can only choose only 1 option which is (at least in my case) a repetition of a task which causes an agent to stuck in an infinite loop.",
+    "comments": [
+      {
+        "user": "Thomas-Lecuppre",
+        "body": "That's a great question, I also interested about this because i use ScrapWebsiteTool in many agents and it always get me this king of error : \n\n>  Error during LLM call: litellm.NotFoundError: NotFoundError: OpenAIException - 404 page not found\n>  An unknown error occurred. Please check the details below.\n>  Error details: litellm.NotFoundError: NotFoundError: OpenAIException - 404 page not found\n\nSee the full crew and full log in the attached files. Hope this can help you.\n\nJust to eliminate some basic check that I could have not done : \n- Ollama connection work because another app use it across my network.\n- .env only contain connection information about Ollama (everything else is commented)\n\nIf you want me to provide mire detail feel free to ask.\n\n[Extract data from supplier websites_export.json](https://github.com/user-attachments/files/19254287/Extract.data.from.supplier.websites_export.json)\n[crew-error.log](https://github.com/user-attachments/files/19254288/crew-error.log)\n\n"
+      },
+      {
+        "user": "Valdemar1863",
+        "body": "> That's a great question, I also interested about this because i use ScrapWebsiteTool in many agents and it always get me this king of error :\n> \n> > Error during LLM call: litellm.NotFoundError: NotFoundError: OpenAIException - 404 page not found\n> > An unknown error occurred. Please check the details below.\n> > Error details: litellm.NotFoundError: NotFoundError: OpenAIException - 404 page not found\n> \n> See the full crew and full log in the attached files. Hope this can help you.\n> \n> Just to eliminate some basic check that I could have not done :\n> \n> * Ollama connection work because another app use it across my network.\n> * .env only contain connection information about Ollama (everything else is commented)\n> \n> If you want me to provide mire detail feel free to ask.\n> \n> [Extract data from supplier websites_export.json](https://github.com/user-attachments/files/19254287/Extract.data.from.supplier.websites_export.json) [crew-error.log](https://github.com/user-attachments/files/19254288/crew-error.log)\n\n\n\nYour error is different from mine, mine is that I exceeded a free quota from OpenAI. My crew worked at some point before I ran out of free usage of OpenAI.\n\nI believe that the streamlit app should be rewritten somehow."
+      }
+    ],
+    "repository": "strnad/CrewAI-Studio"
+  },
+  {
+    "issue_number": 72,
+    "title": "No Options in Agent",
+    "author": "abdulrahman-tafsol",
+    "state": "closed",
+    "created_at": "2025-03-14T09:28:20Z",
+    "updated_at": "2025-03-20T09:13:56Z",
+    "labels": [],
+    "body": "despite of selecting the Process.hierarchical I am not able to select the agent and task what can I do to resolve this issue. In Manager Agent it is giving me only None, and showing non clickable sign on Agents and Tasks.\n\n",
+    "comments": [
+      {
+        "user": "Shayano",
+        "body": "I'm sure you've found the solution by now, but you'll need to create an agent in the “Agents” menu before you can select it in a crew."
+      }
+    ],
+    "repository": "strnad/CrewAI-Studio"
+  },
+  {
+    "issue_number": 41,
+    "title": "License ",
+    "author": "moshere",
+    "state": "closed",
+    "created_at": "2024-12-25T06:13:41Z",
+    "updated_at": "2025-03-13T09:52:38Z",
+    "labels": [],
+    "body": "Hi\r\nUnder which license crew ai studio is running?\r\n\r\nThank you\r\nMoshe ",
+    "comments": [
+      {
+        "user": "jsbonsai",
+        "body": "Wondering the same. What license is this project under @strnad  ? \r\nThank you kindly"
+      },
+      {
+        "user": "strnad",
+        "body": "done... LICENCE info added. Happy new year :))"
+      }
+    ],
+    "repository": "strnad/CrewAI-Studio"
+  },
+  {
+    "issue_number": 44,
+    "title": "Error when launching the Virtual Environment",
+    "author": "mikepica",
+    "state": "closed",
+    "created_at": "2025-01-03T20:44:49Z",
+    "updated_at": "2025-03-13T09:52:34Z",
+    "labels": [],
+    "body": "I've tried deleting and reinstalling the venv. I've also tried to adjust the import files but keep running into errors. This is the one I start with.\r\n\r\nImportError: cannot import name 'BaseTool' from 'crewai_tools' (C:\\Users\\mikeg\\CrewAI-Studio\\venv\\Lib\\site-packages\\crewai_tools\\__init__.py)\r\nTraceback:\r\nFile \"C:\\Users\\mikeg\\CrewAI-Studio\\app\\app.py\", line 3, in <module>\r\n    import db_utils\r\nFile \"C:\\Users\\mikeg\\CrewAI-Studio\\app\\db_utils.py\", line 4, in <module>\r\n    from my_tools import TOOL_CLASSES\r\nFile \"C:\\Users\\mikeg\\CrewAI-Studio\\app\\my_tools.py\", line 6, in <module>\r\n    from tools.CustomApiTool import CustomApiTool\r\nFile \"C:\\Users\\mikeg\\CrewAI-Studio\\app\\tools\\CustomApiTool.py\", line 2, in <module>\r\n    from crewai_tools import BaseTool",
+    "comments": [
+      {
+        "user": "verticz47",
+        "body": "This helped me:\r\n\r\npip install git+https://github.com/crewAIInc/crewAI-tools.git"
+      },
+      {
+        "user": "topmass",
+        "body": "> This helped me:\r\n> \r\n> pip install git+https://github.com/crewAIInc/crewAI-tools.git\r\n\r\nI'm still having the above issue, tried installing on macos/linux same error when accessing the streamlit app. I also have manually pip installed as you mentioned directly to the activated venv, still no dice :( \r\n\r\nThis also breaks the 1 click deploy linked to the repo as well unfortunately.\r\n\r\nI will rollback version but was very interested in custom api tool. "
+      },
+      {
+        "user": "strnad",
+        "body": "Thanks to for raising this issue,\r\nImport paths have been updated to align with the latest version of the crewai-tools library. In versions crewai-tools<0.25.0, BaseTool was imported from crewai_tools. However, starting from version 0.25.0 (released two days ago), it is now imported from crewai.tools.\r\n\r\nThe necessary imports in the project have been updated, and while these changes are not yet thoroughly tested, crewai-studio is running with the current setup. Further testing and adjustments may be needed to ensure full compatibility with the new version.\r\n\r\n[crewai-tools 0.17.0](https://pypi.org/project/crewai-tools/0.17.0/) (older version with underscores)\r\n[crewai-tools 0.25.0](https://pypi.org/project/crewai-tools/0.25.0/) (newer version with dots)."
+      }
+    ],
+    "repository": "strnad/CrewAI-Studio"
+  },
+  {
+    "issue_number": 64,
+    "title": "Unable to Create Tasks Despite Successful Crew & Agent Setup",
+    "author": "bigZos",
+    "state": "closed",
+    "created_at": "2025-02-23T20:04:27Z",
+    "updated_at": "2025-03-13T09:52:00Z",
+    "labels": [],
+    "body": "Running CrewAI-Studio via Docker. I've successfully set up a crew in CrewAI-Studio with agents assigned but encounter \"Could not resolve agent...\" (400 error) when attempting to create tasks. Agents are defined, and linked to the crew. The issue is triggered immediately after clicking \"create task\" \n\n![Image](https://github.com/user-attachments/assets/87f46615-4d91-4aa5-a589-20cf9ca144de)\n\nNeed help identifying the cause preventing this final step. ",
+    "comments": [
+      {
+        "user": "strnad",
+        "body": "it looks like a problem with the DB. do you use postgres or sqlite?"
+      },
+      {
+        "user": "richwats",
+        "body": "I have the same problem. I've tried (I think?) both the postgresql and sqlite options. "
+      },
+      {
+        "user": "Burnarz",
+        "body": "Same here:\nDocker with postgres\nAgent creation ok, DB seems to work as agents are saved when container stops.\nCrew creation ok.\nWhen click on create task same issue as above.\n\nA bit more detail from the main container:\n\n```\nTraceback (most recent call last):\n\n  File \"/usr/local/lib/python3.12/site-packages/streamlit/runtime/scriptrunner/exec_code.py\", line 121, in exec_func_with_error_handling\n\n    result = func()\n\n             ^^^^^^\n\n  File \"/usr/local/lib/python3.12/site-packages/streamlit/runtime/scriptrunner/script_runner.py\", line 544, in code_to_exec\n\n    self._session_state.on_script_will_rerun(\n\n  File \"/usr/local/lib/python3.12/site-packages/streamlit/runtime/state/safe_session_state.py\", line 68, in on_script_will_rerun\n\n    self._state.on_script_will_rerun(latest_widget_states)\n\n  File \"/usr/local/lib/python3.12/site-packages/streamlit/runtime/state/session_state.py\", line 556, in on_script_will_rerun\n\n    self._call_callbacks()\n\n  File \"/usr/local/lib/python3.12/site-packages/streamlit/runtime/state/session_state.py\", line 569, in _call_callbacks\n\n    self._new_widget_state.call_callback(wid)\n\n  File \"/usr/local/lib/python3.12/site-packages/streamlit/runtime/state/session_state.py\", line 270, in call_callback\n\n    callback(*args, **kwargs)\n\n  File \"/CrewAI-Studio/app/pg_tasks.py\", line 16, in create_task\n\n    db_utils.save_task(task)  # Save task to database\n\n    ^^^^^^^^^^^^^^^^^^^^^^^^\n\n  File \"/CrewAI-Studio/app/db_utils.py\", line 281, in save_task\n\n    raise HTTPException(status_code=400, detail=f\"Could not resolve agent for task: {task.agent}\")\n\nfastapi.exceptions.HTTPException: 400: Could not resolve agent for task: None\n```\n"
+      }
+    ],
+    "repository": "strnad/CrewAI-Studio"
+  },
+  {
+    "issue_number": 66,
+    "title": "Unable to run crew due to missing required template variable",
+    "author": "PanLu09",
+    "state": "closed",
+    "created_at": "2025-02-25T01:10:37Z",
+    "updated_at": "2025-03-13T09:51:57Z",
+    "labels": [],
+    "body": "![Image](https://github.com/user-attachments/assets/2dc53942-0e4c-4014-b25a-1da91f474bf6)\nI am not sure why the crew is not able to run even if I have inputed value for flight_information\n",
+    "comments": [
+      {
+        "user": "strnad",
+        "body": "I haven't encountered this issue before. Could you export your crew json and send it to me so I can investigate what's going wrong?"
+      },
+      {
+        "user": "PanLu09",
+        "body": "Yes! I have sent it to you through email. Thanks for the help!\n\n"
+      },
+      {
+        "user": "strnad",
+        "body": "I’ve investigated the issue and identified that the problem occurs when variable names contain underscores, causing crewai to fail in filling them correctly. As a workaround, you can replace underscores with hyphens or other allowed characters, which should resolve the issue and allow the crew to function as expected.\n\nI’ve also noted this for further investigation when I have more time. If you encounter any other issues, feel free to reach out."
+      }
+    ],
+    "repository": "strnad/CrewAI-Studio"
+  },
+  {
+    "issue_number": 70,
+    "title": "add the new claude-3-7-sonnet",
+    "author": "Tazzzounet",
+    "state": "closed",
+    "created_at": "2025-03-13T09:40:02Z",
+    "updated_at": "2025-03-13T09:51:26Z",
+    "labels": [],
+    "body": "Is it possible to add to llms.py the new \"claude-3-7-sonnet-20250219\" ?",
+    "comments": [
+      {
+        "user": "strnad",
+        "body": "thanks for suggestion, claude 3.7 added"
+      }
+    ],
+    "repository": "strnad/CrewAI-Studio"
+  },
+  {
+    "issue_number": 62,
+    "title": "Causing error. Create task looks up agent without agent binding yet",
+    "author": "lpu-bot",
+    "state": "closed",
+    "created_at": "2025-02-09T10:59:24Z",
+    "updated_at": "2025-03-05T11:12:37Z",
+    "labels": [],
+    "body": "Scenario\nBuild from Docker and Docker Compose, Fresh install\nCreated template Crew\nCreated template Agent\nCreate task\n\n![Image](https://github.com/user-attachments/assets/7e3c0c38-5306-4d60-ac53-b9b876ff0b22)\n\nMessage\nfastapi.exceptions.HTTPException: 400: Could not resolve agent for task: None\nTraceback:\nFile \"/CrewAI-Studio/app/pg_tasks.py\", line 16, in create_task\n    db_utils.save_task(task)  # Save task to database\n    ^^^^^^^^^^^^^^^^^^^^^^^^\nFile \"/CrewAI-Studio/app/db_utils.py\", line 281, in save_task\n    raise HTTPException(status_code=400, detail=f\"Could not resolve agent for task: {task.agent}\")\n\n\nDOCKER DB logs:\n2025-02-09 11:25:42 ********************************************************************************\n2025-02-09 11:25:42 WARNING: POSTGRES_HOST_AUTH_METHOD has been set to \"trust\". This will allow\n2025-02-09 11:25:42          anyone with access to the Postgres port to access your database without\n2025-02-09 11:25:42          a password, even if POSTGRES_PASSWORD is set. See PostgreSQL\n2025-02-09 11:25:42          documentation about \"trust\":\n2025-02-09 11:25:42          https://www.postgresql.org/docs/current/auth-trust.html\n2025-02-09 11:25:42          In Docker's default configuration, this is effectively any other\n2025-02-09 11:25:42          container on the same system.\n2025-02-09 11:25:42 \n2025-02-09 11:25:42          It is not recommended to use POSTGRES_HOST_AUTH_METHOD=trust. Replace\n2025-02-09 11:25:42          it with \"-e POSTGRES_PASSWORD=password\" instead to set a password in\n2025-02-09 11:25:42          \"docker run\".\n2025-02-09 11:25:42 ********************************************************************************\n2025-02-09 11:25:42 initdb: warning: enabling \"trust\" authentication for local connections\n2025-02-09 11:25:42 initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.\n2025-02-09 11:25:42 2025-02-09 10:25:42.881 UTC [1] LOG:  starting PostgreSQL 15.10 (Debian 15.10-1.pgdg120+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit\n2025-02-09 11:25:42 2025-02-09 10:25:42.882 UTC [1] LOG:  listening on IPv4 address \"0.0.0.0\", port 5432\n2025-02-09 11:25:42 2025-02-09 10:25:42.882 UTC [1] LOG:  listening on IPv6 address \"::\", port 5432\n2025-02-09 11:25:42 2025-02-09 10:25:42.885 UTC [1] LOG:  listening on Unix socket \"/var/run/postgresql/.s.PGSQL.5432\"\n2025-02-09 11:25:42 2025-02-09 10:25:42.887 UTC [63] LOG:  database system was shut down at 2025-02-09 10:25:42 UTC\n2025-02-09 11:25:42 2025-02-09 10:25:42.891 UTC [1] LOG:  database system is ready to accept connections\n2025-02-09 11:30:42 2025-02-09 10:30:42.977 UTC [61] LOG:  checkpoint starting: time\n2025-02-09 11:30:47 2025-02-09 10:30:47.000 UTC [61] LOG:  checkpoint complete: wrote 43 buffers (0.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=4.012 s, sync=0.005 s, total=4.023 s; sync files=11, longest=0.003 s, average=0.001 s; distance=252 kB, estimate=252 kB\n2025-02-09 11:47:35 2025-02-09 10:47:35.078 UTC [122] FATAL:  role \"root\" does not exist\n2025-02-09 11:52:32 2025-02-09 10:52:32.044 UTC [137] FATAL:  database \"template0\" is not currently accepting connections\n2025-02-09 11:25:42 The files belonging to this database system will be owned by user \"postgres\".\n2025-02-09 11:25:42 This user must also own the server process.\n2025-02-09 11:25:42 \n2025-02-09 11:25:42 The database cluster will be initialized with locale \"en_US.utf8\".\n2025-02-09 11:25:42 The default database encoding has accordingly been set to \"UTF8\".\n2025-02-09 11:25:42 The default text search configuration will be set to \"english\".\n2025-02-09 11:25:42 \n2025-02-09 11:25:42 Data page checksums are disabled.\n2025-02-09 11:25:42 \n2025-02-09 11:25:42 fixing permissions on existing directory /var/lib/postgresql/data ... ok\n2025-02-09 11:25:42 creating subdirectories ... ok\n2025-02-09 11:25:42 selecting dynamic shared memory implementation ... posix\n2025-02-09 11:25:42 selecting default max_connections ... 100\n2025-02-09 11:25:42 selecting default shared_buffers ... 128MB\n2025-02-09 11:25:42 selecting default time zone ... Etc/UTC\n2025-02-09 11:25:42 creating configuration files ... ok\n2025-02-09 11:25:42 running bootstrap script ... ok\n2025-02-09 11:25:42 performing post-bootstrap initialization ... ok\n2025-02-09 11:25:42 syncing data to disk ... ok\n2025-02-09 11:25:42 \n2025-02-09 11:25:42 \n2025-02-09 11:25:42 Success. You can now start the database server using:\n2025-02-09 11:25:42 \n2025-02-09 11:25:42     pg_ctl -D /var/lib/postgresql/data -l logfile start\n2025-02-09 11:25:42 \n2025-02-09 11:25:42 waiting for server to start....2025-02-09 10:25:42.640 UTC [49] LOG:  starting PostgreSQL 15.10 (Debian 15.10-1.pgdg120+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit\n2025-02-09 11:25:42 2025-02-09 10:25:42.642 UTC [49] LOG:  listening on Unix socket \"/var/run/postgresql/.s.PGSQL.5432\"\n2025-02-09 11:25:42 2025-02-09 10:25:42.647 UTC [52] LOG:  database system was shut down at 2025-02-09 10:25:42 UTC\n2025-02-09 11:25:42 2025-02-09 10:25:42.649 UTC [49] LOG:  database system is ready to accept connections\n2025-02-09 11:25:42  done\n2025-02-09 11:25:42 server started\n2025-02-09 11:25:42 \n2025-02-09 11:25:42 /usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*\n2025-02-09 11:25:42 \n2025-02-09 11:25:42 waiting for server to shut down...2025-02-09 10:25:42.768 UTC [49] LOG:  received fast shutdown request\n2025-02-09 11:25:42 .2025-02-09 10:25:42.769 UTC [49] LOG:  aborting any active transactions\n2025-02-09 11:25:42 2025-02-09 10:25:42.770 UTC [49] LOG:  background worker \"logical replication launcher\" (PID 55) exited with exit code 1\n2025-02-09 11:25:42 2025-02-09 10:25:42.770 UTC [50] LOG:  shutting down\n2025-02-09 11:25:42 2025-02-09 10:25:42.771 UTC [50] LOG:  checkpoint starting: shutdown immediate\n2025-02-09 11:25:42 2025-02-09 10:25:42.779 UTC [50] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.003 s, sync=0.002 s, total=0.009 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB\n2025-02-09 11:25:42 2025-02-09 10:25:42.780 UTC [49] LOG:  database system is shut down\n2025-02-09 11:25:42  done\n2025-02-09 11:25:42 server stopped\n2025-02-09 11:25:42 \n2025-02-09 11:25:42 PostgreSQL init process complete; ready for start up.\n2025-02-09 11:25:42",
+    "comments": [],
+    "repository": "strnad/CrewAI-Studio"
+  },
+  {
+    "issue_number": 63,
+    "title": "OpenAI API key not set i.env file",
+    "author": "SimonSaysBoo",
+    "state": "closed",
+    "created_at": "2025-02-23T19:00:53Z",
+    "updated_at": "2025-02-23T19:14:32Z",
+    "labels": [],
+    "body": "Hi - this error when trying to run crew:\n\nValueError: OpenAI API key not set in .env file\nTraceback:\nFile \"/CrewAI-Studio/app/pg_crew_run.py\", line 127, in control_buttons\n    crew = selected_crew.get_crewai_crew(full_output=True)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFile \"/CrewAI-Studio/app/my_crew.py\", line 40, in get_crewai_crew\n    crewai_agents = [agent.get_crewai_agent() for agent in self.agents]\n                     ^^^^^^^^^^^^^^^^^^^^^^^^\nFile \"/CrewAI-Studio/app/my_agent.py\", line 36, in get_crewai_agent\n    llm = create_llm(self.llm_provider_model, temperature=self.temperature)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFile \"/CrewAI-Studio/app/llms.py\", line 138, in create_llm\n    llm = create_llm_func(model, temperature)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFile \"/CrewAI-Studio/app/llms.py\", line 50, in create_openai_llm\n    raise ValueError(\"OpenAI API key not set in .env file\")\n\n----\n\n.env file is populated per below (keys removed, obv):\n\n# OPENAI_API_KEY=\"blah\"\n# OPENAI_API_BASE=\"https://api.openai.com/v1\"\n# OPENAI_PROXY_MODELS=\"openai/gpt4o,openai/gpt4omini,openai/geminiflash,openai/geminipro,openai/claudesonnet35\"\n# GROQ_API_KEY=\"FILL-IN-YOUR-GROQ_API_KEY\"\n# LMSTUDIO_API_BASE=\"http://localhost:1234/v1\"\n# ANTHROPIC_API_KEY=\"FILL-IN-YOUR-ANTHROPIC_API_KEY\"\n# AGENTOPS_API_KEY=\"FILL-IN-YOUR-AGENTOPS_API_KEY\"\n# OLLAMA_HOST=\"http://localhost:11434\"\n# OLLAMA_MODELS=\"ollama/llama3.2,ollama/llama3.1,ollama/gemma2,ollama/phi3.5\"\n# SERPER_API_KEY=\"blah\"\n# DB_URL=postgresql://crewai_user:secret@db:5432/crewai\nAGENTOPS_ENABLED=\"False\"\n\n----\n\nI'm running Docker. I've rebuilt the Container to ensure the .env file was written beforehand. No luck.\n\nThe .env_example wasn't present when I cloned the repo - I took it from another branch. .env should be in the repo root?\n\n\n",
+    "comments": [
+      {
+        "user": "SimonSaysBoo",
+        "body": "Ah - I think the accidential markdown conversion to titles int he .env above has shown my (embarrassing) error... all the lines are commented out, right?!\n\nJust rebuilding the Container now... feel free to laugh and point :) "
+      }
+    ],
+    "repository": "strnad/CrewAI-Studio"
+  },
+  {
+    "issue_number": 40,
+    "title": "Can't connect to any LLM",
+    "author": "navarisun1982",
+    "state": "open",
+    "created_at": "2024-12-05T11:33:21Z",
+    "updated_at": "2025-02-06T14:28:32Z",
+    "labels": [],
+    "body": "i have this error which i can't define, I tried working with Ollama or groq, added the API or URL in .env file, same result\r\n\r\n`Traceback (most recent call last):\\n  File \\\"D:\\\\CrewAI-Studio\\\\venv\\\\lib\\\\site-packages\\\\litellm\\\\llms\\\\OpenAI\\\\openai.py\\\", line 860, in completion\\n    raise e\\n  File \\\"D:\\\\CrewAI-Studio\\\\venv\\\\lib\\\\site-packages\\\\litellm\\\\llms\\\\OpenAI\\\\openai.py\\\", line 796, in completion\\n    self.make_sync_openai_chat_completion_request(\\n  File \\\"D:\\\\CrewAI-Studio\\\\venv\\\\lib\\\\site-packages\\\\litellm\\\\llms\\\\OpenAI\\\\openai.py\\\", line 657, in make_sync_openai_chat_completion_request\\n    raise e\\n  File \\\"D:\\\\CrewAI-Studio\\\\venv\\\\lib\\\\site-packages\\\\litellm\\\\llms\\\\OpenAI\\\\openai.py\\\", line 639, in make_sync_openai_chat_completion_request\\n    raw_response = openai_client.chat.completions.with_raw_response.create(\\n  File \\\"D:\\\\CrewAI-Studio\\\\venv\\\\lib\\\\site-packages\\\\openai\\\\_legacy_response.py\\\", line 356, in wrapped\\n    return cast(LegacyAPIResponse[R], func(*args, **kwargs))\\n  File \\\"D:\\\\CrewAI-Studio\\\\venv\\\\lib\\\\site-packages\\\\openai\\\\_utils\\\\_utils.py\\\", line 275, in wrapper\\n    return func(*args, **kwargs)\\n  File \\\"D:\\\\CrewAI-Studio\\\\venv\\\\lib\\\\site-packages\\\\openai\\\\resources\\\\chat\\\\completions.py\\\", line 829, in create\\n    return self._post(\\n  File \\\"D:\\\\CrewAI-Studio\\\\venv\\\\lib\\\\site-packages\\\\openai\\\\_base_client.py\\\", line 1280, in post\\n    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))\\n  File \\\"D:\\\\CrewAI-Studio\\\\venv\\\\lib\\\\site-packages\\\\openai\\\\_base_client.py\\\", line 957, in request\\n    return self._request(\\n  File \\\"D:\\\\CrewAI-Studio\\\\venv\\\\lib\\\\site-packages\\\\openai\\\\_base_client.py\\\", line 1061, in _request\\n    raise self._make_status_error_from_response(err.response) from None\\nopenai.AuthenticationError: Error code: 401 - {'error': {'message': 'Incorrect API key provided: NA. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}\\n\\nDuring handling of the above exception, another exception occurred:\\n\\nTraceback (most recent call last):\\n  File \\\"D:\\\\CrewAI-Studio\\\\venv\\\\lib\\\\site-packages\\\\litellm\\\\main.py\\\", line 1607, in completion\\n    raise e\\n  File \\\"D:\\\\CrewAI-Studio\\\\venv\\\\lib\\\\site-packages\\\\litellm\\\\main.py\\\", line 1580, in completion\\n    response = openai_chat_completions.completion(\\n  File \\\"D:\\\\CrewAI-Studio\\\\venv\\\\lib\\\\site-packages\\\\litellm\\\\llms\\\\OpenAI\\\\openai.py\\\", line 870, in completion\\n    raise OpenAIError(\\nlitellm.llms.OpenAI.openai.OpenAIError: Error code: 401 - {'error': {'message': 'Incorrect API key provided: NA. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}\\n\\nDuring handling of the above exception, another exception occurred:\\n\\nTraceback (most recent call last):\\n  File \\\"D:\\\\CrewAI-Studio\\\\app\\\\pg_crew_run.py\\\", line 53, in run_crew\\n    result = crewai_crew.kickoff(inputs=inputs)\\n  File \\\"D:\\\\CrewAI-Studio\\\\venv\\\\lib\\\\site-packages\\\\crewai\\\\crew.py\\\", line 550, in kickoff\\n    self._handle_crew_planning()\\n  File \\\"D:\\\\CrewAI-Studio\\\\venv\\\\lib\\\\site-packages\\\\crewai\\\\crew.py\\\", line 626, in _handle_crew_planning\\n    )._handle_crew_planning()\\n  File \\\"D:\\\\CrewAI-Studio\\\\venv\\\\lib\\\\site-packages\\\\crewai\\\\utilities\\\\planning_handler.py\\\", line 39, in _handle_crew_planning\\n    result = planner_task.execute_sync()\\n  File \\\"D:\\\\CrewAI-Studio\\\\venv\\\\lib\\\\site-packages\\\\crewai\\\\task.py\\\", line 192, in execute_sync\\n    return self._execute_core(agent, context, tools)\\n  File \\\"D:\\\\CrewAI-Studio\\\\venv\\\\lib\\\\site-packages\\\\crewai\\\\task.py\\\", line 250, in _execute_core\\n    result = agent.execute_task(\\n  File \\\"D:\\\\CrewAI-Studio\\\\venv\\\\lib\\\\site-packages\\\\crewai\\\\agent.py\\\", line 357, in execute_task\\n    result = self.execute_task(task, context, tools)\\n  File \\\"D:\\\\CrewAI-Studio\\\\venv\\\\lib\\\\site-packages\\\\crewai\\\\agent.py\\\", line 357, in execute_task\\n    result = self.execute_task(task, context, tools)\\n  File \\\"D:\\\\CrewAI-Studio\\\\venv\\\\lib\\\\site-packages\\\\crewai\\\\agent.py\\\", line 356, in execute_task\\n    raise e\\n  File \\\"D:\\\\CrewAI-Studio\\\\venv\\\\lib\\\\site-packages\\\\crewai\\\\agent.py\\\", line 345, in execute_task\\n    result = self.agent_executor.invoke(\\n  File \\\"D:\\\\CrewAI-Studio\\\\venv\\\\lib\\\\site-packages\\\\crewai\\\\agents\\\\crew_agent_executor.py\\\", line 103, in invoke\\n    formatted_answer = self._invoke_loop()\\n  File \\\"D:\\\\CrewAI-Studio\\\\venv\\\\lib\\\\site-packages\\\\crewai\\\\agents\\\\crew_agent_executor.py\\\", line 203, in _invoke_loop\\n    raise e\\n  File \\\"D:\\\\CrewAI-Studio\\\\venv\\\\lib\\\\site-packages\\\\crewai\\\\agents\\\\crew_agent_executor.py\\\", line 125, in _invoke_loop\\n    answer = self.llm.call(\\n  File \\\"D:\\\\CrewAI-Studio\\\\venv\\\\lib\\\\site-packages\\\\crewai\\\\llm.py\\\", line 164, in call\\n    response = litellm.completion(**params)\\n  File \\\"D:\\\\CrewAI-Studio\\\\venv\\\\lib\\\\site-packages\\\\litellm\\\\utils.py\\\", line 960, in wrapper\\n    raise e\\n  File \\\"D:\\\\CrewAI-Studio\\\\venv\\\\lib\\\\site-packages\\\\litellm\\\\utils.py\\\", line 849, in wrapper\\n    result = original_function(*args, **kwargs)\\n  File \\\"D:\\\\CrewAI-Studio\\\\venv\\\\lib\\\\site-packages\\\\litellm\\\\main.py\\\", line 3065, in completion\\n    raise exception_type(\\n  File \\\"D:\\\\CrewAI-Studio\\\\venv\\\\lib\\\\site-packages\\\\litellm\\\\litellm_core_utils\\\\exception_mapping_utils.py\\\", line 2137, in exception_type\\n    raise e\\n  File \\\"D:\\\\CrewAI-Studio\\\\venv\\\\lib\\\\site-packages\\\\litellm\\\\litellm_core_utils\\\\exception_mapping_utils.py\\\", line 343, in exception_type\\n    raise AuthenticationError(\\nlitellm.exceptions.AuthenticationError: litellm.AuthenticationError: AuthenticationError: OpenAIException - Error code: 401 - {'error': {'message': 'Incorrect API key provided: NA. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}\\n\"`",
+    "comments": [
+      {
+        "user": "navarisun1982",
+        "body": "is this project still active? or si there any better alternatives "
+      },
+      {
+        "user": "strnad",
+        "body": "After recent updates to CrewAI, certain components have become dependent on OpenAI. I’ll need to rewrite the LLM integration code to ensure full compatibility with alternative LLM providers. "
+      },
+      {
+        "user": "stritti",
+        "body": "Just a short shot:\r\n\r\nProbably it is a Windows issue? I cloned currently the project into my WSL (Debian distro) and was able to connect first agent to my local ollama instance of openGPT. Only thing I had to pay attention, that I had to prefix the LLM with `ollama/` in `.env`:\r\n\r\n`OLLAMA_MODELS=\"ollama/teuken,[...]`"
+      }
+    ],
+    "repository": "strnad/CrewAI-Studio"
+  },
+  {
+    "issue_number": 59,
+    "title": "stuck @ \"Downloading langchain-0.1.12-py3-none-any.whl\"",
+    "author": "MotherSoraka",
+    "state": "closed",
+    "created_at": "2025-01-30T10:54:52Z",
+    "updated_at": "2025-01-30T13:25:43Z",
+    "labels": [],
+    "body": "i tried to install this on Windows 3 times, every single time i get stuck this.\n\n![Image](https://github.com/user-attachments/assets/c5723807-fba3-4aa9-8481-aa7d3bffcc91)",
+    "comments": [],
+    "repository": "strnad/CrewAI-Studio"
+  },
+  {
+    "issue_number": 58,
+    "title": "Unable to connect to my serverless runpod VLLM pod that I created should be same base url",
+    "author": "TheMindExpansionNetwork",
+    "state": "open",
+    "created_at": "2025-01-30T03:21:42Z",
+    "updated_at": "2025-01-30T03:21:42Z",
+    "labels": [],
+    "body": "I am not sure what I am missing I am getting this error\n\n{'result': \"Error running crew: litellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=TheMindExpansionNetwork/Torque_14B_MED_0.1-AWQ-4bitgpt-4-turbo\\n Pass model as E.g. For 'Huggingface' inference endpoints pass in completion(model='huggingface/starcoder',..) Learn more: https://docs.litellm.ai/docs/providers\", 'stack_trace': 'Traceback (most recent call last):\\n File \"Z:\\GIT\\CR3AT10N-ST4T1ON\\Massumis\\CrewAI-Studio\\app\\pg_crew_run.py\", line 62, in run_crew\\n result = crewai_crew.kickoff(inputs=inputs)\\n ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n File \"Z:\\GIT\\CR3AT10N-ST4T1ON\\Massumis\\CrewAI-Studio\\miniconda\\envs\\crewai_env\\Lib\\site-packages\\crewai\\crew.py\", line 551, in kickoff\\n result = self._run_sequential_process()\\n ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n File \"Z:\\GIT\\CR3AT10N-ST4T1ON\\Massumis\\CrewAI-Studio\\miniconda\\envs\\crewai_env\\Lib\\site-packages\\crewai\\crew.py\", line 658, in _run_sequential_process\\n return self._execute_tasks(self.tasks)\\n ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n File \"Z:\\GIT\\CR3AT10N-ST4T1ON\\Massumis\\CrewAI-Studio\\miniconda\\envs\\crewai_env\\Lib\\site-packages\\crewai\\crew.py\", line 760, in _execute_tasks\\n task_output = task.execute_sync(\\n ^^^^^^^^^^^^^^^^^^\\n File \"Z:\\GIT\\CR3AT10N-ST4T1ON\\Massumis\\CrewAI-Studio\\miniconda\\envs\\crewai_env\\Lib\\site-packages\\crewai\\task.py\", line 302, in execute_sync\\n return self._execute_core(agent, context, tools)\\n ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n File \"Z:\\GIT\\CR3AT10N-ST4T1ON\\Massumis\\CrewAI-Studio\\miniconda\\envs\\crewai_env\\Lib\\site-packages\\crewai\\task.py\", line 366, in _execute_core\\n result = agent.execute_task(\\n ^^^^^^^^^^^^^^^^^^^\\n File \"Z:\\GIT\\CR3AT10N-ST4T1ON\\Massumis\\CrewAI-Studio\\miniconda\\envs\\crewai_env\\Lib\\site-packages\\crewai\\agent.py\", line 264, in execute_task\\n raise e\\n File \"Z:\\GIT\\CR3AT10N-ST4T1ON\\Massumis\\CrewAI-Studio\\miniconda\\envs\\crewai_env\\Lib\\site-packages\\crewai\\agent.py\", line 253, in execute_task\\n result = self.agent_executor.invoke(\\n ^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n File \"Z:\\GIT\\CR3AT10N-ST4T1ON\\Massumis\\CrewAI-Studio\\miniconda\\envs\\crewai_env\\Lib\\site-packages\\crewai\\agents\\crew_agent_executor.py\", line 106, in invoke\\n raise e\\n File \"Z:\\GIT\\CR3AT10N-ST4T1ON\\Massumis\\CrewAI-Studio\\miniconda\\envs\\crewai_env\\Lib\\site-packages\\crewai\\agents\\crew_agent_executor.py\", line 102, in invoke\\n formatted_answer = self._invoke_loop()\\n ^^^^^^^^^^^^^^^^^^^\\n File \"Z:\\GIT\\CR3AT10N-ST4T1ON\\Massumis\\CrewAI-Studio\\miniconda\\envs\\crewai_env\\Lib\\site-packages\\crewai\\agents\\crew_agent_executor.py\", line 154, in _invoke_loop\\n raise e\\n File \"Z:\\GIT\\CR3AT10N-ST4T1ON\\Massumis\\CrewAI-Studio\\miniconda\\envs\\crewai_env\\Lib\\site-packages\\crewai\\agents\\crew_agent_executor.py\", line 134, in _invoke_loop\\n answer = self._get_llm_response()\\n ^^^^^^^^^^^^^^^^^^^^^^^^\\n File \"Z:\\GIT\\CR3AT10N-ST4T1ON\\Massumis\\CrewAI-Studio\\miniconda\\envs\\crewai_env\\Lib\\site-packages\\crewai\\agents\\crew_agent_executor.py\", line 199, in _get_llm_response\\n raise e\\n File \"Z:\\GIT\\CR3AT10N-ST4T1ON\\Massumis\\CrewAI-Studio\\miniconda\\envs\\crewai_env\\Lib\\site-packages\\crewai\\agents\\crew_agent_executor.py\", line 190, in _get_llm_response\\n answer = self.llm.call(\\n ^^^^^^^^^^^^^^\\n File \"Z:\\GIT\\CR3AT10N-ST4T1ON\\Massumis\\CrewAI-Studio\\miniconda\\envs\\crewai_env\\Lib\\site-packages\\crewai\\llm.py\", line 246, in call\\n response = litellm.completion(**params)\\n ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n File \"Z:\\GIT\\CR3AT10N-ST4T1ON\\Massumis\\CrewAI-Studio\\miniconda\\envs\\crewai_env\\Lib\\site-packages\\litellm\\utils.py\", line 1022, in wrapper\\n raise e\\n File \"Z:\\GIT\\CR3AT10N-ST4T1ON\\Massumis\\CrewAI-Studio\\miniconda\\envs\\crewai_env\\Lib\\site-packages\\litellm\\utils.py\", line 900, in wrapper\\n result = original_function(*args, **kwargs)\\n ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n File \"Z:\\GIT\\CR3AT10N-ST4T1ON\\Massumis\\CrewAI-Studio\\miniconda\\envs\\crewai_env\\Lib\\site-packages\\litellm\\main.py\", line 2955, in completion\\n raise exception_type(\\n File \"Z:\\GIT\\CR3AT10N-ST4T1ON\\Massumis\\CrewAI-Studio\\miniconda\\envs\\crewai_env\\Lib\\site-packages\\litellm\\main.py\", line 927, in completion\\n model, custom_llm_provider, dynamic_api_key, api_base = get_llm_provider(\\n ^^^^^^^^^^^^^^^^^\\n File \"Z:\\GIT\\CR3AT10N-ST4T1ON\\Massumis\\CrewAI-Studio\\miniconda\\envs\\crewai_env\\Lib\\site-packages\\litellm\\litellm_core_utils\\get_llm_provider_logic.py\", line 351, in get_llm_provider\\n raise e\\n File \"Z:\\GIT\\CR3AT10N-ST4T1ON\\Massumis\\CrewAI-Studio\\miniconda\\envs\\crewai_env\\Lib\\site-packages\\litellm\\litellm_core_utils\\get_llm_provider_logic.py\", line 328, in get_llm_provider\\n raise litellm.exceptions.BadRequestError( # type: ignore\\nlitellm.exceptions.BadRequestError: litellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=TheMindExpansionNetwork/Torque_14B_MED_0.1-AWQ-4bitgpt-4-turbo\\n Pass model as E.g. For 'Huggingface' inference endpoints pass in completion(model=\\'huggingface/starcoder\\',..) Learn more: [https://docs.litellm.ai/docs/providers\\n'}](https://docs.litellm.ai/docs/providers%5Cn'%7D)\n\nThe model is this TheMindExpansionNetwork/Torque_14B_MED_0.1-AWQ-4\n\nhttps://github.com/runpod-workers/worker-vllm\n\nThis should be it\n\nfrom openai import OpenAI\nimport os\n\n# Initialize the OpenAI Client with your RunPod API Key and Endpoint URL\nclient = OpenAI(\n    api_key=os.environ.get(\"RUNPOD_API_KEY\"),\n    base_url=\"https://api.runpod.ai/v2/<YOUR ENDPOINT ID>/openai/v1\",\n)\n\nI have the API Changed\n\nThen I attempted the .env \n\nOPENAI_PROXY_MODELS\n\nany help is appreciated\n\nthis is also what I attempted same error\n\nimport os\nfrom dotenv import load_dotenv\nimport streamlit as st\nfrom langchain_openai import ChatOpenAI\nfrom langchain_groq import ChatGroq\nfrom langchain_anthropic import ChatAnthropic\nfrom crewai import LLM\n\ndef load_secrets_fron_env():\n    load_dotenv(override=True)\n    if \"env_vars\" not in st.session_state:\n        st.session_state.env_vars = {\n            \"OPENAI_API_KEY\": os.getenv(\"OPENAI_API_KEY\"),\n            \"OPENAI_API_BASE\": os.getenv(\"OPENAI_API_BASE\", \"https://api.openai.com/v1/\"),\n            \"GROQ_API_KEY\": os.getenv(\"GROQ_API_KEY\"),\n            \"LMSTUDIO_API_BASE\": os.getenv(\"LMSTUDIO_API_BASE\"),\n            \"ANTHROPIC_API_KEY\": os.getenv(\"ANTHROPIC_API_KEY\"),\n            \"OLLAMA_HOST\": os.getenv(\"OLLAMA_HOST\"),\n        }\n    else:\n        st.session_state.env_vars = st.session_state.env_vars\n\ndef switch_environment(new_env_vars):\n    for key, value in new_env_vars.items():\n        if value is not None:\n            os.environ[key] = value\n            st.session_state.env_vars[key] = value\n\ndef restore_environment():\n    for key, value in st.session_state.env_vars.items():\n        if value is not None:\n            os.environ[key] = value\n        elif key in os.environ:\n            del os.environ[key]\n\ndef safe_pop_env_var(key):\n    os.environ.pop(key, None)\n\ndef create_openai_llm(model, temperature):\n    switch_environment({\n        \"OPENAI_API_KEY\": st.session_state.env_vars[\"OPENAI_API_KEY\"],\n        \"OPENAI_API_BASE\": st.session_state.env_vars[\"OPENAI_API_BASE\"],\n    })\n    api_key = os.getenv(\"OPENAI_API_KEY\")\n    api_base = os.getenv(\"OPENAI_API_BASE\")\n\n    if api_key:\n        return LLM(model=model, temperature=temperature, base_url=api_base)\n    else:\n        raise ValueError(\"OpenAI API key not set in .env file\")\n\ndef create_anthropic_llm(model, temperature):\n    switch_environment({\n        \"ANTHROPIC_API_KEY\": st.session_state.env_vars[\"ANTHROPIC_API_KEY\"],\n    })\n    api_key = os.getenv(\"ANTHROPIC_API_KEY\")\n\n    if api_key:\n        return ChatAnthropic(\n            anthropic_api_key=api_key,\n            model_name=model,\n            temperature=temperature,\n            max_tokens=4095,\n        )\n    else:\n        raise ValueError(\"Anthropic API key not set in .env file\")\n\ndef create_groq_llm(model, temperature):\n    switch_environment({\n        \"GROQ_API_KEY\": st.session_state.env_vars[\"GROQ_API_KEY\"],\n    })\n    api_key = os.getenv(\"GROQ_API_KEY\")\n\n    if api_key:\n        return ChatGroq(groq_api_key=api_key, model_name=model, temperature=temperature, max_tokens=4095)\n    else:\n        raise ValueError(\"Groq API key not set in .env file\")\n\ndef create_ollama_llm(model, temperature):\n    host = st.session_state.env_vars[\"OLLAMA_HOST\"]\n    if host:\n        switch_environment({\n            \"OPENAI_API_KEY\": \"ollama\",  # Nastaví OpenAI API klíč na \"ollama\"\n            \"OPENAI_API_BASE\": host,    # Nastaví OpenAI API Base na hodnotu OLLAMA_HOST\n        })\n        return LLM(model=model, temperature=temperature, base_url=host)\n    else:\n        raise ValueError(\"Ollama Host is not set in .env file\")\n    \ndef create_lmstudio_llm(model, temperature):\n    switch_environment({\n        \"OPENAI_API_KEY\": \"lm-studio\",\n        \"OPENAI_API_BASE\": st.session_state.env_vars[\"LMSTUDIO_API_BASE\"],\n    })\n    api_base = os.getenv(\"OPENAI_API_BASE\")\n\n    if api_base:\n        return ChatOpenAI(\n            openai_api_key=\"lm-studio\",\n            openai_api_base=api_base,\n            temperature=temperature,\n            max_tokens=4095,\n        )\n    else:\n        raise ValueError(\"LM Studio API base not set in .env file\")\n\nLLM_CONFIG = {\n    \"OpenAI\": {\n        \"models\": os.getenv(\"OPENAI_PROXY_MODELS\", \"\").split(\",\") if os.getenv(\"OPENAI_PROXY_MODELS\") else [\"gpt-4o\", \"gpt-4o-mini\", \"gpt-3.5-turbo\", \"TheMindExpansionNetwork/Torque_14B_MED_0.1-AWQ-4bit\" \"gpt-4-turbo\"],\n        \"create_llm\": create_openai_llm,\n    },\n    \"Groq\": {\n        \"models\": [\"groq/llama3-8b-8192\", \"groq/llama3-70b-8192\", \"groq/mixtral-8x7b-32768\"],\n        \"create_llm\": create_groq_llm,\n    },\n    \"Ollama\": {\n        \"models\": os.getenv(\"OLLAMA_MODELS\", \"\").split(\",\") if os.getenv(\"OLLAMA_MODELS\") else [],\n        \"create_llm\": create_ollama_llm,\n    },\n    \"Anthropic\": {\n        \"models\": [\"claude-3-5-sonnet-20240620\"],\n        \"create_llm\": create_anthropic_llm,\n    },\n    \"LM Studio\": {\n        \"models\": [\"lms-default\"],\n        \"create_llm\": create_lmstudio_llm,\n    },\n}\n\ndef llm_providers_and_models():\n    return [f\"{provider}: {model}\" for provider in LLM_CONFIG.keys() for model in LLM_CONFIG[provider][\"models\"]]\n\ndef create_llm(provider_and_model, temperature=0.15):\n    provider, model = provider_and_model.split(\": \")\n    create_llm_func = LLM_CONFIG.get(provider, {}).get(\"create_llm\")\n\n    if create_llm_func:\n        llm = create_llm_func(model, temperature)\n        restore_environment()  # Obnoví původní prostředí po vytvoření LLM\n        return llm\n    else:\n        raise ValueError(f\"LLM provider {provider} is not recognized or not supported\")\n\n",
+    "comments": [],
+    "repository": "strnad/CrewAI-Studio"
+  },
+  {
+    "issue_number": 57,
+    "title": "fix YahooFinanceNewsTool",
+    "author": "abdulbasetbasher",
+    "state": "closed",
+    "created_at": "2025-01-29T20:34:02Z",
+    "updated_at": "2025-01-29T22:27:19Z",
+    "labels": [],
+    "body": "i got this error when using YahooFinanceNewsTool\n \n```\nValue error, Invalid tool type: <class 'langchain_community.tools.YahooFinanceNewsTool'>. Tool must be an instance of BaseTool or an object with 'name', 'func', and 'description' attributes. [type=value_error, input_value=[YahooFinanceNewsTool()], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.10/v/value_error\n```\n\n✅ i fix it with call add as_tool() function in YahooFinanceNewsTool instance in my_tools.py\n\n```\nYahooFinanceNewsTool().as_tool()\n```\n\n```\nclass MyYahooFinanceNewsTool(MyTool):\n    def __init__(self, tool_id=None):\n        parameters = {}\n        super().__init__(tool_id, 'YahooFinanceNewsTool', \"A tool that can be used to search Yahoo Finance News.\", parameters)\n\n    def create_tool(self) -> YahooFinanceNewsTool:\n        return YahooFinanceNewsTool().as_tool()\n```\n",
+    "comments": [],
+    "repository": "strnad/CrewAI-Studio"
+  },
+  {
+    "issue_number": 50,
+    "title": "ModuleNotFoundError: No module named 'snowflake'",
+    "author": "andresvidal",
+    "state": "closed",
+    "created_at": "2025-01-24T01:49:42Z",
+    "updated_at": "2025-01-24T15:46:27Z",
+    "labels": [],
+    "body": "Set .env variables and ran the commands to setup a docker instance on MacOS M1 Pro. \n\nBash: ```docker-compose up --build```\n\nBrowser tries to load but then displays this error:\n\n## Browser Error:\n\n```\nModuleNotFoundError: No module named 'snowflake'\nTraceback:\nFile \"/CrewAI-Studio/app/app.py\", line 3, in <module>\n    import db_utils\nFile \"/CrewAI-Studio/app/db_utils.py\", line 4, in <module>\n    from my_tools import TOOL_CLASSES\nFile \"/CrewAI-Studio/app/my_tools.py\", line 4, in <module>\n    from crewai_tools import CodeInterpreterTool,ScrapeElementFromWebsiteTool,TXTSearchTool,SeleniumScrapingTool,PGSearchTool,PDFSearchTool,MDXSearchTool,JSONSearchTool,GithubSearchTool,EXASearchTool,DOCXSearchTool,CSVSearchTool,ScrapeWebsiteTool, FileReadTool, DirectorySearchTool, DirectoryReadTool, CodeDocsSearchTool, YoutubeVideoSearchTool,SerperDevTool,YoutubeChannelSearchTool,WebsiteSearchTool\nFile \"/usr/local/lib/python3.12/site-packages/crewai_tools/__init__.py\", line 1, in <module>\n    from .tools import (\nFile \"/usr/local/lib/python3.12/site-packages/crewai_tools/tools/__init__.py\", line 59, in <module>\n    from .snowflake_search_tool import (\nFile \"/usr/local/lib/python3.12/site-packages/crewai_tools/tools/snowflake_search_tool/__init__.py\", line 1, in <module>\n    from .snowflake_search_tool import (\nFile \"/usr/local/lib/python3.12/site-packages/crewai_tools/tools/snowflake_search_tool/snowflake_search_tool.py\", line 6, in <module>\n    import snowflake.connector\n```\n\n## Terminal Error:\n\n```\ncrewai_studio  | 2025-01-24 01:43:50.150 Uncaught app execution\ncrewai_studio  | Traceback (most recent call last):\ncrewai_studio  |   File \"/usr/local/lib/python3.12/site-packages/streamlit/runtime/scriptrunner/exec_code.py\", line 88, in exec_func_with_error_handling\ncrewai_studio  |     result = func()\ncrewai_studio  |              ^^^^^^\ncrewai_studio  |   File \"/usr/local/lib/python3.12/site-packages/streamlit/runtime/scriptrunner/script_runner.py\", line 579, in code_to_exec\ncrewai_studio  |     exec(code, module.__dict__)\ncrewai_studio  |   File \"/CrewAI-Studio/app/app.py\", line 3, in <module>\ncrewai_studio  |     import db_utils\ncrewai_studio  |   File \"/CrewAI-Studio/app/db_utils.py\", line 4, in <module>\ncrewai_studio  |     from my_tools import TOOL_CLASSES\ncrewai_studio  |   File \"/CrewAI-Studio/app/my_tools.py\", line 4, in <module>\ncrewai_studio  |     from crewai_tools import CodeInterpreterTool,ScrapeElementFromWebsiteTool,TXTSearchTool,SeleniumScrapingTool,PGSearchTool,PDFSearchTool,MDXSearchTool,JSONSearchTool,GithubSearchTool,EXASearchTool,DOCXSearchTool,CSVSearchTool,ScrapeWebsiteTool, FileReadTool, DirectorySearchTool, DirectoryReadTool, CodeDocsSearchTool, YoutubeVideoSearchTool,SerperDevTool,YoutubeChannelSearchTool,WebsiteSearchTool\ncrewai_studio  |   File \"/usr/local/lib/python3.12/site-packages/crewai_tools/__init__.py\", line 1, in <module>\ncrewai_studio  |     from .tools import (\ncrewai_studio  |   File \"/usr/local/lib/python3.12/site-packages/crewai_tools/tools/__init__.py\", line 59, in <module>\ncrewai_studio  |     from .snowflake_search_tool import (\ncrewai_studio  |   File \"/usr/local/lib/python3.12/site-packages/crewai_tools/tools/snowflake_search_tool/__init__.py\", line 1, in <module>\ncrewai_studio  |     from .snowflake_search_tool import (\ncrewai_studio  |   File \"/usr/local/lib/python3.12/site-packages/crewai_tools/tools/snowflake_search_tool/snowflake_search_tool.py\", line 6, in <module>\ncrewai_studio  |     import snowflake.connector\ncrewai_studio  | ModuleNotFoundError: No module named 'snowflake'\n```",
+    "comments": [
+      {
+        "user": "strnad",
+        "body": "Hi, I am experiencing the same issue. The problem occurs not only when using docker-compose but also with a venv environment when Python 3.12 is installed. However, when I use the conda installer script (which relies on Python 3.11), everything works as expected.\n\nThis issue seems to have been introduced in the latest versions of CrewAI and CrewAI-Tools, which were released a few days ago. I’ll investigate this further and try to identify the root cause. For now, I recommend using Python 3.11 as a workaround.\nReference to the issue: https://github.com/crewAIInc/crewAI/issues/1942"
+      },
+      {
+        "user": "Wiola09",
+        "body": "Hi, when I add snowflake-connector-python to requirements.txt \nit works"
+      },
+      {
+        "user": "strnad",
+        "body": "@Wiola09 thanks a lot for finding the solution :) I've just added it to requirements in commit https://github.com/strnad/CrewAI-Studio/commit/94746ff6ef80253932a49fc760f79eeea3d5982e"
+      }
+    ],
+    "repository": "strnad/CrewAI-Studio"
+  },
+  {
+    "issue_number": 39,
+    "title": "CustomFileWriteTool fails with validation error",
+    "author": "meetmatt",
+    "state": "closed",
+    "created_at": "2024-11-29T10:16:54Z",
+    "updated_at": "2025-01-24T15:46:13Z",
+    "labels": [],
+    "body": "Hey @strnad, great tool!\r\nI'm trying to use CustomFileWriteTool with an Agent that is expected to create files.\r\n\r\nWhen I run the crew I receive an error (sorry for the docker container name in the logs):\r\n```\r\ncrewai-studio  | Traceback (most recent call last):\r\ncrewai-studio  |   File \"/CrewAI-Studio/app/pg_crew_run.py\", line 113, in control_buttons\r\ncrewai-studio  |     crew = selected_crew.get_crewai_crew(full_output=True)\r\ncrewai-studio  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\ncrewai-studio  |   File \"/CrewAI-Studio/app/my_crew.py\", line 40, in get_crewai_crew\r\ncrewai-studio  |     crewai_agents = [agent.get_crewai_agent() for agent in self.agents]\r\ncrewai-studio  |                      ^^^^^^^^^^^^^^^^^^^^^^^^\r\ncrewai-studio  |   File \"/CrewAI-Studio/app/my_agent.py\", line 37, in get_crewai_agent\r\ncrewai-studio  |     tools = [tool.create_tool() for tool in self.tools]\r\ncrewai-studio  |              ^^^^^^^^^^^^^^^^^^\r\ncrewai-studio  |   File \"/CrewAI-Studio/app/my_tools.py\", line 314, in create_tool\r\ncrewai-studio  |     return CustomFileWriteTool(\r\ncrewai-studio  |            ^^^^^^^^^^^^^^^^^^^^\r\ncrewai-studio  |   File \"/CrewAI-Studio/app/custom_tools.py\", line 26, in __init__\r\ncrewai-studio  |     super().__init__(**kwargs)\r\ncrewai-studio  |   File \"/usr/local/lib/python3.12/site-packages/pydantic/main.py\", line 214, in __init__\r\ncrewai-studio  |     validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)\r\ncrewai-studio  |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\ncrewai-studio  | pydantic_core._pydantic_core.ValidationError: 1 validation error for CustomFileWriteTool\r\ncrewai-studio  | args_schema\r\ncrewai-studio  |   Input should be a subclass of BaseModel [type=is_subclass_of, input_value=<class 'custom_tools.Cust...leWriteToolInputSchema'>, input_type=ModelMetaclass]\r\ncrewai-studio  |     For further information visit https://errors.pydantic.dev/2.10/v/is_subclass_of\r\n```\r\n\r\nHere's how I attempt to use it.\r\nCrew:\r\n```\r\n...\r\nTasks:\r\n1. You are building a new product FooBar. It allows user Foo to do Bar. You should use CustomFileWriteTool to save files.\r\nAgent: Business Analyst\r\nTools: CustomFileWriteTool\r\n```\r\n\r\nAgent:\r\n```\r\nRole: Business Analyst\r\nBackstory: You are guru in translating business objectives into actionable strategies.\r\nGoal: Create detailed feature files with use-case scenarios in Gherkin format.\r\n...\r\nTools: ['CustomFileWriteTool (/CrewAI-Studio/data)']\r\n```\r\n\r\nIs it even intended to be used that way? Thanks for your tool again!",
+    "comments": [
+      {
+        "user": "meetmatt",
+        "body": "I was able to guess-fix it by changing the import of BaseModel from pydantic.v1 to pydantic (v2):\r\n\r\n`app/custom_tools.py`\r\n```python\r\nfrom pydantic import BaseModel\r\nfrom pydantic.v1 import Field,root_validator, ValidationError\r\n```"
+      }
+    ],
+    "repository": "strnad/CrewAI-Studio"
+  },
+  {
+    "issue_number": 45,
+    "title": "Add Docker to the README.md",
+    "author": "chadsly",
+    "state": "closed",
+    "created_at": "2025-01-15T17:37:49Z",
+    "updated_at": "2025-01-24T15:21:45Z",
+    "labels": [],
+    "body": "Similar to the Windows and Linux/MacOS Installation Instructions, please provide instructions for running the Dockerfile:\r\n\r\nHere's an example\r\ndocker build -t crewai-studio .\r\ndocker run -d -p 8501:8501 --name my_crewai_app crewai-studio",
+    "comments": [],
+    "repository": "strnad/CrewAI-Studio"
+  },
+  {
+    "issue_number": 49,
+    "title": ".env_example not found",
+    "author": "solaius",
+    "state": "closed",
+    "created_at": "2025-01-18T16:27:38Z",
+    "updated_at": "2025-01-19T13:24:46Z",
+    "labels": [],
+    "body": ".env_example not present in repo. Not found after installing virt environment either.  ",
+    "comments": [
+      {
+        "user": "strnad",
+        "body": "fixed, thanks"
+      }
+    ],
+    "repository": "strnad/CrewAI-Studio"
+  },
+  {
+    "issue_number": 36,
+    "title": "tasks limit",
+    "author": "adelorenzo",
+    "state": "closed",
+    "created_at": "2024-11-12T21:54:51Z",
+    "updated_at": "2024-11-15T04:47:38Z",
+    "labels": [],
+    "body": "Hello,\r\n\r\nThank you for your project. Is there a limit to the amount of tasks that can be added per project? I have 5 agents and I need to assign a unique task to each one of them. For some reason I can only add 3 tasks.\r\n\r\nThanks!",
+    "comments": [
+      {
+        "user": "adelorenzo",
+        "body": "figured it out. for some reason it's a problem with the Zen Browser.\r\n\r\nthanks"
+      }
+    ],
+    "repository": "strnad/CrewAI-Studio"
+  },
+  {
+    "issue_number": 30,
+    "title": "ollama uasage ",
+    "author": "omarkshoaib",
+    "state": "closed",
+    "created_at": "2024-10-05T08:57:19Z",
+    "updated_at": "2024-10-24T19:40:35Z",
+    "labels": [],
+    "body": "what are all the configurations i need to do to use ollama?",
+    "comments": [
+      {
+        "user": "happyebb",
+        "body": "Same here on windows. I have installed the platform Ollama, as well as using \"open webui\" for the Ollama API service for end point. I have tried playing with the .evn config file and searched the web to no avail. Even toyed with the studio light model management option to use my local model. Perhaps its a simpler solution just starting us in the face. either way I was hoping there would be a predefined option or a comment in the .env file for local model use."
+      },
+      {
+        "user": "arthughes1234",
+        "body": "Here as well. I am running CrewAI-Studio on a Windows 10 workstation successfully. My Agents can access OpenAI just fine. However, when I try to access our Ollama running on a Linux GPU server, I either get \"ERROR: Failed to get supported params: argument of type 'NoneType' is not iterable\" or, if using the OpenAI interface method, \"LiteLLM call failed: litellm.APIConnectionError: OllamaException - {\"error\":\"model \\\"llama3.1\\\" not found, try pulling it first\"}\". Nothing seems to work. I can use Postman and post to the Ollama server and I get correct results. I'm sure I'm doing something wrong. We could really use the proper Ollama configuration, or suggestions on where to look! Thanks."
+      },
+      {
+        "user": "strnad",
+        "body": "fixed :) "
+      }
+    ],
+    "repository": "strnad/CrewAI-Studio"
+  },
+  {
+    "issue_number": 29,
+    "title": "Pydantic validation error when using customfilewrite tool",
+    "author": "evmond1",
+    "state": "closed",
+    "created_at": "2024-09-29T20:47:31Z",
+    "updated_at": "2024-10-24T12:45:46Z",
+    "labels": [],
+    "body": "Btw, big kudos, been toying with doing this myself..  but its a big task and I'm not the best developer. Great platform\r\n\r\nFYI, i ran into a number issues when using the customfilewrite tool, around pydantic validation errors. Spent a little time with chatgpt (A complete fraud I know) and after a few goes around the houses, the custom_tools code I now have works and the tool works. see below :\r\n\r\n[custom_tools.txt](https://github.com/user-attachments/files/17181293/custom_tools.txt)\r\n\r\n",
+    "comments": [
+      {
+        "user": "strnad",
+        "body": "it should be fixed already. thanks a lot"
+      }
+    ],
+    "repository": "strnad/CrewAI-Studio"
+  },
+  {
+    "issue_number": 8,
+    "title": "Error while running the Crew",
+    "author": "EslamHosnyISO",
+    "state": "closed",
+    "created_at": "2024-06-15T22:33:56Z",
+    "updated_at": "2024-10-24T12:45:25Z",
+    "labels": [],
+    "body": "Hello,\r\nI'm facing the following error \"Error: agent tools could not be created. 'NoneType' object has no attribute 'split'\"",
+    "comments": [
+      {
+        "user": "strnad",
+        "body": "> Hello,\n> I'm facing the following error \"Error: agent tools could not be created. 'NoneType' object has no attribute 'split'\"\n\nwhich tools you use?"
+      },
+      {
+        "user": "Psychophoria",
+        "body": "Same problem here, seems related to the web/internet related tools... I didn't have this issue in previous builds, but the last few days I have been unable to resolve this. "
+      },
+      {
+        "user": "strnad",
+        "body": "@Psychophoria @EslamHosnyISO Thanks for reporting this issue. It should be fixed now. Please let me know if you encounter any other problems. 😊"
+      }
+    ],
+    "repository": "strnad/CrewAI-Studio"
+  },
+  {
+    "issue_number": 32,
+    "title": "Feature request: Variables for tasks",
+    "author": "dakipro",
+    "state": "closed",
+    "created_at": "2024-10-23T21:57:42Z",
+    "updated_at": "2024-10-24T06:46:42Z",
+    "labels": [],
+    "body": "Hey, love the project! \r\nI would like for all tasks to have similar context, say I am writing a youtube video on the topic \"Dell vs Samsung Monitor\" and I might have 5 different tasks one after the other (research, write draft, check facts, adjust writing style, suggest B-roll ideas etc). But next time I might compare \"Samsung vs Apple phones\", for the same crew, with same tasks.\r\n\r\nit would be awesome if I could pass same option to all tasks, like\r\n\"The topic you are to do a research is { user_input } and you are to do your best work. If you do your best work, {motivational_string}\"\r\nor something like that",
+    "comments": [
+      {
+        "user": "strnad",
+        "body": "Hey, thanks for the feedback!\r\n\r\nYou can already do this! Just use curly brackets in the task definitions (e.g., {user_input} and {motivational_string}). You'll be prompted to fill them in before starting the crew, and the values will be shared across all tasks automatically.\r\n\r\nLet me know if you have any questions!\r\n\r\n"
+      },
+      {
+        "user": "dakipro",
+        "body": "ha! that was fast, thanks man!\r\nagain, great job with making this, it has so many useful features, reminds me of Laravel for php (tool has focus on actually helping developers with things they do often).\r\n\r\nI am just struggling to import more tools, even if I install them, python shows message that they are missing. But this is because I suck as python and do not understand different virtual environments etc.\r\n\r\nIt would be great if you could continue driving this tool in the future so it doesn't stale. I hope it will catch on :) "
+      }
+    ],
+    "repository": "strnad/CrewAI-Studio"
+  },
+  {
+    "issue_number": 26,
+    "title": "Error loading groq models",
+    "author": "juanpintom",
+    "state": "closed",
+    "created_at": "2024-09-21T14:20:40Z",
+    "updated_at": "2024-09-24T08:40:12Z",
+    "labels": [],
+    "body": "Hi, I found an issue when you select groq models.\r\n\r\nTo solve the bug you just need to modify line 76 from llms.py to:\r\n\r\n        \"models\": [\"groq/llama3-8b-8192\",\"groq/llama3-70b-8192\", \"groq/mixtral-8x7b-32768\"],",
+    "comments": [
+      {
+        "user": "strnad",
+        "body": "thanks, fixed in https://github.com/strnad/CrewAI-Studio/pull/27 "
+      }
+    ],
+    "repository": "strnad/CrewAI-Studio"
+  }
+]

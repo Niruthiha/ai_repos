@@ -1,0 +1,263 @@
+[
+  {
+    "issue_number": 24,
+    "title": "Webhooks are working properly but I'm not getting messages on my smartphone",
+    "author": "marcis",
+    "state": "open",
+    "created_at": "2024-08-21T14:48:43Z",
+    "updated_at": "2025-04-30T02:13:53Z",
+    "labels": [],
+    "body": "Hi guys,\r\n\r\nI followed the instructions until point 3.\r\n\r\n![image](https://github.com/user-attachments/assets/cd05f038-655d-474d-ad64-4aea2392297a)\r\n\r\nOn \"Integrate WhatsApp\" section, I got a call to my local webhook (through ngrok) when clicking on \"Test\" at FB developers site and received \"THIS IS A TEXT MESSAGE\" on my personal WhatsApp account. Perfect!\r\n\r\n![image](https://github.com/user-attachments/assets/bc6a18e7-f240-4de1-8151-e73aa6f0df45)\r\n\r\nThen I replied to that message but got no webhook nor, of course, reply.\r\n\r\nWhat am I missing, please?\r\n",
+    "comments": [
+      {
+        "user": "qrzeller",
+        "body": "I got the same issue. I didn't click \"subscribe\" for the messages section in their webhooks settings."
+      },
+      {
+        "user": "oscarnevarezleal",
+        "body": "Same here :/"
+      },
+      {
+        "user": "Dan-White0",
+        "body": "I was running into this issue. I had the subscription for messages ticked, and when I pressed test it all worked, but I would not get a reply to any messages I sent. \nI tried the answer from [this](https://stackoverflow.com/questions/79175537/whatsapp-business-api-messages-webhook-not-triggering-even-with-manual-testin) stack overflow which seems to have fixed it!\n\ntldr:\n```bash\ncurl -X POST \\\n'https://graph.facebook.com/v21.0/WHATSAPP_BUSINESS_ACCOUNT_ID/subscribed_apps' \\\n-H 'Authorization: Bearer ACCESS_TOKEN'\n```"
+      }
+    ],
+    "repository": "daveebbelaar/python-whatsapp-bot"
+  },
+  {
+    "issue_number": 35,
+    "title": "Facing SSL Cert error while sending message",
+    "author": "Akshat741997",
+    "state": "open",
+    "created_at": "2025-02-11T12:08:01Z",
+    "updated_at": "2025-02-11T12:08:01Z",
+    "labels": [],
+    "body": "While sending the \"Hello message\"\n\nit's falling when sending function \n\nrequests.exceptions.SSLError: HTTPSConnectionPool(host='graph.facebook.com', port=443): Max retries exceeded with url: /None/None/messages (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')))",
+    "comments": [],
+    "repository": "daveebbelaar/python-whatsapp-bot"
+  },
+  {
+    "issue_number": 20,
+    "title": "WhatsApp QR code from Nasty Driller (+254 728 554095)",
+    "author": "NastyDriller",
+    "state": "open",
+    "created_at": "2024-07-26T00:45:23Z",
+    "updated_at": "2025-01-07T01:28:33Z",
+    "labels": [],
+    "body": "Add me as a contact on WhatsApp. https://wa.me/qr/SPLRTYUCPEFMI1![shared_qr_code.png](https://github.com/user-attachments/assets/8cdc47ef-0c0c-4d9b-b767-975a95f3587f)\n\n",
+    "comments": [
+      {
+        "user": "OdinsRache",
+        "body": "> Add me as a contact on WhatsApp. https://wa.me/qr/SPLRTYUCPEFMI1![shared_qr_code.png](https://github.com/user-attachments/assets/8cdc47ef-0c0c-4d9b-b767-975a95f3587f)\n> \n> \n\nVorstellen"
+      }
+    ],
+    "repository": "daveebbelaar/python-whatsapp-bot"
+  },
+  {
+    "issue_number": 32,
+    "title": "Adding numbers without verifications",
+    "author": "RoshanKshirsagar",
+    "state": "open",
+    "created_at": "2024-12-20T14:16:14Z",
+    "updated_at": "2024-12-20T14:20:12Z",
+    "labels": [],
+    "body": "I want to use it in production by sending messages to 100+ whatsapp numbers. As it is only sending messages to numbers which is verified and we can add maximum of 5 numbers, If I want to send to 100+ user how we perform verifications from them. Then how we can do it?",
+    "comments": [],
+    "repository": "daveebbelaar/python-whatsapp-bot"
+  },
+  {
+    "issue_number": 31,
+    "title": ".menu",
+    "author": "Nagiseishiro773",
+    "state": "open",
+    "created_at": "2024-12-01T21:32:25Z",
+    "updated_at": "2024-12-01T21:32:25Z",
+    "labels": [],
+    "body": null,
+    "comments": [],
+    "repository": "daveebbelaar/python-whatsapp-bot"
+  },
+  {
+    "issue_number": 3,
+    "title": "whatsapp_utils.py",
+    "author": "aziliak",
+    "state": "open",
+    "created_at": "2023-12-08T08:15:33Z",
+    "updated_at": "2024-11-24T06:00:35Z",
+    "labels": [],
+    "body": "Comment out line 86 since this is for future.  The program fails with this in it.",
+    "comments": [
+      {
+        "user": "Nagiseishiro773",
+        "body": "Comment utilise mon bot\n"
+      }
+    ],
+    "repository": "daveebbelaar/python-whatsapp-bot"
+  },
+  {
+    "issue_number": 1,
+    "title": "Programmatically define `assistant_id` instead of hard coding its value in `run_assistant` function",
+    "author": "MrJarnould",
+    "state": "open",
+    "created_at": "2023-12-04T21:56:24Z",
+    "updated_at": "2024-11-24T05:57:12Z",
+    "labels": [],
+    "body": "The code in [assistants_quickstart.py](https://github.com/daveebbelaar/python-whatsapp-bot/blob/main/start/assistants_quickstart.py#L94) will fail to run unless you programmatically define the `assistant_id`. \r\n\r\ni.e. line 94 goes from this:\r\n`assistant = client.beta.assistants.retrieve(\"asst_7Wx2nQwoPWSf710jrdWTDlfE\")`\r\n\r\nto this:\r\n`assistant = client.beta.assistants.retrieve(assistant.id)`",
+    "comments": [
+      {
+        "user": "Nagiseishiro773",
+        "body": "Cool"
+      }
+    ],
+    "repository": "daveebbelaar/python-whatsapp-bot"
+  },
+  {
+    "issue_number": 22,
+    "title": "Get 400 from requests.post in send_message because parameter should be json=data, not data=data",
+    "author": "mozboz",
+    "state": "open",
+    "created_at": "2024-08-06T11:27:40Z",
+    "updated_at": "2024-10-09T04:14:59Z",
+    "labels": [],
+    "body": "Pyhton 3.11.2 on Debian, was getting constant 400 when trying to do anything, e.g.\r\n\r\n`400 Client Error: Bad Request for url: https://graph.facebook.com/v20.0/12345678/messages`\r\n\r\nTurned out to be because the `requests.post()` parameter should be named `json` not `data`\r\n\r\ni.e.\r\n```\r\nresponse = requests.post(\r\n    url, json=data, headers=headers, timeout=10\r\n)  # 10 seconds timeout as an example\r\n\r\n```\r\nSorry don't have time to do a PR for this :(\r\n",
+    "comments": [
+      {
+        "user": "A00826925",
+        "body": "is 12345678 your PHONE_NUMBER_ID? where can i find that? i think thats the only issue i have since im also just receiving 400 client errors even after your fix"
+      },
+      {
+        "user": "manifestt",
+        "body": "I have the same error:\r\nroot - ERROR - Request failed due to: 400 Client Error: Bad Request for url: https://graph.facebook.com/v21.0/462219310303970/messages\r\nwerkzeug - INFO - 127.0.0.1 - - [08/Oct/2024 15:50:35] \"POST /webhook HTTP/1.1\" 200 -\r\n\r\n1 - Send message from meta - OK\r\n2 - Webhook - OK\r\n3 - Send Message from test in webhook page meta - error 400 client error\r\n4 - When send message from whatsapp - error 400 client error\r\n\r\nHow can i fix this?"
+      },
+      {
+        "user": "A00826925",
+        "body": "my problem was my .env file, i dont know what i did wrong, but for some reason whenever i updated it and saved it with the new keys, for some reason the file was completely ignored and used a previous version of the file that, as far as i know, didnt exist anymore. maybe something has not updated, clear your cache and try again"
+      }
+    ],
+    "repository": "daveebbelaar/python-whatsapp-bot"
+  },
+  {
+    "issue_number": 27,
+    "title": "Threads creation issue ",
+    "author": "Sudheer7183",
+    "state": "open",
+    "created_at": "2024-09-13T16:05:22Z",
+    "updated_at": "2024-09-13T16:05:35Z",
+    "labels": [],
+    "body": "Having issue with creating the threads, when the threads function is called it set's to infinite loop \r\n\r\nthanks in advance ",
+    "comments": [],
+    "repository": "daveebbelaar/python-whatsapp-bot"
+  },
+  {
+    "issue_number": 23,
+    "title": "Can receive message on Ngrok, but cannot generate response",
+    "author": "Mypainismorethanyours",
+    "state": "open",
+    "created_at": "2024-08-16T01:15:36Z",
+    "updated_at": "2024-08-16T01:29:33Z",
+    "labels": [],
+    "body": "Has anyone encountered the same problem and how to solve it",
+    "comments": [],
+    "repository": "daveebbelaar/python-whatsapp-bot"
+  },
+  {
+    "issue_number": 18,
+    "title": "Not working on Ngrok free account?",
+    "author": "EdEn-D",
+    "state": "open",
+    "created_at": "2024-07-18T20:06:50Z",
+    "updated_at": "2024-08-11T11:08:48Z",
+    "labels": [],
+    "body": "**Can anyone confirm that they got this to work with an Ngrok free account?** \r\n\r\nMy suspicion is that due to the browser warning that comes up with the free account, meta is not able to verify and this step fails... Trying other methods, will update.",
+    "comments": [
+      {
+        "user": "DanielGarciaCol",
+        "body": "Hi! Recently I had this same issue, I ended up leaving Ngrok. I recommend you to use Serveo instead.\r\n\r\nhttps://serveo.net/\r\n\r\nIf serveo for some reason isn't available please try localhost.run\r\n\r\nhttp://localhost.run/\r\n\r\nGreetings :)"
+      },
+      {
+        "user": "CeadeS",
+        "body": "> Hi! Recently I had this same issue, I ended up leaving Ngrok. I recommend you to use Serveo instead.\r\n> \r\n> https://serveo.net/\r\n> \r\n> If serveo for some reason isn't available please try localhost.run\r\n> \r\n> http://localhost.run/\r\n> \r\n> Greetings :)\r\n\r\nNice service!"
+      },
+      {
+        "user": "EdEn-D",
+        "body": "> Hi! Recently I had this same issue, I ended up leaving Ngrok. I recommend you to use Serveo instead.\r\n> \r\n> https://serveo.net/\r\n>\r\n> If serveo for some reason isn't available please try localhost.run\r\n>\r\n> http://localhost.run/\r\n\r\n@DanielGarciaCol I set up the serveo and localhose but for some reason my Flask server doesn't seem to catch any requests... I'm not sure what I'm doing wrong"
+      }
+    ],
+    "repository": "daveebbelaar/python-whatsapp-bot"
+  },
+  {
+    "issue_number": 19,
+    "title": "Whatsapp bot ",
+    "author": "NastyDriller",
+    "state": "open",
+    "created_at": "2024-07-25T00:47:18Z",
+    "updated_at": "2024-07-25T03:51:28Z",
+    "labels": [],
+    "body": "https://github.com/user-attachments/assets/352d0b8f-b12e-4e0b-9360-f531b9a2152e",
+    "comments": [],
+    "repository": "daveebbelaar/python-whatsapp-bot"
+  },
+  {
+    "issue_number": 6,
+    "title": "Paid ngrok needed for this project? ",
+    "author": "odoverdose",
+    "state": "closed",
+    "created_at": "2024-01-09T14:44:42Z",
+    "updated_at": "2024-07-19T01:35:56Z",
+    "labels": [],
+    "body": "I've been following the instructions up until the ngrok section and noticed that a Pro or Enterprise tier is required to proceed. I've only used the free tier so far. Is there a way to use that to proceed? If not, might be a good idea to write in the requirements that a paid subscription is required to proceed. Thanks for a great video & repo, keep up the good work! ",
+    "comments": [
+      {
+        "user": "daveebbelaar",
+        "body": "You don't need paid version. It can be done with the free version. Please check: https://github.com/daveebbelaar/python-whatsapp-bot?tab=readme-ov-file#step-3-configure-webhooks-to-receive-messages"
+      },
+      {
+        "user": "EdEn-D",
+        "body": "@daveebbelaar can you please verify this? I am not able to verify the domain using the free account. My suspicion is that it's because of the warning that users get when entering the domain for the first time which prevents the meta verification process to take place"
+      }
+    ],
+    "repository": "daveebbelaar/python-whatsapp-bot"
+  },
+  {
+    "issue_number": 16,
+    "title": "Webhook URL",
+    "author": "uokesita",
+    "state": "open",
+    "created_at": "2024-06-28T16:06:51Z",
+    "updated_at": "2024-07-17T16:46:12Z",
+    "labels": [],
+    "body": "Hello,\r\n\r\nI'm having some problems trying to verify the free domain in ngrok against Facebook. https://share.zight.com/7KuZXd1b\r\nI have created the free ngrok domain and also added the Verification token to the .env file.  However the verification cant be done\r\nhttps://share.zight.com/xQuoNpem\r\n\r\nSome comments on YouTube point that it does not work with EU ngrok domains. Do you know if this is true? And If so, does the paid account on ngrok allows you to setup another region for the domain?\r\n\r\nThanks in advance for any help",
+    "comments": [
+      {
+        "user": "EdEn-D",
+        "body": "find the configuration file : https://ngrok.com/docs/agent/config/ (depending on OS)\r\n\r\nadd a line above the token\r\nregion: us\r\n\r\nThis changes the region but the verification still doesn't work so it didn't solve anything..."
+      }
+    ],
+    "repository": "daveebbelaar/python-whatsapp-bot"
+  },
+  {
+    "issue_number": 7,
+    "title": "open AI whatsapp re-send message automatically",
+    "author": "jdevsan",
+    "state": "open",
+    "created_at": "2024-01-20T16:39:02Z",
+    "updated_at": "2024-07-12T20:38:36Z",
+    "labels": [],
+    "body": "Hi im facing some issues with randomness I dont know what it is, but sometimes messages are resending, open ai assitante send a message with no user interaction in th e chat..",
+    "comments": [
+      {
+        "user": "kaiofreitas",
+        "body": "Same here"
+      },
+      {
+        "user": "jdevsan",
+        "body": "@kaiofreitas did u solve it?"
+      },
+      {
+        "user": "GuidoLorenzetti",
+        "body": "Hi, did anyone find a solution for this? I´m over my head trying to solve this and currently didn´t have much progress"
+      }
+    ],
+    "repository": "daveebbelaar/python-whatsapp-bot"
+  }
+]

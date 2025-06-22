@@ -1,0 +1,14 @@
+[
+  {
+    "issue_number": 8,
+    "title": "Question on design of alternatives",
+    "author": "TomLucidor",
+    "state": "open",
+    "created_at": "2024-10-24T01:38:06Z",
+    "updated_at": "2024-10-24T01:38:06Z",
+    "labels": [],
+    "body": "Seeing how this paid service made their tools, I wonder what is missing from the whole pipeline https://www.aimodels.fyi/\r\nMaybe it has a DB that relates paper to one another? Ways to look at the paper in multiple angles through prompting different forms of summary? Bringing up unanswered questions in older papers?\r\n",
+    "comments": [],
+    "repository": "summarizepaper/summarizepaper"
+  }
+]

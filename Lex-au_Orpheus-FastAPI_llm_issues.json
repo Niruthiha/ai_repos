@@ -1,0 +1,1145 @@
+[
+  {
+    "issue_number": 56,
+    "title": "QS: extension for obadooga",
+    "author": "kalle07",
+    "state": "closed",
+    "created_at": "2025-05-07T07:36:09Z",
+    "updated_at": "2025-06-18T08:04:22Z",
+    "labels": [
+      "question"
+    ],
+    "body": "https://github.com/oobabooga/text-generation-webui\n\nwhere great to have an extension ... should be easy with server and listening port, but iam no coder   ;)\n",
+    "comments": [
+      {
+        "user": "Lex-au",
+        "body": "Hi @kalle07 \n\nThanks for the suggestion! At this time, I don't have plans to create an extension for that specific repo; however, much like Ollama endpoints, I will keep it in mind.\n\nCheers,\nLex"
+      },
+      {
+        "user": "kalle07",
+        "body": "to continue...\nmaybe take a look at alltalk, could be that you only have to copy some lines, for the right protocoll and format  ;)\nhttps://github.com/erew123/alltalk_tts/tree/alltalkbeta"
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 65,
+    "title": "EOS Token Not Detected in GGUF Model",
+    "author": "taresh18",
+    "state": "open",
+    "created_at": "2025-06-15T08:55:06Z",
+    "updated_at": "2025-06-15T08:55:06Z",
+    "labels": [],
+    "body": "Hi, great work on this project!\n\nI'm successfully running the server connected to a vLLM backend for model inference, using the GGUF model `lex-au/Orpheus-3b-FT-Q8_0.gguf`. However, I’ve noticed that during generation, the LLM sometimes fails to detect the end-of-sequence token and continues generating tokens until `max_model_len` is reached.\n\nIn the official Orpheus-TTS repository, this behavior is handled by explicitly specifying `stop_token_ids` in the sampling parameters. I’d like to implement something similar here.\n\nHowever, I observed that the tokens differ between the original model (`canopylabs/orpheus-3b-0.1-ft`) and the GGUF version. For example:\n\n---\n\n#### Original Orpheus-TTS repo prompt format (`canopylabs/orpheus-3b-0.1-ft`):\n\n```\n<custom_token_3><|begin_of_text|>tara: Hi, how are you doing today?<|eot_id|><custom_token_4><custom_token_5><custom_token_1>\n```\n\n#### GGUF model prompt format (`lex-au/Orpheus-3b-FT-Q8_0.gguf`):\n\n```\n<|audio|>tara: Hi, how are you doing today?<|eot_id|>\n```\n\n---\n\n#### Questions:\n\n1. What is the cause of this discrepancy in the prompt formatting\n   Are token ids changed during the GGUF conversion process?\n\n2. Do the token IDs differ between the original and GGUF versions?\n   If so, what are the correct `stop_token_ids` (EOS tokens) to use with the GGUF model?\n\n---\n\nThanks in advance for your support!\n",
+    "comments": [],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 63,
+    "title": "Error running Dockerfile with AMD gpu",
+    "author": "rishkhandelwal",
+    "state": "open",
+    "created_at": "2025-06-14T08:45:33Z",
+    "updated_at": "2025-06-14T08:45:33Z",
+    "labels": [],
+    "body": "### Problem Description\n\nError response from daemon: failed to create task for container: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: error during container init: error running prestart hook #0: exit status 1, stdout: , stderr: Auto-detected mode as 'legacy'\nnvidia-container-cli: initialization error: WSL environment detected but no adapters were found: unknown \n\n### Operating System\n\nWindows 11 Pro 10.0.26100\n\n### CPU\n\nAMD RYZEN AI MAX+ 395 w/ Radeon 8060S\n\n### GPU\n\nAMD Radeon(TM) 8060S Graphics\n\n### Steps to Reproduce\n\ngit clone https://github.com/Lex-au/Orpheus-FastAPI.git\ncd Orpheus-FastAPI\ncopy .env.example .env\ndocker compose -f docker-compose-gpu.yml up\n\n",
+    "comments": [],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 17,
+    "title": "Add Apple MPS support for GPU",
+    "author": "dogjamboree",
+    "state": "closed",
+    "created_at": "2025-03-23T21:21:12Z",
+    "updated_at": "2025-06-06T12:01:29Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": "Please add MPS support for Apple MPS for those running Apple silicon.",
+    "comments": [
+      {
+        "user": "Lex-au",
+        "body": "Hi @dogjamboree \n\nThanks for the suggestion. I'm sorry to hear it's not working natively for you. Can you confirm what version of Pytorch you're running? I infer that due to my direct preference for CUDA, you're being forced to run inference by CPU?\n\nCould you dump some terminal logs for me?"
+      },
+      {
+        "user": "LucidScript",
+        "body": "Hey @Lex-au I used Pinokio to instal your \"[Orpheus-FastAPI]\" on mac silicon :D and it is working ( :. Well it is only CPU, but  still great for now :D thank you for your hard work ( :. I hope in future we will have metal support. \n\nAnd I have 2 off-topic question :)\n1. Is it possible to add pauses inside the conversation in seconds?\n2. Is there a way to produce more than 2 minutes audio file?\n\nEmm thank you again :D, I am really happy that I can test this one mac silicon :D \n"
+      },
+      {
+        "user": "tansuka",
+        "body": "+1 for this, would be great to have Apple MPS support. I can provide some terminal logs if you tell me what you need\nnevertheless thanks for the great work "
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 62,
+    "title": "The generated audio contains and calls out the Voice (actor) name in each iteration.",
+    "author": "nbaua",
+    "state": "open",
+    "created_at": "2025-05-31T16:11:37Z",
+    "updated_at": "2025-05-31T16:11:37Z",
+    "labels": [],
+    "body": "![Image](https://github.com/user-attachments/assets/4c0ebf3b-a259-4b02-8407-cdfdc0c2b4bf)\n\nI just configured the application on my Windows PC and I am using docker-GPU version to run this, This above is the decent looking application and it generated fare audio.. well not able to create those emotions like <laugh> etc yet... That can be addressed later.\n\nOne important thing I noted that every generated audio file contains the code name -- like Tara -- Mia etc also spoken at beginning of the file\n\n![Image](https://github.com/user-attachments/assets/f7d4f20d-726a-481c-87bd-1c4aae7da073)\n\nThis is the section where it calls the voice's name -- in this specific scenario its called out as Mia\n\nplease have a look at this, as if I have to cut the generated audio later every time.. its painful",
+    "comments": [],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 61,
+    "title": "Shift in Accent",
+    "author": "seedpress",
+    "state": "open",
+    "created_at": "2025-05-28T02:13:38Z",
+    "updated_at": "2025-05-28T03:12:22Z",
+    "labels": [],
+    "body": "I’m having a peculiar problem: the accent of the voice called “Dan” is changing from one accent to another. If I type a short passage in the text window, I get a mature male with a British accent. If I type in a longer passage, then the voice generated is of an adolescent male with an American accent. The demo pages for Orpheus TTS all have the British voice.\n\nMy longer txt sample was 1,581 characters including spaces; the short passage was 302.\nI’m not even certain that the accent shifts correspond with passage length, because I think the first time I used the Dan voice, it had an American voice, which was generated with a short passage. Then I inserted a laugh tag and it switched to British! I rebooted the computer, and now I’m getting the behavior detailed in the first paragraph above!\n\nI’m running your Q8_0 GPU enabled dockerized version.    ",
+    "comments": [],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 59,
+    "title": "Zero-shot voice sample",
+    "author": "Tortoise17",
+    "state": "open",
+    "created_at": "2025-05-19T13:22:07Z",
+    "updated_at": "2025-05-24T15:49:52Z",
+    "labels": [
+      "question"
+    ],
+    "body": "I have request, if there is any chance to integrate the possibility of zero-shot voice sample input instead of fixed number of voices?\nThis is also discussed in the issue [mentioned here](https://github.com/canopyai/Orpheus-TTS/issues/6). This might make some flexibility in voices and could have chance of better results. ",
+    "comments": [
+      {
+        "user": "Lex-au",
+        "body": "> I have request, if there is any chance to integrate the possibility of zero-shot voice sample input instead of fixed number of voices? This is also discussed in the issue [mentioned here](https://github.com/canopyai/Orpheus-TTS/issues/6). This might make some flexibility in voices and could have chance of better results.\n\nThanks for the suggestion! Currently, Orpheus doesn’t support true zero-shot voice cloning. The only way to create new voice identities is by fine-tuning the base model on custom datasets.\n\nWhat’s sometimes referred to as “zero-shot” in this context is actually checkpoint training on a small voice dataset; not true zero-shot generalisation from a single audio clip. For reference, here’s an example dataset used for that purpose:\n🔗 [Orpheus-3b-Kaya Dataset](https://huggingface.co/datasets/lex-au/Orpheus-3b-Kaya)\n\nAnd the resulting model checkpoint:\n🔗 [Orpheus-3b-Kaya-Q8_0.gguf](https://huggingface.co/lex-au/Orpheus-3b-Kaya-Q8_0.gguf)\n\nWhile dynamic voice cloning from a single reference clip would be amazing, it would require a different architecture and conditioning pipeline than what Orpheus currently supports. That at least, is my understanding.\n\nCheers,\nLex"
+      },
+      {
+        "user": "Gregorein",
+        "body": "Thanks for the clarification @Lex-au - could you update readme? `Zero-shot` is quite misleading and `finetune` will work just fine :)"
+      },
+      {
+        "user": "Lex-au",
+        "body": "> Thanks for the clarification [@Lex-au](https://github.com/Lex-au) - could you update readme? `Zero-shot` is quite misleading and `finetune` will work just fine :)\n\nHi @Gregorein \n\nI actually can’t update the README myself, since the model was created by Canopy, I'm just the one who built an open-source project around it. That said, I totally get where you're coming from, the original language is definitely opaque, and borders on being misleading.\n\nCheers,\nLex"
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 58,
+    "title": "The generated audio file is very strange and slow.",
+    "author": "wnqnxbb",
+    "state": "closed",
+    "created_at": "2025-05-16T09:27:19Z",
+    "updated_at": "2025-05-17T07:45:51Z",
+    "labels": [
+      "question"
+    ],
+    "body": "![Image](https://github.com/user-attachments/assets/67243f63-7475-4471-b223-be424677aa5f)\n\nGPU 4090\n\nShort text works, but long text doesn't\n\nbadcase:I mean, I was gonna go, um like, five minutes ago, but then, you know, stuff just kept happening, you know?\n",
+    "comments": [
+      {
+        "user": "Lex-au",
+        "body": "Hi I've moved this directly to #50 \n\nCan you please jump on there, and post me your logs and confirm if you're running this via Docker or Native python? Also please confirm you've installed Pytorch with CUDA 124, and that you've updated/installed the latest CUDA Toolkit.\n\n"
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 50,
+    "title": "Why is the running speed so slow",
+    "author": "syvince",
+    "state": "open",
+    "created_at": "2025-04-30T06:56:39Z",
+    "updated_at": "2025-05-17T07:45:27Z",
+    "labels": [
+      "question"
+    ],
+    "body": "I don't feel normal，But I don't know where the problem occurred, I used the model deployed by Ollama instead\n![Image](https://github.com/user-attachments/assets/4cf330a1-12a6-4ba9-848c-7adabaa660bf)",
+    "comments": [
+      {
+        "user": "syvince",
+        "body": "![Image](https://github.com/user-attachments/assets/23a9568e-31f0-4a8f-80d3-618530b0746c)"
+      },
+      {
+        "user": "Lex-au",
+        "body": "Hi @syvince \n\nCan you please tell me your hardware specs? I can see in the terminal that it's loading Torch via CPU."
+      },
+      {
+        "user": "syvince",
+        "body": "\n\n\n\n> Hi [@syvince](https://github.com/syvince)\n> \n> Can you please tell me your hardware specs? I can see in the terminal that it's loading Torch via CPU.\n\nuse this \n\n![Image](https://github.com/user-attachments/assets/534307ae-568d-492e-a0c5-37d6429d05dc)"
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 57,
+    "title": "how to use 2 or more languages with the front",
+    "author": "mambari",
+    "state": "closed",
+    "created_at": "2025-05-14T09:20:57Z",
+    "updated_at": "2025-05-14T11:42:06Z",
+    "labels": [
+      "question"
+    ],
+    "body": "I can see \" To use a language-specific model, edit the .env file before installation and change ORPHEUS_MODEL_NAME to match the desired model repo ID (e.g., Orpheus-3b-French-FT-Q8_0.gguf)\"\n\nBut what if I want to use Orpheus-3b-French-FT-Q8_0.gguf **And** Orpheus-3b-FT-Q8_0.gguf for the English?\n",
+    "comments": [
+      {
+        "user": "Lex-au",
+        "body": "> I can see \" To use a language-specific model, edit the .env file before installation and change ORPHEUS_MODEL_NAME to match the desired model repo ID (e.g., Orpheus-3b-French-FT-Q8_0.gguf)\"\n> \n> But what if I want to use Orpheus-3b-French-FT-Q8_0.gguf **And** Orpheus-3b-FT-Q8_0.gguf for the English?\n\nHi @mambari \n\nThe LLM endpoint is single-model, whether that's LM Studio or something else, it only loads one .gguf at a time. So if you're pointing Orpheus-FASTAPI at a French checkpoint, you're getting French.\n\nThe .env (and compose yaml) bit only applies if you’re running via Docker; it's used to set the model during image build. If you're running natively, just load whatever model you want in your inference server. But again, only one model per endpoint.\n\nIf you want both French and English available, you’ll need to either:\n\n1. Run two separate inference servers (e.g., two LM Studio instances or Docker containers) on different ports, each with its own Orpheus-FASTAPI pointing at the correct model.\n2. Or, manually swap the model in your LLM server on the fly before calling a new generation in whichever language you need.\n\nCheers,\nLex"
+      },
+      {
+        "user": "mambari",
+        "body": "Ok thank you @Lex-au for the quick answer.\nDo you think it's possible to generate a gguf model with https://github.com/arcee-ai/mergekit\nLike that we can use all the models ?"
+      },
+      {
+        "user": "Lex-au",
+        "body": "> Ok thank you [@Lex-au](https://github.com/Lex-au) for the quick answer. Do you think it's possible to generate a gguf model with https://github.com/arcee-ai/mergekit Like that we can use all the models ?\n\nI haven't checked that specific respository, and afaik, you cannot simply merge two models together. It would destroy the gradient layers. But yes, it's definitely possible to train checkpoint with multiple languages. Canopy already did so, as their Italian and Spanish FT is [one singular checkpoint](https://huggingface.co/lex-au/Orpheus-3b-Italian_Spanish-FT-Q8_0.gguf).\n\nEdit: After reading over that repo you provided, it specifically related to base models. Not finetunes/checkpoints, which these multilingual models are."
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 55,
+    "title": "Windows Pre-Compiled Binaries",
+    "author": "bennmann",
+    "state": "closed",
+    "created_at": "2025-05-06T14:49:45Z",
+    "updated_at": "2025-05-14T09:32:32Z",
+    "labels": [
+      "help wanted"
+    ],
+    "body": "Windows 11, got all servers running in between Windows native (llama-server Vulkan and/or LM Studio - both tested well independently) and O-FastAPI (WSL), however O-FastAPI (WSL) produces empty wav files when testing \"Generate Speech\" in spite of appearing to communicate between Windows native and WSL VM.\n\nI have AMD GPU, and my card does not support WSL compute. I don't want to dual boot.\n\nFrom WSL:\n~$ nc -l 1234\n\nfrom Windows native cmd (ip obscured):\ncurl 172.X.X.X:1234\n\nWSL nc -l shows:\nGET / HTTP/1.1\nUser-Agent: Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.26100.3912\nHost: 172.X.X.X:1234\nConnection: Keep-Alive\n----------------------\n\nSubsequently frustrated, perhaps it would be good to have a complete precompiled Windows exe binary for fastAPI. \n\nFor those with AMD cards that are not elegantly supported with WSL, it would open the door (hopefully a lot of users).",
+    "comments": [
+      {
+        "user": "Lex-au",
+        "body": "Hi @bennmann \n\nJust to confirm, are you using the Docker Compose version? Because the project itself doesn’t require WSL at all when run natively.\n\nIf you want to avoid all that complexity, I strongly recommend running the Python version directly on Windows. There’s no need to dual-boot or wait for a compiled .exe—you’ll bypass the entire WSL/AMD GPU limitation and get a much smoother experience."
+      },
+      {
+        "user": "Lex-au",
+        "body": "Closing as no further response."
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 53,
+    "title": "Great project - Please add support for Danish",
+    "author": "NicolajJakobsen",
+    "state": "closed",
+    "created_at": "2025-05-04T09:24:44Z",
+    "updated_at": "2025-05-09T13:38:10Z",
+    "labels": [],
+    "body": "Hi\n\nVery great project, this have come far.\nWould you be able to support danish?\n\nBest Regards\n",
+    "comments": [
+      {
+        "user": "timonharz",
+        "body": "@NicolajJakobsen Danish is not supported right now because the base model Orpheus was not trained on Danish audio yet. \nhttps://canopylabs.ai/releases/orpheus_can_speak_any_language"
+      },
+      {
+        "user": "Lex-au",
+        "body": "> Hi\n> \n> Very great project, this have come far. Would you be able to support danish?\n> \n> Best Regards\n\nHi @NicolajJakobsen,\n\nAs @timonharz kindly pointed out, Danish isn't currently supported because the base Orpheus model hasn't been trained on Danish dataset yet Unfortunately, it's near impossible to create a working checkpoint for a completely new language through fine-tuning alone—there just isn’t enough linguistic grounding in the pre-trained base model to build on.\n\nFine-tuning works well for dialects or variants where the base language is already present—say, Chilean vs. Mexican Spanish—since the core prosody, vocabulary, and phoneme structure are shared. But in the case of Danish, we’d need official language support first from Canopy.\n\nThat said, if and when Danish becomes available, I’ll absolutely look at adding it to the project.\n\nCheers,\nLex\n"
+      },
+      {
+        "user": "Lex-au",
+        "body": "Moved to closed."
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 54,
+    "title": "Please add Vietnamese",
+    "author": "TuananhCR",
+    "state": "closed",
+    "created_at": "2025-05-06T02:48:33Z",
+    "updated_at": "2025-05-09T13:37:38Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": null,
+    "comments": [
+      {
+        "user": "Lex-au",
+        "body": "Hi @TuananhCR \n\nSame issue as [#53](https://github.com/Lex-au/Orpheus-FastAPI/issues/53)\n\nWe need Canopy to create the model first before I can add."
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 46,
+    "title": "support for real-time streaming",
+    "author": "that-9uy",
+    "state": "open",
+    "created_at": "2025-04-23T23:02:56Z",
+    "updated_at": "2025-05-07T00:01:25Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": "support for real-time streaming ",
+    "comments": [
+      {
+        "user": "timonharz",
+        "body": "have a look at my fork at https://github.com/timonharz/Orpheus-FastAPI \nits the same setup and supports a streaming endpoint \n"
+      },
+      {
+        "user": "that-9uy",
+        "body": "@timonharz what's your latency like to get the first audio chunk back? It's takes 4sec on my rtx 3090. is there a ways to get it to 200 ms? "
+      },
+      {
+        "user": "timonharz",
+        "body": "@that-9uy Are you using my fork? I'm seeing around 200ms latency using the streaming endpoint. You might want to check GPU utilization with nvtop or nvidia-smi—it should be hitting at least 75% during generation. If it's significantly lower, something's likely misconfigured. I'm still not satisfied with the generation speed; it feels unusually slow for a 3B parameter model. What t/s are you at?"
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 51,
+    "title": "OSError: cannot load library 'libportaudio.so.2': /home/mypath/miniconda3/bin/../lib/libstdc++.so.6: version `GLIBCXX_3.4.32' not found (required by /lib/x86_64-linux-gnu/libjack.so.0)",
+    "author": "TheWavePrinciple",
+    "state": "closed",
+    "created_at": "2025-05-01T20:56:54Z",
+    "updated_at": "2025-05-06T16:36:29Z",
+    "labels": [
+      "question"
+    ],
+    "body": "Hi I can't figure this out, am going around in circles trying to work out this error. I have latest version of the missing library on my system I can see it from inside the venv?\n\nInstalled python 3.8.5 and set to system default.\n\nIntel I5\n8GB ram\nGTX1060\nSSD\nKali Linux\n\nI'm having to change numpy to latest version in requirements file to get the install to complete everything.\n\n(base) ┌──(venv)─(USER㉿MYPC)-[~/CODE/Orpheus-FastAPI]\n└─$ python app.py\n✅ Created default .env file from .env.example and environment variables.\nTraceback (most recent call last):\n  File \"/home/mypath/CODE/Orpheus-FastAPI/app.py\", line 54, in <module>\n    from tts_engine import generate_speech_from_api, AVAILABLE_VOICES, DEFAULT_VOICE, VOICE_TO_LANGUAGE, AVAILABLE_LANGUAGES\n  File \"/home/mypath/CODE/Orpheus-FastAPI/tts_engine/__init__.py\", line 10, in <module>\n    from .inference import (\n  File \"/home/mypath/CODE/Orpheus-FastAPI/tts_engine/inference.py\", line 8, in <module>\n    import sounddevice as sd\n  File \"/home/mypath/CODE/Orpheus-FastAPI/venv/lib/python3.12/site-packages/sounddevice.py\", line 72, in <module>\n    _lib = _ffi.dlopen(_libname)\n           ^^^^^^^^^^^^^^^^^^^^^\nOSError: cannot load library 'libportaudio.so.2': /home/mypath/miniconda3/bin/../lib/libstdc++.so.6: version `GLIBCXX_3.4.32' not found (required by /lib/x86_64-linux-gnu/libjack.so.0)\n\nEvery time I run it I get this error!\n\nFrom install.\n\n(base) ┌──(USER㉿MYPC)-[~/CODE]\n└─$ git clone https://github.com/Lex-au/Orpheus-FastAPI.git\ncd Orpheus-FastAPI\nCloning into 'Orpheus-FastAPI'...\nremote: Enumerating objects: 178, done.\nremote: Counting objects: 100% (91/91), done.\nremote: Compressing objects: 100% (43/43), done.\nremote: Total 178 (delta 73), reused 48 (delta 48), pack-reused 87 (from 1)\nReceiving objects: 100% (178/178), 13.18 MiB | 34.17 MiB/s, done.\nResolving deltas: 100% (87/87), done.\n                                                                                                                   \n(base) ┌──(USER㉿MYPC)-[~/CODE/Orpheus-FastAPI]\n└─$ python -m venv venv\nsource venv/bin/activate  \n                                                                                                                   \n(base) ┌──(venv)─(USER㉿MYPC)-[~/CODE/Orpheus-FastAPI]\n└─$ pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124\nLooking in indexes: https://download.pytorch.org/whl/cu124\nCollecting torch\n  Downloading https://download.pytorch.org/whl/cu124/torch-2.6.0%2Bcu124-cp312-cp312-linux_x86_64.whl.metadata (28 kB)\nCollecting torchvision\n  Downloading https://download.pytorch.org/whl/cu124/torchvision-0.21.0%2Bcu124-cp312-cp312-linux_x86_64.whl.metadata (6.1 kB)\nCollecting torchaudio\n  Downloading https://download.pytorch.org/whl/cu124/torchaudio-2.6.0%2Bcu124-cp312-cp312-linux_x86_64.whl.metadata (6.6 kB)\nCollecting filelock (from torch)\n  Downloading https://download.pytorch.org/whl/filelock-3.13.1-py3-none-any.whl.metadata (2.8 kB)\nCollecting typing-extensions>=4.10.0 (from torch)\n  Downloading https://download.pytorch.org/whl/typing_extensions-4.12.2-py3-none-any.whl.metadata (3.0 kB)\nCollecting networkx (from torch)\n  Downloading https://download.pytorch.org/whl/networkx-3.3-py3-none-any.whl.metadata (5.1 kB)\nCollecting jinja2 (from torch)\n  Downloading https://download.pytorch.org/whl/Jinja2-3.1.4-py3-none-any.whl.metadata (2.6 kB)\nCollecting fsspec (from torch)\n  Downloading https://download.pytorch.org/whl/fsspec-2024.6.1-py3-none-any.whl.metadata (11 kB)\nCollecting nvidia-cuda-nvrtc-cu12==12.4.127 (from torch)\n  Downloading https://download.pytorch.org/whl/cu124/nvidia_cuda_nvrtc_cu12-12.4.127-py3-none-manylinux2014_x86_64.whl (24.6 MB)\n     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 24.6/24.6 MB 32.2 MB/s eta 0:00:00\nCollecting nvidia-cuda-runtime-cu12==12.4.127 (from torch)\n  Downloading https://download.pytorch.org/whl/cu124/nvidia_cuda_runtime_cu12-12.4.127-py3-none-manylinux2014_x86_64.whl (883 kB)\n     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 883.7/883.7 kB 23.0 MB/s eta 0:00:00\nCollecting nvidia-cuda-cupti-cu12==12.4.127 (from torch)\n  Downloading https://download.pytorch.org/whl/cu124/nvidia_cuda_cupti_cu12-12.4.127-py3-none-manylinux2014_x86_64.whl (13.8 MB)\n     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.8/13.8 MB 31.6 MB/s eta 0:00:00\nCollecting nvidia-cudnn-cu12==9.1.0.70 (from torch)\n  Downloading https://download.pytorch.org/whl/cu124/nvidia_cudnn_cu12-9.1.0.70-py3-none-manylinux2014_x86_64.whl (664.8 MB)\n     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 664.8/664.8 MB 27.5 MB/s eta 0:00:00\nCollecting nvidia-cublas-cu12==12.4.5.8 (from torch)\n  Downloading https://download.pytorch.org/whl/cu124/nvidia_cublas_cu12-12.4.5.8-py3-none-manylinux2014_x86_64.whl (363.4 MB)\n     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 363.4/363.4 MB 31.2 MB/s eta 0:00:00\nCollecting nvidia-cufft-cu12==11.2.1.3 (from torch)\n  Downloading https://download.pytorch.org/whl/cu124/nvidia_cufft_cu12-11.2.1.3-py3-none-manylinux2014_x86_64.whl (211.5 MB)\n     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 211.5/211.5 MB 33.0 MB/s eta 0:00:00\nCollecting nvidia-curand-cu12==10.3.5.147 (from torch)\n  Downloading https://download.pytorch.org/whl/cu124/nvidia_curand_cu12-10.3.5.147-py3-none-manylinux2014_x86_64.whl (56.3 MB)\n     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 56.3/56.3 MB 32.5 MB/s eta 0:00:00\nCollecting nvidia-cusolver-cu12==11.6.1.9 (from torch)\n  Downloading https://download.pytorch.org/whl/cu124/nvidia_cusolver_cu12-11.6.1.9-py3-none-manylinux2014_x86_64.whl (127.9 MB)\n     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 127.9/127.9 MB 32.3 MB/s eta 0:00:00\nCollecting nvidia-cusparse-cu12==12.3.1.170 (from torch)\n  Downloading https://download.pytorch.org/whl/cu124/nvidia_cusparse_cu12-12.3.1.170-py3-none-manylinux2014_x86_64.whl (207.5 MB)\n     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 207.5/207.5 MB 32.9 MB/s eta 0:00:00\nCollecting nvidia-cusparselt-cu12==0.6.2 (from torch)\n  Downloading https://download.pytorch.org/whl/cu124/nvidia_cusparselt_cu12-0.6.2-py3-none-manylinux2014_x86_64.whl.metadata (6.8 kB)\nCollecting nvidia-nccl-cu12==2.21.5 (from torch)\n  Downloading https://download.pytorch.org/whl/nvidia_nccl_cu12-2.21.5-py3-none-manylinux2014_x86_64.whl (188.7 MB)\n     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 188.7/188.7 MB 32.9 MB/s eta 0:00:00\nCollecting nvidia-nvtx-cu12==12.4.127 (from torch)\n  Downloading https://download.pytorch.org/whl/cu124/nvidia_nvtx_cu12-12.4.127-py3-none-manylinux2014_x86_64.whl (99 kB)\nCollecting nvidia-nvjitlink-cu12==12.4.127 (from torch)\n  Downloading https://download.pytorch.org/whl/cu124/nvidia_nvjitlink_cu12-12.4.127-py3-none-manylinux2014_x86_64.whl (21.1 MB)\n     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 21.1/21.1 MB 29.2 MB/s eta 0:00:00\nCollecting triton==3.2.0 (from torch)\n  Downloading https://download.pytorch.org/whl/triton-3.2.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (1.4 kB)\nCollecting setuptools (from torch)\n  Downloading https://download.pytorch.org/whl/setuptools-70.2.0-py3-none-any.whl.metadata (5.8 kB)\nCollecting sympy==1.13.1 (from torch)\n  Using cached https://download.pytorch.org/whl/sympy-1.13.1-py3-none-any.whl (6.2 MB)\nCollecting mpmath<1.4,>=1.1.0 (from sympy==1.13.1->torch)\n  Using cached https://download.pytorch.org/whl/mpmath-1.3.0-py3-none-any.whl (536 kB)\nCollecting numpy (from torchvision)\n  Downloading https://download.pytorch.org/whl/numpy-2.1.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (60 kB)\nCollecting pillow!=8.3.*,>=5.3.0 (from torchvision)\n  Downloading https://download.pytorch.org/whl/pillow-11.0.0-cp312-cp312-manylinux_2_28_x86_64.whl.metadata (9.1 kB)\nCollecting MarkupSafe>=2.0 (from jinja2->torch)\n  Downloading https://download.pytorch.org/whl/MarkupSafe-2.1.5-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (28 kB)\nDownloading https://download.pytorch.org/whl/cu124/torch-2.6.0%2Bcu124-cp312-cp312-linux_x86_64.whl (768.4 MB)\n   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 768.4/768.4 MB 26.3 MB/s eta 0:00:00\nDownloading https://download.pytorch.org/whl/cu124/nvidia_cusparselt_cu12-0.6.2-py3-none-manylinux2014_x86_64.whl (150.1 MB)\n   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 150.1/150.1 MB 32.9 MB/s eta 0:00:00\nDownloading https://download.pytorch.org/whl/triton-3.2.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (166.7 MB)\n   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 166.7/166.7 MB 32.9 MB/s eta 0:00:00\nDownloading https://download.pytorch.org/whl/cu124/torchvision-0.21.0%2Bcu124-cp312-cp312-linux_x86_64.whl (7.3 MB)\n   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.3/7.3 MB 24.3 MB/s eta 0:00:00\nDownloading https://download.pytorch.org/whl/cu124/torchaudio-2.6.0%2Bcu124-cp312-cp312-linux_x86_64.whl (3.4 MB)\n   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.4/3.4 MB 29.2 MB/s eta 0:00:00\nDownloading https://download.pytorch.org/whl/pillow-11.0.0-cp312-cp312-manylinux_2_28_x86_64.whl (4.4 MB)\n   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.4/4.4 MB 30.2 MB/s eta 0:00:00\nDownloading https://download.pytorch.org/whl/typing_extensions-4.12.2-py3-none-any.whl (37 kB)\nDownloading https://download.pytorch.org/whl/filelock-3.13.1-py3-none-any.whl (11 kB)\nDownloading https://download.pytorch.org/whl/fsspec-2024.6.1-py3-none-any.whl (177 kB)\nDownloading https://download.pytorch.org/whl/Jinja2-3.1.4-py3-none-any.whl (133 kB)\nDownloading https://download.pytorch.org/whl/networkx-3.3-py3-none-any.whl (1.7 MB)\n   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.7/1.7 MB 27.2 MB/s eta 0:00:00\nDownloading https://download.pytorch.org/whl/numpy-2.1.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.0 MB)\n   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.0/16.0 MB 32.0 MB/s eta 0:00:00\nDownloading https://download.pytorch.org/whl/setuptools-70.2.0-py3-none-any.whl (930 kB)\n   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 930.8/930.8 kB 24.0 MB/s eta 0:00:00\nInstalling collected packages: triton, nvidia-cusparselt-cu12, mpmath, typing-extensions, sympy, setuptools, pillow, nvidia-nvtx-cu12, nvidia-nvjitlink-cu12, nvidia-nccl-cu12, nvidia-curand-cu12, nvidia-cufft-cu12, nvidia-cuda-runtime-cu12, nvidia-cuda-nvrtc-cu12, nvidia-cuda-cupti-cu12, nvidia-cublas-cu12, numpy, networkx, MarkupSafe, fsspec, filelock, nvidia-cusparse-cu12, nvidia-cudnn-cu12, jinja2, nvidia-cusolver-cu12, torch, torchvision, torchaudio\nSuccessfully installed MarkupSafe-2.1.5 filelock-3.13.1 fsspec-2024.6.1 jinja2-3.1.4 mpmath-1.3.0 networkx-3.3 numpy-2.1.2 nvidia-cublas-cu12-12.4.5.8 nvidia-cuda-cupti-cu12-12.4.127 nvidia-cuda-nvrtc-cu12-12.4.127 nvidia-cuda-runtime-cu12-12.4.127 nvidia-cudnn-cu12-9.1.0.70 nvidia-cufft-cu12-11.2.1.3 nvidia-curand-cu12-10.3.5.147 nvidia-cusolver-cu12-11.6.1.9 nvidia-cusparse-cu12-12.3.1.170 nvidia-cusparselt-cu12-0.6.2 nvidia-nccl-cu12-2.21.5 nvidia-nvjitlink-cu12-12.4.127 nvidia-nvtx-cu12-12.4.127 pillow-11.0.0 setuptools-70.2.0 sympy-1.13.1 torch-2.6.0+cu124 torchaudio-2.6.0+cu124 torchvision-0.21.0+cu124 triton-3.2.0 typing-extensions-4.12.2\n                                                                                                                   \n(base) ┌──(venv)─(USER㉿MYPC)-[~/CODE/Orpheus-FastAPI]\n└─$ pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124\nLooking in indexes: https://download.pytorch.org/whl/cu124\nRequirement already satisfied: torch in ./venv/lib/python3.12/site-packages (2.6.0+cu124)\nRequirement already satisfied: torchvision in ./venv/lib/python3.12/site-packages (0.21.0+cu124)\nRequirement already satisfied: torchaudio in ./venv/lib/python3.12/site-packages (2.6.0+cu124)\nRequirement already satisfied: filelock in ./venv/lib/python3.12/site-packages (from torch) (3.13.1)\nRequirement already satisfied: typing-extensions>=4.10.0 in ./venv/lib/python3.12/site-packages (from torch) (4.12.2)\nRequirement already satisfied: networkx in ./venv/lib/python3.12/site-packages (from torch) (3.3)\nRequirement already satisfied: jinja2 in ./venv/lib/python3.12/site-packages (from torch) (3.1.4)\nRequirement already satisfied: fsspec in ./venv/lib/python3.12/site-packages (from torch) (2024.6.1)\nRequirement already satisfied: nvidia-cuda-nvrtc-cu12==12.4.127 in ./venv/lib/python3.12/site-packages (from torch) (12.4.127)\nRequirement already satisfied: nvidia-cuda-runtime-cu12==12.4.127 in ./venv/lib/python3.12/site-packages (from torch) (12.4.127)\nRequirement already satisfied: nvidia-cuda-cupti-cu12==12.4.127 in ./venv/lib/python3.12/site-packages (from torch) (12.4.127)\nRequirement already satisfied: nvidia-cudnn-cu12==9.1.0.70 in ./venv/lib/python3.12/site-packages (from torch) (9.1.0.70)\nRequirement already satisfied: nvidia-cublas-cu12==12.4.5.8 in ./venv/lib/python3.12/site-packages (from torch) (12.4.5.8)\nRequirement already satisfied: nvidia-cufft-cu12==11.2.1.3 in ./venv/lib/python3.12/site-packages (from torch) (11.2.1.3)\nRequirement already satisfied: nvidia-curand-cu12==10.3.5.147 in ./venv/lib/python3.12/site-packages (from torch) (10.3.5.147)\nRequirement already satisfied: nvidia-cusolver-cu12==11.6.1.9 in ./venv/lib/python3.12/site-packages (from torch) (11.6.1.9)\nRequirement already satisfied: nvidia-cusparse-cu12==12.3.1.170 in ./venv/lib/python3.12/site-packages (from torch) (12.3.1.170)\nRequirement already satisfied: nvidia-cusparselt-cu12==0.6.2 in ./venv/lib/python3.12/site-packages (from torch) (0.6.2)\nRequirement already satisfied: nvidia-nccl-cu12==2.21.5 in ./venv/lib/python3.12/site-packages (from torch) (2.21.5)\nRequirement already satisfied: nvidia-nvtx-cu12==12.4.127 in ./venv/lib/python3.12/site-packages (from torch) (12.4.127)\nRequirement already satisfied: nvidia-nvjitlink-cu12==12.4.127 in ./venv/lib/python3.12/site-packages (from torch) (12.4.127)\nRequirement already satisfied: triton==3.2.0 in ./venv/lib/python3.12/site-packages (from torch) (3.2.0)\nRequirement already satisfied: setuptools in ./venv/lib/python3.12/site-packages (from torch) (70.2.0)\nRequirement already satisfied: sympy==1.13.1 in ./venv/lib/python3.12/site-packages (from torch) (1.13.1)\nRequirement already satisfied: mpmath<1.4,>=1.1.0 in ./venv/lib/python3.12/site-packages (from sympy==1.13.1->torch) (1.3.0)\nRequirement already satisfied: numpy in ./venv/lib/python3.12/site-packages (from torchvision) (2.1.2)\nRequirement already satisfied: pillow!=8.3.*,>=5.3.0 in ./venv/lib/python3.12/site-packages (from torchvision) (11.0.0)\nRequirement already satisfied: MarkupSafe>=2.0 in ./venv/lib/python3.12/site-packages (from jinja2->torch) (2.1.5)\n                                                                                                                   \n(base) ┌──(venv)─(USER㉿MYPC)-[~/CODE/Orpheus-FastAPI]\n└─$ pip3 install -r requirements.txt\nCollecting fastapi==0.103.1 (from -r requirements.txt (line 2))\n  Downloading fastapi-0.103.1-py3-none-any.whl.metadata (24 kB)\nCollecting uvicorn==0.23.2 (from -r requirements.txt (line 3))\n  Downloading uvicorn-0.23.2-py3-none-any.whl.metadata (6.2 kB)\nCollecting jinja2==3.1.2 (from -r requirements.txt (line 4))\n  Downloading Jinja2-3.1.2-py3-none-any.whl.metadata (3.5 kB)\nCollecting pydantic==2.3.0 (from -r requirements.txt (line 5))\n  Downloading pydantic-2.3.0-py3-none-any.whl.metadata (148 kB)\nCollecting python-multipart==0.0.6 (from -r requirements.txt (line 6))\n  Downloading python_multipart-0.0.6-py3-none-any.whl.metadata (2.5 kB)\nCollecting requests==2.31.0 (from -r requirements.txt (line 9))\n  Downloading requests-2.31.0-py3-none-any.whl.metadata (4.6 kB)\nCollecting python-dotenv==1.0.0 (from -r requirements.txt (line 10))\n  Downloading python_dotenv-1.0.0-py3-none-any.whl.metadata (21 kB)\nCollecting watchfiles==1.0.4 (from -r requirements.txt (line 11))\n  Downloading watchfiles-1.0.4-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.9 kB)\nCollecting numpy==1.24.0 (from -r requirements.txt (line 14))\n  Downloading numpy-1.24.0.tar.gz (10.9 MB)\n     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.9/10.9 MB 21.7 MB/s eta 0:00:00\n  Installing build dependencies ... done\n  Getting requirements to build wheel ... error\n  error: subprocess-exited-with-error\n  \n  × Getting requirements to build wheel did not run successfully.\n  │ exit code: 1\n  ╰─> [33 lines of output]\n      Traceback (most recent call last):\n        File \"/home/mypath/CODE/Orpheus-FastAPI/venv/lib/python3.12/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py\", line 353, in <module>\n          main()\n        File \"/home/mypath/CODE/Orpheus-FastAPI/venv/lib/python3.12/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py\", line 335, in main\n          json_out['return_val'] = hook(**hook_input['kwargs'])\n                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        File \"/home/mypath/CODE/Orpheus-FastAPI/venv/lib/python3.12/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py\", line 112, in get_requires_for_build_wheel\n          backend = _build_backend()\n                    ^^^^^^^^^^^^^^^^\n        File \"/home/mypath/CODE/Orpheus-FastAPI/venv/lib/python3.12/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py\", line 77, in _build_backend\n          obj = import_module(mod_path)\n                ^^^^^^^^^^^^^^^^^^^^^^^\n        File \"/home/mypath/miniconda3/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n          return _bootstrap._gcd_import(name[level:], package, level)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n        File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n        File \"<frozen importlib._bootstrap>\", line 1310, in _find_and_load_unlocked\n        File \"<frozen importlib._bootstrap>\", line 488, in _call_with_frames_removed\n        File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n        File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n        File \"<frozen importlib._bootstrap>\", line 1331, in _find_and_load_unlocked\n        File \"<frozen importlib._bootstrap>\", line 935, in _load_unlocked\n        File \"<frozen importlib._bootstrap_external>\", line 999, in exec_module\n        File \"<frozen importlib._bootstrap>\", line 488, in _call_with_frames_removed\n        File \"/tmp/pip-build-env-9bs4dj2_/overlay/lib/python3.12/site-packages/setuptools/__init__.py\", line 16, in <module>\n          import setuptools.version\n        File \"/tmp/pip-build-env-9bs4dj2_/overlay/lib/python3.12/site-packages/setuptools/version.py\", line 1, in <module>\n          import pkg_resources\n        File \"/tmp/pip-build-env-9bs4dj2_/overlay/lib/python3.12/site-packages/pkg_resources/__init__.py\", line 2172, in <module>\n          register_finder(pkgutil.ImpImporter, find_on_path)\n                          ^^^^^^^^^^^^^^^^^^^\n      AttributeError: module 'pkgutil' has no attribute 'ImpImporter'. Did you mean: 'zipimporter'?\n      [end of output]\n  \n  note: This error originates from a subprocess, and is likely not a problem with pip.\n\n[notice] A new release of pip is available: 24.3.1 -> 25.1\n[notice] To update, run: pip install --upgrade pip\nerror: subprocess-exited-with-error\n\n× Getting requirements to build wheel did not run successfully.\n│ exit code: 1\n╰─> See above for output.\n\nnote: This error originates from a subprocess, and is likely not a problem with pip.\n                                                                                                                   \n(base) ┌──(venv)─(USER㉿MYPC)-[~/CODE/Orpheus-FastAPI]\n└─$ pip3 install -r requirements.txt\nCollecting fastapi==0.103.1 (from -r requirements.txt (line 2))\n  Using cached fastapi-0.103.1-py3-none-any.whl.metadata (24 kB)\nCollecting uvicorn==0.23.2 (from -r requirements.txt (line 3))\n  Using cached uvicorn-0.23.2-py3-none-any.whl.metadata (6.2 kB)\nCollecting jinja2==3.1.2 (from -r requirements.txt (line 4))\n  Using cached Jinja2-3.1.2-py3-none-any.whl.metadata (3.5 kB)\nCollecting pydantic==2.3.0 (from -r requirements.txt (line 5))\n  Using cached pydantic-2.3.0-py3-none-any.whl.metadata (148 kB)\nCollecting python-multipart==0.0.6 (from -r requirements.txt (line 6))\n  Using cached python_multipart-0.0.6-py3-none-any.whl.metadata (2.5 kB)\nCollecting requests==2.31.0 (from -r requirements.txt (line 9))\n  Using cached requests-2.31.0-py3-none-any.whl.metadata (4.6 kB)\nCollecting python-dotenv==1.0.0 (from -r requirements.txt (line 10))\n  Using cached python_dotenv-1.0.0-py3-none-any.whl.metadata (21 kB)\nCollecting watchfiles==1.0.4 (from -r requirements.txt (line 11))\n  Using cached watchfiles-1.0.4-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.9 kB)\nCollecting numpy==2.2.5 (from -r requirements.txt (line 14))\n  Downloading numpy-2.2.5-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (62 kB)\nCollecting sounddevice==0.4.6 (from -r requirements.txt (line 15))\n  Downloading sounddevice-0.4.6-py3-none-any.whl.metadata (1.4 kB)\nCollecting snac==1.2.1 (from -r requirements.txt (line 16))\n  Downloading snac-1.2.1-py3-none-any.whl.metadata (3.5 kB)\nCollecting psutil==5.9.0 (from -r requirements.txt (line 19))\n  Downloading psutil-5.9.0.tar.gz (478 kB)\n  Installing build dependencies ... done\n  Getting requirements to build wheel ... done\n  Preparing metadata (pyproject.toml) ... done\nCollecting anyio<4.0.0,>=3.7.1 (from fastapi==0.103.1->-r requirements.txt (line 2))\n  Using cached anyio-3.7.1-py3-none-any.whl.metadata (4.7 kB)\nCollecting starlette<0.28.0,>=0.27.0 (from fastapi==0.103.1->-r requirements.txt (line 2))\n  Using cached starlette-0.27.0-py3-none-any.whl.metadata (5.8 kB)\nRequirement already satisfied: typing-extensions>=4.5.0 in ./venv/lib/python3.12/site-packages (from fastapi==0.103.1->-r requirements.txt (line 2)) (4.12.2)\nCollecting click>=7.0 (from uvicorn==0.23.2->-r requirements.txt (line 3))\n  Using cached click-8.1.8-py3-none-any.whl.metadata (2.3 kB)\nCollecting h11>=0.8 (from uvicorn==0.23.2->-r requirements.txt (line 3))\n  Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)\nRequirement already satisfied: MarkupSafe>=2.0 in ./venv/lib/python3.12/site-packages (from jinja2==3.1.2->-r requirements.txt (line 4)) (2.1.5)\nCollecting annotated-types>=0.4.0 (from pydantic==2.3.0->-r requirements.txt (line 5))\n  Using cached annotated_types-0.7.0-py3-none-any.whl.metadata (15 kB)\nCollecting pydantic-core==2.6.3 (from pydantic==2.3.0->-r requirements.txt (line 5))\n  Downloading pydantic_core-2.6.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.5 kB)\nCollecting charset-normalizer<4,>=2 (from requests==2.31.0->-r requirements.txt (line 9))\n  Using cached charset_normalizer-3.4.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (35 kB)\nCollecting idna<4,>=2.5 (from requests==2.31.0->-r requirements.txt (line 9))\n  Using cached idna-3.10-py3-none-any.whl.metadata (10 kB)\nCollecting urllib3<3,>=1.21.1 (from requests==2.31.0->-r requirements.txt (line 9))\n  Downloading urllib3-2.4.0-py3-none-any.whl.metadata (6.5 kB)\nCollecting certifi>=2017.4.17 (from requests==2.31.0->-r requirements.txt (line 9))\n  Downloading certifi-2025.4.26-py3-none-any.whl.metadata (2.5 kB)\nCollecting CFFI>=1.0 (from sounddevice==0.4.6->-r requirements.txt (line 15))\n  Using cached cffi-1.17.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (1.5 kB)\nRequirement already satisfied: torch in ./venv/lib/python3.12/site-packages (from snac==1.2.1->-r requirements.txt (line 16)) (2.6.0+cu124)\nCollecting einops (from snac==1.2.1->-r requirements.txt (line 16))\n  Downloading einops-0.8.1-py3-none-any.whl.metadata (13 kB)\nCollecting huggingface-hub (from snac==1.2.1->-r requirements.txt (line 16))\n  Downloading huggingface_hub-0.30.2-py3-none-any.whl.metadata (13 kB)\nCollecting sniffio>=1.1 (from anyio<4.0.0,>=3.7.1->fastapi==0.103.1->-r requirements.txt (line 2))\n  Using cached sniffio-1.3.1-py3-none-any.whl.metadata (3.9 kB)\nCollecting pycparser (from CFFI>=1.0->sounddevice==0.4.6->-r requirements.txt (line 15))\n  Using cached pycparser-2.22-py3-none-any.whl.metadata (943 bytes)\nRequirement already satisfied: filelock in ./venv/lib/python3.12/site-packages (from huggingface-hub->snac==1.2.1->-r requirements.txt (line 16)) (3.13.1)\nRequirement already satisfied: fsspec>=2023.5.0 in ./venv/lib/python3.12/site-packages (from huggingface-hub->snac==1.2.1->-r requirements.txt (line 16)) (2024.6.1)\nCollecting packaging>=20.9 (from huggingface-hub->snac==1.2.1->-r requirements.txt (line 16))\n  Downloading packaging-25.0-py3-none-any.whl.metadata (3.3 kB)\nCollecting pyyaml>=5.1 (from huggingface-hub->snac==1.2.1->-r requirements.txt (line 16))\n  Downloading PyYAML-6.0.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (2.1 kB)\nCollecting tqdm>=4.42.1 (from huggingface-hub->snac==1.2.1->-r requirements.txt (line 16))\n  Using cached tqdm-4.67.1-py3-none-any.whl.metadata (57 kB)\nRequirement already satisfied: networkx in ./venv/lib/python3.12/site-packages (from torch->snac==1.2.1->-r requirements.txt (line 16)) (3.3)\nRequirement already satisfied: nvidia-cuda-nvrtc-cu12==12.4.127 in ./venv/lib/python3.12/site-packages (from torch->snac==1.2.1->-r requirements.txt (line 16)) (12.4.127)\nRequirement already satisfied: nvidia-cuda-runtime-cu12==12.4.127 in ./venv/lib/python3.12/site-packages (from torch->snac==1.2.1->-r requirements.txt (line 16)) (12.4.127)\nRequirement already satisfied: nvidia-cuda-cupti-cu12==12.4.127 in ./venv/lib/python3.12/site-packages (from torch->snac==1.2.1->-r requirements.txt (line 16)) (12.4.127)\nRequirement already satisfied: nvidia-cudnn-cu12==9.1.0.70 in ./venv/lib/python3.12/site-packages (from torch->snac==1.2.1->-r requirements.txt (line 16)) (9.1.0.70)\nRequirement already satisfied: nvidia-cublas-cu12==12.4.5.8 in ./venv/lib/python3.12/site-packages (from torch->snac==1.2.1->-r requirements.txt (line 16)) (12.4.5.8)\nRequirement already satisfied: nvidia-cufft-cu12==11.2.1.3 in ./venv/lib/python3.12/site-packages (from torch->snac==1.2.1->-r requirements.txt (line 16)) (11.2.1.3)\nRequirement already satisfied: nvidia-curand-cu12==10.3.5.147 in ./venv/lib/python3.12/site-packages (from torch->snac==1.2.1->-r requirements.txt (line 16)) (10.3.5.147)\nRequirement already satisfied: nvidia-cusolver-cu12==11.6.1.9 in ./venv/lib/python3.12/site-packages (from torch->snac==1.2.1->-r requirements.txt (line 16)) (11.6.1.9)\nRequirement already satisfied: nvidia-cusparse-cu12==12.3.1.170 in ./venv/lib/python3.12/site-packages (from torch->snac==1.2.1->-r requirements.txt (line 16)) (12.3.1.170)\nRequirement already satisfied: nvidia-cusparselt-cu12==0.6.2 in ./venv/lib/python3.12/site-packages (from torch->snac==1.2.1->-r requirements.txt (line 16)) (0.6.2)\nRequirement already satisfied: nvidia-nccl-cu12==2.21.5 in ./venv/lib/python3.12/site-packages (from torch->snac==1.2.1->-r requirements.txt (line 16)) (2.21.5)\nRequirement already satisfied: nvidia-nvtx-cu12==12.4.127 in ./venv/lib/python3.12/site-packages (from torch->snac==1.2.1->-r requirements.txt (line 16)) (12.4.127)\nRequirement already satisfied: nvidia-nvjitlink-cu12==12.4.127 in ./venv/lib/python3.12/site-packages (from torch->snac==1.2.1->-r requirements.txt (line 16)) (12.4.127)\nRequirement already satisfied: triton==3.2.0 in ./venv/lib/python3.12/site-packages (from torch->snac==1.2.1->-r requirements.txt (line 16)) (3.2.0)\nRequirement already satisfied: setuptools in ./venv/lib/python3.12/site-packages (from torch->snac==1.2.1->-r requirements.txt (line 16)) (70.2.0)\nRequirement already satisfied: sympy==1.13.1 in ./venv/lib/python3.12/site-packages (from torch->snac==1.2.1->-r requirements.txt (line 16)) (1.13.1)\nRequirement already satisfied: mpmath<1.4,>=1.1.0 in ./venv/lib/python3.12/site-packages (from sympy==1.13.1->torch->snac==1.2.1->-r requirements.txt (line 16)) (1.3.0)\nDownloading fastapi-0.103.1-py3-none-any.whl (66 kB)\nDownloading uvicorn-0.23.2-py3-none-any.whl (59 kB)\nDownloading Jinja2-3.1.2-py3-none-any.whl (133 kB)\nDownloading pydantic-2.3.0-py3-none-any.whl (374 kB)\nDownloading python_multipart-0.0.6-py3-none-any.whl (45 kB)\nDownloading requests-2.31.0-py3-none-any.whl (62 kB)\nDownloading python_dotenv-1.0.0-py3-none-any.whl (19 kB)\nDownloading watchfiles-1.0.4-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (452 kB)\nDownloading numpy-2.2.5-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.1 MB)\n   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.1/16.1 MB 31.3 MB/s eta 0:00:00\nDownloading sounddevice-0.4.6-py3-none-any.whl (31 kB)\nDownloading snac-1.2.1-py3-none-any.whl (8.4 kB)\nDownloading pydantic_core-2.6.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (1.9 MB)\n   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.9/1.9 MB 25.5 MB/s eta 0:00:00\nUsing cached annotated_types-0.7.0-py3-none-any.whl (13 kB)\nUsing cached anyio-3.7.1-py3-none-any.whl (80 kB)\nDownloading certifi-2025.4.26-py3-none-any.whl (159 kB)\nUsing cached cffi-1.17.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (479 kB)\nUsing cached charset_normalizer-3.4.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (145 kB)\nUsing cached click-8.1.8-py3-none-any.whl (98 kB)\nDownloading h11-0.16.0-py3-none-any.whl (37 kB)\nUsing cached idna-3.10-py3-none-any.whl (70 kB)\nUsing cached starlette-0.27.0-py3-none-any.whl (66 kB)\nDownloading urllib3-2.4.0-py3-none-any.whl (128 kB)\nDownloading einops-0.8.1-py3-none-any.whl (64 kB)\nDownloading huggingface_hub-0.30.2-py3-none-any.whl (481 kB)\nDownloading packaging-25.0-py3-none-any.whl (66 kB)\nDownloading PyYAML-6.0.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (767 kB)\n   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 767.5/767.5 kB 21.4 MB/s eta 0:00:00\nUsing cached sniffio-1.3.1-py3-none-any.whl (10 kB)\nUsing cached tqdm-4.67.1-py3-none-any.whl (78 kB)\nUsing cached pycparser-2.22-py3-none-any.whl (117 kB)\nBuilding wheels for collected packages: psutil\n  Building wheel for psutil (pyproject.toml) ... done\n  Created wheel for psutil: filename=psutil-5.9.0-cp312-cp312-linux_x86_64.whl size=230682 sha256=d9bf434a5ca844b7fcf4bc3452fdb95a57d822617c8662fed1ba6bcaf656231d\n  Stored in directory: /home/mypath/.cache/pip/wheels/86/bf/4d/f133d3cbffc7c8991cd85fec43d18ff7507b3bc9042bbfd146\nSuccessfully built psutil\nInstalling collected packages: urllib3, tqdm, sniffio, pyyaml, python-multipart, python-dotenv, pydantic-core, pycparser, psutil, packaging, numpy, jinja2, idna, h11, einops, click, charset-normalizer, certifi, annotated-types, uvicorn, requests, pydantic, CFFI, anyio, watchfiles, starlette, sounddevice, huggingface-hub, snac, fastapi\n  Attempting uninstall: numpy\n    Found existing installation: numpy 2.1.2\n    Uninstalling numpy-2.1.2:\n      Successfully uninstalled numpy-2.1.2\n  Attempting uninstall: jinja2\n    Found existing installation: Jinja2 3.1.4\n    Uninstalling Jinja2-3.1.4:\n      Successfully uninstalled Jinja2-3.1.4\nSuccessfully installed CFFI-1.17.1 annotated-types-0.7.0 anyio-3.7.1 certifi-2025.4.26 charset-normalizer-3.4.1 click-8.1.8 einops-0.8.1 fastapi-0.103.1 h11-0.16.0 huggingface-hub-0.30.2 idna-3.10 jinja2-3.1.2 numpy-2.2.5 packaging-25.0 psutil-5.9.0 pycparser-2.22 pydantic-2.3.0 pydantic-core-2.6.3 python-dotenv-1.0.0 python-multipart-0.0.6 pyyaml-6.0.2 requests-2.31.0 snac-1.2.1 sniffio-1.3.1 sounddevice-0.4.6 starlette-0.27.0 tqdm-4.67.1 urllib3-2.4.0 uvicorn-0.23.2 watchfiles-1.0.4\n\n[notice] A new release of pip is available: 24.3.1 -> 25.1\n[notice] To update, run: pip install --upgrade pip\n                                                                                                                   \n(base) ┌──(venv)─(USER㉿MYPC)-[~/CODE/Orpheus-FastAPI]\n└─$ # Create directories for outputs and static files\nmkdir -p outputs static\n                                                                                                                   \n(base) ┌──(venv)─(USER㉿MYPC)-[~/CODE/Orpheus-FastAPI]\n└─$ python app.py\n✅ Created default .env file from .env.example and environment variables.\nTraceback (most recent call last):\n  File \"/home/mypath/CODE/Orpheus-FastAPI/app.py\", line 54, in <module>\n    from tts_engine import generate_speech_from_api, AVAILABLE_VOICES, DEFAULT_VOICE, VOICE_TO_LANGUAGE, AVAILABLE_LANGUAGES\n  File \"/home/mypath/CODE/Orpheus-FastAPI/tts_engine/__init__.py\", line 10, in <module>\n    from .inference import (\n  File \"/home/mypath/CODE/Orpheus-FastAPI/tts_engine/inference.py\", line 8, in <module>\n    import sounddevice as sd\n  File \"/home/mypath/CODE/Orpheus-FastAPI/venv/lib/python3.12/site-packages/sounddevice.py\", line 72, in <module>\n    _lib = _ffi.dlopen(_libname)\n           ^^^^^^^^^^^^^^^^^^^^^\nOSError: cannot load library 'libportaudio.so.2': /home/mypath/miniconda3/bin/../lib/libstdc++.so.6: version `GLIBCXX_3.4.32' not found (required by /lib/x86_64-linux-gnu/libjack.so.0)\n\n\n",
+    "comments": [
+      {
+        "user": "Lex-au",
+        "body": "Hi @TheWavePrinciple \n\nThanks for the detailed logs. The crash isn’t in Orpheus‑FASTAPI; your system is loading an old libstdc++.so.6 from Miniconda that lacks GLIBCXX_3.4.32, which PortAudio (and python‑sounddevice) need.\n\n```\n# 1. Use the system C++ runtime\nexport LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH\n\n# 2. –or– upgrade Conda’s runtime\nconda install -c conda-forge libstdcxx-ng=13.2\n\n# Add PortAudio if it’s missing\nsudo apt-get install libportaudio2 portaudio19-dev\n```\n\nAfter that, rerun pip install --force-reinstall sounddevice and the app should start normally.\n"
+      },
+      {
+        "user": "TheWavePrinciple",
+        "body": "It's working on Windows and Linux but it turned out the linux build didn't have support for AVX2? But yeah everything worked thanks for the assist. I've generated some speech now. Great program thanks."
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 49,
+    "title": "Portuguese language support",
+    "author": "ronanbiel0",
+    "state": "closed",
+    "created_at": "2025-04-29T22:22:47Z",
+    "updated_at": "2025-04-30T07:03:42Z",
+    "labels": [
+      "question"
+    ],
+    "body": "Please add support for Portuguese and Spanish languages",
+    "comments": [
+      {
+        "user": "Lex-au",
+        "body": "> Please add support for Portuguese and Spanish languages\n\nHi @ronanbiel0 \n\nSpanish support was added this month. You will want to ensure you have updated to the latest version of my project, are calling the correct voice actors \"Javi\", \"Sergio\" and \"Maria\", and have loaded the specific multilingual checkpoint into your endpoint.\n\n```\nv1.3.0 (2025-04-18)\n\n🌐 Added comprehensive multilingual support with 16 new voice actors across 7 languages\n🗣️ New voice actors include:\nFrench: pierre, amelie, marie\nGerman: jana, thomas, max\nKorean: 유나, 준서\nHindi: ऋतिका\nMandarin: 长乐, 白芷\nSpanish: javi, sergio, maria <<<\nItalian: pietro, giulia, carlo\n```\n\nMy quant here: [lex-au/Orpheus-3b-Italian_Spanish-FT-Q8_0.gguf](https://huggingface.co/lex-au/Orpheus-3b-Italian_Spanish-FT-Q8_0.gguf)\n\nHope this helps ❤️"
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 48,
+    "title": "Is it possible to force the model to use 100% GPU even if it is low end GPU?",
+    "author": "beinghorizontal",
+    "state": "closed",
+    "created_at": "2025-04-25T19:24:24Z",
+    "updated_at": "2025-04-25T21:20:39Z",
+    "labels": [],
+    "body": "While running orpheus-fastapi on my old desktop (GTX-1650 GPU with 4GB VRAM, 32GB RAM, and an AMD Ryzen 5600 CPU), I hit an issue. I'm using the Ollama server to run my custom gguf model, Q8.\nThe problem is that the model only uses 30% of the GPU but maxes out the CPU at nearly 100%.\nI tried the fixes you mentioned in [issue #36](https://github.com/Lex-au/Orpheus-FastAPI/issues/36), like:\n- Increasing num_workers to 4\n- Setting queue size to 100\n- Adjusting batch size to 32\n\nUnfortunately, none of these worked. Even though the app.py command reloads automatically when it detects changes in inference.py, I manually reran app.py to be sure, but still no luck. The GPU usage stayed the same at 30%.\n\nEdit: Tried to use Orpheus-3b-FT-Q4_K_M.gguf model, but GPU utilization was almost the same. \n\n",
+    "comments": [
+      {
+        "user": "beinghorizontal",
+        "body": "Apologies for opening the issue prematurely without conducting proper research. I managed to resolve the problem—it turns out that Ollama wasn’t offloading enough layers to the GPU.\n\nI’m sharing the solution here in case it proves useful to others:\n\n1. I created a Modelfile (a simple text file without an extension) containing the following:\n\n>  FROM  Orpheus-old-gguf\n>  PARAMETER num_gpu 999\n> \n\n \n   Setting `num_gpu` to a very high value enables Ollama to determine the maximum number of layers that can practically be offloaded.\n\n2. I ran the following command to apply the new settings:\n   ```\n   ollama create <new_custom_name> -f Modelfile\n   ```\n\n3. Finally, I used the `<new_custom_name>` model in the `.env` file.\n\nWith these adjustments, Orpheus-FastAPI is now working seamlessly, utilizing 99% of the GPU and only around 24% of the CPU.\n\nKudos once again to the authors of the repo for the outstanding work! 🙏\n"
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 47,
+    "title": "How to integrate various GGUF stored locally within a Conda environment.",
+    "author": "beinghorizontal",
+    "state": "closed",
+    "created_at": "2025-04-24T17:53:10Z",
+    "updated_at": "2025-04-25T18:32:53Z",
+    "labels": [],
+    "body": "I am experiencing a similar issue to [Issue# 41](https://github.com/Lex-au/Orpheus-FastAPI/issues/41). However, I am using a Conda environment instead of Docker. What settings should I modify?",
+    "comments": [
+      {
+        "user": "Lex-au",
+        "body": "Hi!\n\nIf you're using native python enviroment, then you dont have to really change anything but the endpoint. You can just load whatever model you want on your endpoint (LM Studio for example) then just start the application."
+      },
+      {
+        "user": "beinghorizontal",
+        "body": "Appreciate the quick response—it worked! Took me a while to figure things out, but in the end, editing the .env file did the trick. Turns out the default ORPHEUS_HOST was set to 0.0.0.0, so I changed it to 127.0.0.1 and added ORPHEUS_MODEL_NAME to match the model name from the Ollama list. \n\nI was a bit puzzled with the voice options since I’d fine-tuned Orpheus using my own voice. I set it to English Tara in the web interface, but the final audio still came out in my own voice—kind of cool, actually.\n\nFor anyone trying to integrate Ollama with a custom gguf file, here’s the process. Ollama doesn’t support TTS, so orpheus-fastAPI is a great workaround. Big thanks to the author for their amazing work!\n\n1. Ollama pull your-gguf-tts-model (check [Unsloth collab notebook to finetune Orpheus base model using LORA adaptation and conversion to gguf](https://colab.research.google.com/github/unslothai/notebooks/blob/main/nb/Orpheus_(3B)-TTS.ipynb) .)\nThen ollama run your-custom-model\n\n2. In orpheus-fastapi env root folder edit .env file to something like this:\nORPHEUS_API_URL=http://127.0.0.1:11434/v1/completions\nORPHEUS_API_TIMEOUT=120\nORPHEUS_MAX_TOKENS=8192\nORPHEUS_TEMPERATURE=0.6\nORPHEUS_TOP_P=0.9\nORPHEUS_HOST=127.0.0.1\nORPHEUS_PORT=5005\nORPHEUS_MODEL_NAME=\"The exact name you get after executing ollama list\" (do not add .gguf at the end if the name of the model in ollama list doesn't have one)\n"
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 40,
+    "title": "Slow (0.24x realtime factor) on NVIDIA Ampere architecture",
+    "author": "JonnyTran",
+    "state": "closed",
+    "created_at": "2025-04-21T06:54:13Z",
+    "updated_at": "2025-04-24T19:30:12Z",
+    "labels": [
+      "question"
+    ],
+    "body": "Very nice server for Orpheus here! But on testing with the NVIDIA Jetson AGX Orin (64GB RAM) which has a slower memory bandwidth, I'm encountering a significant performance bottleneck, not with the Orpheus model but at the SNAC Decoder. My testings show:\n\n- Token generation: ~40-42 tokens/second\n- Audio generation: ~2.5-2.9 chunks/second\n\nI've tried the quantized SNAC model, [onnx-community/snac_24khz-ONNX](https://huggingface.co/onnx-community/snac_24khz-ONNX), but there wasn't any improvement. According to [SNAC's paper](https://arxiv.org/abs/2410.14411), the speech model's decoder alone has 13 million parameters with multiple conv layers and upsampling operations.\n\nIf someone has any suggestions for optimization, please share them!",
+    "comments": [
+      {
+        "user": "Lex-au",
+        "body": "@JonnyTran That’s definitely an interesting setup—kudos for rocking a Jetson! From what I understand (and yeah, it’s kinda dumb), native PyTorch tends to run better than the ONNX version of SNAC with your setup, so it’s not too surprising you didn’t see any performance gains from switching runtimes.\n\nHonestly, I’m not sure what optimisations I could suggest beyond what you've already done—but really appreciate you testing it and sharing the numbers!\n"
+      },
+      {
+        "user": "Jefferderp",
+        "body": "@JonnyTran While unrelated to this issue, could you possibly share a code snippet of how you implemented the switch to an ONNX model? I'd like to see if this offers a speedup for CPU inference. Thanks!"
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 45,
+    "title": "Is it possible to use AMD Gpu?",
+    "author": "keakthesneak",
+    "state": "closed",
+    "created_at": "2025-04-23T00:49:34Z",
+    "updated_at": "2025-04-23T22:47:10Z",
+    "labels": [],
+    "body": "Sorry to bug you, this is the first time I have tried this kind of thing and have no coding experience.\n\nI was wondering if it's possible to use my AMD 7900XTX GPU. I had everything working with the docker CPU setup but it's extremely slow and takes forever to respond. I have followed AMD's instructions to Install Radeon software for WSL with ROCm using Ubuntu but just can't seem to get it to work with Orpheus and Docker.\n \nI ended up trying to host both models on LM Studio since it lets me run the models with my GPU and got everything working accept getting Orpheus to talk to Vocalis. There was some endpoint issue that led to a 404 timeout with the language model and I just couldn't fix it. Anyways I think I am just in way over my head haha.  \n\nHoly crap I got it to work by using a second user on Windows so I could open up 2 separate instances of LM Studio and got them talking that way. \n\nVery cool project and thanks for sharing it!",
+    "comments": [],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 43,
+    "title": "NOT WORK ON PINOKIO",
+    "author": "giugit",
+    "state": "closed",
+    "created_at": "2025-04-22T08:49:27Z",
+    "updated_at": "2025-04-23T10:49:05Z",
+    "labels": [],
+    "body": "I'm trying Orpheus-FastAPI inside Pinokio on Windows 11, but it doesn't produce any files either online or through download.\n\n<img width=\"1045\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/3f99117b-adf8-4215-925f-1e50277127bc\" />\n\n",
+    "comments": [
+      {
+        "user": "Lex-au",
+        "body": "Hi @giugit ,\n\nJust a heads up—my repo wasn’t officially ported to Pinokio. That integration was done by their team, so unfortunately I can’t guarantee how faithfully it reflects the original setup or help troubleshoot issues specific to their changes.\n\nThat said, the most common cause for the issue you’re describing (no output files, no downloads) is that the **inference endpoint isn’t running** or isn’t configured correctly.\n\nBy default, Orpheus-FASTAPI expects an endpoint like this:\n```\nhttp://127.0.0.1:1234/v1/completions\n```\nWhich is by default **LM Studio**, so you’ll need to run locally with the Orpheus model loaded.\n\n---\n\n### Checklist:\n- Have you downloaded the Orpheus model?\n- Are you running it in **LM Studio** or another compatible server?\n- If you're using a different inference server, make sure to update the `.env` or WebUI settings to match that endpoint.\n\nOnce the FastAPI backend can communicate with the model, audio generation and downloads should start working as expected.\n\nHope this helps.\n"
+      },
+      {
+        "user": "giugit",
+        "body": "I solved downloading Orpheus model Thank You!"
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 44,
+    "title": "How to run orpheus-fastapi on different port other than 5005 using docker",
+    "author": "outerbound",
+    "state": "closed",
+    "created_at": "2025-04-22T10:50:02Z",
+    "updated_at": "2025-04-22T18:47:48Z",
+    "labels": [],
+    "body": "I am using docker-compose-gpu.yml. I want to expose fastapi on port 8000.\n\n1. I have changed ORPHEUS_PORT to 8000 in .env file.\n2. I have modified docker-compose-gpu.yml replacing 5005 with 8000.\n3. I have even exported with EXPORT ORPHEUS_PORT=8000. \n\nBut when i see docker logs -f orpheus-fastapi logs, I see\nINFO:     Uvicorn running on http://0.0.0.0:5005 (Press CTRL+C to quit)\n\nWhen i run command lsof -i -P -n | grep LISTEN, i see\ndocker-pr 12253            root    7u  IPv4  38021      0t0  TCP *:5006 (LISTEN)\ndocker-pr 12260            root    7u  IPv6  38022      0t0  TCP *:5006 (LISTEN)\ndocker-pr 13310            root    7u  IPv4  39899      0t0  TCP *:8000 (LISTEN)\ndocker-pr 13316            root    7u  IPv6  39900      0t0  TCP *:8000 (LISTEN)\n\nPort 8000 is bound for listening thats all. \n",
+    "comments": [
+      {
+        "user": "outerbound",
+        "body": "I also modified Dockerfile.gpu.\nExpose the port\nEXPOSE 8000\n\nRun FastAPI server with uvicorn\nCMD [\"uvicorn\", \"app:app\", \"--host\", \"0.0.0.0\", \"--port\", \"8000\", \"--workers\", \"1\"]\n\norpheus-fastapi container starts but i see INFO: Uvicorn running on http://0.0.0.0:5005/ (Press CTRL+C to quit). "
+      },
+      {
+        "user": "Lex-au",
+        "body": "Hi @outerbound,\n\nGreat question—and thanks for the detailed breakdown of what you've tried!\n\nThe issue you're running into is likely due to Docker caching the original image config. Even though you've modified the `.env` file, `docker-compose-gpu.yml`, and even the `Dockerfile.gpu`, **Docker won't automatically rebuild the container from scratch unless explicitly told to**.\n\n---\n\n### Here’s what to do:\n\nAfter updating the port in the following places:\n- `.env` → `ORPHEUS_PORT=8000`\n- `docker-compose-gpu.yml` → updated `ports` mapping to `8000:8000`\n- `Dockerfile.gpu` → updated `EXPOSE` and `CMD` to use port 8000\n\nYou’ll need to delete the image and then rebuild it.\n\n```bash\ndocker compose -f docker-compose-gpu.yml up\n```\n\nThat should rebuild the image with the correct Uvicorn command baked in.\n\n---\n\n### A quick note:\n\nThis project was originally built for native Python usage—Docker support was generously contributed by the community. It’s super useful, but occasionally small changes like this (especially around port bindings or startup commands) need a manual rebuild to take effect properly. You'll also need to ensure you're updating the ports for the LLaMacpp server as well.\n"
+      },
+      {
+        "user": "outerbound",
+        "body": "Thanks Lex for the fast resolution 👍 \ndocker compose -f docker-compose-gpu.yml build --no-cache did the trick. Now I can see see the ui in all it's glory"
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 31,
+    "title": "Remove input validation for `voice`",
+    "author": "Sidd065",
+    "state": "closed",
+    "created_at": "2025-04-15T05:14:11Z",
+    "updated_at": "2025-04-22T15:27:01Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": "[Multilingual models](https://canopylabs.ai/releases/orpheus_can_speak_any_language) provide these voices:\n| Language | Voices                         | Supported Tags                                                                 |\n|----------|--------------------------------|---------------------------------------------------------------------------------|\n| French   | pierre, amelie, marie          | chuckle, cough, gasp, groan, laugh, sigh, sniffle, whimper, yawn               |\n| German   | jana, thomas, max              | chuckle, cough, gasp, groan, laugh, sigh, sniffle, yawn                        |\n| Korean   | 유나, 준서                      | 한숨, 헐, 헛기침, 훌쩍, 하품, 낄낄, 신음, 작은 웃음, 기침, 으르렁                     |\n| Hindi    | ऋतिका (more coming)            | coming soon                                                                    |\n| Mandarin | 长乐, 白芷                      | 嬉笑, 轻笑, 呻吟, 大笑, 咳嗽, 抽鼻子, 咳                                             |\n| Spanish  | javi, sergio, maria            | groan, chuckle, gasp, resoplido, laugh, yawn, cough                            |\n| Italian  | pietro, giulia, carlo          | sigh, laugh, cough, sniffle, groan, yawn, gemito, gasp                         |\n\nThe current implementation has a hard coded list of voices which could be updated with these voices or removed entirely.",
+    "comments": [
+      {
+        "user": "Lex-au",
+        "body": "Consolidating this into #29 — all discussion and resolution will continue there."
+      },
+      {
+        "user": "PumaAI487",
+        "body": "Asking here because of the merge. I did see your comment Lex-au, just wondering since I know the voice cloning itself is not working for now, but if we have already trained voices from voice-models dot com, with two files being a, \".pt\" format, and \".index\" file, if there was a folder location to put those files to use them, and how to update the files below? I did trying searching the project folder for where they might be but only reference to the voices themselves are in the \"inference.py\" and in the templates \"tts.html\" file.\n\nAdding New Voices\nTo add new voices, update the AVAILABLE_VOICES list in tts_engine/inference.py and add corresponding descriptions in the HTML template.\n\nInference.py @ line 45 \n\"# Available voices based on the Orpheus-TTS repository\nAVAILABLE_VOICES = [\"tara\", \"leah\", \"jess\", \"leo\", \"dan\", \"mia\", \"zac\", \"zoe\"]\nDEFAULT_VOICE = \"tara\"  # Best voice according to documentation\"\n\ntts.html @ line 167\n   <div class=\"text-xs text-dark-300\">\n                      {% if voice_option == \"tara\" %}Female, conversational, clear\n                      {% elif voice_option == \"leah\" %}Female, warm, gentle\n                      {% elif voice_option == \"jess\" %}Female, energetic, youthful\n                      {% elif voice_option == \"leo\" %}Male, authoritative, deep\n                      {% elif voice_option == \"dan\" %}Male, friendly, casual\n                      {% elif voice_option == \"mia\" %}Female, professional, articulate\n                      {% elif voice_option == \"zac\" %}Male, enthusiastic, dynamic\n                      {% elif voice_option == \"zoe\" %}Female, calm, soothing\n                      {% endif %}\n                    </div>\n\nOr do I have it wrong and only voices that can be added are ones created/added by your team? Since I don't believe the ones off that website have emotion tagging builtin or added to them?\n\nSorry if this is a dumb question lol"
+      },
+      {
+        "user": "Lex-au",
+        "body": "If you're not keen to wait for my full update this weekend—good news, you're already on the right track.\n\nTo add new voice actors to your Orpheus checkpoint, head to `inference.py`. Under the `AVAILABLE_VOICES` list, simply add your new entries. Just make sure each name you add is **callable by the model** you're using.\n\nFor example, if you're using the **French checkpoint**, update the list like this:\n\n```python\nAVAILABLE_VOICES = [\"tara\", \"leah\", \"jess\", \"leo\", \"dan\", \"mia\", \"zac\", \"zoe\", \"pierre\", \"amelie\", \"marie\"]\n```\n\nOptional: Updating the Frontend (Web UI)\n\nIf you're using the **Web UI** and want your new voices to show up with proper labels in `tts.html`, update the descriptive block like so:\n\n```html\n<div class=\"text-xs text-dark-300\">\n  {% if voice_option == \"tara\" %}Female, conversational, clear\n  {% elif voice_option == \"leah\" %}Female, warm, gentle\n  {% elif voice_option == \"jess\" %}Female, energetic, youthful\n  {% elif voice_option == \"leo\" %}Male, authoritative, deep\n  {% elif voice_option == \"dan\" %}Male, friendly, casual\n  {% elif voice_option == \"mia\" %}Female, professional, articulate\n  {% elif voice_option == \"zac\" %}Male, enthusiastic, dynamic\n  {% elif voice_option == \"zoe\" %}Female, calm, soothing\n  {% elif voice_option == \"pierre\" %}Male, French, soft\n  {% elif voice_option == \"amelie\" %}Female, French, youthful\n  {% elif voice_option == \"marie\" %}Female, French, casual\n  {% endif %}\n</div>\n```\n\nIf you're using **only the API**, you can skip this step entirely."
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 41,
+    "title": "How to add/use a different model than those under hf.co/lex-au?",
+    "author": "fintarn",
+    "state": "closed",
+    "created_at": "2025-04-21T12:51:10Z",
+    "updated_at": "2025-04-22T04:16:01Z",
+    "labels": [
+      "question"
+    ],
+    "body": "Hello,\n\nHow can I use a different model than those under this hf repo?\nCan I somehow change llama-cpp-server to use it, or even better, can I add it to the webgui somehow?\nI use the docker image. It's already in /app/models/ , I tried changing inference.py like so:\nmodel_name = os.environ.get(\"ORPHEUS_MODEL_NAME\", \"Orpheus-3b-FT-Q8_0.gguf\", \"new_model_Q8_0.gguf\")\n\nBut that just threw an error on generating :)\nI'm not super good with python, or even use of barebones llama-cpp-server, so any help would be appreciated.",
+    "comments": [
+      {
+        "user": "Lex-au",
+        "body": "> Hello,\n> \n> How can I use a different model than those under this hf repo? Can I somehow change llama-cpp-server to use it, or even better, can I add it to the webgui somehow? I use the docker image. It's already in /app/models/ , I tried changing inference.py like so: model_name = os.environ.get(\"ORPHEUS_MODEL_NAME\", \"Orpheus-3b-FT-Q8_0.gguf\", \"new_model_Q8_0.gguf\")\n> \n> But that just threw an error on generating :) I'm not super good with python, or even use of barebones llama-cpp-server, so any help would be appreciated.\n\nHi @fintarn \n\n---\n\n### 1. Clone the repo and set up your environment\n```bash\ngit clone https://github.com/Lex-au/Orpheus-FastAPI.git\ncd Orpheus-FastAPI\ncp .env.example .env  # or 'copy' if you're on Windows\n```\n\n---\n\n### 2. Edit your `.env` file\n\nOpen `.env` in your text editor and change the `ORPHEUS_MODEL_NAME` to the name of your model checkpoint.\n\nExample:\n- For my custom **Kaya** model:  \n  `ORPHEUS_MODEL_NAME=Orpheus-3b-Kaya-Q8_0.gguf`\n- For my quantised **German** checkpoint:  \n  `ORPHEUS_MODEL_NAME=Orpheus-3b-German-FT-Q8_0.gguf`\n\n---\n\n### 3. Using a model *not* from `lex-au` on Hugging Face?\n\nYou’ll need to also update the **Docker Compose YAML files** (`docker-compose-gpu.yml` or `docker-compose-cpu.yml`, depending on which you're using):\n\nReplace this line:\n```\nhttps://huggingface.co/lex-au/${ORPHEUS_MODEL_NAME}/resolve/main/${ORPHEUS_MODEL_NAME}\n```\n\nWith something like:\n```\nhttps://huggingface.co/ADD_NAME_HERE/${ORPHEUS_MODEL_NAME}/resolve/main/${ORPHEUS_MODEL_NAME}\n```\n\n---\n\n### 4. Rebuild the Docker image\n\nOnce your `.env` and `.yml` changes are done, rebuild and start the Docker service:\n```bash\ndocker compose -f docker-compose-gpu.yml up --build  # Or use docker-compose-cpu.yml\n```\n\n---\n\n### That’s it! The WebUI will automatically reflect the model once it’s loaded.\n\nHowever, if the model you're using is **not one of mine**, or **doesn't yet have voice actors defined**, there's one extra step to expose it properly in the interface.\n\n---\n\n### 1. Add your voice to `inference.py`\n\nOpen `tts_engine/inference.py`, scroll down to the voice actor definitions, and add your custom voice name to the list.\n\nFor example, update the `ENGLISH_VOICES` list like this:\n```python\nENGLISH_VOICES = [\"tara\", \"leah\", \"jess\", \"leo\", \"dan\", \"mia\", \"zac\", \"zoe\", \"Add_Voice_Name_Here\"]\n```\n\n---\n\n### 2. Update `tts.html` (WebUI only)\n\nIf you're using the WebUI, you also need to add your new voice option to the voice descriptions.\n\nOpen `templates/tts.html` and locate the conditional blocks that describe each voice. Add an `if` block for your new voice, like so:\n\n```html\n{% if voice_option == \"tara\" %}Female, English, conversational, clear\n{% elif voice_option == \"Add_Voice_Name_Here\" %}Gender, Language, Emotion, Tone\n{% elif voice_option == \"leah\" %}Female, English, warm, gentle\n{% elif voice_option == \"jess\" %}Female, English, energetic, youthful\n{% elif voice_option == \"leo\" %}Male, English, authoritative, deep\n{% elif voice_option == \"dan\" %}Male, English, friendly, casual\n{% elif voice_option == \"mia\" %}Female, English, professional, articulate\n{% elif voice_option == \"zac\" %}Male, English, enthusiastic, dynamic\n{% elif voice_option == \"zoe\" %}Female, English, calm, soothing\n```\n\nYou can customise the voice description however you like—it’s what shows up in the dropdown UI when selecting a voice.\n\n---\n\nHope that clarifies the process for you ❤️\n\n"
+      },
+      {
+        "user": "fintarn",
+        "body": "Thank you so much for the detailed explanation!"
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 39,
+    "title": "README is too hard to read!!!",
+    "author": "zzhdbw",
+    "state": "closed",
+    "created_at": "2025-04-20T11:08:56Z",
+    "updated_at": "2025-04-21T06:22:20Z",
+    "labels": [
+      "documentation"
+    ],
+    "body": "thank you for your contribution，greate work.\nbut, this readme is too long and unclear, I cant understand how to use this project.could you please update and rewrite it ?\n\nWe look forward to your reply, thank you!",
+    "comments": [
+      {
+        "user": "Lex-au",
+        "body": "Hi,\n\nThanks for the feedback! Sorry to hear you're finding the README unclear. I do try to make them as detailed, comprehensive, and beginner-friendly as possible—even for users who may not have a development background.\n\nThat said, it's totally possible there’s a language barrier or that some parts could use simplification. Could you let me know specifically which sections you’re having trouble with—particularly around setup or running the service? I’d be happy to help clarify or improve those areas.\n\nLooking forward to your reply!"
+      },
+      {
+        "user": "zzhdbw",
+        "body": "Thank you for reply！I dont think its a  language barrier problem，because I can run other project on github smoothly.\nMaybe this README need a quick start section ？\nfor my question:I want run this project by FastAPI Server without docker, but when I run it  according to  【FastAPI Service Native Installation】, I cant see how to set env, and should I set the env.\nwhen I run 【python app.py】,its seems have a lot of port in there, I cant know which to use. and when I look the webui, I dont konw how to set it.\n\nThis may not be your problem, it's just that I'm not quite accustomed to this style.\nWhen I figure out how to use this project, I am willing to contribute a lighter README.\n\nLooking forward to your reply!"
+      },
+      {
+        "user": "Lex-au",
+        "body": "> Thank you for reply！I dont think its a language barrier problem，because I can run other project on github smoothly. Maybe this README need a quick start section ？ for my question:I want run this project by FastAPI Server without docker, but when I run it according to 【FastAPI Service Native Installation】, I cant see how to set env, and should I set the env. when I run 【python app.py】,its seems have a lot of port in there, I cant know which to use. and when I look the webui, I dont konw how to set it.\n> \n> This may not be your problem, it's just that I'm not quite accustomed to this style. When I figure out how to use this project, I am willing to contribute a lighter README.\n> \n> Looking forward to your reply!\n\nThanks for clarifying!\n\nThe native Python setup is actually [quite straightforward](https://github.com/Lex-au/Orpheus-FastAPI?tab=readme-ov-file#fastapi-service-native-installation):\n\n1. **Create a virtual environment** (using `venv` or `conda`).\n2. **Install PyTorch with CUDA support** (if you have an NVIDIA GPU).\n3. **Install the dependencies** using `requirements.txt`.\n4. **Activate your environment** and run `python app.py`.\n\n---\n\n### A few extra tips:\n\n- **`.env` file**: This is created automatically from `.env.example` the first time the server runs.  \n  If you’d like to edit it manually, you can do so using any text editor or IDE.\n\n- **Via the Web UI**: Once the server is running, visit [http://localhost:5005](http://localhost:5005), then:\n  - Click **“Advanced Options”**\n  - You can configure the server port, LLM endpoint, and more\n  - After saving, the server will auto-restart and persist changes to the `.env` file\n\n---\n\nHope this helps."
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 28,
+    "title": "🖥️ Hardware: CPU only (No CUDA GPU detected)",
+    "author": "edmundman",
+    "state": "closed",
+    "created_at": "2025-04-14T12:42:57Z",
+    "updated_at": "2025-04-20T12:19:05Z",
+    "labels": [
+      "question"
+    ],
+    "body": "Heya, i am seeing this when running on  a machine with a nvidia gpu ( 3090) after trying to docker compose ",
+    "comments": [
+      {
+        "user": "Lex-au",
+        "body": "Hi,\n\nCan you confirm for me if you have CUDA toolkit installed?"
+      },
+      {
+        "user": "Lex-au",
+        "body": "@edmundman Any update on this one? "
+      },
+      {
+        "user": "edmundman",
+        "body": "Yeah I have cuda, 11.8 , usually docker spots it so idk what's up "
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 36,
+    "title": "GPU not fully utilized",
+    "author": "timonharz",
+    "state": "closed",
+    "created_at": "2025-04-17T19:36:03Z",
+    "updated_at": "2025-04-18T10:08:05Z",
+    "labels": [
+      "question"
+    ],
+    "body": "Hey! When deploying the API I was wondering why it's not using the full resources of my GPU (NVIDIA L4 with 23GB Vram).\nThu Apr 17 19:35:12 2025       \n+---------------------------------------------------------------------------------------+\n| NVIDIA-SMI 535.216.01             Driver Version: 535.216.01   CUDA Version: 12.2     |\n|-----------------------------------------+----------------------+----------------------+\n| GPU  Name                 Persistence-M | Bus-Id        Disp.A | Volatile Uncorr. ECC |\n| Fan  Temp   Perf          Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |\n|                                         |                      |               MIG M. |\n|=========================================+======================+======================|\n|   0  NVIDIA L4                      On  | 00000000:00:03.0 Off |                    0 |\n| N/A   53C    P0              29W /  72W |   5241MiB / 23034MiB |      0%      Default |\n|                                         |                      |                  N/A |\n+-----------------------------------------+----------------------+----------------------+\n                                                                                         \n+---------------------------------------------------------------------------------------+\n| Processes:                                                                            |\n|  GPU   GI   CI        PID   Type   Process name                            GPU Memory |\n|        ID   ID                                                             Usage      |\n|=======================================================================================|\n|    0   N/A  N/A      7889      C   /app/llama-server                          4892MiB |\n|    0   N/A  N/A     10548      C   /app/venv/bin/python3                       336MiB |\n+---------------------------------------------------------------------------------------+",
+    "comments": [
+      {
+        "user": "Lex-au",
+        "body": "> Hey! When deploying the API I was wondering why it's not using the full resources of my GPU (NVIDIA L4 with 23GB Vram). Thu Apr 17 19:35:12 2025 +---------------------------------------------------------------------------------------+ | NVIDIA-SMI 535.216.01 Driver Version: 535.216.01 CUDA Version: 12.2 | |-----------------------------------------+----------------------+----------------------+ | GPU Name Persistence-M | Bus-Id Disp.A | Volatile Uncorr. ECC | | Fan Temp Perf Pwr:Usage/Cap | Memory-Usage | GPU-Util Compute M. | | | | MIG M. | |=========================================+======================+======================| | 0 NVIDIA L4 On | 00000000:00:03.0 Off | 0 | | N/A 53C P0 29W / 72W | 5241MiB / 23034MiB | 0% Default | | | | N/A | +-----------------------------------------+----------------------+----------------------+\n> \n> +---------------------------------------------------------------------------------------+ | Processes: | | GPU GI CI PID Type Process name GPU Memory | | ID ID Usage | |=======================================================================================| | 0 N/A N/A 7889 C /app/llama-server 4892MiB | | 0 N/A N/A 10548 C /app/venv/bin/python3 336MiB | +---------------------------------------------------------------------------------------+\n\nHi!\n\nYou could try switching Q8 for FP16 to utilise more VRAM, though I haven't uploaded that specific model. Alternatively, in `inference.py` you can change the amount of parallel processing:\n\n```python\n# Parallel processing settings\nNUM_WORKERS = 4 if HIGH_END_GPU else 2\n```\n```python\ndef tokens_decoder_sync(syn_token_gen, output_file=None):\n    \"\"\"Optimized synchronous wrapper with parallel processing and efficient file I/O.\"\"\"\n    # Use a larger queue for high-end systems\n    queue_size = 100 if HIGH_END_GPU else 50\n    audio_queue = queue.Queue(maxsize=queue_size)\n    audio_segments = []\n```\n```python\n    # Batch processing of tokens for improved throughput\n    batch_size = 32 if HIGH_END_GPU else 16\n```\n\nHowever, I’d caveat that this may lead to instability.\n"
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 37,
+    "title": "OpenWebUI integration",
+    "author": "Nitroedge",
+    "state": "closed",
+    "created_at": "2025-04-18T01:02:54Z",
+    "updated_at": "2025-04-18T03:07:10Z",
+    "labels": [
+      "question"
+    ],
+    "body": "I'm having a difficult time getting it to work in OpenWebUI. \nI've got Orpheus up and running, LM Studio hosting the model.\n\nI was asking Claude for some help and he had me run this:\n\ncurl -X POST http://localhost:5005/v1/audio/speech -H \"Content-Type: application/json\" -d \"{\\\"model\\\":\\\"tts-1\\\", \\\"input\\\":\\\"Hello, this is a test.\\\", \\\"voice\\\":\\\"tara\\\"}\" --output test_audio.wav\n\nIt successfully created the wav file. So Orpheus and LM Studio are working fine.\n\nIn OpenWebUI, when I click \"Read Aloud\" on a response, the three dots just keep animating and nothing happens with errors in the log.\n\nFirst my OpenWebUI settings are:\n\nTTS Engine: OpenAI\nBase URL: http://localhost:5005/v1\nAPI Key: not-needed\nTTS Voice: Choose a voice (e.g., tara)\nTTS Model: tts-1\n\nOpenWebUI logs output some errors which Claude interpreted for me as:\n\nThe key error in this log is:\nERROR    | open_webui.routers.audio:speech:320 - Cannot connect to host localhost:5005 ssl:default [Connect call failed ('127.0.0.1', 5005)]\n\nThis suggests that OpenWebUI is unable to connect to the Orpheus-FastAPI server at localhost:5005.\n\nYet, I can open http://localhost:5005 without any problem in my browser.\n\nWas there anything special you had to do for Orpheus to work with OpenWebUI? \nI'm running (ver. v0.6.5 (latest)).\nThanks!",
+    "comments": [
+      {
+        "user": "Lex-au",
+        "body": "Hi!\n\nOpenWebUI prefers the direct IP address over localhost. Try this instead. Obviously replace voice string with whichever actor you want to make use of.\n\n```\nURL STRING = http://127.0.0.1:5005/v1\nAPI STRING = not-needed\nVOICE STRING = tara\nTTS STRING = tts-1\n```\n\n![Image](https://github.com/user-attachments/assets/f45360cb-8f6a-41de-a94a-e54fe5e791e7)"
+      },
+      {
+        "user": "Nitroedge",
+        "body": "> OpenWebUI prefers the direct IP address over localhost. Try this instead. Obviously replace voice string with whichever actor you want to make use of.\n> \n> ```\n> URL STRING = http://127.0.0.1:5005/v1\n\nThanks so much for your help, I made a complete noob error!\nMy OpenWebUI is hosted in Docker Desktop and I forgot that, \nso:\n\nhttp://host.docker.internal:5005/v1\n\nas the URL fully worked, sorry for my error!\nYour code and installation procedure is awesome, I just made one modification to pull the nightly PyTorch to get Blackwell GPU support.\nThanks for your help!"
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 29,
+    "title": "How exactly do you add different voices ?",
+    "author": "PumaAI487",
+    "state": "closed",
+    "created_at": "2025-04-14T17:59:28Z",
+    "updated_at": "2025-04-18T01:51:04Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": "Adding New Voices\nTo add new voices, update the AVAILABLE_VOICES list in tts_engine/inference.py and add corresponding descriptions in the HTML template.\n\nHow would I go about using voice models locally stored on pc?\n&\nAm I able to use voices from voice-models.com, using the .index and .pth files?\n",
+    "comments": [
+      {
+        "user": "Lex-au",
+        "body": "I will push an update this easter weekend adding the voice actors for multilingual support."
+      },
+      {
+        "user": "Lex-au",
+        "body": "Merged related issue #31 into this thread to centralise the discussion and resolution."
+      },
+      {
+        "user": "Lex-au",
+        "body": "Enhancement added in [5ead1e4](https://github.com/Lex-au/Orpheus-FastAPI/commit/5ead1e4b8906c38d7f948a2f1dd72d23951e1fd9). Closing.\n"
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 30,
+    "title": "Real time streaming chunk",
+    "author": "Khaled-BH",
+    "state": "closed",
+    "created_at": "2025-04-15T01:11:41Z",
+    "updated_at": "2025-04-18T01:40:54Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": "Hey, I modified the py files and got the real time streaming with first chunk , it's improved and really low-latency \n\n",
+    "comments": [
+      {
+        "user": "Khaled-BH",
+        "body": "[inference.txt](https://github.com/user-attachments/files/19745566/inference.txt)\n\n[app.txt](https://github.com/user-attachments/files/19745567/app.txt)\n\nRename them to .py"
+      },
+      {
+        "user": "Lex-au",
+        "body": "> [inference.txt](https://github.com/user-attachments/files/19745566/inference.txt)\n> \n> [app.txt](https://github.com/user-attachments/files/19745567/app.txt)\n> \n> Rename them to .py\n\nHi!\n\nCan you please push this as a PR? then I can review this tonight."
+      },
+      {
+        "user": "Khaled-BH",
+        "body": "Done."
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 34,
+    "title": "TTS issue: Generated audio skips sections of text and truncates sentences",
+    "author": "malibrated",
+    "state": "closed",
+    "created_at": "2025-04-17T01:49:30Z",
+    "updated_at": "2025-04-18T00:13:14Z",
+    "labels": [],
+    "body": "System: MBP m3 max with 128gb RAM (metal)\nInference Engine: llama.cpp (using recommended settings)\nModel: lex-au/Orpheus-3b-FT-Q8_0.gguf/Orpheus-3b-FT-Q8_0.gguf\n\nDefault settings\nVoice: Tara\n\n**Issue**: Audio conversion skips words in text (2117 characters). Specifically, the generated audio appears to jump over the section in bold below (the audio jumps back to \"(1) to effectively measure system-calibrated performance...\").  Then the generated audio loses coherence and jumps around throughout the rest of the text. \n\n### Input Text:\nThe 2021 Speaker Recognition Evaluation (SRE21) is the next in an ongoing series of speaker recognition evaluations conducted by the US National Institute of Standards and Technology (NIST) since 1996. The objectives of the evaluation series are (1) to effectively measure system-calibrated performance of the current state of technology, (2) to provide a common framework that enables the research community to explore promising new ideas in speaker recognition, and (3) to support the community in their development of advanced technology incorporating these ideas. The evaluations are intended to be of interest to all researchers working on the general problem of text-independent speaker recognition. To this end, the evaluations are **designed to focus on core technology issues and to be simple and accessible to those wishing to\nparticipate. This document describes the task, the performance metric, data, and the evaluation protocol**  as well as rules/requirements for SRE21.\nSRE21 will be organized similar to SRE19, focusing on speaker detection over conversational telephone speech (CTS) and audio from video (AfV). It will introduce the following new features, thanks to a new multimodal and multilingual (i.e., with multilingual subjects) corpus collected outside North America:\n– trials (target and non-target) with enrollment and test segments originating from different source types (i.e., CTS and AfV)\n– trials (target and non-target) with enrollment and test segments spoken in different languages (i.e., cross-lingual trials)\nSRE21 will offer both fixed and open training conditions to allow uniform cross-system comparisons and to understand the effect of additional and unconstrained amounts of training data on system performance (see Section 2.2). Similar to SRE19, in addition to the audio-only track, SRE21 will feature a visual-only track and an audio-visual track involving automatic person detection using audio, image, and video material.\nSystem submission is required for the audio and audio-visual tracks, and optional for the visual track.\nTable 1 summarizes the tracks for the SRE21.",
+    "comments": [
+      {
+        "user": "Lex-au",
+        "body": "Hi!\n\nThis is to do with how the underlying model processes text and the constraints it has regarding length. I've taken great strides to fix this, using intelligent cross-fading and segment piecing (1000 characters at a time), allowing the user to generate up to **8192 characters** worth of audio in a single generation — which you can increase or decrease as you see fit via `tts.html`.\n\nYou’ll need to **break up and format** the chunk of text you're looking to convert to audio.\n\n[Read here](https://github.com/Lex-au/Orpheus-FastAPI?tab=readme-ov-file#long-text-processing)\n\nFor example, I processed a similarly long (in terms of character length) portion of *Moby Dick* without issues.\n\n> \n> Call me Ishmael. Some years ago—never mind how long precisely—having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world. It is a way I have of driving off the spleen and regulating the circulation. Whenever I find myself growing grim about the mouth; whenever it is a damp, drizzly November in my soul; whenever I find myself involuntarily pausing before coffin warehouses, and bringing up the rear of every funeral I meet; and especially whenever my hypos get such an upper hand of me, that it requires a strong moral principle to prevent me from deliberately stepping into the street, and methodically knocking people’s hats off—then, I account it high time tozz get to sea as soon as I can. This is my substitute for pistol and ball. With a philosophical flourish Cato throws himself upon his sword; I quietly take to the ship. There is nothing surprising in this. If they but knew it, almost all men in their degree, some time or other, cherish very nearly the same feelings towards the ocean with me.\n> \n> There now is your insular city of the Manhattoes, belted round by wharves as Indian isles by coral reefs—commerce surrounds it with her surf. Right and left, the streets take you waterward. Its extreme downtown is the battery, where that noble mole is washed by waves, and cooled by breezes, which a few hours previous were out of sight of land. Look at the crowds of water-gazers there.\n> \n> Circumambulate the city of a dreamy Sabbath afternoon. Go from Corlears Hook to Coenties Slip, and from thence, by Whitehall, northward. What do you see?—Posted like silent sentinels all around the town, stand thousands upon thousands of mortal men fixed in ocean reveries. Some leaning against the spiles; some seated upon the pier-heads; some looking over the bulwarks of ships from China; some high aloft in the rigging, as if striving to get a still better seaward peep. But these are all landsmen; of week days pent up in lath and plaster— tied to counters, nailed to benches, clinched to desks. How then is this? Are the green fields gone? What do they here?\n\n\nResult: [Tara Moby Dick](https://lex-au.github.io/Orpheus-FastAPI/TaraLongGeneration.mp3)\n\n"
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 35,
+    "title": "Code 404 No Model loaded",
+    "author": "maglat",
+    "state": "closed",
+    "created_at": "2025-04-17T09:46:59Z",
+    "updated_at": "2025-04-17T09:58:12Z",
+    "labels": [
+      "question"
+    ],
+    "body": "I installed Orpheus-FastAPi succesfully on my Mac and can access the page. When I try to create a voice sample, I receive the error \"Api request failed with status code 404\" \"Code: Model_not_found\". Where do I need to place the model? I thought the model will be downloaded automatically.",
+    "comments": [
+      {
+        "user": "Lex-au",
+        "body": "> I installed Orpheus-FastAPi succesfully on my Mac and can access the page. When I try to create a voice sample, I receive the error \"Api request failed with status code 404\" \"Code: Model_not_found\". Where do I need to place the model? I thought the model will be downloaded automatically.\n\nYou need need to download and run the model via an Inference server. This project uses OpenAI Like endpoint for API calls.\n\nIn .env\n\n```\n# Server connection settings\nORPHEUS_API_URL=http://127.0.0.1:1234/v1/completions\n```\n\nThe example uses LM Studio. But you can use any inference application.\n\n[Read here](https://github.com/Lex-au/Orpheus-FastAPI?tab=readme-ov-file#external-inference-server)"
+      },
+      {
+        "user": "maglat",
+        "body": "OMG! I am soo stupid..... Got it running now :D Many thanks! I hope you had a good laugh! Next time I should read EVERYTHING!"
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 25,
+    "title": "Support Multilanguage",
+    "author": "brehiner",
+    "state": "closed",
+    "created_at": "2025-04-05T21:13:55Z",
+    "updated_at": "2025-04-13T01:14:35Z",
+    "labels": [
+      "question"
+    ],
+    "body": "It seems this is only for english speakers, are there plans for new languages? I'll be waiting spanish",
+    "comments": [
+      {
+        "user": "Lex-au",
+        "body": "Hi @brehiner \n\nUnfortunately, the underlying model only supports English at this time. It's not something I can directly change on this occasion. We'll need to wait for the developers to either fine-tune it further or release a new version with multilingual support."
+      },
+      {
+        "user": "jandrop",
+        "body": "It seems now supports multilanguage https://canopylabs.ai/releases/orpheus_can_speak_any_language#info"
+      },
+      {
+        "user": "Lex-au",
+        "body": "> It seems now supports multilanguage https://canopylabs.ai/releases/orpheus_can_speak_any_language#info\n\nOh nice—looks like it now supports multilanguage! Appreciate the link.\n\nDo you know if they’re still using the same voice actors (e.g., Tara) but adapting them for other languages? If so, that's perfect—it means anyone make use of it right now without any further changes.\n\nOr were you asking about custom quantisations for these models?"
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 27,
+    "title": "Connection error to API at http://127.0.0.1:1234/v1/completions",
+    "author": "Wonderflex",
+    "state": "closed",
+    "created_at": "2025-04-11T18:44:02Z",
+    "updated_at": "2025-04-11T20:59:29Z",
+    "labels": [],
+    "body": "Hello,\n\nI'm getting the following error \"Connection error to API at http://127.0.0.1:1234/v1/completions\"  when attempting to generate audio, and the resulting audio file is zero seconds long.  For a backend, I'm running KoboldCCP which defaults to http://localhost:5001 and can generate text just fine. \n\nHere is the full command prompt if it helps:\n\n(venv) E:\\LocalLLM\\Orpheus-FastAPI>python app.py\n🖥️ Hardware: High-end CUDA GPU detected\n📊 Device: NVIDIA GeForce RTX 4090\n📊 VRAM: 23.99 GB\n📊 Compute Capability: 8.9\n🚀 Using high-performance optimizations\nConfiguration loaded:\n  API_URL: http://127.0.0.1:1234/v1/completions\n  MAX_TOKENS: 8192\n  TEMPERATURE: 0.6\n  TOP_P: 0.9\n  REPETITION_PENALTY: 1.1\n🔥 Starting Orpheus-FASTAPI Server on 0.0.0.0:5005\n💬 Web UI available at http://localhost:5005\n📖 API docs available at http://localhost:5005/docs\n🔗 Using LLM inference server at: http://127.0.0.1:1234/v1/completions\nINFO:     Will watch for changes in these directories: ['E:\\\\LocalLLM\\\\Orpheus-FastAPI']\nINFO:     Uvicorn running on http://0.0.0.0:5005 (Press CTRL+C to quit)\nINFO:     Started reloader process [29228] using WatchFiles\nINFO:     Started server process [26512]\nINFO:     Waiting for application startup.\nINFO:     Application startup complete.\nINFO:     127.0.0.1:55885 - \"GET / HTTP/1.1\" 200 OK\nINFO:     127.0.0.1:55892 - \"GET / HTTP/1.1\" 200 OK\nINFO:     127.0.0.1:55892 - \"GET /get_config HTTP/1.1\" 200 OK\nINFO:     127.0.0.1:55892 - \"GET /favicon.ico HTTP/1.1\" 200 OK\nStarting speech generation for 'This is a test of Tara. '\nUsing voice: tara, GPU acceleration: Yes (High-end)\nGenerating speech for: <|audio|>tara: This is a test of Tara. <|eot_id|>\nUsing optimized parameters for high-end GPU\nConnection error to API at http://127.0.0.1:1234/v1/completions\nRetrying in 2 seconds... (attempt 2/3)\nConnection error to API at http://127.0.0.1:1234/v1/completions\nRetrying in 4 seconds... (attempt 3/3)\nConnection error to API at http://127.0.0.1:1234/v1/completions\nMax retries reached. Token generation failed.\nProducer completed - setting done event\nReceived end-of-stream marker\nAudio saved to outputs/tara_20250411_105743.wav\nTotal speech generation completed in 12.12 seconds\nINFO:     127.0.0.1:55911 - \"POST /speak HTTP/1.1\" 200 OK\nINFO:     127.0.0.1:55911 - \"GET /tara_20250411_105743.wav HTTP/1.1\" 200 OK\n\nScreenshot of the output area within the app:\n\n![Image](https://github.com/user-attachments/assets/44a9ba0e-eb85-4445-956b-b6a6770b2283)\n\nI've tried to changing the API URL in Orpheus FASTAPI advanced options to these provided in the Kobold command line (bolded), replacing \"localhost\" with 127.0.0.1, and the error out instantly with a 404 error.\n\nStarting Kobold API on port 5001 at **http://localhost:5001/api/**\nStarting OpenAI Compatible API on port 5001 at **http://localhost:5001/v1/**\nPlease connect to custom endpoint at **http://localhost:5001**",
+    "comments": [
+      {
+        "user": "Wonderflex",
+        "body": "You may resolve.  If anybody else comes here with the same issue,  you need to use \"http://127.0.0.1:5001/v1/completions\" in your API URL.  I'm just stupid and took the 1234 literally in the example text."
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 26,
+    "title": "Streaming",
+    "author": "AI-Guru",
+    "state": "closed",
+    "created_at": "2025-04-08T05:39:07Z",
+    "updated_at": "2025-04-09T00:04:28Z",
+    "labels": [
+      "question"
+    ],
+    "body": "Good morning, \n\nFirst and foremost, congratulations on your fine project! Works like a charm!\n\nI dug a little into it, looking for streaming capabilities. Streaming in a sense that the resulting waveform is being returned via the API, while the underlying model is still generating. \n\nWould streaming be possible?\n\nCheers,\nTristan",
+    "comments": [
+      {
+        "user": "Lex-au",
+        "body": "Hi @AI-Guru,\n\nIt’s great to finally connect with you on GitHub—and thank you for generously sharing my open-source work on LinkedIn! That kind of support is genuinely appreciated.\n\nAt the moment, the WebUI is static and pulls the fully cross-faded audio in one go. This was a deliberate UX decision, primarily because my workaround for handling longer text (cross-fading) helps mitigate the current limitations of the underlying model—which is best suited for short- to mid-length generations. The goal was to let users generate and consume the full audio seamlessly in a single step.\n\n> **Note about long-form audio:**  \n> While the system now supports texts of unlimited length, there may be slight audio discontinuities between segments due to architectural constraints of the underlying model. The Orpheus model was designed for short to medium text segments, and our batching system works around this limitation by intelligently splitting and stitching content with minimal audible impact.\n\nThat said, the project includes OpenAI-style endpoints (e.g., `v1/audio/speech`), and you're absolutely free to build your own WebUI around them. If you stream the output chunk by chunk to your own frontend, you can effectively achieve real-time playback as each chunk is generated. A good example of this is how OpenWebUI handles TTS from the API endpoint.\n\nYou can explore all the available endpoints by visiting [http://localhost:5005/docs/](http://localhost:5005/docs/).\n\nThere has also been some really cool checkpoint fine-tunes on top of Orpheus, introducing new character voices. If there's enough community interest, I might consider natively supporting real-time streaming in the WebUI down the line (along with added new characters, though it'd require me to create new quants to make it end-to-end). But for now, it’s static by design.\n\nCheers,  \nLex\n"
+      },
+      {
+        "user": "AI-Guru",
+        "body": "Howdy Lex,\n\nYea! Small world. I love it! And thanks for your generous contributions to the open source community!\n\nI see!\n\nA clarification. I actually meant the API endpoints. What I gather is that the WebUI is batching, to facilitate unlimited length generation. If I use the API endpoints directly, which as a matter of fact I am doing, I would have trouble with long texts, but there would be streaming, right?\n\nCheers,\nTristan"
+      },
+      {
+        "user": "Lex-au",
+        "body": "Hey Tristan,\n\nAh, gotcha—that makes more sense now.\n\nIt's a bit nuanced. The WebUI I provide waits for all the audio chunks to be generated before stitching them together into a single output using crossfading. In contrast, if you're using the API endpoints directly—like integrating with OpenWebUI—you *can* stream each individual `.wav` chunk as it's produced, rather than waiting for the full response.\n\nMy repo doesn’t explicitly walk through the full streaming setup, but I *do* provide guidance on how you might connect the FASTAPI endpoint into platforms like OpenWebUI. Ultimately, though, it’s up to the end user to implement that depending on their stack and desired flow.\n\nThat said, I get where you're coming from. You're not the only one who’s asked for the native WebUI (the demo page I included) to support real-time playback as each chunk becomes available. Totally valid. But just to clarify—**the WebUI was always meant as a simple demo page** for users who just wanted to convert text into speech with each voice actor, without needing to dive into the API. I explained that in this issue here if you’re curious:  \n👉 [Issue #15 – Comment](https://github.com/Lex-au/Orpheus-FastAPI/issues/15#issuecomment-2746195469)\n\nFrom the beginning, the project has been focused on creating an **OpenAI-style endpoint** for Orpheus that could be used flexibly across different frontends. So the WebUI decisions leaned toward simplicity more than anything else.\n\nReally appreciate the feedback though—honestly, it’s exactly the kind of stuff that helps me improve the direction.\n\nCheers,  \nLex\n"
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 10,
+    "title": "API/Endpoint Issues",
+    "author": "oivio",
+    "state": "closed",
+    "created_at": "2025-03-22T21:40:06Z",
+    "updated_at": "2025-04-02T19:08:45Z",
+    "labels": [],
+    "body": "I did do my best to fallow instructions but constantly I am hitting some wall.\n\nafter running python app.py I did trying generate anything from http://localhost:5005\n\n```\n(orpheus-tts) D:\\GitHub\\TTS\\Orpheus-FastAPI>python app.py\n🖥️ Hardware: High-end CUDA GPU detected\n📊 Device: NVIDIA GeForce RTX 4080\n📊 VRAM: 15.99 GB\n📊 Compute Capability: 8.9\n🚀 Using high-performance optimizations\nConfiguration loaded:\n  API_URL: http://127.0.0.1:1234/v1/completions\n  MAX_TOKENS: 8192\n  TEMPERATURE: 0.6\n  TOP_P: 0.9\n  REPETITION_PENALTY: 1.1\n🔥 Starting Orpheus-FASTAPI Server on 0.0.0.0:5005\n💬 Web UI available at http://localhost:5005\n📖 API docs available at http://localhost:5005/docs\n🔗 Using LLM inference server at: http://127.0.0.1:1234/v1/completions\nINFO:     Will watch for changes in these directories: ['E:\\\\GitHub\\\\LLMS\\\\TTS\\\\Orpheus-FastAPI']\nINFO:     Uvicorn running on http://0.0.0.0:5005 (Press CTRL+C to quit)\nWARNING:  --reload-include and --reload-exclude have no effect unless watchfiles is installed.\nINFO:     Started reloader process [25192] using StatReload\nINFO:     Started server process [28628]\nINFO:     Waiting for application startup.\nINFO:     Application startup complete.\nINFO:     127.0.0.1:30928 - \"GET / HTTP/1.1\" 200 OK\nINFO:     127.0.0.1:30929 - \"GET /get_config HTTP/1.1\" 200 OK\nINFO:     127.0.0.1:30928 - \"GET /favicon.ico HTTP/1.1\" 304 Not Modified\nStarting speech generation for 'Use <laugh> to add laughter to the speech'\nUsing voice: tara, GPU acceleration: Yes (High-end)\nGenerating speech for: <|audio|>tara: Use <laugh> to add laughter to the speech<|eot_id|>\nUsing optimized parameters for high-end GPU\nConnection error to API at http://127.0.0.1:1234/v1/completions\nRetrying in 2 seconds... (attempt 2/3)\nConnection error to API at http://127.0.0.1:1234/v1/completions\nRetrying in 4 seconds... (attempt 3/3)\nConnection error to API at http://127.0.0.1:1234/v1/completions\nMax retries reached. Token generation failed.\nProducer completed - setting done event\nReceived end-of-stream marker\nAudio saved to outputs/tara_20250322_222008.wav\nTotal speech generation completed in 12.16 seconds\nINFO:     127.0.0.1:30933 - \"POST /speak HTTP/1.1\" 200 OK\nINFO:     127.0.0.1:30933 - \"GET /tara_20250322_222008.wav HTTP/1.1\" 200 OK\n```\n\nThen I did try also Open WebUI and same timeout issues additionally there I did found extra errors:\n```\n2025-03-22 22:20:47.309 | ERROR    | open_webui.routers.audio:get_available_voices:741 - Error fetching voices from custom endpoint: 404 Client Error: Not Found for url: http://localhost:5005/v1/audio/voices - {}\n2025-03-22 22:20:49.369 | ERROR    | open_webui.routers.audio:get_available_models:694 - Error fetching models from custom endpoint: 404 Client Error: Not Found for url: http://localhost:5005/v1/audio/models - {}\n```\n\nIm on Windows10 with GTX4080",
+    "comments": [
+      {
+        "user": "Lex-au",
+        "body": "Hi @oivio \n\nHave you downloaded the Orpheus model from Hugging Face yet? Also, which inference server are you using to serve the model as an endpoint? By default, when the .env file is auto-generated, it points to LM Studio (most widely used).\n\nThe API error you're seeing indicates that it can’t reach the expected endpoint at: `http://127.0.0.1:1234/v1/completions`\n\nIf you haven’t done that part yet, you’ll need to download the model from Hugging Face: [Orpheus-3b-FT-Q8_0.gguf](https://huggingface.co/lex-au/Orpheus-3b-FT-Q8_0.gguf)\n\nThen, load it into an inference server like LM Studio, llama.cpp, or GPUStack. After it's running, grab the API endpoint from your inference server and either:\n\nManually update the .env file, or\n\nUse the web UI to set the endpoint - then you're good to go👌"
+      },
+      {
+        "user": "oivio",
+        "body": "Hi @Lex-au \nThank you for quit response.\nI did already download` Orpheus-3b-FT-Q8_0.gguf` and uploaded to Ollama. \nThen in env I did changed as you mention to correct end point `http://localhost:11434/api/generate`\nthen I did run cli  `ollama run Orpheus-3b-FT-Q8_0:latest` and it loaded\n\nAfter that I did try again and I did get new results.\n\n```\nINFO:     Uvicorn running on http://0.0.0.0:5005 (Press CTRL+C to quit)\nWARNING:  --reload-include and --reload-exclude have no effect unless watchfiles is installed.\nINFO:     Started reloader process [11036] using StatReload\nINFO:     Started server process [26376]\nINFO:     Waiting for application startup.\nINFO:     Application startup complete.\nINFO:     127.0.0.1:31659 - \"GET / HTTP/1.1\" 200 OK\nINFO:     127.0.0.1:31659 - \"GET /favicon.ico HTTP/1.1\" 304 Not Modified\nINFO:     127.0.0.1:31659 - \"GET /get_config HTTP/1.1\" 200 OK\nStarting speech generation for 'Use <laugh> to add laughter to the speech'\nUsing voice: tara, GPU acceleration: Yes (High-end)\nGenerating speech for: <|audio|>tara: Use <laugh> to add laughter to the speech<|eot_id|>\nUsing optimized parameters for high-end GPU\nToken generation complete: 0 tokens in 6.79s (0.0 tokens/sec)\nProducer completed - setting done event\nReceived end-of-stream marker\nWaiting for token processor thread to complete...\nAudio saved to outputs/tara_20250322_230702.wav\nTotal speech generation completed in 6.79 seconds\nINFO:     127.0.0.1:31661 - \"POST /speak HTTP/1.1\" 200 OK\nINFO:     127.0.0.1:31661 - \"GET /tara_20250322_230702.wav HTTP/1.1\" 200 OK\n```\n\nsadly tara_20250322_230702.wav is empty - looks like because of : 0 tokens ?\n\nMaybe it is because I do run  Orpheus-3b-FT-Q8_0 on Ollama?"
+      },
+      {
+        "user": "Lex-au",
+        "body": "@oivio Ollama updates very frequently, but give me like 20mins and Ill try it myself."
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 23,
+    "title": "How to quantize AR text-to-speech models?",
+    "author": "JohnHerry",
+    "state": "closed",
+    "created_at": "2025-03-29T10:57:07Z",
+    "updated_at": "2025-03-31T00:06:39Z",
+    "labels": [
+      "question"
+    ],
+    "body": "Thanks for the good job.  What I am instreated most is how to quantize the large text to speech models into 8bits, 4bits, or even 2bits.  Is there any paper or introdution? ",
+    "comments": [
+      {
+        "user": "richardr1126",
+        "body": "With this you can convert HF models to GGUF quantized format for use in llama.cpp or LM Studio. There are also other quantization methods with the official HuggingFace transformers inference, or if using vLLM.\n\nhttps://huggingface.co/spaces/ggml-org/gguf-my-repo\n\nIf you want to  quantize locally you can use llama.cpp scripts."
+      },
+      {
+        "user": "Lex-au",
+        "body": "> Thanks for the good job. What I am instreated most is how to quantize the large text to speech models into 8bits, 4bits, or even 2bits. Is there any paper or introdution?\n\nHey!\n\nI used [llama.cpp](https://github.com/ggml-org/llama.cpp/releases) locally. To quantize Orpheus, you'll need the full repository—including the safetensors, tokenizer, and config files. First, convert the model to FP16 or Q8_0 using the Hugging Face to GGUF conversion script. From there, you can use llama-quantize to generate smaller quantised versions if needed.\n\nAlternatively, you can use the space provided by @richardr1126 to handle the entire process through Hugging Face."
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 19,
+    "title": "FutureWarning: You are using `torch.load` with `weights_only=False`",
+    "author": "oivio",
+    "state": "closed",
+    "created_at": "2025-03-25T08:06:40Z",
+    "updated_at": "2025-03-26T02:27:06Z",
+    "labels": [
+      "question"
+    ],
+    "body": "I just did notice FutureWarning msg:\n\n```\nenv\\lib\\site-packages\\snac\\snac.py:108: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default val\nue), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/\npytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could \nbe executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_g\nlobals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to \nthis experimental feature.\n  state_dict = torch.load(model_path, map_location=\"cpu\")\n```\n\nStrange that I did not seen that before.\n\nMy Specs:\n📊 Device: NVIDIA GeForce RTX 4080\n📊 VRAM: 15.99 GB\n📊 Compute Capability: 8.9\n📊 Windows: 10\n📊 Ultralytics : 8.3.96\n📊 Python: 3.11.9",
+    "comments": [
+      {
+        "user": "Lex-au",
+        "body": "Hi again @oivio 👋\n\nYeah, that warning’s just PyTorch being cautious about future defaults (it’s related to how the SNAC model is loaded). I’m not seeing it on my end—probably because I’m running an older version of Python or PyTorch than you are. Nothing to worry about though, it won’t affect anything for now."
+      },
+      {
+        "user": "oivio",
+        "body": "thank you @Lex-au \n\nA bit out of topic maybe future enhancement idea is to add function that instead of playing audio from wav file would play it directly from buffer. Or, maybe it is already possible and I just didn't notice ;)"
+      },
+      {
+        "user": "Lex-au",
+        "body": "> thank you [@Lex-au](https://github.com/Lex-au)\n> \n> A bit out of topic maybe future enhancement idea is to add function that instead of playing audio from wav file would play it directly from buffer. Or, maybe it is already possible and I just didn't notice ;)\n\nYou're most welcome @oivio!\n\nRight now, the API streams audio via the /v1/speech/audio endpoint. So if you're using something like OpenWebUI or SillyTavern, playback starts as soon as the first batch is ready—each .wav chunk plays incrementally.\n\nIf you meant doing that on the native web UI side, it's technically possible, but not currently implemented—and wouldn't be quite as smooth without some extra handling. But I'll take a look for future use-cases."
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 2,
+    "title": "Voice clone support?",
+    "author": "shivshankar11",
+    "state": "closed",
+    "created_at": "2025-03-21T23:03:47Z",
+    "updated_at": "2025-03-25T21:34:44Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": "According to oroheus repo , it supports voice cloning ",
+    "comments": [
+      {
+        "user": "Lex-au",
+        "body": "Hi!\n\nThis might be something I explore down the line, but not at the moment. As far as I know, there isn’t a smart or scalable way to create custom voice profiles—at least not without fine-tuning the underlying model. While we could technically do one-shot voice cloning through the UI, we wouldn’t be able to serve that consistently through the API unless the model itself had been trained on that data.\n\nI’ll revisit this in the future when a better approach becomes feasible."
+      },
+      {
+        "user": "rubentorresbonet",
+        "body": "So I made a finetune and got a new model. Two questions arise @Lex-au, if you are so kind:\n\n- Could you provide with the quantization command you use for, lets say, Q8 so I can get comparable results?\n- Something I do not quite get is voices. I did a finetune with my own audio as per the docs, and I got a checkpoint/model which I would then serve over llamacpp (after quantizing with your command). Which voice would I have to specify to use the voice of the dataset I put during finetuning? I had around 1k samples.\n\nSorry if something's plainly wrong, not too experienced here, but I definitely appreciate your work. Thanks."
+      },
+      {
+        "user": "patientx",
+        "body": "this works at least with some success, that specific model is needed though , can you try it , https://github.com/isaiahbjork/orpheus-tts-local/pull/18"
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 18,
+    "title": "RTF always around 1.0",
+    "author": "lvt1693",
+    "state": "closed",
+    "created_at": "2025-03-25T06:49:12Z",
+    "updated_at": "2025-03-25T10:57:32Z",
+    "labels": [],
+    "body": "I'm sorry if this issue is out of scope, but I'm noob so hope someone could help.\nI loaded your gguf models using llama.cpp cuda 12.1 RTX 3090. And all 3 gguf models generated output with RTF around 1.0. (even thought 2Q should be faster, right?)\nSo is there any way for faster inference?\n",
+    "comments": [
+      {
+        "user": "Lex-au",
+        "body": "> I'm sorry if this issue is out of scope, but I'm noob so hope someone could help. I loaded your gguf models using llama.cpp cuda 12.1 RTX 3090. And all 3 gguf models generated output with RTF around 1.0. (even thought 2Q should be faster, right?) So is there any way for faster inference?\n\nCan you post some terminal logs for me. With a 3090, you should not be getting an RTF of only 1. "
+      },
+      {
+        "user": "lvt1693",
+        "body": "I tried 3 models, switched to vllm with original model, it was the same for all:\n![Image](https://github.com/user-attachments/assets/76a22a4c-157b-4989-ae56-17f5f31da3a1)\n"
+      },
+      {
+        "user": "lvt1693",
+        "body": "ah my bad 🥹 my llama.cpp config sucks. I tried again and now get 1.4 for q8 model. "
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 5,
+    "title": "Dockerized version",
+    "author": "av",
+    "state": "closed",
+    "created_at": "2025-03-22T09:52:25Z",
+    "updated_at": "2025-03-24T15:21:12Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": "Hi, thanks for sharing Orpheus! \n\nI'm curious if there are any plans for dockerized version or pre-built images of the service so that it's easier to integrate",
+    "comments": [
+      {
+        "user": "Lex-au",
+        "body": "Hi, thanks so much for the kind words!\n\nAt the moment, there aren’t any plans for a Dockerised version or pre-built images—but I really appreciate the suggestion, and I’ll definitely keep it in mind (a few people have requested it now)."
+      },
+      {
+        "user": "tansuka",
+        "body": "I know you closed this with a comment, but it would be great to have the dockerised version. \nnevertheless thanks for the great work "
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 16,
+    "title": "The output audio skipped text if text prompt is long.",
+    "author": "duynt575",
+    "state": "closed",
+    "created_at": "2025-03-23T16:38:43Z",
+    "updated_at": "2025-03-24T01:52:38Z",
+    "labels": [
+      "question"
+    ],
+    "body": "Sometimes the output audio skipped half a sentence, sometimes it skipped a few sentences. Btw, thanks for the project.",
+    "comments": [
+      {
+        "user": "Lex-au",
+        "body": "Hi!\n\nThanks so much for the kind words—really appreciate it! I totally understand how frustrating the long-form audio limitations can be. The underlying model wasn’t originally designed for extended content, but rather for short to midsize conversations ([more on that here](https://github.com/Lex-au/Orpheus-FastAPI#:~:text=Note%20about%20long,minimal%20audible%20impact.)).\n\nThat said, my repo includes a workaround that bypasses the 45-second limit and enables longer output. The trade-off is that it stitches segments together using cross-fading during audio compilation. It’s not perfect, but it helps minimise disruption.\n\nA more robust fix would need to come from the developers of the underlying model—either by supporting extended content generation natively, or by providing token-level timestamps we can leverage during synthesis."
+      },
+      {
+        "user": "duynt575",
+        "body": "Just a small suggestion since I'm not a programmer: split the long text into chunks of 2-3 sentences then send those chunks to the model, when all is done we can join all the audios into one final file. It's alright if it's not possible, still appreciate it."
+      },
+      {
+        "user": "Lex-au",
+        "body": "> Just a small suggestion since I'm not a programmer: split the long text into chunks of 2-3 sentences then send those chunks to the model, when all is done we can join all the audios into one final file. It's alright if it's not possible, still appreciate it.\n\nThat’s a great suggestion—and definitely a logical approach! I could technically use something like Sentence Transformers to give a small parameter LLM some oversight on how batches are assigned, but that would significantly increase generation time and overcomplicate things.\n\nAnother option would be to split text using regex around punctuation like periods or commas, but that’s a bit too error-prone for clean audio synthesis. What’s in place right now is honestly the most intelligent balance I could think of for quality and speed.\n\nThat said, if someone finds a better, more consistent method, I’m totally open to pull requests!\n\nAlso, the Canopy devs (who maintain the underlying model) are pretty active—I’ve flagged this kind of limitation with them already. Hopefully we’ll see native support for extended context in a future release."
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 14,
+    "title": "Installation Issues Python 3.12 on Linux",
+    "author": "duckfriend123",
+    "state": "closed",
+    "created_at": "2025-03-23T09:09:39Z",
+    "updated_at": "2025-03-23T14:51:39Z",
+    "labels": [
+      "documentation"
+    ],
+    "body": "Installation Method: python venv \nOS: Debian 12 \nCommands executed: \n```\npython3 -m venv venv\nsource/venv/bin/activate\npip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124\npip3 install -r requirements.txt\n ```\nError:\n```\n error: subprocess-exited-with-error\n  \n  × Getting requirements to build wheel did not run successfully.\n  │ exit code: 1\n  ╰─> [33 lines of output]\n      Traceback (most recent call last):\n        File \"/home/user1/gits/Orpheus-FastAPI/venv/lib/python3.12/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py\", line 389, in <module>\n          main()\n        File \"/home/user1/gits/Orpheus-FastAPI/venv/lib/python3.12/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py\", line 373, in main\n          json_out[\"return_val\"] = hook(**hook_input[\"kwargs\"])\n                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        File \"/home/user1/gits/Orpheus-FastAPI/venv/lib/python3.12/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py\", line 137, in get_requires_for_build_wheel\n          backend = _build_backend()\n                    ^^^^^^^^^^^^^^^^\n        File \"/home/user1/gits/Orpheus-FastAPI/venv/lib/python3.12/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py\", line 70, in _build_backend\n          obj = import_module(mod_path)\n                ^^^^^^^^^^^^^^^^^^^^^^^\n        File \"/home/user1/anaconda3/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n          return _bootstrap._gcd_import(name[level:], package, level)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n        File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n        File \"<frozen importlib._bootstrap>\", line 1310, in _find_and_load_unlocked\n        File \"<frozen importlib._bootstrap>\", line 488, in _call_with_frames_removed\n        File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n        File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n        File \"<frozen importlib._bootstrap>\", line 1331, in _find_and_load_unlocked\n        File \"<frozen importlib._bootstrap>\", line 935, in _load_unlocked\n        File \"<frozen importlib._bootstrap_external>\", line 995, in exec_module\n        File \"<frozen importlib._bootstrap>\", line 488, in _call_with_frames_removed\n        File \"/tmp/pip-build-env-1vnzdlvn/overlay/lib/python3.12/site-packages/setuptools/__init__.py\", line 16, in <module>\n          import setuptools.version\n        File \"/tmp/pip-build-env-1vnzdlvn/overlay/lib/python3.12/site-packages/setuptools/version.py\", line 1, in <module>\n          import pkg_resources\n        File \"/tmp/pip-build-env-1vnzdlvn/overlay/lib/python3.12/site-packages/pkg_resources/__init__.py\", line 2172, in <module>\n          register_finder(pkgutil.ImpImporter, find_on_path)\n                          ^^^^^^^^^^^^^^^^^^^\n      AttributeError: module 'pkgutil' has no attribute 'ImpImporter'. Did you mean: 'zipimporter'?\n      [end of output]\n  \n  note: This error originates from a subprocess, and is likely not a problem with pip.\nerror: subprocess-exited-with-error\n\n× Getting requirements to build wheel did not run successfully.\n│ exit code: 1\n╰─> See above for output.\n\nnote: This error originates from a subprocess, and is likely not a problem with pip.\n(venv) (base) user1@workstation1:~/gits/Orpheus-FastAPI$ \n```\n\nWorkaround: \nusing conda instead fixes the issue.",
+    "comments": [
+      {
+        "user": "Lex-au",
+        "body": "> ```\n>  error: subprocess-exited-with-error\n>   \n>   × Getting requirements to build wheel did not run successfully.\n>   │ exit code: 1\n>   ╰─> [33 lines of output]\n>       Traceback (most recent call last):\n>         File \"/home/user1/gits/Orpheus-FastAPI/venv/lib/python3.12/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py\", line 389, in <module>\n>           main()\n>         File \"/home/user1/gits/Orpheus-FastAPI/venv/lib/python3.12/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py\", line 373, in main\n>           json_out[\"return_val\"] = hook(**hook_input[\"kwargs\"])\n>                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n>         File \"/home/user1/gits/Orpheus-FastAPI/venv/lib/python3.12/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py\", line 137, in get_requires_for_build_wheel\n>           backend = _build_backend()\n>                     ^^^^^^^^^^^^^^^^\n>         File \"/home/user1/gits/Orpheus-FastAPI/venv/lib/python3.12/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py\", line 70, in _build_backend\n>           obj = import_module(mod_path)\n>                 ^^^^^^^^^^^^^^^^^^^^^^^\n>         File \"/home/user1/anaconda3/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n>           return _bootstrap._gcd_import(name[level:], package, level)\n>                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n>         File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n>         File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n>         File \"<frozen importlib._bootstrap>\", line 1310, in _find_and_load_unlocked\n>         File \"<frozen importlib._bootstrap>\", line 488, in _call_with_frames_removed\n>         File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n>         File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n>         File \"<frozen importlib._bootstrap>\", line 1331, in _find_and_load_unlocked\n>         File \"<frozen importlib._bootstrap>\", line 935, in _load_unlocked\n>         File \"<frozen importlib._bootstrap_external>\", line 995, in exec_module\n>         File \"<frozen importlib._bootstrap>\", line 488, in _call_with_frames_removed\n>         File \"/tmp/pip-build-env-1vnzdlvn/overlay/lib/python3.12/site-packages/setuptools/__init__.py\", line 16, in <module>\n>           import setuptools.version\n>         File \"/tmp/pip-build-env-1vnzdlvn/overlay/lib/python3.12/site-packages/setuptools/version.py\", line 1, in <module>\n>           import pkg_resources\n>         File \"/tmp/pip-build-env-1vnzdlvn/overlay/lib/python3.12/site-packages/pkg_resources/__init__.py\", line 2172, in <module>\n>           register_finder(pkgutil.ImpImporter, find_on_path)\n>                           ^^^^^^^^^^^^^^^^^^^\n>       AttributeError: module 'pkgutil' has no attribute 'ImpImporter'. Did you mean: 'zipimporter'?\n>       [end of output]\n>   \n>   note: This error originates from a subprocess, and is likely not a problem with pip.\n> error: subprocess-exited-with-error\n> \n> × Getting requirements to build wheel did not run successfully.\n> │ exit code: 1\n> ╰─> See above for output.\n> \n> note: This error originates from a subprocess, and is likely not a problem with pip.\n> (venv) (base) user1@workstation1:~/gits/Orpheus-FastAPI$ \n> ```\n\nHi there!\n\nThe error you're seeing is due to compatibility issues with Python 3.12. Python 3.12 removed the `pkgutil.ImpImporter` class that some older packages still depend on.\n\nYou have two straightforward options:\n\n1. **Update your dependencies**:\n   ```\n   pip install --upgrade pip setuptools wheel\n   ```\n   This may resolve the immediate error, though you might encounter other compatibility issues with Python 3.12.\n\n2. **Use Python 3.10 or 3.11 instead** (recommended):\n   Since the project was built with Python 3.10, creating a virtual environment with that version will likely give you the most stable experience:\n   ```\n   # If you have Python 3.10 installed alongside 3.12:\n   python3.10 -m venv venv_py310\n   # Or with the py launcher on Windows:\n   py -3.10 -m venv venv_py310\n   ```\n\nLet me know if either solution works for you!\n\nEdit: If possible, could you please also confirm which release version you're using?"
+      },
+      {
+        "user": "duckfriend123",
+        "body": ">Edit: If possible, could you please also confirm which release version you're using?\n\ni git cloned without any further parameters, so probably v1.1 \n\n>Update your dependencies:\n\npip install --upgrade pip setuptools wheel\n\n\nthis did not fix the error, I would just inform the user about this on the README to use conda or python3.10 or 3.11"
+      },
+      {
+        "user": "Lex-au",
+        "body": "Updated in [39df139 ](https://github.com/Lex-au/Orpheus-FastAPI/commit/39df139)\n"
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 15,
+    "title": "Model Response Randomization",
+    "author": "oivio",
+    "state": "closed",
+    "created_at": "2025-03-23T11:02:31Z",
+    "updated_at": "2025-03-23T13:00:00Z",
+    "labels": [
+      "question"
+    ],
+    "body": "Maybe it is not the issue, might be something that is expected. \nWhen using `Orpheus-3b-FT-Q8_0.gguf` as for TTS with LMStudio server it works perfectly fine <3\n\nOnly two Questions:\n\n1. I did notice each time I generate same few words lets say \"Hello world\" I do get each time different sound. Is this related to random seed? If so, is it possible to have control over it? \n\n2. I was trying actually chat with that `Orpheus-3b-FT-Q8_0.gguf` and when I asked lets say \"whats your name\" I did always get random answer. Is it because it was only train to be voice model? Only asking because it would great to have loaded just one model that you can chat with instead of two models.\n\n Anyways, big thank you for your amazing work <3 \n\nMaybe you already part of \"Open Sesame\" Discord that have maybe already 500 users https://discord.gg/weQSP2Kj \nOn that channel guys actively working on orpheus also cms and thanks to them I did found you ;)\n\nbtw: your work is now on Pinokio app (one click install) ;)\n![Image](https://github.com/user-attachments/assets/98d9934a-3be0-4ffb-b543-313ae4412b5e)",
+    "comments": [
+      {
+        "user": "Lex-au",
+        "body": "Hi again @oivio 👋\n\nYou’re absolutely spot on—the variation you’re hearing is due to how the model tokenizes and samples outputs. It’s kind of like a seed in diffusion models, but in this case, there’s no exposed way to set a “seed” directly, especially with GGUF or safetensor formats. So yep, you’ll get a slightly different sound every time, even for the same phrase.\n\nReally glad to hear you’re enjoying it though! I haven’t used Pinokio much myself, but if you’ve helped share the repo in that ecosystem, thank you—I really appreciate it.\n\nRegarding chatting with the Orpheus model directly—the WebUI you’re using is mainly just a demo/testing interface for generating audio. The text box doesn’t run an LLM; it just feeds your input into the TTS model, so whatever you write is what gets spoken. If you want Orpheus to be the voice for a chatbot, I recommend using the FastAPI endpoint provided from the server and pairing it with something like OpenWebUI—that way you can route responses from any LLM through Orpheus for voice output and hear it in conversation. (I’ve also included a SystemPrompt in the repo if you go down that path.)\n\nI’ve yet to check out the Open Sesame Discord—sounds like it’s building into a great little community. I’ll be sure to pop in.\n\nThanks again for the kind words and support 💜"
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 11,
+    "title": "koboldcpp backend does not generate audio",
+    "author": "S-Bryce",
+    "state": "closed",
+    "created_at": "2025-03-23T01:29:37Z",
+    "updated_at": "2025-03-23T07:29:02Z",
+    "labels": [],
+    "body": "I've run into an issue while trying to get this working on an Ubuntu 22.04 LTS system. While the LLM backend (koboldcpp) has no issue generating the SNAC tokens (`<custom_token_5>`, `<custom_token_958>`, etc.), the server does not seem to be able to decode them into any kind of audio. I can see the tokens being processed, and the server is utilizing my GPU according to nvtop, but it always says that 0.0s seconds of audio have been generated. The resulting .wav file is similarly empty, always being 44 B and containing `RIFF$WAVEfmt �]��data`. This happens with all voices that I've tested (Tara, Leah, & Jess).\n\nUnfortunately I haven't been able to figure out how to get more detailed debugging outputs from the server, so I'm left being unsure of how to further troubleshoot this. Any input would be appreciated.\n\nI did run into issues prior to getting the server launched due to an `OSError: PortAudio library not found`, although I was able to resolve this with an `apt install libportaudio2`. Not sure if it's related to the problem. Additionally, I am using Python 3.10.12 with PyTorch 2.6 built against CUDA 12.6.\n\nHere's the initial output from the server:\n```\n🖥️ Hardware: High-end CUDA GPU detected\n📊 Device: NVIDIA RTX 6000 Ada Generation\n📊 VRAM: 47.38 GB\n📊 Compute Capability: 8.9\n🚀 Using high-performance optimizations\nConfiguration loaded:\n  API_URL: http://127.0.0.1:5002/v1/completions\n  MAX_TOKENS: 1024\n  TEMPERATURE: 0.7\n  TOP_P: 0.9\n  REPETITION_PENALTY: 1.1\n```\n\n.env file:\n```\nORPHEUS_API_URL=http://127.0.0.1:5002/v1/completions\nORPHEUS_API_TIMEOUT=120\nORPHEUS_MAX_TOKENS=1024\nORPHEUS_TEMPERATURE=0.7\nORPHEUS_TOP_P=0.9\nORPHEUS_HOST=127.0.0.1\nORPHEUS_PORT=8880\n```\n\nServer output example:\n```\nUsing optimized parameters for high-end GPU\nProgress: 40.2 tokens/sec, est. 0.0s audio generated, 81 tokens, 0 chunks in 2.0s\nProcessing buffer with 28 tokens, total collected: 28\nPyTorch 2.0+ detected, torch.compile is available\nCUDA graphs support is available\nUsing device: cuda\nUsing standard PyTorch optimizations (torch.compile disabled)\nUsing CUDA stream for parallel processing\nProgress: 31.9 tokens/sec, est. 0.0s audio generated, 129 tokens, 0 chunks in 4.0s\nToken processing rate: 8.9 tokens/second\nProcessing buffer with 28 tokens, total collected: 56\nProgress: 46.4 tokens/sec, est. 0.0s audio generated, 283 tokens, 0 chunks in 6.1s\nProcessing buffer with 28 tokens, total collected: 84\nProgress: 47.2 tokens/sec, est. 0.0s audio generated, 384 tokens, 0 chunks in 8.1s\nProcessing buffer with 28 tokens, total collected: 112\nProcessing buffer with 28 tokens, total collected: 140\nProgress: 47.7 tokens/sec, est. 0.0s audio generated, 484 tokens, 0 chunks in 10.2s\nToken processing rate: 14.2 tokens/second\nProcessing buffer with 28 tokens, total collected: 168\nProgress: 47.9 tokens/sec, est. 0.0s audio generated, 584 tokens, 0 chunks in 12.2s\nToken generation complete: 589 tokens in 12.43s (47.4 tokens/sec)\nProducer completed - setting done event\nReceived end-of-stream marker\nWaiting for token processor thread to complete...\nAudio saved to outputs/tara_20250322_201134.wav\nTotal speech generation completed in 12.44 seconds\n```",
+    "comments": [
+      {
+        "user": "S-Bryce",
+        "body": "Actually, now that I've gone through #7 , it looks like this is somehow related to Koboldcpp. Going to see about spending some time comparing llamacpp and Koboldcpp to figure out why the generation isn't working with Koboldcpp, since if one works I would normally expect the other to work, too."
+      },
+      {
+        "user": "S-Bryce",
+        "body": "Managed to figure this out: Koboldcpp's default generation API returns chunks of tokens at once during streaming, e.g., `{'text': '<custom_token_4><custom_token_5><custom_token_1>'}`, whereas llamacpp (and I presume others) return streamed tokens one at a time, e.g., `{'text': 'custom_token_4>'}; {'text': 'custom_token_5>'}; {'text': 'custom_token_1>'}`. The inference engine is not built to handle this and will yield the full chunk of tokens, which breaks the tts engine.\n\nI've gotten a local fix working for this, and will be making a PR shortly to hopefully fix things upstream as well.\n\nWhat this was effectively resulting in, however, is generation of token codes way outside the valid range (4096), causing the frames to be dropped silently.\nhttps://github.com/Lex-au/Orpheus-FastAPI/blob/db0ac922f0e74186669d6f429a8eb79fb2ef2c3b/tts_engine/speechpipe.py#L88-L92\nMight be worth it to generate a warning when invalid codes get dropped, so that the user knows something's wrong with their backend."
+      },
+      {
+        "user": "Lex-au",
+        "body": "Thank you for your work."
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 7,
+    "title": "Zero audio from 80+ tokens",
+    "author": "jsalix",
+    "state": "closed",
+    "created_at": "2025-03-22T15:40:39Z",
+    "updated_at": "2025-03-22T22:30:15Z",
+    "labels": [],
+    "body": "First of all, thanks for making and open sourcing this! Saves me the trouble of trying to guide Claude through building a crappy one myself. :D\n\nI feel like I'm going crazy when everyone else is having success running this, but for the life of me I can't seem to get it to generate the actual audio. Tried on two separate linux machines with nvidia gpus (3070 and M2200), up-to-date drivers, started from freshly cloned repos, using python venv, getting no errors in the logs but the final wav file is always 44 bytes and empty, zero length :/\n\n3070 (fyi tried adding '3070' to the list of high end gpus just to see if it fixed anything):\n```\nHigh-end GPU detected: NVIDIA GeForce RTX 3070\nEnabling high-performance optimizations\n🔥 Starting Orpheus-FASTAPI Server (CUDA)\nINFO:     Will watch for changes in these directories: ['/home/jsalcido/repo/Orpheus-FastAPI']\nINFO:     Uvicorn running on http://0.0.0.0:5005 (Press CTRL+C to quit)\nINFO:     Started reloader process [3286] using StatReload\nHigh-end GPU detected: NVIDIA GeForce RTX 3070\nEnabling high-performance optimizations\nINFO:     Started server process [3302]\nINFO:     Waiting for application startup.\nINFO:     Application startup complete.\nINFO:     192.168.122.1:59548 - \"GET / HTTP/1.1\" 200 OK\nINFO:     192.168.122.1:59548 - \"GET /static/favicon.ico HTTP/1.1\" 200 OK\nStarting speech generation for 'Hello I'm Mia! How are you doing today?'\nUsing voice: mia, GPU acceleration: Yes (High-end)\nGenerating speech for: <|audio|>mia: Hello I'm Mia! How are you doing today?<|eot_id|>\nUsing optimized parameters for high-end GPU\nProgress: 36.8 tokens/sec, est. 0.0s audio generated, 81 tokens, 0 chunks in 2.2s\nToken generation complete: 82 tokens in 2.20s (37.2 tokens/sec)\nProcessing buffer with 28 tokens, total collected: 28\nPyTorch 2.0+ detected, torch.compile is available\nCUDA graphs support is available\nUsing device: cuda\nUsing standard PyTorch optimizations (torch.compile disabled)\nUsing CUDA stream for parallel processing\nTotal speech generation completed in 3.31 seconds\nINFO:     192.168.122.1:38568 - \"POST /speak HTTP/1.1\" 200 OK\nINFO:     192.168.122.1:38568 - \"GET /outputs/mia_20250322_073454.wav HTTP/1.1\" 200 OK\nStarting speech generation for 'Hello I'm Mia! How are you doing today?'\nUsing voice: mia, GPU acceleration: Yes (High-end)\nGenerating speech for: <|audio|>mia: Hello I'm Mia! How are you doing today?<|eot_id|>\nUsing optimized parameters for high-end GPU\nProgress: 40.0 tokens/sec, est. 0.0s audio generated, 80 tokens, 0 chunks in 2.0s\nToken generation complete: 92 tokens in 2.40s (38.3 tokens/sec)\nProcessing buffer with 28 tokens, total collected: 28\nTotal speech generation completed in 2.41 seconds\nINFO:     192.168.122.1:46232 - \"POST /speak HTTP/1.1\" 200 OK\nINFO:     192.168.122.1:46232 - \"GET /outputs/mia_20250322_073528.wav HTTP/1.1\" 200 OK\n```\n\nM2200:\n```\n🔥 Starting Orpheus-FASTAPI Server (CUDA)\nINFO:     Will watch for changes in these directories: ['/home/jsalcido/repo/Orpheus-FastAPI']\nINFO:     Uvicorn running on http://0.0.0.0:5005 (Press CTRL+C to quit)\nINFO:     Started reloader process [479173] using StatReload\nINFO:     Started server process [479200]\nINFO:     Waiting for application startup.\nINFO:     Application startup complete.\nStarting speech generation for 'Hello I'm Mia! How are you doing today?'\nUsing voice: mia, GPU acceleration: Yes\nGenerating speech for: <|audio|>mia: Hello I'm Mia! How are you doing today?<|eot_id|>\nProcessing buffer with 28 tokens, total collected: 28\nPyTorch 2.0+ detected, torch.compile is available\nCUDA graphs support is available\nconfig.json: 100%|...| 300/300 [00:00<00:00, 854kB/s]\npytorch_model.bin: 100%|...| 79.5M/79.5M [00:02<00:00, 38.7MB/s]\nUsing device: cuda\nUsing standard PyTorch optimizations (torch.compile disabled)\nUsing CUDA stream for parallel processing\nProgress: 14.2 tokens/sec, est. 0.0s audio generated, 65 tokens, 0 chunks in 4.6s\nToken generation complete: 96 tokens in 4.58s (21.0 tokens/sec)\nTotal speech generation completed in 4.58 seconds\nINFO:     127.0.0.1:58720 - \"POST /speak HTTP/1.1\" 200 OK\nINFO:     127.0.0.1:58720 - \"GET /outputs/mia_20250322_074159.wav HTTP/1.1\" 200 OK\n```\n\nAny ideas why 0.0s audio is generated from 80+ tokens, or where I can throw some extra print logging to try to troubleshoot my hardware? Do I need to install some dependency for the SNAC model to work? I'm guessing something is misconfigured or missing some dependencies on my primary 3070 setup and breaking the \"cuda\" calls or something, but on two separate machines that otherwise have worked fine with llama.cpp/koboldcpp/comfyui/sd/etc? I'm tired of blowing it all away and trying again and getting the same results :')\n\n```\n> nvidia-smi\nSat Mar 22 08:29:15 2025\n+-----------------------------------------------------------------------------------------+\n| NVIDIA-SMI 550.144.03             Driver Version: 550.144.03     CUDA Version: 12.4     |\n|-----------------------------------------+------------------------+----------------------+\n| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |\n| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |\n|                                         |                        |               MIG M. |\n|=========================================+========================+======================|\n|   0  NVIDIA GeForce RTX 3070        Off |   00000000:08:00.0 Off |                  N/A |\n|  0%   35C    P8             21W /  220W |       9MiB /   8192MiB |      0%      Default |\n|                                         |                        |                  N/A |\n+-----------------------------------------+------------------------+----------------------+\n\n+-----------------------------------------------------------------------------------------+\n| Processes:                                                                              |\n|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |\n|        ID   ID                                                               Usage      |\n|=========================================================================================|\n|    0   N/A  N/A       795      G   /usr/lib/Xorg                                   4MiB |\n+-----------------------------------------------------------------------------------------+\n```\n\n```\nSat Mar 22 08:29:40 2025\n+-----------------------------------------------------------------------------------------+\n| NVIDIA-SMI 550.144.03             Driver Version: 550.144.03     CUDA Version: 12.4     |\n|-----------------------------------------+------------------------+----------------------+\n| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |\n| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |\n|                                         |                        |               MIG M. |\n|=========================================+========================+======================|\n|   0  Quadro M2200                   Off |   00000000:01:00.0 Off |                  N/A |\n| N/A   32C    P8             N/A /   80W |       7MiB /   4096MiB |      0%      Default |\n|                                         |                        |                  N/A |\n+-----------------------------------------+------------------------+----------------------+\n\n+-----------------------------------------------------------------------------------------+\n| Processes:                                                                              |\n|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |\n|        ID   ID                                                               Usage      |\n|=========================================================================================|\n|    0   N/A  N/A       679      G   /usr/lib/Xorg                                   2MiB |\n+-----------------------------------------------------------------------------------------+\n```",
+    "comments": [
+      {
+        "user": "Lex-au",
+        "body": "I'm pushing an update later tonight, but I have a strong feeling you may have not set your endpoint correctly. Can you check inference.py in the tts_engine folder - and make sure the API URL is set to your local inference server? \n\nIt should go http://yourip:port/v1/completions\n\n"
+      },
+      {
+        "user": "jsalix",
+        "body": "Appreciate it! Yeah I checked all that, lemme copy some logs and see if you think they look right.\n\n```\ndiff --git a/tts_engine/inference.py b/tts_engine/inference.py\nindex f746242..e50b7ec 100644\n--- a/tts_engine/inference.py\n+++ b/tts_engine/inference.py\n@@ -18,13 +18,13 @@ import torch\n HIGH_END_GPU = False\n if torch.cuda.is_available():\n     gpu_name = torch.cuda.get_device_name(0).lower()\n-    if any(x in gpu_name for x in ['4090', '3090', 'a100', 'h100']):\n+    if any(x in gpu_name for x in ['4090', '3090', '3070', 'a100', 'h100']):\n         HIGH_END_GPU = True\n         print(f\"High-end GPU detected: {torch.cuda.get_device_name(0)}\")\n         print(\"Enabling high-performance optimizations\")\n\n # Orpheus-FASTAPI settings - make configurable for different endpoints\n-API_URL = os.environ.get(\"ORPHEUS_API_URL\", \"http://your-server-ip:port/v1/completions or v1/chat/completions\")\n+API_URL = os.environ.get(\"ORPHEUS_API_URL\", \"http://localhost:5001/v1/completions\")\n HEADERS = {\n     \"Content-Type\": \"application/json\"\n }\n```\n\nI'm using koboldcpp atm on the same machine.\n\n```\nWelcome to KoboldCpp - Version 1.86.2\nLoading Chat Completions Adapter: /home/jsalcido/repo/koboldcpp/kcpp_adapters/AutoGuess.json\nChat Completions Adapter Loaded\nSetting process to Higher Priority - Use Caution\nHigh Priority for Linux Set: 0 to 1\nAuto Recommended GPU Layers: 31\nInitializing dynamic library: koboldcpp_cublas.so\n==========\nNamespace(model=['/home/jsalcido/mnt/LLMs/models/3B.orpheus-0.1-ft.q4_k_m.gguf'], model_param='/home/jsalcido/mnt/LLMs/models/3B.orpheus-0.1-ft.q4_k_m.gguf', port=5001, port_param=5001, host='', launch=False, config=None, threads=3, usecu\nblas=[], usevulkan=None, useclblast=None, usecpu=False, contextsize=16384, gpulayers=31, tensor_split=None, version=False, analyze='', ropeconfig=[0.0, 10000.0], blasbatchsize=512, blasthreads=3, lora=None, noshift=False, nofastforward=Fa\nlse, usemmap=False, usemlock=False, noavx2=False, failsafe=False, debugmode=0, onready='', benchmark=None, prompt='', promptlimit=100, multiuser=1, multiplayer=False, websearch=False, remotetunnel=False, highpriority=True, foreground=Fals\ne, preloadstory='', savedatafile='', quiet=False, ssl=None, nocertify=False, mmproj='', visionmaxres=1024, draftmodel='', draftamount=8, draftgpulayers=999, draftgpusplit=None, password=None, ignoremissing=False, chatcompletionsadapter='A\nutoGuess', flashattention=False, quantkv=0, forceversion=0, smartcontext=False, unpack='', exportconfig='', exporttemplate='', nomodel=False, moeexperts=-1, defaultgenamt=512, nobostoken=False, showgui=False, skiplauncher=False, hordemode\nlname='', hordeworkername='', hordekey='', hordemaxctx=0, hordegenlen=0, sdmodel='', sdthreads=0, sdclamped=0, sdt5xxl='', sdclipl='', sdclipg='', sdvae='', sdvaeauto=False, sdquant=False, sdlora='', sdloramult=1.0, sdnotile=False, whispe\nrmodel='', ttsmodel='', ttswavtokenizer='', ttsgpu=False, ttsmaxlen=4096, ttsthreads=0, admin=False, adminpassword=None, admindir='', hordeconfig=None, sdconfig=None, noblas=False, nommap=False)\n==========\nLoading Text Model: /home/jsalcido/mnt/LLMs/models/3B.orpheus-0.1-ft.q4_k_m.gguf\n\nThe reported GGUF Arch is: llama\nArch Category: 0\n\n---\nIdentified as GGUF model: (ver 6)\nAttempting to Load...\n\n\\...\\\n\nLoad Text Model OK: True\nChat completion heuristic: Llama 3.x.\nEmbedded KoboldAI Lite loaded.\nEmbedded API docs loaded.\n======\nActive Modules: TextGeneration\nInactive Modules: ImageGeneration VoiceRecognition MultimodalVision NetworkMultiplayer ApiKeyPassword WebSearchProxy TextToSpeech AdminControl\nEnabled APIs: KoboldCppApi OpenAiApi OllamaApi\nStarting Kobold API on port 5001 at http://localhost:5001/api/\nStarting OpenAI Compatible API on port 5001 at http://localhost:5001/v1/\n======\nPlease connect to custom endpoint at http://localhost:5001\n\nInput: {\"model\": \"orpheus-3b-0.1-ft-q4_k_m\", \"prompt\": \"<|audio|>mia: Hello I'm Mia! How are you doing today?<|eot_id|>\", \"max_tokens\": 8192, \"temperature\": 0.6, \"top_p\": 0.9, \"repeat_penalty\": 1.1, \"stream\": true}\n\nProcessing Prompt (16 / 16 tokens)\nGenerating (270 / 8192 tokens)\n(EOS token triggered! ID:128009)\n[09:23:32] CtxLimit:286/16384, Amt:270/8192, Init:0.00s, Process:0.03s (592.59T/s), Generate:2.24s (120.54T/s), Total:2.27s\nOutput: <custom_token_4><custom_token_5><custom_token_1><custom_token_3226><custom_token_4177><custom_token_10025><custom_token_13812><custom_token_18925><custom_token_21471><custom_token_24596><custom_token_3848><custom_token_7910><custom_token_9716><custom_token_14687><custom_token_17521><custom_token_22313><custom_token_25469><custom_token_3692><custom_token_7128><custom_token_9509><custom_token_14922><custom_token_19590><custom_token_23001><custom_token_25483><custom_token_2550><custom_token_4595><custom_token_9745><custom_token_13121><custom_token_20130><custom_token_22331><custom_token_24672><custom_token_2767><custom_token_7458><custom_token_11751><custom_token_14950><custom_token_16960><custom_token_22090><custom_token_24603><custom_token_2128><custom_token_4672><custom_token_8592><custom_token_15112><custom_token_18299><custom_token_21222><custom_token_28455><custom_token_740><custom_token_7321><custom_token_8659><custom_token_15684><custom_token_19710><custom_token_21172><custom_token_25908><custom_token_777><custom_token_7623><custom_token_8467><custom_token_15412><custom_token_19096><custom_token_21557><custom_token_24927><custom_token_513><custom_token_5066><custom_token_12288><custom_token_13347><custom_token_18726><custom_token_21563><custom_token_26891><custom_token_2528><custom_token_5830><custom_token_10430><custom_token_12416><custom_token_18765><custom_token_21304><custom_token_28268><custom_token_367><custom_token_6585><custom_token_11206><custom_token_13659><custom_token_17523><custom_token_20681><custom_token_25250><custom_token_3872><custom_token_4170><custom_token_8866><custom_token_13779><custom_token_17354><custom_token_20583><custom_token_26716><custom_token_1710><custom_token_4228><custom_token_9724><custom_token_15435><custom_token_17823><custom_token_24306><custom_token_27477><custom_token_2698><custom_token_5789><custom_token_11501><custom_token_14221><custom_token_18688><custom_token_20742><custom_token_27613><custom_token_3159><custom_token_7989><custom_token_10858><custom_token_14734><custom_token_16678><custom_token_22337><custom_token_25977><custom_token_557><custom_token_7524><custom_token_11590><custom_token_16128><custom_token_17798><custom_token_20651><custom_token_25015><custom_token_1421><custom_token_6637><custom_token_8886><custom_token_13251><custom_token_19741><custom_token_21797><custom_token_27210><custom_token_2394><custom_token_5993><custom_token_12167><custom_token_12300><custom_token_18021><custom_token_22734><custom_token_26949><custom_token_1667><custom_token_5565><custom_token_11826><custom_token_12298><custom_token_19030><custom_token_22894><custom_token_28164><custom_token_1797><custom_token_7787><custom_token_12194><custom_token_14310><custom_token_19272><custom_token_22664><custom_token_27516><custom_token_1639><custom_token_5235><custom_token_10015><custom_token_16268><custom_token_18044><custom_token_24336><custom_token_24847><custom_token_3446><custom_token_4472><custom_token_11737><custom_token_15424><custom_token_18503><custom_token_21050><custom_token_25819><custom_token_3116><custom_token_4319><custom_token_8947><custom_token_14707><custom_token_19575><custom_token_23474><custom_token_28504><custom_token_1383><custom_token_6208><custom_token_8411><custom_token_13865><custom_token_17117><custom_token_22185><custom_token_27495><custom_token_729><custom_token_6130><custom_token_12159><custom_token_14355><custom_token_19765><custom_token_21477><custom_token_25873><custom_token_1470><custom_token_4470><custom_token_9301><custom_token_16297><custom_token_17524><custom_token_23807><custom_token_24612><custom_token_1289><custom_token_6438><custom_token_9485><custom_token_15184><custom_token_17814><custom_token_22401><custom_token_25291><custom_token_1827><custom_token_4722><custom_token_11437><custom_token_14231><custom_token_19203><custom_token_20649><custom_token_24832><custom_token_1565><custom_token_5056><custom_token_11708><custom_token_15024><custom_token_20205><custom_token_21517><custom_token_25572><custom_token_775><custom_token_6003><custom_token_10772><custom_token_13373><custom_token_19345><custom_token_21869><custom_token_25404><custom_token_1712><custom_token_7714><custom_token_8439><custom_token_12897><custom_token_16592><custom_token_22454><custom_token_24811><custom_token_1487><custom_token_5510><custom_token_9957><custom_token_13784><custom_token_18948><custom_token_22245><custom_token_28216><custom_token_801><custom_token_5135><custom_token_8631><custom_token_12727><custom_token_17412><custom_token_21625><custom_token_25721><custom_token_2803><custom_token_6660><custom_token_9085><custom_token_13181><custom_token_17084><custom_token_20919><custom_token_24747><custom_token_3895><custom_token_4315><custom_token_9155><custom_token_13054><custom_token_18130><custom_token_21141><custom_token_27179><custom_token_2><custom_token_6><custom_token_3>tara: I can't believe it's been a year already—so fast.\n```\n\nIs it supposed to have a random \"tara\" etc response at the end like that?"
+      },
+      {
+        "user": "Lex-au",
+        "body": "```\ndiff --git a/tts_engine/inference.py b/tts_engine/inference.py\nindex f746242..e50b7ec 100644\n--- a/tts_engine/inference.py\n+++ b/tts_engine/inference.py\n@@ -18,13 +18,13 @@ import torch\n HIGH_END_GPU = False\n if torch.cuda.is_available():\n     gpu_name = torch.cuda.get_device_name(0).lower()\n-    if any(x in gpu_name for x in ['4090', '3090', 'a100', 'h100']):\n+    if any(x in gpu_name for x in ['4090', '3090', '3070', 'a100', 'h100']):\n         HIGH_END_GPU = True\n         print(f\"High-end GPU detected: {torch.cuda.get_device_name(0)}\")\n         print(\"Enabling high-performance optimizations\")\n\n # Orpheus-FASTAPI settings - make configurable for different endpoints\n**-API_URL = os.environ.get(\"ORPHEUS_API_URL\", \"http://your-server-ip:port/v1/completions or v1/chat/completions\")**\n+API_URL = os.environ.get(\"ORPHEUS_API_URL\", \"http://localhost:5001/v1/completions\")\n HEADERS = {\n     \"Content-Type\": \"application/json\"\n }\n```\n\nIt looks like you didn't edit the API_URL in inference.py - it's showing the placeholder value you are meant to change. Change it to \"http://localhost:5001/v1/completions\" and save the file. Or if you're willing to wait, i'll push my repo update soon so you can do it via the UI.\n\n"
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 3,
+    "title": "LLM sample prompt for intonations and emotions",
+    "author": "bsudharsan-amalgam",
+    "state": "closed",
+    "created_at": "2025-03-22T01:55:08Z",
+    "updated_at": "2025-03-22T22:24:15Z",
+    "labels": [
+      "question"
+    ],
+    "body": "Could you share the prompt for the LLM  to get the samples like close to CSM? Thanks!",
+    "comments": [
+      {
+        "user": "Lex-au",
+        "body": "Done on [ac6e3a5](https://github.com/Lex-au/Orpheus-FastAPI/commit/ac6e3a5)\n"
+      },
+      {
+        "user": "bsudharsan-amalgam",
+        "body": "Thanks! Could you share the input/prompt that you passed for the happy Leah example output? Just to get an idea of the how best to combine the tags, and other intonations. Thanks again!"
+      },
+      {
+        "user": "Lex-au",
+        "body": "I don’t have it saved unfortunately, but it was something along the lines of this.\n\n\n`<chuckle> Okay, so... I took the first bite and, oh my god—it was like being ten years old.. again. Like.. picture this.. Grandma’s kitchen, on a Sunday morning... <sigh> Can you imagine?.. Like seriously. That flaky crust, the smell of cinnamon—Oh, My, God... mmm, yeah. Just... perfect. I almost cried, I’m not even kidding. Like seriously. <laugh>`\n\n\nIf you want to use that specific output as the example, feel free to just update the markdown file I sent you and drop it in directly.\n\nAlso—just a heads up—due to the way the model works (and yeah, I know, it’s kind of dumb), it actually performs significantly better when you ignore strict grammatical structure. So instead of well-formed sentences and neatly punctuated text, go with more run-on, free-flowing paragraphs. It’s counterintuitive, but you'll get much more natural and expressive results that way."
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 8,
+    "title": "Difficulties in end-points with LM Studio as local server.",
+    "author": "ryrAiy",
+    "state": "closed",
+    "created_at": "2025-03-22T16:15:30Z",
+    "updated_at": "2025-03-22T21:36:42Z",
+    "labels": [],
+    "body": "Hi, and thank you for contributing to the community! and I am trying to run this to have a cool tts system for local models and I am using LM Studio as the local server and even just trying the built in web interface no matter what I put into \"inference.py\" eg:192.168.1.1:1234 or v/1 or /v1/chat/completions...I always get this back in the LM studio server log and could anyone help me and thank you!\n\nUnexpected endpoint or method. (POST /). Returning 200 anyway\n\n",
+    "comments": [
+      {
+        "user": "Lex-au",
+        "body": "Hi,\n\nMake sure you have enable CORS, and try using /v1/completions instead of the full endpoint.  The IP example you provided also looks like you're trying to serve over LAN and not just localhost. \n\nIn this case (if you're LM Studio is on another workstation to that of the device you're using) use http://192.168.1.1:1234/v1/completions"
+      },
+      {
+        "user": "ryrAiy",
+        "body": "Hi and thank you! I do have CORS enabled and switch the endpoint in inference.py to the endpoint you suggested and works now!!! I am trying to get it to work over LAN not just local host because I use an app to relay stuff to my iPhone sometimes, And to be able to work, you know, in case with other backends or you know front ends like OpenWeb UI or others and I wish there was a way to use it with an LM studio, AI model, you know at the same time! I have Orpheus Q4KM and Gemma3 27B loaded at the same time trying to figure a way to do that out rn and it's hammering my 4090 laptop! Do you think I should use your Q8 gguf? Have you noticed any quality differences? I also noticed it defaulted to Torch-CPU which I switched to CUDA and should I maybe run yours on cpu and leave entire GPU for LLM? And thank you so much I am figuring out how to add the emotion tags now!"
+      },
+      {
+        "user": "Lex-au",
+        "body": "I'm really glad to hear it's working for you now. LM Studio is definitely a solid option for inference—but unfortunately, it doesn't support audio playback yet. If you're aiming to text chat with Gemma 3 but actually hear the responses as voice, you'll need a dedicated frontend like OpenWebUI or something similar that supports both audio output and speech-to-speech (speech-to-speech if you're planning to use the mic as well). Just a heads-up— even with my latest updates (will push later before I go to sleep), the best I've managed so far is around 1.6x real-time from audio output to inference.\n\nIs there any particular reason you haven’t tried OpenWebUI yet? I included a section in the readme.md that walks through how to set up the endpoint for both voice response and speech input—it’s pretty seamless once it’s going. You can even install it via pip, so it's fairly lightweight and easy to spin up.\n\nOn your current setup, it sounds like the 27B model is pushing your 4090 pretty hard (especially depending on the quant). You could try Gemma's 12b, or Mistral 8b, both are very good conversationalists. As for Orpheus, I haven’t tested other quants myself, but I’ve seen folks using Q4 versions from forks of my repo without much trouble. If you're trying to free up GPU space and want to use Gemma's 27b, I'd definitely recommend giving Q4 a try—it might give you the breathing room you need ."
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 4,
+    "title": "some words cutting out",
+    "author": "Mellzor",
+    "state": "closed",
+    "created_at": "2025-03-22T03:24:48Z",
+    "updated_at": "2025-03-22T20:53:30Z",
+    "labels": [
+      "bug"
+    ],
+    "body": "Some words and small parts of sentences are being randomly cut from the speech.. \nI've tried with Q4 and Q8 models. Same thing was happening with the openai fork. any ideas ?",
+    "comments": [
+      {
+        "user": "Lex-au",
+        "body": "Hi!\n\nThe underlying model has some constraints in terms of how it processes tokens. We can tweak min frames, but process every is hardcoded at 7.\n\nI've addressed this with a slight tweak so it performs much better in terms of unprocessed tokens (missed speech, etc)."
+      },
+      {
+        "user": "Lex-au",
+        "body": "Pushed with v1.1.0"
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 6,
+    "title": "Dynamic Configuration System",
+    "author": "Lex-au",
+    "state": "closed",
+    "created_at": "2025-03-22T09:56:35Z",
+    "updated_at": "2025-03-22T20:53:16Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": "**Web UI Configuration Management**\n**Summary**: _Added an intuitive form interface in the Advanced Options section with fields for all important settings._\n- Created form fields for all critical configuration parameters:\n- API URL endpoint\n- API Timeout duration\n- Max Tokens limit\n- Temperature\n- Top P\n- Repetition Penalty\n- Server Host/Port settings\n\n**Dynamic Configuration Flow**\n**Summary**: _Implemented a seamless save-restart-apply cycle that persists changes to disk and activates them._\n- User can view and modify all configuration parameters directly in the web UI\n- Values are saved to the .env file when the \"Save Configuration\" button is clicked\n- User can then restart the server via the UI to apply changes\n- After restart, the UI correctly reflects the new configuration values\n\n**Technical Improvements for Configuration Refresh**\n**Summary:** _Solved difficult technical challenges to ensure configuration updates appear properly without manual refresh_\n- Implemented reliable server restart via restart.flag\n- Added intelligent polling to detect when server is fully ready\n- Fixed cache busting to ensure UI shows updated configuration\n- Increased validation limits to allow more flexibility in configuration values",
+    "comments": [
+      {
+        "user": "Lex-au",
+        "body": "Complete."
+      }
+    ],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  },
+  {
+    "issue_number": 1,
+    "title": "Crashing when trying to use epub to audiobook.",
+    "author": "xrishox",
+    "state": "closed",
+    "created_at": "2025-03-21T20:33:19Z",
+    "updated_at": "2025-03-21T20:47:51Z",
+    "labels": [],
+    "body": "It isnt clear to me if this is a problem on the side of this server or https://github.com/p0n1/epub_to_audiobook, but it is crashing with this error:\n\n```\n(orpheus-tts) anonymous@anonymouss-MacBook-Pro-2 Orpheus-FastAPI % python app.py --host 0.0.0.0 --port 5005 --reload\n🔥 Starting Orpheus-FASTAPI Server (CUDA)\nINFO:     Will watch for changes in these directories: ['/Users/anonymous/git/Orpheus-FastAPI']\nINFO:     Uvicorn running on http://0.0.0.0:5005 (Press CTRL+C to quit)\nINFO:     Started reloader process [94087] using StatReload\nINFO:     Started server process [94091]\nINFO:     Waiting for application startup.\nINFO:     Application startup complete.\nStarting speech generation for 'The Project Gutenberg eBook of Moby Dick; Or, The ...'\nUsing voice: alloy, GPU acceleration: No\nWarning: Voice 'alloy' not recognized. Using 'tara' instead.\nGenerating speech for: <|audio|>tara: The Project Gutenberg eBook of Moby Dick; Or, The Whale This ebook is for the use of anyone anywhere in the United States and most other parts of the world at no cost and with almost no restrictions whatsoever. You may copy it, give it away or re-use it under the terms of the Project Gutenberg License included with this ebook or online at www.gutenberg.org. If you are not located in the United States, you will have to check the laws of the country where you are located before using this eBook. Title: Moby Dick; Or, The Whale Author: Herman Melville Release date: July 1, 2001 [eBook #2701] Most recently updated: January 19, 2025 Language: English Credits: Daniel Lazarus, Jonesey, and David Widger *** START OF THE PROJECT GUTENBERG EBOOK MOBY DICK; OR, THE WHALE *** MOBY-DICK; or, THE WHALE. By Herman Melville CONTENTS ETYMOLOGY. EXTRACTS (Supplied by a Sub-Sub-Librarian). CHAPTER 1. Loomings. CHAPTER 2. The Carpet-Bag. CHAPTER 3. The Spouter-Inn. CHAPTER 4. The Counterpane. CHAPTER 5. Breakfast. CHAPTER 6. The Street. CHAPTER 7. The Chapel. CHAPTER 8. The Pulpit. CHAPTER 9. The Sermon. CHAPTER 10. A Bosom Friend. CHAPTER 11. Nightgown. CHAPTER 12. Biographical. CHAPTER 13. Wheelbarrow. CHAPTER 14. Nantucket. CHAPTER 15. Chowder. CHAPTER 16. The Ship. CHAPTER 17. The Ramadan. CHAPTER 18. His Mark. CHAPTER 19. The Prophet. CHAPTER 20. All Astir. CHAPTER 21. Going Aboard. CHAPTER 22. Merry Christmas. CHAPTER 23. The Lee Shore. CHAPTER 24. The Advocate. CHAPTER 25. Postscript. CHAPTER 26. Knights and Squires. CHAPTER 27. Knights and Squires. CHAPTER 28. Ahab. CHAPTER 29. Enter Ahab; to Him, Stubb. CHAPTER 30. The Pipe. CHAPTER 31. Queen Mab. CHAPTER 32. Cetology. CHAPTER 33. The Specksnyder. CHAPTER 34. The Cabin-Table. CHAPTER 35. The Mast-Head. CHAPTER 36. The Quarter-Deck. CHAPTER 37. Sunset. CHAPTER 38. Dusk. CHAPTER 39. First Night-Watch. CHAPTER 40. Midnight, Forecastle. CHAPTER 41. Moby Dick. CHAPTER 42. The Whiteness of the Whale. CHAPTER 43. Hark! CHAPTER 44. The Chart. CHAPTER 45. The Affidavit. CHAPTER 46. Surmises. CHAPTER 47. The Mat-Maker. CHAPTER 48. The First Lowering. CHAPTER 49. The Hyena. CHAPTER 50. Ahab’s Boat and Crew. Fedallah. CHAPTER 51. The Spirit-Spout. CHAPTER 52. The Albatross. CHAPTER 53. The Gam. CHAPTER 54. The Town-Ho’s Story. CHAPTER 55. Of the Monstrous Pictures of Whales. CHAPTER 56. Of the Less Erroneous Pictures of Whales, and the True Pictures of Whaling Scenes. CHAPTER 57. Of Whales in Paint; in Teeth; in Wood; in Sheet-Iron; in Stone; in Mountains; in Stars. CHAPTER 58. Brit. CHAPTER 59. Squid. CHAPTER 60. The Line. CHAPTER 61. Stubb Kills a Whale. CHAPTER 62. The Dart. CHAPTER 63. The Crotch. CHAPTER 64. Stubb’s Supper. CHAPTER 65. The Whale as a Dish. CHAPTER 66. The Shark Massacre. CHAPTER 67. Cutting In. CHAPTER 68. The Blanket. CHAPTER 69. The Funeral. CHAPTER 70. The Sphynx. CHAPTER 71. The Jeroboam’s Story. CHAPTER 72. The Monkey-Rope. CHAPTER 73. Stubb and Flask kill a Right Whale; and Then Have a Talk over Him. CHAPTER 74. The Sperm Whale’s Head—Contrasted View. CHAPTER 75. The Right Whale’s Head—Contrasted View. CHAPTER 76. The Battering-Ram. CHAPTER 77. The Great Heidelburgh Tun. CHAPTER 78. Cistern and Buckets. CHAPTER 79. The Prairie. CHAPTER 80. The Nut. CHAPTER 81. The Pequod Meets The Virgin. CHAPTER 82. The Honor and Glory of Whaling. CHAPTER 83. Jonah Historically Regarded. CHAPTER 84. Pitchpoling. CHAPTER 85. The Fountain. CHAPTER 86. The Tail. CHAPTER 87. The Grand Armada. CHAPTER 88. Schools and Schoolmasters. CHAPTER 89. Fast-Fish and Loose-Fish. CHAPTER 90. Heads or Tails. CHAPTER 91. The Pequod Meets The Rose-Bud. CHAPTER 92. Ambergris. CHAPTER 93. The Castaway. CHAPTER 94. A Squeeze of the Hand. CHAPTER 95. The Cassock. CHAPTER 96. The Try-Works. CHAPTER 97. The Lamp. CHAPTER 98. Stowing Down and Clearing Up. CHAPTER 99. The Doubloon. CHAPTER 100. Leg and Arm. CHAPTER 101. The Decanter. CHAPTER 102. A Bower in the Arsacides. CHAPTER 103. Measurement of The Whale’s<|eot_id|>\nException in thread Thread-1 (run_async):\nTraceback (most recent call last):\n  File \"/Users/anonymous/miniconda3/envs/orpheus-tts/lib/python3.10/site-packages/urllib3/util/url.py\", line 423, in parse_url\n    host, port = _HOST_PORT_RE.match(host_port).groups()  # type: ignore[union-attr]\nAttributeError: 'NoneType' object has no attribute 'groups'\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/Users/anonymous/miniconda3/envs/orpheus-tts/lib/python3.10/site-packages/requests/models.py\", line 433, in prepare_url\n    scheme, auth, host, port, path, query, fragment = parse_url(url)\n  File \"/Users/anonymous/miniconda3/envs/orpheus-tts/lib/python3.10/site-packages/urllib3/util/url.py\", line 449, in parse_url\n    raise LocationParseError(source_url) from e\nurllib3.exceptions.LocationParseError: Failed to parse: http://your-server-ip:port/v1/completions or v1/chat/completions\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/Users/anonymous/miniconda3/envs/orpheus-tts/lib/python3.10/threading.py\", line 1016, in _bootstrap_inner\n    self.run()\n  File \"/Users/anonymous/miniconda3/envs/orpheus-tts/lib/python3.10/threading.py\", line 953, in run\n    self._target(*self._args, **self._kwargs)\n  File \"/Users/anonymous/git/Orpheus-FastAPI/tts_engine/inference.py\", line 368, in run_async\n    asyncio.run(async_producer())\n```\n\nedit: ahh, i've discovered i need to set an inference server. it appears to be working now. sorry for wasting your time. i'm still new to this.",
+    "comments": [],
+    "repository": "Lex-au/Orpheus-FastAPI"
+  }
+]

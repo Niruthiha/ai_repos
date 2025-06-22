@@ -1,0 +1,89 @@
+[
+  {
+    "issue_number": 33,
+    "title": "how to use the app",
+    "author": "xiaowang-bit",
+    "state": "open",
+    "created_at": "2025-04-05T06:27:56Z",
+    "updated_at": "2025-04-05T06:27:56Z",
+    "labels": [],
+    "body": null,
+    "comments": [],
+    "repository": "jbexta/AgentPilot"
+  },
+  {
+    "issue_number": 29,
+    "title": "MAC support",
+    "author": "bhupesh-sf",
+    "state": "open",
+    "created_at": "2025-01-19T16:44:11Z",
+    "updated_at": "2025-01-24T15:58:24Z",
+    "labels": [],
+    "body": "Hey, I am on apple mac m2 series. I see install instructions only for Linux and Windows. How can I use it on mac?",
+    "comments": [
+      {
+        "user": "jbexta",
+        "body": "Will try to get binaries out tomorrow (intel and silicone) and I'll add build instructions for Mac"
+      },
+      {
+        "user": "bhupesh-sf",
+        "body": "Thanks a lot"
+      },
+      {
+        "user": "jbexta",
+        "body": "Open interpreter had some issues with the new version, I've fixed those and it's now ready to build into executables but I gotta get some sleep, hopefully get them out in the morning"
+      }
+    ],
+    "repository": "jbexta/AgentPilot"
+  },
+  {
+    "issue_number": 22,
+    "title": "0.1.7: API/Litellm",
+    "author": "chymian",
+    "state": "closed",
+    "created_at": "2024-01-15T08:47:52Z",
+    "updated_at": "2024-07-18T14:40:31Z",
+    "labels": [],
+    "body": "hey @jbexta,\r\nthanks very much for the new release.\r\n```\r\nAP: 1.5.7\r\nlitellm(proxy): 1.17.5\r\nollama: 0.1.20\r\n```\r\nI'm still stocked at the model-setup.\r\n\r\nI'm testing with\r\n1. direct connection to together.ai: __nok__\r\nin the `API`-menu: select together.ai (provider are not alphabetical orderd)\r\n - added key in privat key\r\n - tried to find a model which is impossible in the API/Model-list due to no readability. (long model names)\r\n - only a very old subset of the models are offered. missing i.e mixtral, \r\n\r\nthen setting the model in `System`\r\ntrying to chat: pop-up error: no OPENAI_API_KEY is set\r\n\r\n2. using ollama (on my ext. server)\r\n  - choose ollama provider\r\n  - only a fraction of the latest modellist is shown.\r\n  - the local modified models(files) are not shown.\r\n - where can I set the API_BASE_URL for all my ollama-models at once?\r\n   or do I have to set that for every model seperat, instead of provider-wide?\r\n- adding my own  model-file-name to the list.\r\n  - setting URL\r\n  - need to restart to see in 'System'-Menu\r\n  - choose the new model\r\n\r\ntrying to chat: \r\n-> same OPENAI_API_KEY_error, \r\neven if I set a dummy one in ollama: private-key    \r\n\r\n4. what are the `client-key` and `privat-key` fields for?\r\n   - guess: private-key is the api-key?\r\n   - `client-key`: ?\r\n   \r\nwhen exporting a OPENAI_API_KEY in the env, before starting, the error changes:\r\n```log\r\nlitellm.exceptions.AuthenticationError: OpenAIException - Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-nobro. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}\r\n```\r\nthe call get routed to openai.com, instead of using either the together-api-endpoint, ollama, or custom-proxy ones.\r\n\r\n### Suggestion: create a hirachical Settings structure:\r\n1. BASE-Settings\r\n2. PROVIDER-Settings\r\n    query litellm for default model list & params, cost, etc.: see [token_usage](https://docs.litellm.ai/docs/completion/token_usage)\r\n3. MODEL-Settings, \r\n  fill in the queried params as default\r\n  overwrite as necessary\r\n\r\n__workflow 1:__\r\nUse a LiteLLM provided services:\r\n1. fill in all BASE-Settings with all neccessary params, then\r\n1. PROVIDER-Settings: choose a provider \r\n2. fill in all neccessary: i.e.\r\n  - API-KEY if necessary\r\n  - BASE_URL for __all provider's models__.\r\n  - then, query the provider for available modules `<API_BASE_URL>/v1/models`\r\n  - then show the recieved model-list in a wide-enough window, so one even can read replicate's and together.ai`s very long model-names. since we already choose the provider, the first field of the litellm-modelanme schema could be dropped for readability.\r\n 3. MODEL-Settings:\r\n  - then only offer model-spec overwrites, like, temp, top_?, c_ntx, etc.\r\n\r\n __workflow 2:__\r\nin case of a proxy-use *), we need to set:\r\n1. BASE-settings\r\n2. PROVIDER-settings: create/choose: custom/proxy\r\n  - custom API_BASE_URL\r\n  - provider: API to use, like openai (for litellm-proxy)\r\n  but without asking for an API_KEY or use dummy, if empty and (API_BASE_URL != api.openai.com)\r\n- query the proxy for avail. model-(aliases)\r\n3. set MODEL-setting overwrites\r\n\r\n*) litellm as proxy/router/cache can hold all neccessary info like KEY, URL, provider, model-params\r\n\r\n#### Caveat:\r\nwith all the remote queries, this would need to have an airplane-mode.\r\nb/c in case we run the API local (i.e. ollama & running tiny Models), we would loose usability, if we depend on online checks.\r\ntherefore an online/offline switch, or maybe don't query by default and implement an update-button could be a solution. the later one would IMHO be preferable, since we can control how often we need to update the list, while tinkering away ;)\r\nthe online/offline availability could also go into the provider settings?\r\n\r\nwhat do you think?\r\n\r\nI'm sorry to say, but with all these errors since 0.1.5 I still get it not to work. ",
+    "comments": [
+      {
+        "user": "jbexta",
+        "body": "```\r\n1. direct connection to together.ai: **nok**\r\n  in the `API`-menu: select together.ai (provider are not alphabetical orderd)\r\n```\r\nIf you click the Name header it will sort the table, that will be default on next version\r\n\r\n```\r\n * tried to find a model which is impossible in the API/Model-list due to no readability. (long model names)\r\n [...]\r\n * then show the recieved model-list in a wide-enough window, so one even can read replicate's and together.ai`s very long model-names. since we already choose the provider, the first field of the litellm-modelanme schema could be dropped for readability.\r\n```\r\nIt uses litellm's model names, it would be possible to remove the prefix eg `together_ai/..` from the model names, that would need an additional field for each API something like 'litellm prefix'. I'll get around to that but it won't be soon, I'll do that after 0.2.0 is released (within a few months)\r\n\r\nFor now long model names can be viewed and edited in the `model name` field next to the list in `API` settings, I know it's tedious, but even with the prefix removed some model names will still be cut off.\r\n\r\nAlso the list can be scrolled horizontally if you have a trackpad with horizontal scrolling, maybe I should enable the horizontal scrollbar for now.\r\n\r\n```\r\n  * only a very old subset of the models are offered. missing i.e mixtral,\r\n```\r\nModels can be added manually with the new icon, I add some new models as time goes on like GPT 4.5 turbo etc, but maintaining the collection of models from all providers is a lot of work, until there's an easy way to scrape them from litellm website or library\r\n\r\n```\r\n then setting the model in `System` trying to chat: pop-up error: no OPENAI_API_KEY is set\r\n```\r\nAre you changing the model in the Context settings or the Agent settings? When a new chat is created from the Agents list it uses the default agent settings. But when a new chat is created using the + icon in the chat page, the agent settings is copied from that specific context, so if that context still had an openai model then it will copy it, this behaviour is needed when it comes to more complex contexts like multi agent chat, although maybe it should be clearer. \r\nSo basically, each chat agent has it's own settings, the Agents page settings are the 'default agent settings'.\r\n\r\nIf the model in context settings (access from the chat page by clicking the header) is together_ai and it's still asking for openai api key, then let me know I'll investigate further, but it might be a litellm issue I'm not sure.\r\n\r\n```\r\n 2. using ollama (on my ext. server)\r\n * the local modified models(files) are not shown.\r\n```\r\nI've not tested ollama, but you would need to add the model names manually in agent pilot. I need to get around to testing ollama, I still haven't tried it.\r\n\r\n```\r\n * where can I set the API_BASE_URL for all my ollama-models at once?\r\n   or do I have to set that for every model seperat, instead of provider-wide?\r\n```\r\nFor now yes it has to be set for each model\r\n\r\n```\r\n  need to restart to see in 'System'-Menu\r\n```\r\nOops I'll see to that\r\n\r\n```\r\n   4. what are the `client-key` and `privat-key` fields for?\r\n```\r\nclient key is rarely used but needed for some APIs (like AWS)\r\nprivate key is the api key yes, I will rename that to API key\r\n\r\n```\r\n    but without asking for an API_KEY or use dummy, if empty and (API_BASE_URL != api.openai.com)\r\n```\r\nLet me know if you still get this response after changing the context specific model (or contexts created from the agent defautls)\r\n\r\n```\r\nwith all the remote queries, this would need to have an airplane-mode. b/c in case we run the API local (i.e. ollama & running tiny Models), we would loose usability, if we depend on online checks. therefore an online/offline switch, or maybe don't query by default and implement an update-button could be a solution. the later one would IMHO be preferable, since we can control how often we need to update the list, while tinkering away ;) the online/offline availability could also go into the provider settings?\r\n```\r\nThis is something I need to look into, I think open interpreter had the same probem, but not sure what you mean by update button and update the list?\r\n\r\nBtw there is a new button to update all context agents when you change the default agent settings, this will apply the new settings to all the previous chats"
+      },
+      {
+        "user": "krrishdholakia",
+        "body": "Hey @chymian @jbexta anything we can do to help here? \r\n\r\nContext - i'm the maintainer of litellm "
+      },
+      {
+        "user": "jbexta",
+        "body": "I think these issues are sorted now, feel free to reopen if you find anything else"
+      }
+    ],
+    "repository": "jbexta/AgentPilot"
+  },
+  {
+    "issue_number": 9,
+    "title": "CUSTOM API ENDPOINT URL",
+    "author": "illegalsolutions",
+    "state": "closed",
+    "created_at": "2023-11-12T17:00:35Z",
+    "updated_at": "2024-07-18T14:36:36Z",
+    "labels": [],
+    "body": "Is there a feature to add a custom endpoint for the API? If not, are you considering adding it?",
+    "comments": [
+      {
+        "user": "jbexta",
+        "body": "Yeah next version will have litellm so will be possible, will be released in a week or 2"
+      },
+      {
+        "user": "illegalsolutions",
+        "body": "Got it! Thank you for the quick response! I'm excited to hear that the next version will include the feature I requested. Looking forward to the release in a week or two."
+      },
+      {
+        "user": "ishaan-jaff",
+        "body": "@jbexta @Only1337 what do you need from litellm ? happy to bumo urgency on this \r\n"
+      }
+    ],
+    "repository": "jbexta/AgentPilot"
+  }
+]

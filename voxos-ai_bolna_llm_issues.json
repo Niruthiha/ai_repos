@@ -1,0 +1,366 @@
+[
+  {
+    "issue_number": 389,
+    "title": "Error during local setup: ModuleNotFoundError :  No module named 'llama_index'",
+    "author": "chaitanya1-coder",
+    "state": "open",
+    "created_at": "2024-09-09T11:22:56Z",
+    "updated_at": "2024-09-11T16:03:12Z",
+    "labels": [],
+    "body": "I'm trying to set up the project locally, but I'm encountering an error while running bolna server which is preventing me from proceedings. I have already install \"llama_index\" framework but it's still showing error \"ModuleNotFoundError :  No module named 'llama_index'\"\r\n<img width=\"1075\" alt=\"Screenshot 2024-09-09 at 3 58 25 PM\" src=\"https://github.com/user-attachments/assets/2685856e-c8d8-4054-bc3b-407bfcb22c64\">\r\n",
+    "comments": [
+      {
+        "user": "chaitanya1-coder",
+        "body": "Hi @prateeksachan @marmikcfc, Can you help me in solving this issue with my local setup ? I would love to contribute to bolna."
+      }
+    ],
+    "repository": "voxos-ai/bolna"
+  },
+  {
+    "issue_number": 380,
+    "title": "Torch and Torchaudio makes Docker Image size very big",
+    "author": "h3110Fr13nd",
+    "state": "open",
+    "created_at": "2024-08-23T13:08:23Z",
+    "updated_at": "2024-08-27T09:54:10Z",
+    "labels": [],
+    "body": "Image size is currently roughly 6gb. Which isn't good. As we aren't actually inferencing any ml model locally.\n\nMost of the image size is due to torch and torchaudio installing 4-5 GBs of nvidia packages. Which can be replaced with lightweight libraries like pydub, wave etc.\n\n- [x] Remove Torch and Torchaudio dependency",
+    "comments": [
+      {
+        "user": "h3110Fr13nd",
+        "body": "Already halfway there. Can you assign this to me."
+      },
+      {
+        "user": "marmikcfc",
+        "body": "Hey @h3110Fr13nd, can you ensure the changing pydub doesn't affect the latency in calls? Because I do remember pydub degrading quality of calls a bit because of time consuming operation. "
+      },
+      {
+        "user": "h3110Fr13nd",
+        "body": "> Hey @h3110Fr13nd, can you ensure the changing pydub doesn't affect the latency in calls? Because I do remember pydub degrading quality of calls a bit because of time consuming operation. \n\nSure, I'll check and tell"
+      }
+    ],
+    "repository": "voxos-ai/bolna"
+  },
+  {
+    "issue_number": 317,
+    "title": "Error with ffmpeg",
+    "author": "iowathe3rd",
+    "state": "open",
+    "created_at": "2024-07-05T12:01:43Z",
+    "updated_at": "2024-08-24T22:56:56Z",
+    "labels": [],
+    "body": "When working with elevenlabs a problem pops up\r\n\r\n```\r\nbolna-app-1   | 2024-07-05 11:54:48.037 INFO {task_manager} [_synthesize] ##### sending text to elevenlabs for generation: Welcome!\r\nbolna-app-1   | 2024-07-05 11:54:48.037 INFO {elevenlabs_synthesizer} [push] Pushed message to internal queue {'data': 'Welcome!', 'meta_info': {'io': 'twilio', 'message_category': 'agent_welcome_message', 'stream_sid': 'MZd6a2a5714938c29b35741cfa4863301a', 'request_id': '5c32a901-a2ea-4ce0-9e16-5f7a5e6e8cf4', 'cached': False, 'sequence_id': -1, 'format': 'pcm', 'text': 'Welcome!', 'is_md5_hash': False, 'llm_generated': False, 'type': 'audio', 'synthesizer_start_time': 1720180488.0376647}}\r\nbolna-app-1   | Traceback (most recent call last):\r\nbolna-app-1   |   File \"/usr/local/lib/python3.10/site-packages/bolna/agent_manager/task_manager.py\", line 1345, in __send_preprocessed_audio\r\nbolna-app-1   |     number_of_chunks = math.ceil(len(audio_chunk)/self.output_chunk_size)\r\nbolna-app-1   | TypeError: object of type 'NoneType' has no len()\r\nbolna-app-1   | 2024-07-05 11:54:48.038 ERROR {task_manager} [__send_preprocessed_audio] Something went wrong object of type 'NoneType' has no len()\r\nbolna-app-1   | 2024-07-05 11:54:48.038 INFO {utils} [write_request_logs] Message {'direction': 'request', 'data': 'Welcome!', 'leg_id': '5c32a901-a2ea-4ce0-9e16-5f7a5e6e8cf4', 'time': '2024-07-05 11:54:48', 'component': 'synthesizer', 'sequence_id': -1, 'model': 'elevenlabs', 'cached': False, 'latency': None, 'is_final': False, 'engine': 'eleven_turbo_v2'}\r\nbolna-app-1   | 2024-07-05 11:54:48.041 INFO {utils} [write_request_logs] Message {'direction': 'response', 'data': 'Welcome!', 'leg_id': '5c32a901-a2ea-4ce0-9e16-5f7a5e6e8cf4', 'time': '2024-07-05 11:54:48', 'component': 'synthesizer', 'sequence_id': -1, 'model': 'elevenlabs', 'cached': True, 'latency': None, 'is_final': False, 'engine': 'eleven_turbo_v2'}\r\nbolna-app-1   | 2024-07-05 11:54:48.041 INFO {utils} [write_request_logs] Message {'direction': 'request', 'data': 'Welcome!', 'leg_id': '5c32a901-a2ea-4ce0-9e16-5f7a5e6e8cf4', 'time': '2024-07-05 11:54:48', 'component': 'synthesizer', 'sequence_id': -1, 'model': 'elevenlabs', 'cached': False, 'latency': None, 'is_final': False, 'engine': 'eleven_turbo_v2'}\r\nbolna-app-1   | 2024-07-05 11:54:48.042 INFO {elevenlabs_synthesizer} [generate] Generating TTS response for message: {'data': 'Welcome!', 'meta_info': {'io': 'twilio', 'message_category': 'agent_welcome_message', 'stream_sid': 'MZd6a2a5714938c29b35741cfa4863301a', 'request_id': '5c32a901-a2ea-4ce0-9e16-5f7a5e6e8cf4', 'cached': False, 'sequence_id': -1, 'format': 'pcm', 'text': 'Welcome!', 'is_md5_hash': False, 'llm_generated': False, 'type': 'audio', 'synthesizer_start_time': 1720180488.0376647}}, using mulaw False\r\nbolna-app-1   | 2024-07-05 11:54:48.042 INFO {inmemory_scalar_cache} [get] Cache miss for key Welcome!\r\nbolna-app-1   | 2024-07-05 11:54:48.042 INFO {elevenlabs_synthesizer} [generate] Not a cache hit [] and hence increasing characters by 8\r\nbolna-app-1   | 2024-07-05 11:54:48.042 INFO {elevenlabs_synthesizer} [__generate_http] text Welcome!\r\nbolna-app-1   | 2024-07-05 11:54:48.847 ERROR {elevenlabs_synthesizer} [__send_payload] Error: 400 - {\"detail\":{\"status\":\"voice_not_found\",\"message\":\"A voice for the voice_id TTa58Hl9lmhnQEvhp1WM was not found.\"}}\r\nbolna-app-1   | 2024-07-05 11:54:48.847 INFO {utils} [convert_audio_to_wav] CONVERTING AUDIO TO WAV mp3\r\nbolna-app-1   | Traceback (most recent call last):\r\nbolna-app-1   |   File \"/usr/local/lib/python3.10/site-packages/bolna/synthesizer/elevenlabs_synthesizer.py\", line 228, in generate\r\nbolna-app-1   |     wav_bytes = convert_audio_to_wav(audio, source_format=\"mp3\")\r\nbolna-app-1   |   File \"/usr/local/lib/python3.10/site-packages/bolna/helpers/utils.py\", line 354, in convert_audio_to_wav\r\nbolna-app-1   |     audio = AudioSegment.from_file(io.BytesIO(audio_bytes), format=source_format)\r\nbolna-app-1   |   File \"/usr/local/lib/python3.10/site-packages/pydub/audio_segment.py\", line 773, in from_file\r\nbolna-app-1   |     raise CouldntDecodeError(\r\nbolna-app-1   | pydub.exceptions.CouldntDecodeError: Decoding failed. ffmpeg returned error code: 1\r\nbolna-app-1   |\r\nbolna-app-1   | Output from ffmpeg/avlib:\r\nbolna-app-1   |\r\nbolna-app-1   | ffmpeg version 5.1.5-0+deb12u1 Copyright (c) 2000-2024 the FFmpeg developers\r\nbolna-app-1   |   built with gcc 12 (Debian 12.2.0-14)\r\nbolna-app-1   |   configuration: --prefix=/usr --extra-version=0+deb12u1 --toolchain=hardened --libdir=/usr/lib/x86_64-linux-gnu --incdir=/usr/include/x86_64-linux-gnu --arch=amd64 --enable-gpl --disable-stripping --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libglslang --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librist --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sdl2 --disable-sndio --enable-libjxl --enable-pocketsphinx --enable-librsvg --enable-libmfx --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-libplacebo --enable-librav1e --enable-shared\r\nbolna-app-1   |   libavutil      57. 28.100 / 57. 28.100\r\nbolna-app-1   |   libavcodec     59. 37.100 / 59. 37.100\r\nbolna-app-1   |   libavformat    59. 27.100 / 59. 27.100\r\nbolna-app-1   |   libavdevice    59.  7.100 / 59.  7.100\r\nbolna-app-1   |   libavfilter     8. 44.100 /  8. 44.100\r\nbolna-app-1   |   libswscale      6.  7.100 /  6.  7.100\r\nbolna-app-1   |   libswresample   4.  7.100 /  4.  7.100\r\nbolna-app-1   |   libpostproc    56.  6.100 / 56.  6.100\r\nbolna-app-1   | [cache @ 0x55d68c0e1240] Inner protocol failed to seekback end : -38\r\nbolna-app-1   |     Last message repeated 1 times\r\nbolna-app-1   | [mp3 @ 0x55d68c0e0a40] Failed to read frame size: Could not seek to 1026.\r\nbolna-app-1   | [cache @ 0x55d68c0e1240] Statistics, cache hits:0 cache misses:0\r\nbolna-app-1   | cache:pipe:0: Invalid argument\r\nbolna-app-1   |\r\nbolna-app-1   | 2024-07-05 11:54:49.203 ERROR {elevenlabs_synthesizer} [generate] Error in eleven labs generate Decoding failed. ffmpeg returned error code: 1\r\n````",
+    "comments": [
+      {
+        "user": "jhui323444",
+        "body": "Hey so I also had this problem. FFmpeg wasnt the issue.\r\n\r\n I realized that <\"message\":\"A voice for the voice_id TTa58Hl9lmhnQEvhp1WM was not found.\">\r\nmeant that the voice id and voice provided in example agent payload did not exist.\r\nSo just replacing those two with one you can find from elevenlabs makes it work"
+      }
+    ],
+    "repository": "voxos-ai/bolna"
+  },
+  {
+    "issue_number": 383,
+    "title": "Exotel Support",
+    "author": "abhishekelectricspeech",
+    "state": "open",
+    "created_at": "2024-08-24T17:27:42Z",
+    "updated_at": "2024-08-24T19:03:11Z",
+    "labels": [],
+    "body": "Hi ,\r\n\r\nI can see exotel as a provider as code, but I don't see that option available.\r\nSo you plan to add it and if yes, Is there a timeline?",
+    "comments": [
+      {
+        "user": "marmikcfc",
+        "body": "Do you mean on the dashboard? "
+      },
+      {
+        "user": "abhishekelectricspeech",
+        "body": "Yes , is it available on dashboard , and If not can i integrate with it without dashboard , do you have any guides on it ?"
+      }
+    ],
+    "repository": "voxos-ai/bolna"
+  },
+  {
+    "issue_number": 382,
+    "title": "chore: Update Dockerfile to install bolna from local repository instead of remote git",
+    "author": "h3110Fr13nd",
+    "state": "open",
+    "created_at": "2024-08-24T15:16:49Z",
+    "updated_at": "2024-08-24T15:17:45Z",
+    "labels": [],
+    "body": "Dockerfile downloads the bolna package from github repo.\r\nThis causes an issue as your changes may not appear in theimage build. You have to push the repo update the repo url and then rebuild. \r\nQuite a tedious and unnecessary task.\r\n\r\n- [ ] Change Docker, Docker Compose to Install bolna package directly from the local repository folder.",
+    "comments": [
+      {
+        "user": "h3110Fr13nd",
+        "body": "Assign this I've other optimizations of Dockerfiles in mind as well."
+      }
+    ],
+    "repository": "voxos-ai/bolna"
+  },
+  {
+    "issue_number": 370,
+    "title": "Using Torch Audio instead of Scipy",
+    "author": "h3110Fr13nd",
+    "state": "open",
+    "created_at": "2024-08-09T11:47:26Z",
+    "updated_at": "2024-08-23T13:13:48Z",
+    "labels": [],
+    "body": "scipy has only been used once in whole project and can be replaced by torchaudio",
+    "comments": [
+      {
+        "user": "marmikcfc",
+        "body": "Makes sense, could you please send a PR for the same?"
+      },
+      {
+        "user": "h3110Fr13nd",
+        "body": "I think it should be other way around.\n\nTorch and torch audio are taking up lot of space and should be replaced.\n\n#380 Issue\nI'm working on removing/replacing torch and torchaudio.\n\nIf that works properly, then this issue is contradictory. And should be closed.\n\n@prateeksachan @marmikcfc\n\nWhat are your thoughts."
+      }
+    ],
+    "repository": "voxos-ai/bolna"
+  },
+  {
+    "issue_number": 375,
+    "title": "Supporting FOSS telephony tools",
+    "author": "vasnt",
+    "state": "open",
+    "created_at": "2024-08-14T20:21:04Z",
+    "updated_at": "2024-08-14T20:38:58Z",
+    "labels": [],
+    "body": "Possible to add support for foss telephony tools? \r\ne.g. (not sure are they are mature/stable or not or there are any better alternatives outs)\r\n- https://github.com/kamailio/kamailio\r\n- https://fonoster.com/\r\n- https://www.asterisk.org/downloads/",
+    "comments": [
+      {
+        "user": "prateeksachan",
+        "body": "hey @vasnt we welcome contributions and PRs. I've put up a small doc for integrating telephony providers: \r\n\r\nhttps://github.com/bolna-ai/bolna?tab=readme-ov-file#extending-with-other-telephony-providers"
+      }
+    ],
+    "repository": "voxos-ai/bolna"
+  },
+  {
+    "issue_number": 281,
+    "title": "when install through docker error in bolna dockerfile",
+    "author": "tonyMilad",
+    "state": "closed",
+    "created_at": "2024-06-24T14:39:54Z",
+    "updated_at": "2024-08-09T15:35:23Z",
+    "labels": [
+      "fixed"
+    ],
+    "body": "gives error on RUN pip install --force-reinstall git+https://github.com/bolna-ai/bolna@StyleTTS",
+    "comments": [
+      {
+        "user": "marmikcfc",
+        "body": "Can you try installing the master branch instead styletts\r\n It has already been merged into master. "
+      },
+      {
+        "user": "tonyMilad",
+        "body": "i have already installing from the master but in local_setup -->  dockerfiles --> bolna _server.dockerfile in line 10 \r\n\"RUN pip install --force-reinstall git+https://github.com/bolna-ai/bolna@StyleTTS\"\r\ngive error when build through docker-compase.yml"
+      },
+      {
+        "user": "marmikcfc",
+        "body": "Instead of git+https://github.com/bolna-ai/bolna@StyleTTS can you try git+https://github.com/bolna-ai/bolna@master?"
+      }
+    ],
+    "repository": "voxos-ai/bolna"
+  },
+  {
+    "issue_number": 355,
+    "title": "chore: UnOptimized Dockerfiles in local_setup",
+    "author": "h3110Fr13nd",
+    "state": "closed",
+    "created_at": "2024-08-01T16:24:30Z",
+    "updated_at": "2024-08-06T17:16:27Z",
+    "labels": [],
+    "body": "- [x] Improper requirements file\r\n- [x] Not utilising build cache as requirements are is copied after or with the whole app\r\n- [x] Unnecessarily increased number of Layers\r\n- [x] Changes in quickstart_server app will require to download and install the pip dependencies again.",
+    "comments": [
+      {
+        "user": "h3110Fr13nd",
+        "body": "I'm already working on this Issue.\r\n\r\nCan you assign this to me?"
+      },
+      {
+        "user": "prateeksachan",
+        "body": "hey @h3110Fr13nd any updates here?"
+      },
+      {
+        "user": "h3110Fr13nd",
+        "body": "I've tried and tested it.\r\nIf you want to Test it before Merging the PR\r\nThen you'll have to make a fork and make a change in `bolna_server.Dockerfile`\r\n```Dockerfile\r\nFROM python:3.10.13-slim\r\nWORKDIR /app\r\nRUN apt-get update && apt-get install -y --no-install-recommends \\\r\n    libgomp1 \\\r\n    git \\\r\n    ffmpeg\r\n# NOTE: Change the username and repo name to your fork\r\nRUN --mount=type=cache,target=/root/.cache/pip \\\r\n    pip install git+https://github.com/<your-username>/<your-fork-bolna>@master\r\n\r\nCOPY quickstart_server.py /app/\r\nEXPOSE 5001\r\nCMD [\"uvicorn\", \"quickstart_server:app\", \"--host\", \"0.0.0.0\", \"--port\", \"5001\"]\r\n```\r\nThis step is required as torchaudio isn't originally in master of bolna requirements."
+      }
+    ],
+    "repository": "voxos-ai/bolna"
+  },
+  {
+    "issue_number": 250,
+    "title": "Please add Plivo lib in local setup requirement.txt",
+    "author": "satishBohra",
+    "state": "closed",
+    "created_at": "2024-06-17T08:20:56Z",
+    "updated_at": "2024-08-05T04:59:08Z",
+    "labels": [
+      "bug",
+      "fixed"
+    ],
+    "body": "Here's the corrected version of your text:\r\n\r\n1. Add the Plivo library to `requirements.txt`:\r\n   ```\r\n   plivo==4.55.0\r\n   ```\r\n\r\n2. Add the `keepalive` parameter to Plivo to stay connected. For example:\r\n   ```xml\r\n   <Stream bidirectional=\"true\" keepCallAlive=\"true\">{}</Stream>\r\n   ```\r\n\r\n3. I am still not getting any output. Please update the code.\r\n\r\n",
+    "comments": [
+      {
+        "user": "prateeksachan",
+        "body": "hey @satishBohra, have added this in the `local_setup` directory so it's available in the docker. ref: 7f665d4193ae364006a2b5c4f9fbb9e021bfe873. do let me know in case of any issues."
+      },
+      {
+        "user": "satishBohra",
+        "body": "Thanks"
+      }
+    ],
+    "repository": "voxos-ai/bolna"
+  },
+  {
+    "issue_number": 363,
+    "title": "Error Using LLMs other than OpenAI",
+    "author": "Codemonk-adi",
+    "state": "open",
+    "created_at": "2024-08-05T03:44:11Z",
+    "updated_at": "2024-08-05T03:49:12Z",
+    "labels": [],
+    "body": "Using alternate LLMs for conversational tasks fails since even in creating a `StreamingContextualAgent`, OpenAiLLM is used to detect conversation completion.\r\n\r\n`bolna/agent_types/contextual_conversational_agent.py:18`\r\n\r\n",
+    "comments": [
+      {
+        "user": "Codemonk-adi",
+        "body": "Agent Creation Request\r\nPOST /agent\r\n\r\n```json\r\n{\r\n    \"agent_config\": {\r\n        \"agent_name\": \"Alfred\",\r\n        \"agent_type\": \"other\",\r\n        \"agent_welcome_message\": \"Welcome\",\r\n        \"tasks\": [{\r\n            \"task_type\": \"conversation\",\r\n            \"toolchain\": {\r\n                \"execution\": \"parallel\",\r\n                \"pipelines\": [\r\n                    [\r\n                        \"transcriber\",\r\n                        \"llm\",\r\n                        \"synthesizer\"\r\n                    ]\r\n                ]\r\n            },\r\n            \"tools_config\": {\r\n                \"input\": {\r\n                    \"format\": \"pcm\",\r\n                    \"provider\": \"twilio\"\r\n                },\r\n                \"llm_agent\": {\r\n                    \"agent_flow_type\": \"streaming\",\r\n                    \"provider\": \"azure-openai\",\r\n                    \"request_json\": true,\r\n                    \"model\": \"gpt-4o\",\r\n                    \"use_fallback\": true\r\n                },\r\n                \"output\": {\r\n                    \"format\": \"pcm\",\r\n                    \"provider\": \"twilio\"\r\n                },\r\n                \"synthesizer\": {\r\n                    \"audio_format\": \"wav\",\r\n                    \"provider\": \"elevenlabs\",\r\n                    \"stream\": true,\r\n                    \"provider_config\": {\r\n                        \"voice\": \"Meera - high quality, emotive\",\r\n                        \"model\": \"eleven_turbo_v2_5\",\r\n                        \"voice_id\": \"TTa58Hl9lmhnQEvhp1WM\"\r\n                    },\r\n                    \"buffer_size\": 100.0\r\n                },\r\n                \"transcriber\": {\r\n                    \"encoding\": \"linear16\",\r\n                    \"language\": \"en\",\r\n                    \"provider\": \"deepgram\",\r\n                    \"stream\": true\r\n                }\r\n            },\r\n            \"task_config\": {\r\n                \"hangup_after_silence\": 30.0\r\n            }\r\n        }]\r\n    },\r\n    \"agent_prompts\": {\r\n        \"task_1\": {\r\n            \"system_prompt\": \"Ask if they are coming for party tonight\"\r\n        }\r\n    }\r\n}\r\n```"
+      }
+    ],
+    "repository": "voxos-ai/bolna"
+  },
+  {
+    "issue_number": 338,
+    "title": "Whisper is erroring and calls are not being transcribed",
+    "author": "jkfnc",
+    "state": "open",
+    "created_at": "2024-07-15T20:00:49Z",
+    "updated_at": "2024-07-15T21:48:24Z",
+    "labels": [],
+    "body": "bolna-app-1    | 2024-07-15 19:57:55.916 INFO {whisper_transcriber} [transcribe] STARTED TRANSCRIBING\r\nwhisper-app-1  | 2024-07-15 19:57:55.927 INFO {server} [accept] connection open\r\nwhisper-app-1  | 2024-07-15 19:57:55.927 INFO {WhisperServer} [recv_audio] start receving audio\r\nwhisper-app-1  | 2024-07-15 19:57:55.928 INFO {WhisperServer} [handle_new_connection] New client connected\r\nwhisper-app-1  | 2024-07-15 19:57:55.935 INFO {WhisperServer} [handle_new_connection] Connection closed by client\r\nbolna-app-1    | 2024-07-15 19:57:55.936 ERROR {whisper_transcriber} [transcribe] Error in transcribe: 'NoneType' object has no attribute 'split'\r\n\r\nUsing these containers https://github.com/bolna-ai/bolna/tree/master/examples/whisper-melo-llama3",
+    "comments": [],
+    "repository": "voxos-ai/bolna"
+  },
+  {
+    "issue_number": 323,
+    "title": "Error in melo_server.dockerfile",
+    "author": "Jaiaggarwaaaaal",
+    "state": "open",
+    "created_at": "2024-07-06T11:44:57Z",
+    "updated_at": "2024-07-08T16:48:02Z",
+    "labels": [],
+    "body": "I am facing issue in melo_server.Dockerfile, the issue is \r\n\r\n> [melo-app  9/10] RUN pip install --no-cache-dir txtsplit torch torchaudio cached_path transformers mecab-python3==1.0.5 num2words==0.5.12 unidic_lite unidic pykakasi==2.2.1 fugashi==1.3.0 g2p_en==2.1.0 anyascii==0.3.2 jamo==0.4.1 gruut[de,es,fr]==2.2.3 g2pkk>=0.1.1 librosa==0.9.1 pydub==0.25.1 eng_to_ipa==0.0.2 inflect==7.0.0 unidecode==1.3.7 pypinyin==0.50.0 cn2an==0.5.22 jieba==0.42.1 langid==1.1.6 tqdm tensorboard==2.16.2 loguru==0.7.2 git+https://github.com/kvinwang/python-crfsuite:\r\n0.518   Running command git clone --filter=blob:none --quiet https://github.com/kvinwang/python-crfsuite /tmp/pip-req-build-ryuiph02\r\n2.586   Running command git submodule update --init --recursive -q\r\n38.27 ERROR: Cannot install gruut[de,es,fr]==2.2.3 and python-crfsuite 0.9.6 (from git+https://github.com/kvinwang/python-crfsuite) because these package versions have conflicting dependencies.\r\n38.27 ERROR: ResolutionImpossible: for help visit https://pip.pypa.io/en/latest/topics/dependency-resolution/#dealing-with-dependency-conflicts\r\n38.42 \r\n38.42 [notice] A new release of pip is available: 23.0.1 -> 24.1.1\r\n38.42 [notice] To update, run: pip install --upgrade pip\r\n------\r\nfailed to solve: process \"/bin/sh -c pip install --no-cache-dir txtsplit torch torchaudio cached_path transformers mecab-python3==1.0.5 num2words==0.5.12 unidic_lite unidic pykakasi==2.2.1 fugashi==1.3.0 g2p_en==2.1.0 anyascii==0.3.2 jamo==0.4.1 gruut[de,es,fr]==2.2.3 g2pkk>=0.1.1 librosa==0.9.1 pydub==0.25.1 eng_to_ipa==0.0.2 inflect==7.0.0 unidecode==1.3.7 pypinyin==0.50.0 cn2an==0.5.22 jieba==0.42.1 langid==1.1.6 tqdm tensorboard==2.16.2 loguru==0.7.2 git+https://github.com/kvinwang/python-crfsuite\" did not complete successfully: exit code: 1",
+    "comments": [
+      {
+        "user": "prateeksachan",
+        "body": "hey @Jaiaggarwaaaaal , did you try deploying this in GPU-based instance? melo_server and whisper_server require GPU instances as mentioned in their docker config.\r\n\r\nhttps://github.com/bolna-ai/bolna/blob/aafb2133ce2f1b9a837c57eb2b8e3efb7e643833/examples/whisper-melo-llama3/docker-compose.yml#L68-L82"
+      },
+      {
+        "user": "Jaiaggarwaaaaal",
+        "body": "No, @prateeksachan i didn't. @marmikcfc also tried to solve the issue in the Hackathon(AI - AGENT ), he also proposed that might be the GPU issue, because he was able to run 'bolna' in his device through instance.  I will try deploying it using the gpu."
+      }
+    ],
+    "repository": "voxos-ai/bolna"
+  },
+  {
+    "issue_number": 305,
+    "title": "Fatal error with docker on whisper-melo-llama3",
+    "author": "acastry",
+    "state": "open",
+    "created_at": "2024-07-03T00:47:03Z",
+    "updated_at": "2024-07-07T23:52:30Z",
+    "labels": [
+      "bug"
+    ],
+    "body": "Hello there is a fatal error when trying to deploy whisper-melo-llama3\r\nFirst it is necessary to modify bolna_server.Dockerfile to get the last repository right ?\r\nRUN pip install --force-reinstall git+https://github.com/bolna-ai/bolna@MeloTTS\r\nto:\r\nRUN pip install --force-reinstall git+https://github.com/bolna-ai/bolna@master\r\n\r\nThen the fatal error i guess in MeloTTS :\r\n` => [melo-app  5/10] RUN git clone https://github.com/bolna-ai/MeloTTS                                                                                                                                        2.1s\r\n => [melo-app  6/10] RUN pip install fastapi uvicorn torchaudio                                                                                                                                              46.9s\r\n => [bolna-app 12/14] RUN pip install pydub==0.25.1                                                                                                                                                           1.6s\r\n => [bolna-app 13/14] RUN pip install ffprobe                                                                                                                                                                 2.7s\r\n => [bolna-app 14/14] RUN pip install aiofiles                                                                                                                                                                1.3s\r\n => ERROR [bolna-app] exporting to docker image format                                                                                                                                                      183.9s\r\n => => exporting layers                                                                                                                                                                                     112.2s\r\n => => exporting manifest sha256:06c40a005b2f6040981b04d677a5994fa440a4b8b0a826bb7193ffae940856e5                                                                                                             0.0s\r\n => => exporting config sha256:89c37bae6f62aca0d4d57689610467537971fa097ea12c00147f3fc21cd900d5                                                                                                               0.0s\r\n => => sending tarball                                                                                                                                                                                       71.7s\r\n => [melo-app  7/10] RUN cp -a MeloTTS/. .                                                                                                                                                                    0.7s\r\n => [melo-app  8/10] RUN python -m pip cache purge                                                                                                                                                            0.8s\r\n => ERROR [melo-app  9/10] RUN pip install --no-cache-dir txtsplit torch torchaudio cached_path transformers==4.27.4 mecab-python3==1.0.5 num2words==0.5.12 unidic_lite unidic mecab-python3==1.0.5 pykaka  147.7s\r\n => [whisper-app  9/12] RUN pip install git+https://github.com/SYSTRAN/faster-whisper.git                                                                                                                     8.6s\r\n => [whisper-app 10/12] RUN pip install transformers                                                                                                                                                         11.1s\r\n => [whisper-app 11/12] RUN ct2-transformers-converter --model openai/whisper-small --copy_files preprocessor_config.json --output_dir ./Server/ASR/whisper_small --quantization float16                     33.0s\r\n => [whisper-app 12/12] WORKDIR Server                                                                                                                                                                        0.0s\r\n => CANCELED [whisper-app] exporting to docker image format                                                                                                                                                  87.4s\r\n => => exporting layers                                                                                                                                                                                      87.4s\r\n => CANCELED [bolna-app bolna-app] importing to docker                                                                                                                                                       17.5s\r\n------\r\n > [bolna-app] exporting to docker image format:\r\n------\r\n------\r\n > [melo-app  9/10] RUN pip install --no-cache-dir txtsplit torch torchaudio cached_path transformers==4.27.4 mecab-python3==1.0.5 num2words==0.5.12 unidic_lite unidic mecab-python3==1.0.5 pykakasi==2.2.1 fugashi==1.3.0 g2p_en==2.1.0 anyascii==0.3.2 jamo==0.4.1 gruut[de,es,fr]==2.2.3 g2pkk>=0.1.1 librosa==0.9.1 pydub==0.25.1 eng_to_ipa==0.0.2 inflect==7.0.0 unidecode==1.3.7 pypinyin==0.50.0 cn2an==0.5.22 jieba==0.42.1 langid==1.1.6 tqdm tensorboard==2.16.2 loguru==0.7.2:\r\n132.9   error: subprocess-exited-with-error\r\n132.9   \r\n132.9   × python setup.py bdist_wheel did not run successfully.\r\n132.9   │ exit code: 1\r\n132.9   ╰─> [24 lines of output]\r\n132.9       running bdist_wheel\r\n132.9       running build\r\n132.9       running build_py\r\n132.9       creating build\r\n132.9       creating build/lib.linux-aarch64-cpython-310\r\n132.9       creating build/lib.linux-aarch64-cpython-310/pycrfsuite\r\n132.9       copying pycrfsuite/_dumpparser.py -> build/lib.linux-aarch64-cpython-310/pycrfsuite\r\n132.9       copying pycrfsuite/_logparser.py -> build/lib.linux-aarch64-cpython-310/pycrfsuite\r\n132.9       copying pycrfsuite/__init__.py -> build/lib.linux-aarch64-cpython-310/pycrfsuite\r\n132.9       running build_ext\r\n132.9       building 'pycrfsuite._pycrfsuite' extension\r\n132.9       creating build/temp.linux-aarch64-cpython-310\r\n132.9       creating build/temp.linux-aarch64-cpython-310/crfsuite\r\n132.9       creating build/temp.linux-aarch64-cpython-310/crfsuite/lib\r\n132.9       creating build/temp.linux-aarch64-cpython-310/crfsuite/lib/cqdb\r\n132.9       creating build/temp.linux-aarch64-cpython-310/crfsuite/lib/cqdb/src\r\n132.9       creating build/temp.linux-aarch64-cpython-310/crfsuite/lib/crf\r\n132.9       creating build/temp.linux-aarch64-cpython-310/crfsuite/lib/crf/src\r\n132.9       creating build/temp.linux-aarch64-cpython-310/crfsuite/swig\r\n132.9       creating build/temp.linux-aarch64-cpython-310/liblbfgs\r\n132.9       creating build/temp.linux-aarch64-cpython-310/liblbfgs/lib\r\n132.9       creating build/temp.linux-aarch64-cpython-310/pycrfsuite\r\n132.9       gcc -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O3 -Wall -fPIC -Icrfsuite/include/ -Icrfsuite/lib/cqdb/include -Iliblbfgs/include -Ipycrfsuite -I/usr/local/include/python3.10 -c -std=c99 crfsuite/lib/cqdb/src/cqdb.c -o build/temp.linux-aarch64-cpython-310/crfsuite/lib/cqdb/src/cqdb.o\r\n132.9       error: command 'gcc' failed: No such file or directory\r\n132.9       [end of output]\r\n132.9   \r\n132.9   note: This error originates from a subprocess, and is likely not a problem with pip.\r\n132.9   ERROR: Failed building wheel for python-crfsuite\r\n139.5   error: subprocess-exited-with-error\r\n139.5   \r\n139.5   × Running setup.py install for python-crfsuite did not run successfully.\r\n139.5   │ exit code: 1\r\n139.5   ╰─> [26 lines of output]\r\n139.5       running install\r\n139.5       /usr/local/lib/python3.10/site-packages/setuptools/command/install.py:34: SetuptoolsDeprecationWarning: setup.py install is deprecated. Use build and pip and other standards-based tools.\r\n139.5         warnings.warn(\r\n139.5       running build\r\n139.5       running build_py\r\n139.5       creating build\r\n139.5       creating build/lib.linux-aarch64-cpython-310\r\n139.5       creating build/lib.linux-aarch64-cpython-310/pycrfsuite\r\n139.5       copying pycrfsuite/_dumpparser.py -> build/lib.linux-aarch64-cpython-310/pycrfsuite\r\n139.5       copying pycrfsuite/_logparser.py -> build/lib.linux-aarch64-cpython-310/pycrfsuite\r\n139.5       copying pycrfsuite/__init__.py -> build/lib.linux-aarch64-cpython-310/pycrfsuite\r\n139.5       running build_ext\r\n139.5       building 'pycrfsuite._pycrfsuite' extension\r\n139.5       creating build/temp.linux-aarch64-cpython-310\r\n139.5       creating build/temp.linux-aarch64-cpython-310/crfsuite\r\n139.5       creating build/temp.linux-aarch64-cpython-310/crfsuite/lib\r\n139.5       creating build/temp.linux-aarch64-cpython-310/crfsuite/lib/cqdb\r\n139.5       creating build/temp.linux-aarch64-cpython-310/crfsuite/lib/cqdb/src\r\n139.5       creating build/temp.linux-aarch64-cpython-310/crfsuite/lib/crf\r\n139.5       creating build/temp.linux-aarch64-cpython-310/crfsuite/lib/crf/src\r\n139.5       creating build/temp.linux-aarch64-cpython-310/crfsuite/swig\r\n139.5       creating build/temp.linux-aarch64-cpython-310/liblbfgs\r\n139.5       creating build/temp.linux-aarch64-cpython-310/liblbfgs/lib\r\n139.5       creating build/temp.linux-aarch64-cpython-310/pycrfsuite\r\n139.5       gcc -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O3 -Wall -fPIC -Icrfsuite/include/ -Icrfsuite/lib/cqdb/include -Iliblbfgs/include -Ipycrfsuite -I/usr/local/include/python3.10 -c -std=c99 crfsuite/lib/cqdb/src/cqdb.c -o build/temp.linux-aarch64-cpython-310/crfsuite/lib/cqdb/src/cqdb.o\r\n139.5       error: command 'gcc' failed: No such file or directory\r\n139.5       [end of output]\r\n139.5   \r\n139.5   note: This error originates from a subprocess, and is likely not a problem with pip.\r\n139.5 error: legacy-install-failure\r\n139.5 \r\n139.5 × Encountered error while trying to install package.\r\n139.5 ╰─> python-crfsuite\r\n139.5 \r\n139.5 note: This is an issue with the package mentioned above, not pip.\r\n139.5 hint: See above for output from the failure.\r\n141.0 \r\n141.0 [notice] A new release of pip is available: 23.0.1 -> 24.1.1\r\n141.0 [notice] To update, run: pip install --upgrade pip\r\n------\r\nfailed to solve: process \"/bin/sh -c pip install --no-cache-dir txtsplit torch torchaudio cached_path transformers==4.27.4 mecab-python3==1.0.5 num2words==0.5.12 unidic_lite unidic mecab-python3==1.0.5 pykakasi==2.2.1 fugashi==1.3.0 g2p_en==2.1.0 anyascii==0.3.2 jamo==0.4.1 gruut[de,es,fr]==2.2.3 g2pkk>=0.1.1 librosa==0.9.1 pydub==0.25.1 eng_to_ipa==0.0.2 inflect==7.0.0 unidecode==1.3.7 pypinyin==0.50.0 cn2an==0.5.22 jieba==0.42.1 langid==1.1.6 tqdm tensorboard==2.16.2 loguru==0.7.2\" did not complete successfully: exit code: 1\r\n`\r\n\r\nThanks for your support,",
+    "comments": [
+      {
+        "user": "prateeksachan",
+        "body": "thanks @acastry for reporting this. Will debug and get it fixed."
+      },
+      {
+        "user": "prateeksachan",
+        "body": "hey @acastry did you try deploying this in GPU-based instance? melo_server and whisper_server require GPU instances as mentioned in their docker config.\r\n\r\nhttps://github.com/bolna-ai/bolna/blob/aafb2133ce2f1b9a837c57eb2b8e3efb7e643833/examples/whisper-melo-llama3/docker-compose.yml#L68-L82"
+      }
+    ],
+    "repository": "voxos-ai/bolna"
+  },
+  {
+    "issue_number": 307,
+    "title": "whisper-melo-llama3 not receiving my voice",
+    "author": "acastry",
+    "state": "open",
+    "created_at": "2024-07-03T05:40:52Z",
+    "updated_at": "2024-07-03T05:40:52Z",
+    "labels": [],
+    "body": "Hi\r\nI am trying to deploy whisper-melo-llama3\r\n\r\nI created an agent with my ngrok adress coming from my ngrok token :\r\n`\r\ncurl --location 'https://XXXXXXXXXXXX.ngrok-free.app/agent' \\\r\n--header 'Content-Type: application/json' \\\r\n--data '{\r\n  \"agent_config\": {\r\n    \"agent_name\": \"Alfred\",\r\n    \"agent_type\": \"other\",\r\n    \"tasks\": [\r\n      {\r\n        \"task_type\": \"conversation\",\r\n        \"tools_config\": {\r\n          \"llm_agent\": {\r\n            \"model\": \"deepinfra/meta-llama/Meta-Llama-3-70B-Instruct\",\r\n            \"max_tokens\": 123,\r\n            \"agent_flow_type\": \"streaming\",\r\n            \"use_fallback\": true,\r\n            \"family\": \"llama\",\r\n            \"temperature\": 0.1,\r\n            \"request_json\": true,\r\n            \"provider\":\"deepinfra\"\r\n          },\r\n          \"synthesizer\": {\r\n            \"provider\": \"melotts\",\r\n            \"provider_config\": {\r\n              \"voice\": \"Casey\",\r\n              \"sample_rate\": 8000,\r\n              \"sdp_ratio\" : 0.2,\r\n              \"noise_scale\" : 0.6,\r\n              \"noise_scale_w\" :  0.8,\r\n              \"speed\" : 1.0\r\n            },\r\n            \"stream\": true,\r\n            \"buffer_size\": 123,\r\n            \"audio_format\": \"wav\"\r\n          },\r\n          \"transcriber\": {\r\n            \"encoding\": \"linear16\",\r\n            \"language\": \"en\",\r\n            \"model\": \"whisper\",\r\n            \"stream\": true,\r\n            \"task\": \"transcribe\"\r\n          },\r\n          \"input\": {\r\n            \"provider\": \"twilio\",\r\n            \"format\": \"wav\"\r\n          },\r\n          \"output\": {\r\n            \"provider\": \"twilio\",\r\n            \"format\": \"wav\"\r\n          }\r\n        },\r\n        \"toolchain\": {\r\n          \"execution\": \"parallel\",\r\n          \"pipelines\": [\r\n            [\r\n              \"transcriber\",\r\n              \"llm\",\r\n              \"synthesizer\"\r\n            ]\r\n          ]\r\n        }\r\n      }\r\n    ]\r\n  },\r\n  \"agent_prompts\": {\r\n    \"task_1\": {\r\n      \"system_prompt\": \"What is the Ultimate Question of Life, the Universe, and Everything?\"\r\n    }\r\n  }                                                \r\n`\r\n\r\nIt returns \r\n`\r\n\"{\"agent_id\":\"*************-3409-4f09-a1a7-582b12232444\",\"state\":\"created\"}\"\r\n`\r\n\r\nThen i try to do\r\n\r\n`\r\ncurl --location 'https://XXXXXXXXXXXX.ngrok-free.app/call' \\ \r\n--header 'Content-Type: application/json' \\\r\n--data '{\r\n    \"agent_id\": \"*************-3409-4f09-a1a7-582b12232444\",\r\n    \"recipient_phone_number\": \"+590690320620\"\r\n}'  \r\n`\r\n`\r\n{\"detail\":\"Not Found\"}\r\n`\r\n\r\nSo i do\r\n\r\n`\r\ncurl --location '[http://0.0.0.0:/call](http://0.0.0.0:8001/call)' \\ \r\n--header 'Content-Type: application/json' \\\r\n--data '{\r\n    \"agent_id\": \"*************-3409-4f09-a1a7-582b12232444\",\r\n    \"recipient_phone_number\": \"+590690320620\"\r\n}'  `\r\n\r\nto get it working don't know why\r\n\r\n\r\nIt calls me but the system doesn't hear my voice. DO i have to enter any endpoint into TWILIO ? Please help me @prateeksachan \r\n\r\n`2024-07-03 01:23:25 2024-07-03 05:23:25.753 INFO {telephony} [handle] Sending Message None and MZbcf6c8ebc7391c74914520cf4cfa7639 and  {'io': 'twilio', 'message_category': 'agent_welcome_message', 'stream_sid': 'MZbcf6c8ebc7391c74914520cf4cfa7639', 'request_id': 'a3fb47c6-7301-4d27-bcf2-eb8fd5fbcfcc', 'cached': False, 'sequence_id': -1, 'format': 'linear16', 'text': 'This call is being recorded for quality assurance and training. Please speak now.', 'is_md5_hash': False, 'llm_generated': False, 'type': 'audio', 'synthesizer_start_time': 1719984197.0962937, 'is_first_chunk': True, 'synthesizer_latency': 5.429271936416626, 'synthesizer_first_chunk_latency': 5.429289817810059, 'chunk_id': 15}\r\n2024-07-03 01:23:25 2024-07-03 05:23:25.753 INFO {telephony} [handle] Sending message 4096 linear16\r\n2024-07-03 01:23:25 2024-07-03 05:23:25.753 INFO {twilio} [form_media_message] Converting to mulaw\r\n2024-07-03 01:23:25 2024-07-03 05:23:25.753 INFO {task_manager} [__process_output_loop] Duration of the byte 0.256\r\n2024-07-03 01:23:25 2024-07-03 05:23:25.753 INFO {task_manager} [__process_output_loop] ##### Sleeping for 0.256 to maintain quueue on our side 8000\r\n2024-07-03 01:23:25 2024-07-03 05:23:25.988 INFO {task_manager} [__process_output_loop] ##### Updating Last transmitted timestamp to 1719984205.988593\r\n2024-07-03 01:23:25 2024-07-03 05:23:25.989 INFO {task_manager} [__process_output_loop] Started transmitting at 1719984205.9892044\r\n2024-07-03 01:23:25 2024-07-03 05:23:25.989 INFO {task_manager} [__process_output_loop] ##### Start response is True for 16 and hence starting to speak {'io': 'twilio', 'message_category': 'agent_welcome_message', 'stream_sid': 'MZbcf6c8ebc7391c74914520cf4cfa7639', 'request_id': 'a3fb47c6-7301-4d27-bcf2-eb8fd5fbcfcc', 'cached': False, 'sequence_id': -1, 'format': 'linear16', 'text': 'This call is being recorded for quality assurance and training. Please speak now.', 'is_md5_hash': False, 'llm_generated': False, 'type': 'audio', 'synthesizer_start_time': 1719984197.0962937, 'is_first_chunk': True, 'synthesizer_latency': 5.429271936416626, 'synthesizer_first_chunk_latency': 5.429289817810059, 'chunk_id': 16} Current sequence ids {-1}\r\n2024-07-03 01:23:25 2024-07-03 05:23:25.989 INFO {telephony} [handle] Sending Message None and MZbcf6c8ebc7391c74914520cf4cfa7639 and  {'io': 'twilio', 'message_category': 'agent_welcome_message', 'stream_sid': 'MZbcf6c8ebc7391c74914520cf4cfa7639', 'request_id': 'a3fb47c6-7301-4d27-bcf2-eb8fd5fbcfcc', 'cached': False, 'sequence_id': -1, 'format': 'linear16', 'text': 'This call is being recorded for quality assurance and training. Please speak now.', 'is_md5_hash': False, 'llm_generated': False, 'type': 'audio', 'synthesizer_start_time': 1719984197.0962937, 'is_first_chunk': True, 'synthesizer_latency': 5.429271936416626, 'synthesizer_first_chunk_latency': 5.429289817810059, 'chunk_id': 16}\r\n2024-07-03 01:23:25 2024-07-03 05:23:25.989 INFO {telephony} [handle] Sending message 4096 linear16\r\n2024-07-03 01:23:25 2024-07-03 05:23:25.989 INFO {twilio} [form_media_message] Converting to mulaw\r\n2024-07-03 01:23:25 2024-07-03 05:23:25.990 INFO {task_manager} [__process_output_loop] Duration of the byte 0.256\r\n2024-07-03 01:23:25 2024-07-03 05:23:25.990 INFO {task_manager} [__process_output_loop] ##### Sleeping for 0.256 to maintain quueue on our side 8000\r\n2024-07-03 01:23:26 2024-07-03 05:23:26.219 INFO {task_manager} [__process_output_loop] ##### Updating Last transmitted timestamp to 1719984206.2192206\r\n2024-07-03 01:23:26 2024-07-03 05:23:26.219 INFO {task_manager} [__process_output_loop] Started transmitting at 1719984206.219604\r\n2024-07-03 01:23:26 2024-07-03 05:23:26.219 INFO {task_manager} [__process_output_loop] ##### Start response is True for 17 and hence starting to speak {'io': 'twilio', 'message_category': 'agent_welcome_message', 'stream_sid': 'MZbcf6c8ebc7391c74914520cf4cfa7639', 'request_id': 'a3fb47c6-7301-4d27-bcf2-eb8fd5fbcfcc', 'cached': False, 'sequence_id': -1, 'format': 'linear16', 'text': 'This call is being recorded for quality assurance and training. Please speak now.', 'is_md5_hash': False, 'llm_generated': False, 'type': 'audio', 'synthesizer_start_time': 1719984197.0962937, 'is_first_chunk': True, 'synthesizer_latency': 5.429271936416626, 'synthesizer_first_chunk_latency': 5.429289817810059, 'chunk_id': 17, 'is_final_chunk_of_entire_response': True} Current sequence ids {-1}\r\n2024-07-03 01:23:26 2024-07-03 05:23:26.219 INFO {telephony} [handle] Sending Message None and MZbcf6c8ebc7391c74914520cf4cfa7639 and  {'io': 'twilio', 'message_category': 'agent_welcome_message', 'stream_sid': 'MZbcf6c8ebc7391c74914520cf4cfa7639', 'request_id': 'a3fb47c6-7301-4d27-bcf2-eb8fd5fbcfcc', 'cached': False, 'sequence_id': -1, 'format': 'linear16', 'text': 'This call is being recorded for quality assurance and training. Please speak now.', 'is_md5_hash': False, 'llm_generated': False, 'type': 'audio', 'synthesizer_start_time': 1719984197.0962937, 'is_first_chunk': True, 'synthesizer_latency': 5.429271936416626, 'synthesizer_first_chunk_latency': 5.429289817810059, 'chunk_id': 17, 'is_final_chunk_of_entire_response': True}\r\n2024-07-03 01:23:26 2024-07-03 05:23:26.219 INFO {telephony} [handle] Sending message 828 linear16\r\n2024-07-03 01:23:26 2024-07-03 05:23:26.219 INFO {twilio} [form_media_message] Converting to mulaw\r\n2024-07-03 01:23:26 2024-07-03 05:23:26.221 INFO {task_manager} [__process_output_loop] Duration of the byte 0.05175\r\n2024-07-03 01:23:26 2024-07-03 05:23:26.221 INFO {task_manager} [__process_output_loop] ##### End of synthesizer stream and \r\n2024-07-03 01:23:26 2024-07-03 05:23:26.221 INFO {task_manager} [__process_output_loop] Making first message passed as True\r\n2024-07-03 01:23:26 2024-07-03 05:23:26.221 INFO {task_manager} [__process_output_loop] ##### Sleeping for 0.05175 to maintain quueue on our side 8000\r\n2024-07-03 01:23:26 2024-07-03 05:23:26.244 INFO {task_manager} [__process_output_loop] ##### Updating Last transmitted timestamp to 1719984206.2447424\r\n2024-07-03 01:23:26 2024-07-03 05:23:26.244 INFO {task_manager} [__process_output_loop] First interim result hasn't been gotten yet and hence sleeping \r\n2024-07-03 01:23:26 2024-07-03 05:23:26.345 INFO {task_manager} [__process_output_loop] ##### Got to wait 300 ms before speaking and alreasy waited -1 since the first interim result\r\n2024-07-03 01:23:26 2024-07-03 05:23:26.591 INFO {task_manager} [__check_for_completion] Only 0.34679651260375977 seconds since last spoken time stamp and hence not cutting the phone call\r\n2024-07-03 01:23:28 2024-07-03 05:23:28.586 INFO {task_manager} [__handle_initial_silence] Checking for initial silence 15\r\n2024-07-03 01:23:28 2024-07-03 05:23:28.594 INFO {task_manager} [__check_for_completion] Only 2.349334239959717 seconds since last spoken time stamp and hence not cutting the phone call\r\n2024-07-03 01:23:30 2024-07-03 05:23:30.596 INFO {task_manager} [__check_for_completion] Only 4.351584434509277 seconds since last spoken time stamp and hence not cutting the phone call\r\n2024-07-03 01:23:31 2024-07-03 05:23:31.587 INFO {task_manager} [__handle_initial_silence] Checking for initial silence 15\r\n2024-07-03 01:23:32 2024-07-03 05:23:32.601 INFO {task_manager} [__check_for_completion] Asking if the user is still there\r\n2024-07-03 01:23:32 2024-07-03 05:23:32.605 INFO {task_manager} [_synthesize] ##### sending text to melotts for generation: Hey, are you still there? \r\n2024-07-03 01:23:32 2024-07-03 05:23:32.605 INFO {melo_synthesizer} [push] Pushed message to internal queue\r\n2024-07-03 01:23:32 2024-07-03 05:23:32.606 INFO {twilio} [handle_interruption] interrupting because user spoke in between\r\n2024-07-03 01:23:32 2024-07-03 05:23:32.607 INFO {utils} [write_request_logs] Message {'direction': 'request', 'data': 'Hey, are you still there?', 'leg_id': 'eadcdfac-26f4-458b-9773-88a260359249', 'time': '2024-07-03 05:23:32', 'component': 'synthesizer', 'sequence_id': -1, 'model': 'melotts', 'cached': False, 'latency': None, 'is_final': False, 'engine': 'default'}`\r\n\r\nFull logs attached\r\n\r\n[bolna-app.log](https://github.com/user-attachments/files/16077569/bolna-app.log)\r\n\r\nThank you !",
+    "comments": [],
+    "repository": "voxos-ai/bolna"
+  },
+  {
+    "issue_number": 306,
+    "title": "whisper-melo-llama3 still call Deepgram ",
+    "author": "acastry",
+    "state": "open",
+    "created_at": "2024-07-03T05:21:50Z",
+    "updated_at": "2024-07-03T05:21:50Z",
+    "labels": [],
+    "body": "Hello,\r\nIt appears that whisper-melo-llama3 example uses DEEPGRAM i guess for fillers right ?\r\nNot a big issue but this prevents it to be called 100% offline :-)\r\n\r\n`2024-07-03 00:13:31 2024-07-03 04:13:31.927 INFO {deepgram_transcriber} [transcribe] STARTED TRANSCRIBING\r\n2024-07-03 00:13:31 2024-07-03 04:13:31.927 INFO {deepgram_transcriber} [get_deepgram_ws_url] GETTING DEEPGRAM WS\r\n2024-07-03 00:13:31 2024-07-03 04:13:31.928 INFO {deepgram_transcriber} [get_deepgram_ws_url] Deepgram websocket url: wss://api.deepgram.com/v1/listen?model=nova-2&filler_words=true&diarize=true&language=en&vad_events=true&encoding=mulaw&sample_rate=8000&channels=1&interim_results=true&utterance_end_ms=1000\r\n2024-07-03 00:13:32 2024-07-03 04:13:32.427 INFO {task_manager} [__first_message] Got stream sid and hence sending the first message MZ6605b1b187e313aacd72ed8a348c7834\r\n2024-07-03 00:13:32 2024-07-03 04:13:32.428 INFO {task_manager} [__first_message] Generating This call is being recorded for quality assurance and training. Please speak now.\r\n2024-07-03 00:13:32 2024-07-03 04:13:32.440 INFO {task_manager} [_synthesize] ##### sending text to melotts for generation: This call is being recorded for quality assurance and training. Please speak now. \r\n`",
+    "comments": [],
+    "repository": "voxos-ai/bolna"
+  },
+  {
+    "issue_number": 161,
+    "title": "No Audio in Call",
+    "author": "wdcs-divyeshpatel",
+    "state": "closed",
+    "created_at": "2024-05-15T09:12:18Z",
+    "updated_at": "2024-07-02T03:22:26Z",
+    "labels": [],
+    "body": "Hello, I am not able to here AI voice while running the \"/call\" API. But I am able to see the AI response on terminal logs. Can you please let me know what can be the issue here? Thanks.",
+    "comments": [
+      {
+        "user": "dev-orion-ps",
+        "body": "have you setup ngrok auth token?"
+      },
+      {
+        "user": "wdcs-divyeshpatel",
+        "body": "yes, I have setup ngrok auth token in \"ngrok-config.yml\" file."
+      },
+      {
+        "user": "prateeksachan",
+        "body": "@wdcs-divyeshpatel what synthesiser are you using?"
+      }
+    ],
+    "repository": "voxos-ai/bolna"
+  },
+  {
+    "issue_number": 251,
+    "title": "Exception: Something went wrong while sending heartbeats to deepgram bolna-",
+    "author": "orion-satyammishra",
+    "state": "closed",
+    "created_at": "2024-06-17T08:25:12Z",
+    "updated_at": "2024-06-28T12:32:43Z",
+    "labels": [],
+    "body": "bolna-app-1   | 2024-06-17 08:19:23.514 ERROR {traceback} [extract] Task exception was never retrieved\r\nbolna-app-1   | future: <Task finished name='Task-31' coro=<DeepgramTranscriber.send_heartbeat() done, defined at /usr/local/lib/python3.10/site-packages/bolna/transcriber/deepgram_transcriber.py:112> exception=Exception('Something went wrong while sending heartbeats to deepgram') created at /usr/local/lib/python3.10/asyncio/tasks.py:337>\r\nbolna-app-1   | source_traceback: Object created at (most recent call last):\r\nbolna-app-1   |   File \"/usr/local/bin/uvicorn\", line 8, in <module>\r\nbolna-app-1   |     sys.exit(main())\r\nbolna-app-1   |   File \"/usr/local/lib/python3.10/site-packages/click/core.py\", line 1157, in __call__\r\nbolna-app-1   |     return self.main(*args, **kwargs)\r\nbolna-app-1   |   File \"/usr/local/lib/python3.10/site-packages/click/core.py\", line 1078, in main\r\nbolna-app-1   |     rv = self.invoke(ctx)\r\nbolna-app-1   |   File \"/usr/local/lib/python3.10/site-packages/click/core.py\", line 1434, in invoke\r\nbolna-app-1   |     return ctx.invoke(self.callback, **ctx.params)\r\nbolna-app-1   |   File \"/usr/local/lib/python3.10/site-packages/click/core.py\", line 783, in invoke\r\nbolna-app-1   |     return __callback(*args, **kwargs)\r\nbolna-app-1   |   File \"/usr/local/lib/python3.10/site-packages/uvicorn/main.py\", line 410, in main\r\nbolna-app-1   |     run(\r\nbolna-app-1   |   File \"/usr/local/lib/python3.10/site-packages/uvicorn/main.py\", line 578, in run\r\nbolna-app-1   |     server.run()\r\nbolna-app-1   |   File \"/usr/local/lib/python3.10/site-packages/uvicorn/server.py\", line 61, in run\r\nbolna-app-1   |     return asyncio.run(self.serve(sockets=sockets))\r\nbolna-app-1   |   File \"/usr/local/lib/python3.10/asyncio/runners.py\", line 44, in run\r\nbolna-app-1   |     return loop.run_until_complete(main)\r\nbolna-app-1   |   File \"/usr/local/lib/python3.10/site-packages/bolna/transcriber/deepgram_transcriber.py\", line 353, in transcribe\r\nbolna-app-1   |     self.heartbeat_task = asyncio.create_task(self.send_heartbeat(deepgram_ws))\r\nbolna-app-1   |   File \"/usr/local/lib/python3.10/asyncio/tasks.py\", line 337, in create_task\r\nbolna-app-1   |     task = loop.create_task(coro)\r\nbolna-app-1   | Traceback (most recent call last):\r\nbolna-app-1   |   File \"/usr/local/lib/python3.10/site-packages/bolna/transcriber/deepgram_transcriber.py\", line 116, in send_heartbeat\r\nbolna-app-1   |     await ws.send(json.dumps(data))\r\nbolna-app-1   |   File \"/usr/local/lib/python3.10/site-packages/websockets/legacy/protocol.py\", line 635, in send\r\nbolna-app-1   |     await self.ensure_open()\r\nbolna-app-1   |   File \"/usr/local/lib/python3.10/site-packages/websockets/legacy/protocol.py\", line 944, in ensure_open\r\nbolna-app-1   |     raise self.connection_closed_exc()\r\nbolna-app-1   | websockets.exceptions.ConnectionClosedOK: received 1000 (OK); then sent 1000 (OK)\r\nbolna-app-1   |\r\nbolna-app-1   | During handling of the above exception, another exception occurred:\r\nbolna-app-1   |\r\nbolna-app-1   | Traceback (most recent call last):\r\nbolna-app-1   |   File \"/usr/local/lib/python3.10/site-packages/bolna/transcriber/deepgram_transcriber.py\", line 120, in send_heartbeat\r\nbolna-app-1   |     raise Exception(\"Something went wrong while sending heartbeats to {}\".format(self.model))\r\nbolna-app-1   | Exception: Something went wrong while sending heartbeats to deepgram\r\nbolna-",
+    "comments": [
+      {
+        "user": "marmikcfc",
+        "body": "Hey this happens sometimes when we close the connection but before the connection is fully closed, heartbeat coroutine wakes up and tries to send the heartbeat"
+      }
+    ],
+    "repository": "voxos-ai/bolna"
+  },
+  {
+    "issue_number": 291,
+    "title": "To check Integration for EmergenceAI's Agent-E.",
+    "author": "prateeksachan",
+    "state": "open",
+    "created_at": "2024-06-26T23:19:05Z",
+    "updated_at": "2024-06-26T23:19:14Z",
+    "labels": [
+      "discussion"
+    ],
+    "body": "details: https://github.com/EmergenceAI/Agent-E/issues/55",
+    "comments": [],
+    "repository": "voxos-ai/bolna"
+  }
+]

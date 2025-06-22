@@ -1,0 +1,31 @@
+[
+  {
+    "issue_number": 5,
+    "title": "Is this really working?",
+    "author": "Valent-p",
+    "state": "open",
+    "created_at": "2025-06-14T09:04:17Z",
+    "updated_at": "2025-06-14T09:07:48Z",
+    "labels": [],
+    "body": "No matter what I type, it just generates the same old video, even after 20 trials ",
+    "comments": [
+      {
+        "user": "rohitg00",
+        "body": "I am going to sit down this week to support new premium models. Currently, this app uses very old models."
+      }
+    ],
+    "repository": "rohitg00/manim-video-generator"
+  },
+  {
+    "issue_number": 4,
+    "title": "gpt model",
+    "author": "sushen123",
+    "state": "open",
+    "created_at": "2025-05-14T05:02:22Z",
+    "updated_at": "2025-05-14T05:02:22Z",
+    "labels": [],
+    "body": "which gpt model it use?",
+    "comments": [],
+    "repository": "rohitg00/manim-video-generator"
+  }
+]

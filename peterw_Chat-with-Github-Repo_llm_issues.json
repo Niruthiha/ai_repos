@@ -1,0 +1,48 @@
+[
+  {
+    "issue_number": 28,
+    "title": "Exception in chat.py due to maximal_marginal_relevance Invalid Argument in DeepLake Similarity Search",
+    "author": "digitalbuddha",
+    "state": "open",
+    "created_at": "2024-02-29T14:09:40Z",
+    "updated_at": "2024-10-06T11:56:05Z",
+    "labels": [],
+    "body": "Howdy! I was going through the readme, all was well until I got to the step of doing a search. \r\n\r\nDescribe the bug\r\nAn uncaught exception occurs in the chat.py module when executing a similarity search through the DeepLake vector store. The traceback indicates that the maximal_marginal_relevance argument is not a valid parameter for the search method. This results in a failure of the search_db function, impacting the chat application's ability to process and respond to user inputs.\r\n\r\n\r\nSet up the environment and dependencies as per the project requirements.\r\nRun the chat application using the command:`python src/main.py chat --activeloop-dataset-name my-dataset`.\r\nInput a query that triggers the search_db function, for example \"what are the apis of the project\"\r\nThe application throws the exception and terminates.\r\nExpected behavior\r\nThe expected behavior is for the application to successfully process the query and return relevant results without crashing. The maximal_marginal_relevance argument should either be correctly handled or removed if it's not applicable to the similarity search method in the DeepLake vector store.\r\n\r\n\r\n\r\nexception below\r\n```\r\n2024-02-29 09:03:58.916 Uncaught app exception\r\nTraceback (most recent call last):\r\n  File \"/opt/homebrew/lib/python3.11/site-packages/streamlit/runtime/scriptrunner/script_runner.py\", line 535, in _run_script\r\n    exec(code, module.__dict__)\r\n  File \"/Users/mnakhimovich/workspace/Chat-with-Github-Repo/src/utils/chat.py\", line 93, in <module>\r\n    run_chat_app(args.activeloop_dataset_path)\r\n  File \"/Users/mnakhimovich/workspace/Chat-with-Github-Repo/src/utils/chat.py\", line 42, in run_chat_app\r\n    output = search_db(db, user_input)\r\n             ^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"/Users/mnakhimovich/workspace/Chat-with-Github-Repo/src/utils/chat.py\", line 85, in search_db\r\n    return qa.run(query)\r\n           ^^^^^^^^^^^^^\r\n  File \"/opt/homebrew/lib/python3.11/site-packages/langchain_core/_api/deprecation.py\", line 145, in warning_emitting_wrapper\r\n    return wrapped(*args, **kwargs)\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"/opt/homebrew/lib/python3.11/site-packages/langchain/chains/base.py\", line 545, in run\r\n    return self(args[0], callbacks=callbacks, tags=tags, metadata=metadata)[\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"/opt/homebrew/lib/python3.11/site-packages/langchain_core/_api/deprecation.py\", line 145, in warning_emitting_wrapper\r\n    return wrapped(*args, **kwargs)\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"/opt/homebrew/lib/python3.11/site-packages/langchain/chains/base.py\", line 378, in __call__\r\n    return self.invoke(\r\n           ^^^^^^^^^^^^\r\n  File \"/opt/homebrew/lib/python3.11/site-packages/langchain/chains/base.py\", line 163, in invoke\r\n    raise e\r\n  File \"/opt/homebrew/lib/python3.11/site-packages/langchain/chains/base.py\", line 153, in invoke\r\n    self._call(inputs, run_manager=run_manager)\r\n  File \"/opt/homebrew/lib/python3.11/site-packages/langchain/chains/retrieval_qa/base.py\", line 141, in _call\r\n    docs = self._get_docs(question, run_manager=_run_manager)\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"/opt/homebrew/lib/python3.11/site-packages/langchain/chains/retrieval_qa/base.py\", line 221, in _get_docs\r\n    return self.retriever.get_relevant_documents(\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"/opt/homebrew/lib/python3.11/site-packages/langchain_core/retrievers.py\", line 244, in get_relevant_documents\r\n    raise e\r\n  File \"/opt/homebrew/lib/python3.11/site-packages/langchain_core/retrievers.py\", line 237, in get_relevant_documents\r\n    result = self._get_relevant_documents(\r\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"/opt/homebrew/lib/python3.11/site-packages/langchain_core/vectorstores.py\", line 674, in _get_relevant_documents\r\n    docs = self.vectorstore.similarity_search(query, **self.search_kwargs)\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"/opt/homebrew/lib/python3.11/site-packages/langchain_community/vectorstores/deeplake.py\", line 530, in similarity_search\r\n    return self._search(\r\n           ^^^^^^^^^^^^^\r\n  File \"/opt/homebrew/lib/python3.11/site-packages/langchain_community/vectorstores/deeplake.py\", line 402, in _search\r\n    self._validate_kwargs(kwargs, \"search\")\r\n  File \"/opt/homebrew/lib/python3.11/site-packages/langchain_community/vectorstores/deeplake.py\", line 929, in _validate_kwargs\r\n    raise TypeError(\r\nTypeError: `maximal_marginal_relevance` are not a valid argument to search method\r\n```",
+    "comments": [
+      {
+        "user": "vardotexe",
+        "body": "Hey did you find any solution for this?"
+      },
+      {
+        "user": "mameesie",
+        "body": "same here"
+      },
+      {
+        "user": "mameesie",
+        "body": "in utils/chat.py you should change def search_db with the following then it will work: \r\n```\r\ndef search_db(db, query):\r\n    \"\"\"Search for a response to the query in the DeepLake database using MMR.\"\"\"\r\n    # Create a retriever that uses MMR search\r\n    retriever = db.as_retriever(search_type=\"mmr\")\r\n    \r\n    # Set the search parameters\r\n    retriever.search_kwargs = {\r\n        \"distance_metric\": \"cos\",\r\n        \"fetch_k\": 100,  # Number of initial results to fetch\r\n        \"k\": 10,         # Number of results to finally return\r\n        #\"lambda_mult\": 0.5  # MMR diversity parameter (0 = max diversity, 1 = max relevance)\r\n    }\r\n    \r\n    # Create a ChatOpenAI model instance\r\n    model = ChatOpenAI(model=\"gpt-3.5-turbo\")\r\n    \r\n    # Create a RetrievalQA instance from the model and retriever\r\n    qa = RetrievalQA.from_llm(model, retriever=retriever)\r\n    \r\n    # Return the result of the query\r\n    return qa.run(query)\r\n```"
+      }
+    ],
+    "repository": "peterw/Chat-with-Github-Repo"
+  },
+  {
+    "issue_number": 26,
+    "title": "ValueError when processing repo:: `texts` parameter shouldn't be empty.",
+    "author": "chrisammon3000",
+    "state": "open",
+    "created_at": "2023-08-24T18:19:14Z",
+    "updated_at": "2024-08-13T22:54:28Z",
+    "labels": [],
+    "body": "## Description\r\nFollowed the README instructions for installation, encountered a ValueError when processing repositories:\r\n```bash\r\n(.venv) ➜  Chat-with-Github-Repo (main) python3 src/main.py process --repo-url https://github.com/chrisammon3000/aws-json-dataset               ✭\r\nYour Deep Lake dataset has been successfully created!\r\nThis dataset can be visualized in Jupyter Notebook by ds.visualize() or at https://app.activeloop.ai/chrisammon3000/aws-json-dataset\r\nhub://chrisammon3000/aws-json-dataset loaded successfully.\r\nfatal: destination path 'repos' already exists and is not an empty directory.\r\nUsing embedding function is deprecated and will be removed in the future. Please use embedding instead.\r\nDeep Lake Dataset in hub://chrisammon3000/aws-json-dataset already exists, loading from the storage\r\nTraceback (most recent call last):\r\n  File \"/Users/ammon/Projects/chrisammon3000/experiments/Chat-with-Github-Repo/src/main.py\", line 110, in <module>\r\n    main()\r\n  File \"/Users/ammon/Projects/chrisammon3000/experiments/Chat-with-Github-Repo/src/main.py\", line 104, in main\r\n    process_repo(args)\r\n  File \"/Users/ammon/Projects/chrisammon3000/experiments/Chat-with-Github-Repo/src/main.py\", line 33, in process_repo\r\n    process(\r\n  File \"/Users/ammon/Projects/chrisammon3000/experiments/Chat-with-Github-Repo/src/utils/process.py\", line 105, in process\r\n    db.add_documents(texts)\r\n  File \"/Users/ammon/Projects/chrisammon3000/experiments/Chat-with-Github-Repo/.venv/lib/python3.11/site-packages/langchain/vectorstores/base.py\", line 101, in add_documents\r\n    return self.add_texts(texts, metadatas, **kwargs)\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"/Users/ammon/Projects/chrisammon3000/experiments/Chat-with-Github-Repo/.venv/lib/python3.11/site-packages/langchain/vectorstores/deeplake.py\", line 217, in add_texts\r\n    raise ValueError(\"`texts` parameter shouldn't be empty.\")\r\nValueError: `texts` parameter shouldn't be empty.\r\n```",
+    "comments": [
+      {
+        "user": "hankerbiao",
+        "body": "Bro，is this problem sloved？"
+      },
+      {
+        "user": "whilelie",
+        "body": "I also have this error"
+      }
+    ],
+    "repository": "peterw/Chat-with-Github-Repo"
+  }
+]

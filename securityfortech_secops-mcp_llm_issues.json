@@ -1,0 +1,60 @@
+[
+  {
+    "issue_number": 4,
+    "title": "Can services of the sse protocol be provided？",
+    "author": "blu3sh0rk",
+    "state": "open",
+    "created_at": "2025-05-12T02:32:37Z",
+    "updated_at": "2025-05-12T02:32:37Z",
+    "labels": [],
+    "body": null,
+    "comments": [],
+    "repository": "securityfortech/secops-mcp"
+  },
+  {
+    "issue_number": 3,
+    "title": "The details of mcp-client?",
+    "author": "DecemberM",
+    "state": "open",
+    "created_at": "2025-04-24T01:56:37Z",
+    "updated_at": "2025-04-25T13:04:51Z",
+    "labels": [],
+    "body": "the details of setting mcp-client, such as command and args",
+    "comments": [
+      {
+        "user": "xyh4ck",
+        "body": "@DecemberM You can try using the following configuration：\n`\n{\n  \"mcpServers\": {\n    \"secops-mcp\": {\n      \"command\": \"docker\",\n      \"args\": [\n        \"run\",\n        \"--rm\",\n        \"--network\",\n        \"secops-net\",\n        \"--name\",\n        \"secops-container\",\n        \"-i\",\n        \"secops-mcp\"\n      ]\n    }\n  }\n}\n`"
+      },
+      {
+        "user": "DecemberM",
+        "body": "thank you\r\n\r\n\r\n\r\n---Original---\r\nFrom: ***@***.***&gt;\r\nDate: Fri, Apr 25, 2025 17:24 PM\r\nTo: ***@***.***&gt;;\r\nCc: ***@***.******@***.***&gt;;\r\nSubject: Re: [securityfortech/secops-mcp] The details of mcp-client? (Issue#3)\r\n\r\n\r\n xuanyu123 left a comment (securityfortech/secops-mcp#3)\r\n \r\n@DecemberM You can try using the following configuration：\r\n { \"mcpServers\": { \"secops-mcp\": { \"command\": \"docker\", \"args\": [ \"run\", \"--rm\", \"--network\", \"secops-net\", \"--name\", \"secops-container\", \"-i\", \"secops-mcp\" ] } } }\r\n \r\n—\r\nReply to this email directly, view it on GitHub, or unsubscribe.\r\nYou are receiving this because you were mentioned.Message ID: ***@***.***&gt;"
+      },
+      {
+        "user": "DecemberM",
+        "body": "> 您可以尝试使用以下配置： `{ \"mcpServers\": { \"secops-mcp\": { \"command\": \"docker\", \"args\": [ \"run\", \"--rm\", \"--network\", \"secops-net\", \"--name\", \"secops-container\", \"-i\", \"secops-mcp\" ] } } }`\n\nI was using vscode and cline to deployed secops-mcp，but when I set configurations as this，the error was MCP error-32000：Connection closed"
+      }
+    ],
+    "repository": "securityfortech/secops-mcp"
+  },
+  {
+    "issue_number": 1,
+    "title": "tools.ipinfo is missing?",
+    "author": "okazdal",
+    "state": "open",
+    "created_at": "2025-04-21T09:46:49Z",
+    "updated_at": "2025-04-22T08:38:37Z",
+    "labels": [],
+    "body": "Hello,\nIs there something I am missing or tools.ipinfo is missing?\n\n`\npython main.py\nTraceback (most recent call last):\n  File \"/home/user/projects/secops-mcp/main.py\", line 19, in <module>\n    from tools.ipinfo import run_ipinfo\nModuleNotFoundError: No module named 'tools.ipinfo'\n`\n\nThanks",
+    "comments": [
+      {
+        "user": "xufengnian",
+        "body": "same question，tools/ipinfo.py is missing"
+      },
+      {
+        "user": "okazdal",
+        "body": "I found the file in a previous commit. But it is missing in current commit."
+      }
+    ],
+    "repository": "securityfortech/secops-mcp"
+  }
+]

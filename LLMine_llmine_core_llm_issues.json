@@ -1,0 +1,23 @@
+[
+  {
+    "issue_number": 24,
+    "title": "Installing issue with docker compose",
+    "author": "minhhoangho",
+    "state": "open",
+    "created_at": "2024-06-14T10:10:27Z",
+    "updated_at": "2024-10-29T10:36:02Z",
+    "labels": [],
+    "body": "Hi, I'm so appreciated about your great work with this powerful tool\r\n\r\nHowever, when installing with docker compose, I found that some css or js files are missing, so that I could not build the application properly. It's possible that there might be some lines in our .gitignore file that are causing this problem. Can you help check that?\r\n\r\nThank you for your contribution and hard work.",
+    "comments": [
+      {
+        "user": "n0kovo",
+        "body": "+1"
+      },
+      {
+        "user": "arpanpreneur",
+        "body": "Hi, Ideally the static files should be generated via the Django's collectstatic command, which I have included in the `docker-entrypoint-celery.sh` file. If this is not working, it might be worth inspecting the docker volumes mentioned in the compose file.\r\n\r\nI might need more info on the exact steps you performed and the exact issues you faced. Apologies for the late reply and thank you for exploring LLMine."
+      }
+    ],
+    "repository": "LLMine/llmine_core"
+  }
+]

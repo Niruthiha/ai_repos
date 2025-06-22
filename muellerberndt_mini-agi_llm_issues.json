@@ -1,0 +1,65 @@
+[
+  {
+    "issue_number": 74,
+    "title": "Commands.execute_python() can trigger RCE vulnerable",
+    "author": "BACMiao",
+    "state": "open",
+    "created_at": "2025-05-23T09:45:08Z",
+    "updated_at": "2025-05-23T09:45:08Z",
+    "labels": [],
+    "body": "# PoC-MiniAGI-RCE\n\n## 1. Commands\n\n### Summary\nWhen using a security analysis tool to analyze MiniAGI (the latest commit branch on GitHub is d2add8f), we discovered a security risk in the `miniagi.py` file during initialization. \nThe risk is triggered by the exec statement call in the `Commands.execute_python()` method. If developers deploy MiniAGI on a server for users to interact with and pass malicious commands directly as parameters to `miniagi.py` without any additional handling, MiniAGI will use the malicious command in subsequent processes to interact with the large model. \nThe model will return malicious code based on the instructions of the malicious command, and MiniAGI will execute this malicious code in its later processing stages.\nThe valunerable code is shown in the figure below and is marked accordingly.\n\n![图像2025-5-23 17 17](https://github.com/user-attachments/assets/e786270e-442f-433a-951d-9b2f2b052578)\n\n\n\n### PoC\nPlease review the fallow code:\n```shell\n$ python3 miniagi.py print(__import_('os').system('ls -al'))\n```\n\n\n### Impact\nAs shown in the figure below, by executing the code `__import_('os').system('ls -al')`, an attacker can list all files on the server where the Agent is deployed. \nSimilar payloads can also be used to view sensitive information (e.g., passwords) or delete files.\n\n<img width=\"1130\" alt=\"image\" src=\"https://github.com/user-attachments/assets/881db4cd-1923-40ce-a0e4-a7e54306ec3b\" />\n\n\n\n### Weaknesses\nCWE-94: Improper Control of Generation of Code ('Code Injection')\n\n### Environment information\nLLM type and model name: OpenAI gpt-3.5-turbo\n\nSystem version: MacOs 14.3.1\n\nPython version: python3.12\n\nMiniAGI version or branch: git commit <= d2add8f\n",
+    "comments": [],
+    "repository": "muellerberndt/mini-agi"
+  },
+  {
+    "issue_number": 73,
+    "title": "Why is this still the best AGI library?",
+    "author": "earonesty",
+    "state": "open",
+    "created_at": "2025-03-28T17:11:52Z",
+    "updated_at": "2025-03-28T18:02:34Z",
+    "labels": [],
+    "body": "2 years old, but still:\n\n✅ Simple, extensible, clean codebase\n✅ Supports memory, planning, reflection, OpenAI/LLM interchangeable\n✅ Runs fully local (can plug in LM Studio, Ollama, etc.)\n✅ Good for understanding AGI-like behaviors without bloat\n🔧 Built with Python and clear class abstractions\n🧠 Agents use tools, can reflect, self-improve (Loosely ReAct-based)\n📦 No heavy external frameworks (LangChain, etc.)\n\nthis is the api everyone needs, not autogen, not crew\n\nalso langchain sucks",
+    "comments": [
+      {
+        "user": "endolith",
+        "body": "It's fully autonomous, though?  I want something interactive like ChatGPT Code Interpreter or Open Interpreter (which is somewhat abandoned but may have a new maintainer now)"
+      }
+    ],
+    "repository": "muellerberndt/mini-agi"
+  },
+  {
+    "issue_number": 72,
+    "title": "my question:  How to treat insomnia?",
+    "author": "Guoaking",
+    "state": "open",
+    "created_at": "2023-08-26T03:35:38Z",
+    "updated_at": "2025-01-07T17:08:42Z",
+    "labels": [],
+    "body": "output\r\n---------------------------------------------\r\n\r\nMiniAGI: Research different methods to solve insomnia.\r\nCmd: web_search, Arg: insomnia treatment methods\r\nPress enter to continue or abort this action by typing feedback:\r\nMiniAGI: Research and provide information on methods to treat insomnia.\r\nCmd: web_search, Arg: insomnia treatment methods\r\nPress enter to continue or abort this action by typing feedback:\r\nMiniAGI: Let's search for methods to treat insomnia.\r\nCmd: web_search, Arg: insomnia treatment methods\r\nPress enter to continue or abort this action by typing feedback:\r\nMiniAGI: Based on the previous actions and the objective of finding a solution for insomnia, I should continue searching for insomnia treatment methods.\r\nCmd: web_search, Arg: insomnia treatment methods\r\nPress enter to continue or abort this action by typing feedback:\r\nMiniAGI: Continue search for insomnia treatment methods.\r\nCmd: web_search, Arg: insomnia treatment methods\r\nPress enter to continue or abort this action by typing feedback:\r\nMiniAGI: Continue searching for insomnia treatment methods.\r\nCmd: web_search, Arg: insomnia treatment methods\r\nPress enter to continue or abort this action by typing feedback:\r\nMiniAGI: Let's try a different approach to find insomnia treatment methods.\r\nCmd: web_search, Arg: insomnia treatment methods\r\nPress enter to continue or abort this action by typing feedback:\r\nMiniAGI: Since you are continuously searching for insomnia treatment methods, I recommend continuing with another web search.\r\nCmd: web_search, Arg: insomnia treatment methods\r\nPress enter to continue or abort this action by typing feedback:\r\nMiniAGI: Continue searching for insomnia treatment methods.\r\nCmd: web_search, Arg: insomnia treatment methods\r\nPress enter to continue or abort this action by typing feedback:\r\nMiniAGI: Continue searching for insomnia treatment methods.\r\nCmd: web_search, Arg: insomnia treatment methods\r\nPress enter to continue or abort this action by typing feedback:\r\nMiniAGI: Continue searching for insomnia treatment methods.\r\nCmd: web_search, Arg: insomnia treatment methods\r\nPress enter to continue or abort this action by typing feedback:\r\nMiniAGI: Continue searching for insomnia treatment methods.\r\nCmd: web_search, Arg: insomnia treatment methods\r\nPress enter to continue or abort this action by typing feedback:\r\nMiniAGI: Continue searching for insomnia treatment methods.\r\nCmd: web_search, Arg: insomnia treatment methods\r\n\r\n\r\n------------------------\r\nI interrupted his thinking, is this output normal?",
+    "comments": [
+      {
+        "user": "earonesty",
+        "body": "depends on the model.   it can definitely get stuck in a loop!   i've modified mine so if the same action happens again, i increase the temperature by 10% until it doesn't and then reset back to 1.   also, enable the critic!  it doesn't work well without it.   and add some more functions.   that helps too."
+      }
+    ],
+    "repository": "muellerberndt/mini-agi"
+  },
+  {
+    "issue_number": 65,
+    "title": "ModuleNotFoundError: No module named 'dotenv'",
+    "author": "AgimaFR",
+    "state": "open",
+    "created_at": "2023-06-20T06:12:19Z",
+    "updated_at": "2024-11-03T04:46:39Z",
+    "labels": [],
+    "body": "Error message on first launch after installation by following the instructions\r\n\r\n```\r\nTraceback (most recent call last):\r\n  File \"/Users/laurents/Documents/mini-agi/miniagi.py\", line 16, in <module>\r\n    from dotenv import load_dotenv\r\nModuleNotFoundError: No module named 'dotenv'\r\n```",
+    "comments": [
+      {
+        "user": "Rafiuldevaccount",
+        "body": "It looks like the dotenv module isn’t installed. You can fix this by opening you command shell and running:\r\n\r\n`\r\npip install dotenv\r\n`\r\n\r\nMake sure your virtual environment is activated if you’re using one. Let me know if you need more help!"
+      }
+    ],
+    "repository": "muellerberndt/mini-agi"
+  }
+]

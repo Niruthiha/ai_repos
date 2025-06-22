@@ -1,0 +1,60 @@
+[
+  {
+    "issue_number": 29,
+    "title": "TypeError: 'type' object is not subscriptable",
+    "author": "Rottah",
+    "state": "open",
+    "created_at": "2024-11-17T01:07:15Z",
+    "updated_at": "2024-11-17T01:07:15Z",
+    "labels": [],
+    "body": "\r\nog@og-VirtualBox:~/LLMChat$ python3.8 main.py\r\nTraceback (most recent call last):\r\n  File \"main.py\", line 5, in <module>\r\n    from config import Config\r\n  File \"/home/og/LLMChat/llmchat/config.py\", line 4, in <module>\r\n    class Config:\r\n  File \"/home/og/LLMChat/llmchat/config.py\", line 146, in Config\r\n    def discord_active_channels(self) -> list[int]:\r\nTypeError: 'type' object is not subscriptable\r\nog@og-VirtualBox:~/LLMChat$\r\n",
+    "comments": [],
+    "repository": "hc20k/LLMChat"
+  },
+  {
+    "issue_number": 21,
+    "title": "Discord Audio Client error",
+    "author": "mohemish9",
+    "state": "open",
+    "created_at": "2023-11-01T23:12:49Z",
+    "updated_at": "2024-09-19T08:30:41Z",
+    "labels": [],
+    "body": "[11-01 22:52:22] [client.py:515] ERROR - Ignoring exception in on_voice_state_update\r\nTraceback (most recent call last):\r\n  File \"/home/ubuntu/.local/lib/python3.10/site-packages/discord/client.py\", line 441, in _run_event\r\n    await coro(*args, **kwargs)\r\n  File \"/home/ubuntu/LLMChat/llmchat/client.py\", line 562, in on_voice_state_update\r\n    vc.listen(self.sink)\r\n  File \"/home/ubuntu/.local/lib/python3.10/site-packages/discord/voice_client.py\", line 704, in listen\r\n    raise ClientException(\"Must initialize audio processing pool before listening.\")\r\n\r\n\r\nSteps to replicate :\r\n1. speech_recognition_service = whisper\r\n2. I ran python3 update.py -y and installed everything\r\n3. I ran python3 main.py\r\n4. I join a VC on the server and the bot joined\r\n5. error message above is shown and bot is still in the channel but silent",
+    "comments": [
+      {
+        "user": "imohitmayank",
+        "body": "Getting the same error. Anyone able to make it work?"
+      }
+    ],
+    "repository": "hc20k/LLMChat"
+  },
+  {
+    "issue_number": 28,
+    "title": "AttributeError: module 'discord' has no attribute 'AudioSink'",
+    "author": "LotEep",
+    "state": "open",
+    "created_at": "2024-07-28T02:38:23Z",
+    "updated_at": "2024-07-28T16:33:55Z",
+    "labels": [],
+    "body": "On first installation, running main.py returns the following error:\r\n\r\n\r\n`Traceback (most recent call last):\r\n  File \"/home/bob/LLMChat/main.py\", line 6, in <module>\r\n    from client import DiscordClient\r\n  File \"/home/bob/LLMChat/llmchat/client.py\", line 16, in <module>\r\n    from voice_support import BufferAudioSink\r\n  File \"/home/bob/LLMChat/llmchat/voice_support.py\", line 12, in <module>\r\n    class BufferAudioSink(discord.AudioSink):\r\n                          ^^^^^^^^^^^^^^^^^\r\nAttributeError: module 'discord' has no attribute 'AudioSink'`\r\n\r\nOS: Arch Linux\r\nWhat I have done: I remember fixing this error before somehow, but I forgot what I did to fix it. After fixing this error I got Another error, and did something to try to fix it but it only caused this error to come back again.\r\n\r\nThis is that other error that shows up after I fixed this one:\r\n` Traceback (most recent call last):\r\n  File \"/home/bob/LLMChat/main.py\", line 6, in <module>\r\n    from client import DiscordClient\r\n  File \"/home/bob/LLMChat/llmchat/client.py\", line 7, in <module>\r\n    from discord import app_commands\r\n  File \"/home/bob/pythonvenv/lib/python3.12/site-packages/discord/app_commands/__init__.py\", line 12, in <module>\r\n    from .commands import *\r\n  File \"/home/bob/pythonvenv/lib/python3.12/site-packages/discord/app_commands/commands.py\", line 51, in <module>\r\n    from ..enums import SlashCommandOptionType, AppCommandType, ChannelType, Locale\r\nImportError: cannot import name 'AppCommandType' from 'discord.enums' (/home/bob/pythonvenv/lib/python3.12/site-packages/discord/enums.py)`",
+    "comments": [],
+    "repository": "hc20k/LLMChat"
+  },
+  {
+    "issue_number": 27,
+    "title": "Voice Channel Connection Error",
+    "author": "ValleryJS",
+    "state": "open",
+    "created_at": "2024-03-06T10:52:19Z",
+    "updated_at": "2024-07-16T09:30:32Z",
+    "labels": [],
+    "body": "I have setup the bot and everything works, except the following:\r\n\r\nI have audiobook mode turned off, so the bot should be able to listen to me on VC, however, whenever the bot joins the channel, the following error is thrown into the console: \"Mist initialize audio processing pool before listening\"",
+    "comments": [
+      {
+        "user": "ValleryJS",
+        "body": "I did a little bit of digging, seems the code is just very outdated "
+      }
+    ],
+    "repository": "hc20k/LLMChat"
+  }
+]

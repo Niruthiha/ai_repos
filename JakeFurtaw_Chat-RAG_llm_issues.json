@@ -1,0 +1,145 @@
+[
+  {
+    "issue_number": 11,
+    "title": "Can't find dependency installation information.",
+    "author": "karsmalla",
+    "state": "closed",
+    "created_at": "2024-09-24T02:30:57Z",
+    "updated_at": "2024-09-27T10:49:36Z",
+    "labels": [],
+    "body": "I am trying to install the dependencies and I am stuck with\r\n\r\n  File \"/Chat-RAG/app.py\", line 2, in <module>\r\n    from chatrag import demo\r\n  File \"/Chat-RAG/chatrag.py\", line 3, in <module>\r\n    from gradio_utils import GradioUtils\r\n  File \"/Chat-RAG/gradio_utils.py\", line 3, in <module>\r\n    from model_utils import ModelManager, ModelParamUpdates\r\n  File \"/Chat-RAG/model_utils.py\", line 3, in <module>\r\n    from chat_utils import create_chat_engine\r\n  File \"/Chat-RAG/chat_utils.py\", line 3, in <module>\r\n    from llama_index.vector_stores.neo4jvector import Neo4jVectorStore\r\n",
+    "comments": [
+      {
+        "user": "JakeFurtaw",
+        "body": "Some of these may not be necessary because I use this environment for many of my AI Assistant projects. But here is the full list of dependencies fro you!\r\n\r\n\r\nPackage                                  Version\r\n---------------------------------------- ------------\r\naccelerate==0.33.0\r\naiofiles==23.2.1\r\naiohappyeyeballs==2.4.0\r\naiohttp==3.10.5\r\naiosignal==1.3.1\r\nannotated-types==0.7.0\r\nanthropic==0.28.1\r\nanyio==4.4.0\r\nasgiref==3.8.1\r\nattrs==24.2.0\r\nbackoff==2.2.1\r\nbcrypt==4.2.0\r\nbeautifulsoup4==4.12.3\r\nbitsandbytes==0.43.3\r\nbuild==1.2.1\r\ncachetools==5.5.0\r\ncertifi==2024.8.30\r\ncharset-normalizer==3.3.2\r\nchroma-hnswlib==0.7.6\r\nchromadb==0.5.5\r\nclick==8.1.7\r\ncoloredlogs==15.0.1\r\ncontourpy==1.3.0\r\ncycler==0.12.1\r\ndataclasses-json==0.6.7\r\nDeprecated==1.2.14\r\ndirtyjson==1.0.8\r\ndistro==1.9.0\r\neinops==0.8.0\r\nenvirons==9.5.0\r\nfastapi==0.112.2\r\nffmpy==0.4.0\r\nfilelock==3.15.4\r\nflash-attn==2.6.3\r\nflatbuffers==24.3.25\r\nfonttools==4.53.1\r\nfrozenlist==1.4.1\r\nfsspec==2024.6.1\r\ngoogle-auth==2.34.0\r\ngoogleapis-common-protos==1.65.0\r\ngradio==4.42.0\r\ngradio_client==1.3.0\r\ngreenlet==3.0.3\r\ngrpcio==1.66.1\r\nh11==0.14.0\r\nhttpcore==1.0.5\r\nhttptools==0.6.1\r\nhttpx==0.27.2\r\nhuggingface-hub==0.24.6\r\nhumanfriendly==10.0\r\nidna==3.8\r\nimportlib_metadata==8.4.0\r\nimportlib_resources==6.4.4\r\nJinja2==3.1.4\r\njiter==0.5.0\r\njoblib==1.4.2\r\njsonpatch==1.33\r\njsonpointer==3.0.0\r\nkiwisolver==1.4.5\r\nkubernetes==30.1.0\r\nlangchain==0.2.16\r\nlangchain-community==0.2.16\r\nlangchain-core==0.2.38\r\nlangchain-huggingface==0.0.3\r\nlangchain-ollama==0.1.3\r\nlangchain-text-splitters==0.2.4\r\nlangsmith==0.1.117\r\nllama-cloud==0.0.15\r\nllama-index==0.11.2\r\nllama-index-agent-openai==0.3.0\r\nllama-index-cli==0.3.0\r\nllama-index-core==0.11.3\r\nllama-index-embeddings-huggingface==0.3.1\r\nllama-index-embeddings-openai==0.2.3\r\nllama-index-indices-managed-llama-cloud==0.3.0\r\nllama-index-legacy==0.9.48.post3\r\nllama-index-llms-anthropic==0.3.0\r\nllama-index-llms-huggingface==0.3.1\r\nllama-index-llms-nvidia==0.2.1\r\nllama-index-llms-ollama==0.3.0\r\nllama-index-llms-openai==0.2.0\r\nllama-index-llms-openai-like==0.2.0\r\nllama-index-multi-modal-llms-openai==0.2.0\r\nllama-index-program-openai==0.2.0\r\nllama-index-question-gen-openai==0.2.0\r\nllama-index-readers-file==0.2.0\r\nllama-index-readers-github==0.2.0\r\nllama-index-readers-llama-parse==0.2.0\r\nllama-index-vector-stores-chroma==0.2.0\r\nllama-index-vector-stores-milvus==0.2.3\r\nllama-index-vector-stores-neo4jvector==0.2.1\r\nllama-parse==0.5.1\r\nmarkdown-it-py==3.0.0\r\nMarkupSafe==2.1.5\r\nmarshmallow==3.22.0\r\nmatplotlib==3.9.2\r\nmdurl==0.1.2\r\nmilvus-lite==2.4.10\r\nminijinja==2.2.0\r\nmmh3==4.1.0\r\nmonotonic==1.6\r\nmpmath==1.3.0\r\nmultidict==6.0.5\r\nmypy-extensions==1.0.0\r\nneo4j==5.24.0\r\nnest-asyncio==1.6.0\r\nnetworkx==3.3\r\nnltk==3.9.1\r\nnumpy==1.26.4\r\nnvidia-cublas-cu12==12.1.3.1\r\nnvidia-cuda-cupti-cu12==12.1.105\r\nnvidia-cuda-nvrtc-cu12==12.1.105\r\nnvidia-cuda-runtime-cu12==12.1.105\r\nnvidia-cudnn-cu12==9.1.0.70\r\nnvidia-cufft-cu12==11.0.2.54\r\nnvidia-curand-cu12==10.3.2.106\r\nnvidia-cusolver-cu12==11.4.5.107\r\nnvidia-cusparse-cu12==12.1.0.106\r\nnvidia-nccl-cu12==2.20.5\r\nnvidia-nvjitlink-cu12==12.6.68\r\nnvidia-nvtx-cu12==12.1.105\r\noauthlib==3.2.2\r\nollama==0.3.2\r\nonnxruntime==1.19.0\r\nopenai==1.43.0\r\nopentelemetry-api==1.27.0\r\nopentelemetry-exporter-otlp-proto-common==1.27.0\r\nopentelemetry-exporter-otlp-proto-grpc==1.27.0\r\nopentelemetry-instrumentation==0.48b0\r\nopentelemetry-instrumentation-asgi==0.48b0\r\nopentelemetry-instrumentation-fastapi==0.48b0\r\nopentelemetry-proto==1.27.0\r\nopentelemetry-sdk==1.27.0\r\nopentelemetry-semantic-conventions==0.48b0\r\nopentelemetry-util-http==0.48b0\r\norjson==3.10.7\r\noverrides==7.7.0\r\npackaging==24.1\r\npandas==2.2.2\r\npillow==10.4.0\r\npip==24.2\r\nposthog==3.6.0\r\nprotobuf==5.28.0\r\npsutil==6.0.0\r\npyasn1==0.6.0\r\npyasn1_modules==0.4.0\r\npydantic==2.8.2\r\npydantic_core==2.20.1\r\npydub==0.25.1\r\nPygments==2.18.0\r\npymilvus==2.4.6\r\npyparsing==3.1.4\r\npypdf==4.3.1\r\nPyPika==0.48.9\r\npyproject_hooks==1.1.0\r\npython-dateutil==2.9.0.post0\r\npython-dotenv==1.0.1\r\npython-multipart==0.0.9\r\npytz==2024.1\r\nPyYAML==6.0.2\r\nregex==2024.7.24\r\nrequests==2.32.3\r\nrequests-oauthlib==2.0.0\r\nrich==13.8.0\r\nrsa==4.9\r\nruff==0.6.3\r\nsafetensors==0.4.4\r\nscikit-learn==1.5.1\r\nscipy==1.14.1\r\nsemantic-version==2.10.0\r\nsentence-transformers==3.0.1\r\nsentencepiece==0.2.0\r\nsetuptools==74.0.0\r\nshellingham==1.5.4\r\nsix==1.16.0\r\nsniffio==1.3.1\r\nsoupsieve==2.6\r\nSQLAlchemy==2.0.32\r\nstarlette==0.38.2\r\nstriprtf==0.0.26\r\nsympy==1.13.2\r\ntenacity==8.5.0\r\ntext-generation==0.7.0\r\nthreadpoolctl==3.5.0\r\ntiktoken==0.7.0\r\ntokenizers==0.19.1\r\ntomlkit==0.12.0\r\ntorch==2.4.0\r\ntorchaudio==2.4.0\r\ntorchvision==0.19.0\r\ntqdm==4.66.5\r\ntransformers==4.44.2\r\ntriton==3.0.0\r\ntyper==0.12.5\r\ntyping_extensions==4.12.2\r\ntyping-inspect==0.9.0\r\ntzdata==2024.1\r\nujson==5.10.0\r\nurllib3==2.2.2\r\nuvicorn==0.30.6\r\nuvloop==0.20.0\r\nwatchfiles==0.24.0\r\nwebsocket-client==1.8.0\r\nwebsockets==12.0\r\nwheel==0.44.0\r\nwrapt==1.16.0\r\nxformers==0.0.27.post2\r\nyarl==1.9.4\r\nzipp==3.20.1\r\n"
+      }
+    ],
+    "repository": "JakeFurtaw/Chat-RAG"
+  },
+  {
+    "issue_number": 10,
+    "title": "HuggingFace Model loading before quantization specified",
+    "author": "JakeFurtaw",
+    "state": "closed",
+    "created_at": "2024-09-09T14:24:31Z",
+    "updated_at": "2024-09-09T14:25:07Z",
+    "labels": [],
+    "body": "HF model loads before quantization gets specified",
+    "comments": [
+      {
+        "user": "JakeFurtaw",
+        "body": "fixed this!"
+      }
+    ],
+    "repository": "JakeFurtaw/Chat-RAG"
+  },
+  {
+    "issue_number": 7,
+    "title": "Handle_doc_upload function warning",
+    "author": "JakeFurtaw",
+    "state": "closed",
+    "created_at": "2024-08-31T11:26:26Z",
+    "updated_at": "2024-09-07T17:09:57Z",
+    "labels": [],
+    "body": "# Issue\r\nThere is an error with the handle_doc_upload function that causes a warning when you first run the program. Its saying that it is expecting 1 argument but received 0. The file uploading works fine and does what it should so I'm not sure what the problem is. I would like to get this resolved.\r\n\r\n### Warning Message\r\n```\r\n/miniconda3/envs/Chatbot/lib/python3.12/site-packages/gradio/utils.py:1002: UserWarning: Expected 1 arguments for function <function GradioUtils.handle_doc_upload at 0x79c2808ab740>, received 0.\r\n  warnings.warn(\r\n/miniconda3/envs/Chatbot/lib/python3.12/site-packages/gradio/utils.py:1006: UserWarning: Expected at least 1 arguments for function <function GradioUtils.handle_doc_upload at 0x79c2808ab740>, received 0.\r\n```",
+    "comments": [
+      {
+        "user": "JakeFurtaw",
+        "body": "had to set the input value of files.upload to files/ Function was still working but was giving a warning message. The warning message has been cleared."
+      }
+    ],
+    "repository": "JakeFurtaw/Chat-RAG"
+  },
+  {
+    "issue_number": 9,
+    "title": "Chat With A Github Repository Problem",
+    "author": "JakeFurtaw",
+    "state": "closed",
+    "created_at": "2024-09-01T14:31:37Z",
+    "updated_at": "2024-09-02T15:11:33Z",
+    "labels": [],
+    "body": "The repository is getting loaded to the documents and being passed to the setup_index_and_chat_engine. But not being seen by the model based on its responses. I need to figure out why the model cant see my files. It works well in RepoRipper. It is also clearly receiving the content.\r\n\r\nAdded some debugging for it and it shows that the files are being loaded:\r\nLoading GitHub repo: JakeFurtaw/RepoRipper (branch: main)\r\nLoaded 5 documents from JakeFurtaw/RepoRipper on branch main\r\n5\r\n",
+    "comments": [
+      {
+        "user": "JakeFurtaw",
+        "body": "Fixed this!!! Chat With a Repository works now"
+      }
+    ],
+    "repository": "JakeFurtaw/Chat-RAG"
+  },
+  {
+    "issue_number": 6,
+    "title": "Embedding Model Runtime Error",
+    "author": "JakeFurtaw",
+    "state": "open",
+    "created_at": "2024-08-31T11:20:43Z",
+    "updated_at": "2024-08-31T11:20:43Z",
+    "labels": [],
+    "body": "# Issue\r\nWhen you run the program and come back after a few hours to run the program you get a Runtime error. This error occurs when the program tries to load the embedding model onto the GPU.\r\n\r\n### Error Message\r\n```\r\nRuntimeError: CUDA error: CUDA-capable device(s) is/are busy or unavailable\r\nCUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.\r\nFor debugging consider passing CUDA_LAUNCH_BLOCKING=1\r\nCompile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.\r\n```\r\n\r\n### Temporary Fix\r\nRestart your computer to clear the GPU's memory and allow the embedding model to load properly. I have done some investigating in nvidia-smi and it seems nothing is loaded into the GPU so I'm not sure what is causing the error.",
+    "comments": [],
+    "repository": "JakeFurtaw/Chat-RAG"
+  },
+  {
+    "issue_number": 5,
+    "title": "Pydantic Warnings",
+    "author": "JakeFurtaw",
+    "state": "open",
+    "created_at": "2024-08-31T11:06:42Z",
+    "updated_at": "2024-08-31T11:07:10Z",
+    "labels": [],
+    "body": "# Issue\r\nWhen you first load the program you get 3 UserWarnings from Pydantic. This isn't a serious problem but id like to resolve it. \r\n\r\n### Warning Messages\r\n```\r\nUserWarning: Field \"model_id\" has conflict with protected namespace \"model_\".\r\n\r\nYou may be able to resolve this warning by setting `model_config['protected_namespaces'] = ()`.\r\n  warnings.warn(\r\nUserWarning: Field \"model_name\" has conflict with protected namespace \"model_\".\r\n\r\nYou may be able to resolve this warning by setting `model_config['protected_namespaces'] = ()`.\r\n  warnings.warn(\r\nUserWarning: Field \"model_kwargs\" has conflict with protected namespace \"model_\".\r\n\r\nYou may be able to resolve this warning by setting `model_config['protected_namespaces'] = ()`.\r\n  warnings.warn(\r\n```",
+    "comments": [],
+    "repository": "JakeFurtaw/Chat-RAG"
+  },
+  {
+    "issue_number": 3,
+    "title": "File upload issue",
+    "author": "JakeFurtaw",
+    "state": "closed",
+    "created_at": "2024-08-10T17:11:02Z",
+    "updated_at": "2024-08-12T03:18:38Z",
+    "labels": [],
+    "body": "Files get uploaded but they don't get loaded into the model immediately. I have started working on a solution but it is not tested.",
+    "comments": [
+      {
+        "user": "JakeFurtaw",
+        "body": "added file upload button, solves this issue"
+      }
+    ],
+    "repository": "JakeFurtaw/Chat-RAG"
+  },
+  {
+    "issue_number": 2,
+    "title": "Clear Chat History and Memory Button",
+    "author": "JakeFurtaw",
+    "state": "closed",
+    "created_at": "2024-08-10T17:08:21Z",
+    "updated_at": "2024-08-10T22:32:44Z",
+    "labels": [],
+    "body": "The clear chat history and memory button functionality needs to be added.",
+    "comments": [
+      {
+        "user": "JakeFurtaw",
+        "body": "fixed button funcitonality"
+      }
+    ],
+    "repository": "JakeFurtaw/Chat-RAG"
+  },
+  {
+    "issue_number": 1,
+    "title": "Clear Chat Window Button doesn't do its job...",
+    "author": "JakeFurtaw",
+    "state": "closed",
+    "created_at": "2024-08-10T17:02:15Z",
+    "updated_at": "2024-08-10T17:11:37Z",
+    "labels": [],
+    "body": "The \"Clear Chat Window\" button clears the chat window, but the chat history reappears when the user sends a new query. I need to fix this so the button functions properly.",
+    "comments": [
+      {
+        "user": "JakeFurtaw",
+        "body": "fixed issue wasnt clearing model outputs"
+      }
+    ],
+    "repository": "JakeFurtaw/Chat-RAG"
+  }
+]

@@ -1,0 +1,48 @@
+[
+  {
+    "issue_number": 177,
+    "title": "Not working",
+    "author": "alwaz-shahid",
+    "state": "open",
+    "created_at": "2024-03-05T11:50:37Z",
+    "updated_at": "2024-09-07T23:37:44Z",
+    "labels": [],
+    "body": "Multiple errors and dependencies issues so far. Need an update asap",
+    "comments": [
+      {
+        "user": "randompersononinternet69",
+        "body": "Yes, my AutoGPT is just failing to even start\r\n```\r\nTraceback (most recent call last):\r\n  File \"C:\\Users\\Name\\Free-Auto-GPT\\AUTOGPT.py\", line 11, in <module>\r\n    from langchain.experimental.autonomous_agents.autogpt.agent import AutoGPT\r\nModuleNotFoundError: No module named 'langchain.experimental'\r\n```"
+      },
+      {
+        "user": "randompersononinternet69",
+        "body": "I even installed \"langchain.experimental\", still doesn't work"
+      }
+    ],
+    "repository": "IntelligenzaArtificiale/Free-Auto-GPT"
+  },
+  {
+    "issue_number": 138,
+    "title": "ImportError: cannot import name 'Chatbot' from 'EdgeGPT'",
+    "author": "xyzaf1",
+    "state": "open",
+    "created_at": "2023-06-16T17:05:49Z",
+    "updated_at": "2024-06-27T22:01:01Z",
+    "labels": [],
+    "body": "I´m getting this error by using Python 3.11.4. The requirements.txt is of course installed",
+    "comments": [
+      {
+        "user": "Dex94",
+        "body": "It's the same error of #136 issue. I have a workaround for it"
+      },
+      {
+        "user": "m4conSpeed",
+        "body": "@Dex94 what is the workaroud? where can i find it? pls tell me its not in the #136 and im just to stupid to find it...\r\n\r\nbtw: this is just my second acc, for my phone, just don't ask why"
+      },
+      {
+        "user": "Dex94",
+        "body": "there are too many errors in the code. It does not worth to repair only this one. I know that this error is appearing when you are using bing chat, it's not the only error, there is also cookie path error that I don't know if the fix is correct and an error with the loading of huggingchat... too many errors that make this repo not usable at all"
+      }
+    ],
+    "repository": "IntelligenzaArtificiale/Free-Auto-GPT"
+  }
+]

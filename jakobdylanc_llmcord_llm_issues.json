@@ -1,0 +1,779 @@
+[
+  {
+    "issue_number": 98,
+    "title": "System prompts as markdown/txt files & MCP support",
+    "author": "GobDevv",
+    "state": "closed",
+    "created_at": "2025-05-08T05:13:22Z",
+    "updated_at": "2025-06-20T13:35:43Z",
+    "labels": [],
+    "body": "Enhancing the bot's capabilities by enabling it to read a system prompt from a markdown or text file since it would allow easier editing of system prompts would be beneficial. Additionally, adding MCP support could be interesting since it would allow the bot to retrieve & use tools to enhance it's responses. ",
+    "comments": [
+      {
+        "user": "jakobdylanc",
+        "body": "> Enhancing the bot's capabilities by enabling it to read a system prompt from a markdown or text file since it would allow easier editing of system prompts would be beneficial\n\nNot a bad idea.\n\n> Additionally, adding MCP support could be interesting since it would allow the bot to retrieve & use tools to enhance it's responses.\n\nNot sure how I feel about this. Adding MCP would raise llmcord's \"barrier to entry\" since new users would have to understand MCP. Not everyone wants it."
+      },
+      {
+        "user": "GobDevv",
+        "body": "Now that I think of it you're right MCP would make it less simple to setup."
+      },
+      {
+        "user": "jakobdylanc",
+        "body": "Closing for now. I still want to add MCP support eventually, when the time is right."
+      }
+    ],
+    "repository": "jakobdylanc/llmcord"
+  },
+  {
+    "issue_number": 91,
+    "title": "Attach Deepseek <think></think> Text as a .txt File",
+    "author": "saphtea",
+    "state": "closed",
+    "created_at": "2025-02-01T17:55:00Z",
+    "updated_at": "2025-06-20T13:35:29Z",
+    "labels": [],
+    "body": "Hey! Seriously grateful for this tool you've been providing and upkeeping, llmcord has been wonderful for my ollama setup.\n\nI've been playing around with implementing it myself, but there's not many comments and I am TERRIBLE when it comes to API async stuff lmfao.\n\nHoping to have an option to either filter out the <think> tags or to be able to attach it in a .txt file for ppl who want to see how the models thinking.\n\nAppreciate your time and again thank you for a wonderful lil program !!",
+    "comments": [
+      {
+        "user": "jakobdylanc",
+        "body": "I'm glad you're enjoying llmcord! & yeah sorry about the lack of comments...maybe I should add some more haha.\n\nI like your ideas. The biggest issue is that different providers currently handle reasoning content differently.\n\nWith Ollama it looks like the the reasoning content is always returned in the main `content` field with \\<think> tags as you mentioned. But with OpenRouter for example, the reasoning content is NOT included unless you set `include_reasoning: true` in your API parameters. And even then it's still returned as a separate `reasoning` field instead of being included in `content`. I like this behavior better.\n\nI'm hoping that all providers eventually agree on a single standard, otherwise it'll be much more of a pain to implement while maintaining universal compatibility.\n\nAlso with the .txt file attachment idea, I question whether the .txt file should include the ENTIRE response or JUST the reasoning content. I feel like including the entire response can be useful sometimes, like when the response gets split into multiple Discord messages."
+      },
+      {
+        "user": "saphtea",
+        "body": "Yeah it's pretty inconsistent at the moment xD.\n\nI was thinking just the reasoning, discord has built in embeds you can expand for txt files as well. Though, yeah, including the response in it as well I'm sure could be good for some use cases.\n\nMight end up being better for me just to keep toying around and try to put it together since my use case is purely ollama lolol."
+      },
+      {
+        "user": "nikdavis",
+        "body": "@jakobdylanc that sounds pretty reasonable.\n\ni would ask you maybe consider an intermediate config hack to filter/extract thought tokens as that has emerged as a simpler standard, but no worries if not.\n\ndo you know, are any providers standardizing around streaming thought? i would imagine openai's is not streaming (judging by how you described it). i would expect a streaming standard might win, but who knows.\n\nanywho. i'm going to work around it myself for now – not sure how to visualize the thought though.\n\nvery cool project btw. appreciate the simplicity 🙏🏻 \n"
+      }
+    ],
+    "repository": "jakobdylanc/llmcord"
+  },
+  {
+    "issue_number": 19,
+    "title": "Try this before submitting an issue",
+    "author": "jakobdylanc",
+    "state": "open",
+    "created_at": "2024-02-17T23:45:22Z",
+    "updated_at": "2025-05-05T20:39:27Z",
+    "labels": [],
+    "body": "- Force-update to the latest version of llmcord:\r\n   ```bash\r\n   git fetch && git reset --hard origin/main\r\n   ```\r\n- **(No Docker)** Update python packages:\r\n\r\n   ```bash\r\n   python -m pip install -U -r requirements.txt\r\n   ```\r\n- **(With Docker)** Rebuild the container:\r\n\r\n   ```bash\r\n   docker compose build --no-cache\r\n   docker compose up\r\n   ```\r\n- Make sure your ***config.yaml*** is up-to-date with ***config-example.yaml*** (this project is WIP so the config structure is subject to change)\r\n- If you're using something like Ollama, make sure it's up-to-date",
+    "comments": [
+      {
+        "user": "adamreading",
+        "body": "Hi - great bot, thank you - how would I run multiple instances in the same VPS? "
+      },
+      {
+        "user": "jakobdylanc",
+        "body": "Thanks!\n\nYou can run as many instances of llmcord as you want. Simply clone the repo multiple times and run each one independently."
+      },
+      {
+        "user": "adamreading",
+        "body": "> Thanks!\r\n> \r\n> You can run as many instances of llmcord as you want. Simply clone the repo multiple times and run each one independently.\r\n\r\nI’ve been trying to launch using docker commands with separate config files and they all fail lol - 6 hours trying… it took me a while to get the 2nd config to work - but it’s now good thank you - I want to make a few different types of bots all for the same server and running on cheap $5 a month VPS 24/7 service… I am just waiting for my main cloud service for comfyui to get API calls - then next stage will be a comfyui Bot - calling the GPU only when it is generating"
+      }
+    ],
+    "repository": "jakobdylanc/llmcord"
+  },
+  {
+    "issue_number": 97,
+    "title": "Is it possible to allow the bot to @ other people?",
+    "author": "Title666645",
+    "state": "closed",
+    "created_at": "2025-04-07T20:48:38Z",
+    "updated_at": "2025-04-08T13:02:01Z",
+    "labels": [],
+    "body": "Would it be possible to integrate such feature?\n\nI have a few bots in my server and thought it might be hilarious if they could ping and trigger themselves",
+    "comments": [
+      {
+        "user": "jakobdylanc",
+        "body": "Not sure what you mean exactly. The bot can already @ people when you use a model that supports user identity. What else do you mean?\n\n![Image](https://github.com/user-attachments/assets/da9792f1-2d2a-4cb9-b8f9-b55076e63f5a)"
+      },
+      {
+        "user": "Title666645",
+        "body": "Huh, sorry for bothering I guess.\nI tried to do that by they just add @someone as text, but it doesn't ping them.\nIs there a list of models that support user identity?\n\nI also have plain response enabled. Does it need to be turned off?\n[https://i.ibb.co/WpqJgMK7/image-2.png](url)\n"
+      },
+      {
+        "user": "jakobdylanc",
+        "body": "Sorry let me clarify - ANY model can @ people, you just need to tell it how first. The format to @ people in Discord is `<@ID>` where ID is the user's Discord ID. Discord IDs are only numbers and will look something like this: 212409751391300814\n\nSo you can't just tell it to do `@username` like you did in your image. It needs to know the user's Discord ID in order to @ them.\n\nThe easy solution is to actually @ the user in your message, like I did below. The bot sees it as `<@ID>`, so it sees the user's ID, and is able to replicate the format back.\n![Image](https://github.com/user-attachments/assets/700329f5-16a4-4046-a78f-e5160b243da2)\n\nI get this isn't exactly what you want though...open to more feedback :)\n\n> I also have plain response enabled. Does it need to be turned off?\n\nYou need `use_plain_responses: true`, otherwise it uses embeds which won't properly @ the user.\n\n> Is there a list of models that support user identity?\n\nAny model from OpenAI API or xAI API supports user identity. I'm not aware of any others. When you use one of these models, the bot knows your Discord ID automatically without you first having to tell it."
+      }
+    ],
+    "repository": "jakobdylanc/llmcord"
+  },
+  {
+    "issue_number": 95,
+    "title": "\"⚠️ Can't see images\" when it should",
+    "author": "Shakior31",
+    "state": "closed",
+    "created_at": "2025-03-20T06:50:53Z",
+    "updated_at": "2025-03-20T07:11:49Z",
+    "labels": [],
+    "body": "So, I've tried using this new Gemma-3 model which has vision, which works fine in LM Studio directly\n![Image](https://github.com/user-attachments/assets/b692127a-8895-4d49-9127-31435180ea0f)\n\nBut when I try sending image attachments on discord, I get \"⚠️ Can't see images\"  error.\n\n![Image](https://github.com/user-attachments/assets/33289146-5e9e-4442-be3f-5130b724ffab)",
+    "comments": [
+      {
+        "user": "jakobdylanc",
+        "body": "Do you have the latest version of llmcord? This is fixed in the latest version."
+      },
+      {
+        "user": "Shakior31",
+        "body": "Oh man, sorry, git pull fixed it.\nThanks for fast response"
+      }
+    ],
+    "repository": "jakobdylanc/llmcord"
+  },
+  {
+    "issue_number": 92,
+    "title": "Integrate OpenAI Assistants API",
+    "author": "Raecaug",
+    "state": "closed",
+    "created_at": "2025-02-14T04:52:42Z",
+    "updated_at": "2025-02-18T21:25:05Z",
+    "labels": [],
+    "body": "Hey, many thanks for making this tool, it's very unique in the message chaining for context! I was wondering if it would be possible to integrate compatibility for the Assistants API, akin to what was implemented in this repo: https://github.com/linxule/openai-assistants-discord-bot? I understand there are a number of differences in the structure of Assistant threads compared to using the models directly, but if it were possible, I could use this as a personal assistant, trained on my own docs. Glad to hear what you think on this!",
+    "comments": [
+      {
+        "user": "jakobdylanc",
+        "body": "Hey!\n\nSince assistants work quite differently than regular LLMs they wouldn't really make sense in llmcord. It COULD work, but it'd be better off as an entirely separate project designed from the ground up for assistants. I also just want to keep llmcord focused purely on LLMs.\n\nAssistants are also pretty expensive IIRC. I feel like there's better/cheaper ways to achieve what you want with a regular LLM."
+      }
+    ],
+    "repository": "jakobdylanc/llmcord"
+  },
+  {
+    "issue_number": 84,
+    "title": "stream stops abruptly in some instances",
+    "author": "anojndr",
+    "state": "closed",
+    "created_at": "2024-12-22T21:37:02Z",
+    "updated_at": "2025-02-08T17:15:58Z",
+    "labels": [],
+    "body": "sometimes, an openai-compatible provider doesn't give a finish reason, causing the stream to stop prematurely, such as with google's gemini openai-compatible api\r\n",
+    "comments": [
+      {
+        "user": "jakobdylanc",
+        "body": "Thanks for pointing this out!\r\n\r\nI never actually tested Google's OpenAI compatible API. Just did though, and I see the issue.\r\n\r\nIt indeed looks like `finish_reason` is always `None` which is definitely incorrect on their part.\r\n\r\nI also noticed that the final chunk contains both `finish_reason` and `finishReason`. And it looks like only `finishReason` contains the actual finish reason (in this case `stop`), while `finish_reason` (the correctly named one) remains `None`.\r\n\r\nI see other issues too...like the content of each chunk is way too long. Here's some that I saw for example:\r\n```\r\ncontent=' carp:\\n\\nBartholomew \"Barty\" Butterfield, a taxider'\r\ncontent=\"mist with a penchant for sherry and questionable hygiene, inherited his great-aunt Mildred's dilapidated mansion – a gothic monstrosity clinging precariously to a cliff\"\r\ncontent=' overlooking a churning, grey sea.  Mildred, a recluse with a rumored penchant for necromancy (and possibly tax evasion), left Barty only'\r\n```\r\n\r\nVersus with OpenAI's API they're nice and small:\r\n```\r\ncontent='Oh'\r\ncontent=','\r\ncontent=' sure'\r\ncontent=','\r\ncontent=' absolutely'\r\ncontent=','\r\n```\r\n\r\nGoogle's OpenAI API is still in beta so hopefully we'll see these issues resolved. Otherwise I'll have to bandaid fix it in llmcord :)\r\n\r\nIn the meantime I recommend using Google models through OpenRouter. Those have issues too...but you can avoid them by setting `use_plain_responses` to `true`."
+      },
+      {
+        "user": "anojndr",
+        "body": "a solution i found is migrating to litellm, for anyone experiencing this issue"
+      },
+      {
+        "user": "jakobdylanc",
+        "body": "This is now fixed in latest llmcord, no litellm required :)\n\n(4e24cdd)"
+      }
+    ],
+    "repository": "jakobdylanc/llmcord"
+  },
+  {
+    "issue_number": 86,
+    "title": "Response error",
+    "author": "Quelling",
+    "state": "closed",
+    "created_at": "2025-01-11T08:36:47Z",
+    "updated_at": "2025-01-19T16:47:02Z",
+    "labels": [],
+    "body": "Sometimes I see an error after @​bot. I see the bot writing, but when the error returns, it stops. So, if I make a new call, it will answer, but sometimes not with an error. How can I fix this? I am using openrouter with gemini\r\nhttps://i.imgur.com/ljyewIX.png\r\n```\r\n2025-01-11 09:27:24,852 ERROR: Error while generating response\r\nTraceback (most recent call last):\r\n  File \"/home/factorio/Discord-Ai-llmcord/llmcord/llmcord.py\", line 203, in on_message\r\n    async for curr_chunk in await openai_client.chat.completions.create(**kwargs):\r\n  File \"/home/factorio/Discord-Ai-llmcord/llmcord/bot-llmcord/lib/python3.11/site-packages/openai/_streaming.py\", line 147, in __aiter__\r\n    async for item in self._iterator:\r\n  File \"/home/factorio/Discord-Ai-llmcord/llmcord/bot-llmcord/lib/python3.11/site-packages/openai/_streaming.py\", line 174, in __stream__\r\n    raise APIError(\r\nopenai.APIError: Provider returned error\r\n```\r\n\r\n```\r\n# Discord settings:\r\n\r\nbot_token: XXXXX\r\nclient_id: 1327284790415593492\r\nstatus_message: Activated\r\n\r\nallow_dms: true\r\nallowed_channel_ids: [1327283230419718185]\r\nallowed_role_ids: []\r\nblocked_user_ids: []\r\n\r\nmax_text: 100000\r\nmax_images: 5\r\nmax_messages: 25\r\n\r\nuse_plain_responses: false\r\n\r\n\r\n# LLM settings:\r\n\r\nproviders:\r\n  openai:\r\n    base_url: https://api.openai.com/v1\r\n    api_key:\r\n  x-ai:\r\n    base_url: https://api.x.ai/v1\r\n    api_key:\r\n  mistral:\r\n    base_url: https://api.mistral.ai/v1\r\n    api_key:\r\n  groq:\r\n    base_url: https://api.groq.com/openai/v1\r\n    api_key:\r\n  openrouter:\r\n    base_url: https://openrouter.ai/api/v1\r\n    api_key: XXXXX\r\n  ollama:\r\n    base_url: http://localhost:11434/v1\r\n  lmstudio:\r\n    base_url: http://localhost:1234/v1\r\n  vllm:\r\n    base_url: http://localhost:8000/v1\r\n  oobabooga:\r\n    base_url: http://localhost:5000/v1\r\n  jan:\r\n    base_url: http://localhost:1337/v1\r\n\r\nmodel: openrouter/google/gemini-2.0-flash-exp:free\r\n\r\nextra_api_parameters:\r\n  max_tokens: 4096\r\n  temperature: 1.0\r\n\r\nsystem_prompt: >\r\n  Ты - текстовый помощник. Всегда готов помочь. Никогда не пиши о своем возрасте. Всегда пиши на русском, за исключением тех моментов, когда просят писать на английском. Не комментируй свои действия, сразу отвечай на запрос.\r\n```",
+    "comments": [
+      {
+        "user": "jakobdylanc",
+        "body": "The error is likely due to ratelimiting. OpenRouter heavily ratelimits their free models, so some requests will just fail and return an error.\r\n\r\nThere's also another issue related to gemini models on OpenRouter (https://github.com/jakobdylanc/llmcord/issues/84) that can be avoided by setting `use_plain_responses` to `true`."
+      },
+      {
+        "user": "Quelling",
+        "body": "> The error is likely due to ratelimiting. OpenRouter heavily ratelimits their free models, so some requests will just fail and return an error.\r\n> \r\n> There's also another issue related to gemini models on OpenRouter (#84) that can be avoided by setting `use_plain_responses` to `true`.\r\n\r\nThank you, I see. use_plain_responses didn't really help much, actually. Can you recommend an alternative free service, other than openrouter, for Gemini?\r\n\r\nBtw, maybe we can have some hack for bad response? Like if response return with error, wait, then try again."
+      },
+      {
+        "user": "jakobdylanc",
+        "body": "> Can you recommend an alternative free service, other than openrouter, for Gemini?\r\n\r\nI don't know of anything honestly.\r\n\r\n> Btw, maybe we can have some hack for bad response? Like if response return with error, wait, then try again.\r\n\r\nI'll look into this :)"
+      }
+    ],
+    "repository": "jakobdylanc/llmcord"
+  },
+  {
+    "issue_number": 85,
+    "title": "Photo generation",
+    "author": "Polarfatfat",
+    "state": "closed",
+    "created_at": "2024-12-24T18:34:41Z",
+    "updated_at": "2024-12-24T20:13:46Z",
+    "labels": [],
+    "body": "Hi, I just want to ask how can I use the bot to integrate chatgpt and dalle so the chatgpt can generatre image.",
+    "comments": [
+      {
+        "user": "jakobdylanc",
+        "body": "Hi! llmcord does not support image generation. It's made for LLM text generation only.\n\nFeel free to hack the code yourself and add any features you want! I don't think it would be too hard. "
+      }
+    ],
+    "repository": "jakobdylanc/llmcord"
+  },
+  {
+    "issue_number": 81,
+    "title": "Error when pinging bot on Discord, will not respond.",
+    "author": "TheBlueSavior",
+    "state": "closed",
+    "created_at": "2024-12-05T16:54:08Z",
+    "updated_at": "2024-12-05T17:04:17Z",
+    "labels": [],
+    "body": "```\r\n2024-12-05 11:41:47,511 ERROR: Ignoring exception in on_message\r\nTraceback (most recent call last):\r\n  File \"C:\\Users\\Blue\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\discord\\client.py\", line 449, in _run_event\r\n    await coro(*args, **kwargs)\r\n  File \"C:\\Users\\Blue\\Desktop\\llmcord\\llmcord.py\", line 92, in on_message\r\n    provider, model = cfg[\"model\"].split(\"/\", 1)\r\n    ^^^^^^^^^^^^^^^\r\nValueError: not enough values to unpack (expected 2, got 1)\r\n```\r\n\r\nI know very little about python besides it causing me headaches, but did I manage to set this up all the way to the bot being online, connected to discord, and the config set to use LM Studio. I followed the pinned thread in issues to ensure everything was up to date, I just downloaded all of this today. I've tried multiple models, nothing is working to get me past the error above. Any input would be greatly appreciated.",
+    "comments": [
+      {
+        "user": "jakobdylanc",
+        "body": "From the looks of it, you have `model` set incorrectly in the config. It should be in the format of `<provider name>/<model name>`. For LM Studio it should be `lmstudio/model` (I don't think the model name matters with LM Studio unless you have >1 models loaded)."
+      },
+      {
+        "user": "TheBlueSavior",
+        "body": "> From the looks of it, you have `model` set incorrectly in the config. It should be in the format of `<provider name>/<model name>`. For LM Studio it should be `lmstudio/model` (I don't think the model name matters with LM Studio unless you have >1 models loaded).\r\n\r\nBingo! Thanks a lot, must've missed the difference in how to reference it. And here I was just typing in the model's api identifier and nothing else. Thanks again!"
+      },
+      {
+        "user": "jakobdylanc",
+        "body": "Sweet, enjoy 🫡"
+      }
+    ],
+    "repository": "jakobdylanc/llmcord"
+  },
+  {
+    "issue_number": 77,
+    "title": "openai.APIError",
+    "author": "jdlaci",
+    "state": "closed",
+    "created_at": "2024-11-23T23:17:46Z",
+    "updated_at": "2024-11-23T23:47:25Z",
+    "labels": [],
+    "body": "I am experiencing an open AI error but I am not using Openai. I am using openrouter to google. \r\nllm of https://openrouter.ai/models?q=google)/gemini-flash-1.5-exp\r\n\r\nplease help\r\n\r\n\r\n\r\n2024-11-23 17:13:02,391 INFO: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions \"HTTP/1.1 200 OK\"\r\n2024-11-23 17:13:02,753 ERROR: Error while generating response\r\nTraceback (most recent call last):\r\n  File \"/home/--force-badname/llmcord/llmcord.py\", line 199, in on_message\r\n    async for curr_chunk in await openai_client.chat.completions.create(**kwargs):\r\n  File \"/home/--force-badname/.local/lib/python3.10/site-packages/openai/_streaming.py\", line 147, in __aiter__\r\n    async for item in self._iterator:\r\n  File \"/home/--force-badname/.local/lib/python3.10/site-packages/openai/_streaming.py\", line 174, in __stream__\r\n    raise APIError(\r\nopenai.APIError: Provider returned error",
+    "comments": [
+      {
+        "user": "jakobdylanc",
+        "body": "Is that the full error? Just making sure you didn't cut anything out. \n\nHave you tried other models from OpenRouter?"
+      },
+      {
+        "user": "jdlaci",
+        "body": "Yes, it was the full error ended up trying a few other models. eventually found one that worked. I the model wasn't working \r\n"
+      },
+      {
+        "user": "jdlaci",
+        "body": "I was able to get it to work with new model"
+      }
+    ],
+    "repository": "jakobdylanc/llmcord"
+  },
+  {
+    "issue_number": 76,
+    "title": "Text Limit and Max Token Setting",
+    "author": "wastu01",
+    "state": "closed",
+    "created_at": "2024-11-15T07:17:23Z",
+    "updated_at": "2024-11-15T12:44:15Z",
+    "labels": [],
+    "body": "I'm curious about the configuration for `max_text` and `extra_api_parameters`. Since the maximum character limit for a single Discord message is 2,000 characters for standard users, setting `max_text` to 100,000 seems to exceed this limit or it will automatic message splitting ?",
+    "comments": [
+      {
+        "user": "jakobdylanc",
+        "body": "The \"max_text\" config does not control the length of the bot's responses. Rather, it controls how much text is allowed in a single user message.\n\nSince llmcord supports text file attachments, the total amount of text in a user message can greatly exceed 2000. So \"max_text\" allows you to set a limit."
+      },
+      {
+        "user": "wastu01",
+        "body": "Got it, thanks for clarifying! Here's my use case: I'm using this project to help with English learning.\r\nThanks for providing such an excellent project to seamlessly integrate chatbots into Discord.\r\n\r\n![toeic_practice](https://github.com/user-attachments/assets/5723fd66-cb48-4584-8f19-a227f597d435)\r\n"
+      },
+      {
+        "user": "jakobdylanc",
+        "body": "Awesome! :) "
+      }
+    ],
+    "repository": "jakobdylanc/llmcord"
+  },
+  {
+    "issue_number": 67,
+    "title": "Not able to @ the bot in a Forum",
+    "author": "jczhang07",
+    "state": "closed",
+    "created_at": "2024-11-05T18:40:07Z",
+    "updated_at": "2024-11-15T00:18:40Z",
+    "labels": [],
+    "body": "Hello, @jakobdylanc, thanks for the llmcord. I have been playing with it in our Discord server.\r\n\r\nI created two test channels (both non-private), one was a regular channel and the other was a Forum type channel.  I found I could mention the bot in the regular channel but not in the Forum channel.  In the later case, the bot just kept silent and gave no response. \r\n\r\nDo you know whether it is a llmcord issue or a my Discord setting issue?\r\n\r\nThanks!",
+    "comments": [
+      {
+        "user": "jakobdylanc",
+        "body": "Thanks for using llmcord!\r\n\r\nI intentionally restricted llmcord to only work in certain channel types. This is defined by ALLOWED_CHANNEL_TYPES at the top of llmcord.py.\r\n\r\nThe reason I didn't include forum channels is because, for some reason, the discord.py library does not have a `fetch_message` method for forum channels. `fetch_message` is important for llmcord's reply-based functionality."
+      },
+      {
+        "user": "jczhang07",
+        "body": "Oh, I see. Looking at https://discord.com/developers/docs/resources/channel#channel-object-channel-types, I tried to append `discord.ChannelType.guild_forum` in `ALLOWED_CHANNEL_TYPES` but it did not work. The Discord python module complained:  \r\n\r\n> AttributeError: type object 'ChannelType' has no attribute 'guild_forum'\r\n\r\nMy goal is to forward emails to our mailing-list to a Discord channel and let the LLM bot to make a draft reply. I just feel a Forum channel with posts (title + message) is better suited to email threads. "
+      },
+      {
+        "user": "jakobdylanc",
+        "body": "The correct entry would be `discord.ChannelType.forum`, per discord.py's documentation:\r\nhttps://discordpy.readthedocs.io/en/stable/api.html?highlight=channeltype#discord.ChannelType\r\n\r\nIf you experiment and find anything out, let me know. I'll do the same when I have time :)"
+      }
+    ],
+    "repository": "jakobdylanc/llmcord"
+  },
+  {
+    "issue_number": 71,
+    "title": "Column width in Bot response",
+    "author": "jczhang07",
+    "state": "closed",
+    "created_at": "2024-11-07T15:12:01Z",
+    "updated_at": "2024-11-15T00:18:26Z",
+    "labels": [],
+    "body": "I have a wide screen but the Bot response only takes a narrow part.  It is a waste of space. \r\nHow to increase that?\r\n\r\nThanks!",
+    "comments": [
+      {
+        "user": "jakobdylanc",
+        "body": "I also find this annoying! But unfortunately the width of embeds is not controllable in Discord. At least I'm 99% sure.\r\n\r\nYou could set `use_plain_responses: true` which uses plaintext responses instead of embeds, which will allow the text to take up the full width.\r\n\r\nBut setting `use_plain_responses: true` will also:\r\n- Disable streamed responses and warning messages\r\n- Decrease the character limit from 4000 to 2000, so the bot's messages may get split up more often\r\n\r\nThe lower character limit of plaintext messages is another Discord limitation."
+      },
+      {
+        "user": "mkagit",
+        "body": "\n> You could set `use_plain_responses: true` which uses plaintext responses instead of embeds, which will allow the text to take up the full width.\n> \n> But setting `use_plain_responses: true` will also:\n> - Disable streamed responses and warning messages\n> - Decrease the character limit from 4000 to 2000, so the bot's messages may get split up more often\n> \n> The lower character limit of plaintext messages is another Discord limitation.\n\nJacob, I think it's a good idea to add it to the readme. It's a important one. "
+      }
+    ],
+    "repository": "jakobdylanc/llmcord"
+  },
+  {
+    "issue_number": 75,
+    "title": "[Suggestion] placeholder response",
+    "author": "Mohamed3nan",
+    "state": "closed",
+    "created_at": "2024-11-12T07:41:37Z",
+    "updated_at": "2024-11-12T16:17:45Z",
+    "labels": [],
+    "body": "I suggest implementing an immediate placeholder response such as:\r\n\r\n\"Bot is preparing...\"\r\n\r\nto be sent as soon as the bot receives a message. Once the API response is received, the placeholder message can then be edited or replaced with the actual response.\r\n\r\nI tried implementing it with cursor help and it worked, but it required significant changes to the structure, and I figured you might not be on board with such a big refactor 😅.\r\n\r\nWhat do you think?",
+    "comments": [
+      {
+        "user": "jakobdylanc",
+        "body": "Why would this be necessary?\r\n\r\nIt sends a typing indicator which is plenty I think: \r\n\r\n![image](https://github.com/user-attachments/assets/4fee0609-d879-479b-a3bc-5663e4d90ea4)\r\n\r\n"
+      },
+      {
+        "user": "Mohamed3nan",
+        "body": "because sometimes the response takes a lot of time and some times no response due to any error\r\nand the most important when more than one talk to the bot the insta reply will prevent spam when people think that they are something wrong when it takes some time to get the api respond.."
+      },
+      {
+        "user": "jakobdylanc",
+        "body": "You raise some good points. There are always caveats though.\r\n\r\nFor example, the bot's response will sometimes be split into multiple messages if it's very long. Ideally these messages should be back-to-back for easy readability. If we send a placeholder response, and then the bot takes long to respond, and meanwhile more conversation is happening in the channel, now the subsequent messages will be separated from the first one. Not ideal.\r\n\r\nAnother idea is making the bot react to your message with a :hourglass: to let you know that it's processing. If the response is successful then the reaction is removed. If there's an error then it could be replaced with a :x:.\r\n\r\nI hope that as LLMs continue to advance, slowness becomes less of a problem in general :)\r\n\r\n"
+      }
+    ],
+    "repository": "jakobdylanc/llmcord"
+  },
+  {
+    "issue_number": 69,
+    "title": "AI forgets in DMs",
+    "author": "Meeep1",
+    "state": "closed",
+    "created_at": "2024-11-07T03:20:23Z",
+    "updated_at": "2024-11-07T17:53:35Z",
+    "labels": [],
+    "body": "First in DMs the bot only remembers when they are replied to but forgets it if you don't reply\r\n\r\nSecond would it be possible for when your chatting with the bot in DMs or in threads you wouldn't have to reply for it to remember the conversation.",
+    "comments": [
+      {
+        "user": "jakobdylanc",
+        "body": "llmcord uses the reply-based chat system everywhere. Without it you would lose a significant amount of control. How would you start a new conversation? Or rewind the conversation to any point? Etc.\n\nI don't plan on changing this. Hope it makes sense. "
+      },
+      {
+        "user": "mkagit",
+        "body": "Is there a way to config.yaml option to disable the DM feature if one needs? For example, if I want more control to keep all conversations in the channels and avoid people using it for DM personal use. "
+      },
+      {
+        "user": "jakobdylanc",
+        "body": "There isn't a specific setting to disable DMs. But you can use \"allowed_channel_ids\" to restrict the bot to certain channels, or use \"allowed_role_ids\" to restrict usage to certain guild roles. Both are effective ways to disable DMs."
+      }
+    ],
+    "repository": "jakobdylanc/llmcord"
+  },
+  {
+    "issue_number": 70,
+    "title": "The stream stops generating midway if gemini-openai-proxy is used.",
+    "author": "ghost",
+    "state": "closed",
+    "created_at": "2024-11-07T10:08:32Z",
+    "updated_at": "2024-11-07T10:22:36Z",
+    "labels": [],
+    "body": "The stream suddenly stops generating if https://github.com/zhu327/gemini-openai-proxy is used for gemini, like this:\r\n![image](https://github.com/user-attachments/assets/39ed052d-44fa-4920-b02d-dcf94939fc6f)\r\n",
+    "comments": [
+      {
+        "user": "ghost",
+        "body": "nvm, sorry, i found another proxy that works properly."
+      }
+    ],
+    "repository": "jakobdylanc/llmcord"
+  },
+  {
+    "issue_number": 66,
+    "title": "No groq/llama-3.2-90b-vision-preview support ",
+    "author": "mkagit",
+    "state": "closed",
+    "created_at": "2024-11-05T16:36:06Z",
+    "updated_at": "2024-11-05T18:35:15Z",
+    "labels": [],
+    "body": "Tried to attach an image and prompt the groq/llama-3.2-90b-vision-preview but it is not working.",
+    "comments": [
+      {
+        "user": "jakobdylanc",
+        "body": "Can you share the error you're seeing?"
+      },
+      {
+        "user": "mkagit",
+        "body": "```\r\n2024-11-05 13:31:41.760 | openai.BadRequestError: Error code: 400 - {'error': {'message': 'prompting with images is incompatible with system messages', 'type': 'invalid_request_error'}} |  \r\n-- | -- | --\r\n  |   | 2024-11-05 13:31:41.760 | raise self._make_status_error_from_response(err.response) from None |  \r\n  |   | 2024-11-05 13:31:41.760 | File \"/usr/local/lib/python3.12/site-packages/openai/_base_client.py\", line 1633, in _request |  \r\n  |   | 2024-11-05 13:31:41.760 | ^^^^^^^^^^^^^^^^^^^^ |  \r\n  |   | 2024-11-05 13:31:41.760 | return await self._request( |  \r\n  |   | 2024-11-05 13:31:41.760 | File \"/usr/local/lib/python3.12/site-packages/openai/_base_client.py\", line 1532, in request |  \r\n  |   | 2024-11-05 13:31:41.760 | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ |  \r\n  |   | 2024-11-05 13:31:41.760 | return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls) |  \r\n  |   | 2024-11-05 13:31:41.760 | File \"/usr/local/lib/python3.12/site-packages/openai/_base_client.py\", line 1838, in post |  \r\n  |   | 2024-11-05 13:31:41.760 | ^^^^^^^^^^^^^^^^^ |  \r\n  |   | 2024-11-05 13:31:41.760 | return await self._post( |  \r\n  |   | 2024-11-05 13:31:41.760 | File \"/usr/local/lib/python3.12/site-packages/openai/resources/chat/completions.py\", line 1661, in create |  \r\n  |   | 2024-11-05 13:31:41.760 | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ |  \r\n  |   | 2024-11-05 13:31:41.760 | async for curr_chunk in await openai_client.chat.completions.create(**kwargs): |  \r\n  |   | 2024-11-05 13:31:41.760 | File \"/app/llmcord.py\", line 201, in on_message |  \r\n  |   | 2024-11-05 13:31:41.760 | Traceback (most recent call last): |  \r\n  |   | 2024-11-05 13:31:41.760 | 2024-11-05 16:31:41,755 ERROR: Error while generating response |  \r\n  |   | 2024-11-05 13:31:41.754 | 2024-11-05 16:31:41,753 INFO: HTTP Request: POST https://api.groq.com/openai/v1/chat/completions \"HTTP/1.1 400 Bad Request\"\r\n\r\n```"
+      },
+      {
+        "user": "jakobdylanc",
+        "body": "> prompting with images is incompatible with system messages\n\nThis is a weakness on OpenRouter's end.\n\nIn llmcord, you can disable the system prompt by simply leaving it empty in the config. This should fix your issue. "
+      }
+    ],
+    "repository": "jakobdylanc/llmcord"
+  },
+  {
+    "issue_number": 64,
+    "title": "peer closed connection without sending complete message (Yes, again.)",
+    "author": "T9es",
+    "state": "closed",
+    "created_at": "2024-11-01T01:30:34Z",
+    "updated_at": "2024-11-01T19:49:22Z",
+    "labels": [],
+    "body": "Are we positive that oobabooga is working correctly? I've seen some issues here, even seen test scripts for the API, but even those test scripts are giving me this exact error.\r\n\r\n```\r\n2024-11-01 02:26:50,926 INFO: HTTP Request: POST http://192.168.1.13:5000/v1/chat/completions \"HTTP/1.1 200 OK\"\r\n2024-11-01 02:26:50,963 ERROR: Error while generating response\r\nTraceback (most recent call last):\r\n  File \"C:\\Python311\\Lib\\site-packages\\httpx\\_transports\\default.py\", line 72, in map_httpcore_exceptions\r\n    yield\r\n  File \"C:\\Python311\\Lib\\site-packages\\httpx\\_transports\\default.py\", line 257, in __aiter__\r\n    async for part in self._httpcore_stream:\r\n  File \"C:\\Python311\\Lib\\site-packages\\httpcore\\_async\\connection_pool.py\", line 367, in __aiter__\r\n    raise exc from None\r\n  File \"C:\\Python311\\Lib\\site-packages\\httpcore\\_async\\connection_pool.py\", line 363, in __aiter__\r\n    async for part in self._stream:\r\n  File \"C:\\Python311\\Lib\\site-packages\\httpcore\\_async\\http11.py\", line 349, in __aiter__\r\n    raise exc\r\n  File \"C:\\Python311\\Lib\\site-packages\\httpcore\\_async\\http11.py\", line 341, in __aiter__\r\n    async for chunk in self._connection._receive_response_body(**kwargs):\r\n  File \"C:\\Python311\\Lib\\site-packages\\httpcore\\_async\\http11.py\", line 210, in _receive_response_body\r\n    event = await self._receive_event(timeout=timeout)\r\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Python311\\Lib\\site-packages\\httpcore\\_async\\http11.py\", line 220, in _receive_event\r\n    with map_exceptions({h11.RemoteProtocolError: RemoteProtocolError}):\r\n  File \"C:\\Python311\\Lib\\contextlib.py\", line 158, in __exit__\r\n    self.gen.throw(typ, value, traceback)\r\n  File \"C:\\Python311\\Lib\\site-packages\\httpcore\\_exceptions.py\", line 14, in map_exceptions\r\n    raise to_exc(exc) from exc\r\nhttpcore.RemoteProtocolError: peer closed connection without sending complete message body (incomplete chunked read)\r\n\r\nThe above exception was the direct cause of the following exception:\r\n\r\nTraceback (most recent call last):\r\n  File \"C:\\Users\\server\\Desktop\\LLMcord\\llmcord.py\", line 201, in on_message\r\n    async for curr_chunk in await openai_client.chat.completions.create(**kwargs):\r\n  File \"C:\\Python311\\Lib\\site-packages\\openai\\_streaming.py\", line 147, in __aiter__\r\n    async for item in self._iterator:\r\n  File \"C:\\Python311\\Lib\\site-packages\\openai\\_streaming.py\", line 160, in __stream__\r\n    async for sse in iterator:\r\n  File \"C:\\Python311\\Lib\\site-packages\\openai\\_streaming.py\", line 151, in _iter_events\r\n    async for sse in self._decoder.aiter_bytes(self.response.aiter_bytes()):\r\n  File \"C:\\Python311\\Lib\\site-packages\\openai\\_streaming.py\", line 302, in aiter_bytes\r\n    async for chunk in self._aiter_chunks(iterator):\r\n  File \"C:\\Python311\\Lib\\site-packages\\openai\\_streaming.py\", line 313, in _aiter_chunks\r\n    async for chunk in iterator:\r\n  File \"C:\\Python311\\Lib\\site-packages\\httpx\\_models.py\", line 931, in aiter_bytes\r\n    async for raw_bytes in self.aiter_raw():\r\n  File \"C:\\Python311\\Lib\\site-packages\\httpx\\_models.py\", line 989, in aiter_raw\r\n    async for raw_stream_bytes in self.stream:\r\n  File \"C:\\Python311\\Lib\\site-packages\\httpx\\_client.py\", line 150, in __aiter__\r\n    async for chunk in self._stream:\r\n  File \"C:\\Python311\\Lib\\site-packages\\httpx\\_transports\\default.py\", line 256, in __aiter__\r\n    with map_httpcore_exceptions():\r\n  File \"C:\\Python311\\Lib\\contextlib.py\", line 158, in __exit__\r\n    self.gen.throw(typ, value, traceback)\r\n  File \"C:\\Python311\\Lib\\site-packages\\httpx\\_transports\\default.py\", line 89, in map_httpcore_exceptions\r\n    raise mapped_exc(message) from exc\r\nhttpx.RemoteProtocolError: peer closed connection without sending complete message body (incomplete chunked read)\r\n```\r\n\r\nI've updated everything. I've checked flags, I've added flags to oobabooga itself in the CMD FLAGS file, nothing is working. This is running inside docker. \r\n\r\nI've tried running the DarkIdol-Llama-3.1-8B-Instruct-1.2-Uncensored-Q4_K_S-imat.gguf model first, didn't work. Then I switched over to Llama-3.2-1B-Instruct-Q4_K_S.gguf, didn't work. \r\n\r\nEdit: Tried out llama-2-7b-chat.Q4_K_M.gguf as a last resort, that gave the same error.",
+    "comments": [
+      {
+        "user": "T9es",
+        "body": "Oh my god this is so stupid.\r\n\r\nI was thinking the \"max_tokens\": in config is taking into account the system prompt. (If the system prompt is at 9k tokens, the max tokens would need to be set to something like 10k or 12k.) THIS is not the case. I looked over the logs for the container, it was constantly screaming about the context being too high. I set \"max_tokens\": 4096, and it instantly started working. I wasted 6 hours today on this. \r\n\r\nAre there any plans to make the system prompts work even better? I've tested out several system prompts that are ranging from 8k to 28k tokens, the way they are handled now makes the LLM confused. "
+      },
+      {
+        "user": "jakobdylanc",
+        "body": "Sorry you struggled for so long with this.\n\n\"max_tokens\" is a standard OpenAI API parameter that llmcord.py simply passes to oobabooga. It's not a llmcord.py specific thing if that's what you're thinking. \n\nThe whole point of \"extra_api_parameters\" in llmcord.py's config is to let you pass any API parameters you want. I include \"max_tokens\" and \"temperature\" because those are pretty standard, but you can change them, remove them and add more as you please. \n\nSame with the system prompt. If you're having issues with large system prompts then that would be a oobabooga issue. Or maybe a weakness of whatever LLM you're using.\n\nHope that helps. "
+      },
+      {
+        "user": "jakobdylanc",
+        "body": "oobabooga has some additional custom API parameters that you have to refer to its documentation for. But for standard OpenAI API parameters (which oobabooga supports, since it is OpenAI compatible) you can refer to here for their definitions: https://platform.openai.com/docs/api-reference/chat/create\n\nI noticed that \"max_tokens\" is actually labeled as deprecated, so maybe I'll have to remove it from config-example.json soon.\n![image](https://github.com/user-attachments/assets/939657c4-6123-4af5-ac89-fe72328978d7)"
+      }
+    ],
+    "repository": "jakobdylanc/llmcord"
+  },
+  {
+    "issue_number": 63,
+    "title": "Is this possible support GPT-4o-audio-preview ?",
+    "author": "wastu01",
+    "state": "closed",
+    "created_at": "2024-10-30T06:17:57Z",
+    "updated_at": "2024-10-31T11:15:19Z",
+    "labels": [],
+    "body": null,
+    "comments": [
+      {
+        "user": "wastu01",
+        "body": "and can we generate image by using openai model using api ?"
+      },
+      {
+        "user": "jakobdylanc",
+        "body": "Currently llmcord is focused on text generation models only. No plans for image generation support. Feel free to experiment with it yourself though!\r\n\r\nI experimented a bit with gpt-4o-audio-preview. I think it's fairly easy accepting user voice messages as input. The tricky part is getting the bot to send a voice message back.\r\n\r\nIn Discord's API, a voice message is a special kind of message and the discord.py library I'm using doesn't support this at the moment. Without sending a PROPER voice message, it's just an audio attachment that isn't playable on mobile devices. So...not ideal."
+      },
+      {
+        "user": "wastu01",
+        "body": "Got it! Thank you for sharing this project. I've successfully got it running on my server. Next, I plan to start learning from the OpenAI documentation, and once I'm comfortable, I'll try to modify the project further.\r\n\r\nThanks again for your contribution and explanation!\r\nhttps://platform.openai.com/docs/quickstart"
+      }
+    ],
+    "repository": "jakobdylanc/llmcord"
+  },
+  {
+    "issue_number": 54,
+    "title": "Switching models without restarting the bot",
+    "author": "jakobdylanc",
+    "state": "closed",
+    "created_at": "2024-08-20T13:36:13Z",
+    "updated_at": "2024-10-30T07:07:54Z",
+    "labels": [],
+    "body": "I'm thinking something like a settings menu that you can access by @'ing the bot with just a blank message. Then you're presented with a settings menu in the form of a special bot message, containing a bunch of checkboxes corresponding to the \"characters\" you've configured (aka models, each with a nickname and their own system prompt / parameters).\r\n\r\nYou can check as many boxes as you want to enable just 1 model or 5 models. If you enable 5 then you'll get 5 messages back each time you @ the bot; 1 from each model. This gives the added bonus of effortless multi-model prompting.",
+    "comments": [
+      {
+        "user": "tavdog",
+        "body": "I love this idea."
+      },
+      {
+        "user": "jakobdylanc",
+        "body": "I await your PR (jk, unless)"
+      },
+      {
+        "user": "wastu01",
+        "body": "It would be better if we could type a prefix to reload the script, maybe by using cog mode."
+      }
+    ],
+    "repository": "jakobdylanc/llmcord"
+  },
+  {
+    "issue_number": 62,
+    "title": "Groq broken?",
+    "author": "RizkyM2999",
+    "state": "closed",
+    "created_at": "2024-10-28T17:29:26Z",
+    "updated_at": "2024-10-29T20:57:17Z",
+    "labels": [],
+    "body": "Groq seems broken\r\n\r\n`2024-10-28 13:28:27,141 INFO: HTTP Request: POST https://api.groq.com/openai/v1/chat/completions \"HTTP/1.1 200 OK\"\r\n2024-10-28 13:28:27,142 ERROR: Error while generating response\r\nTraceback (most recent call last):\r\n  File \"/home/container/llmcord.py\", line 201, in on_message\r\n    async for curr_chunk in await openai_client.chat.completions.create(**kwargs):\r\n  File \"/home/container/.local/lib/python3.11/site-packages/openai/_streaming.py\", line 147, in __aiter__\r\n    async for item in self._iterator:\r\n  File \"/home/container/.local/lib/python3.11/site-packages/openai/_streaming.py\", line 193, in __stream__\r\n    raise APIError(\r\nopenai.APIError: Service Unavailable`",
+    "comments": [
+      {
+        "user": "jakobdylanc",
+        "body": "Just tested and it works for me. Did you test with other models from Groq? Or with other providers?\r\n\r\n```\r\n2024-10-28 13:31:29,418 INFO: HTTP Request: POST https://api.groq.com/openai/v1/chat/completions \"HTTP/1.1 200 OK\"\r\n```\r\n"
+      },
+      {
+        "user": "RizkyM2999",
+        "body": "> Just tested and it works for me. Did you test with other models from Groq? Or with other providers?\r\n> \r\n> ```\r\n> 2024-10-28 13:31:29,418 INFO: HTTP Request: POST https://api.groq.com/openai/v1/chat/completions \"HTTP/1.1 200 OK\"\r\n> ```\r\n\r\nNo im just use Groq with Mixtral model when i tested log says 200 OK but not replying in discord"
+      },
+      {
+        "user": "jakobdylanc",
+        "body": "Have you tested again recently?"
+      }
+    ],
+    "repository": "jakobdylanc/llmcord"
+  },
+  {
+    "issue_number": 60,
+    "title": "Embed color stays orange with OpenRouter models",
+    "author": "jakobdylanc",
+    "state": "closed",
+    "created_at": "2024-10-11T14:54:12Z",
+    "updated_at": "2024-10-22T18:00:11Z",
+    "labels": [],
+    "body": "When using certain models from OpenRouter, the embed color of the bot's messages will stay orange instead of turning green when complete.\r\n\r\nThis is due to a difference in the `finish_reason` value in the final streamed chunk. Per OpenAI spec it should be `stop`, but some OpenRouter models instead use `end_turn` (Anthropic models), `STOP` (Google models), etc.\r\n\r\nWhile this is an easy fix in my code, I decided that I don't agree with this behavior from OpenRouter's API. I only know of the `stop`, `end_turn` and `STOP` variations from my quick testing, but who knows how many more there are? I think this needs to be normalized.\r\n\r\nI reached out to the OpenRouter team on their Discord and made some progress, we'll see what happens :)\r\n![image](https://github.com/user-attachments/assets/c539bd6f-c1be-4d84-bdee-28822edefa99)\r\n",
+    "comments": [],
+    "repository": "jakobdylanc/llmcord"
+  },
+  {
+    "issue_number": 58,
+    "title": "How can we enable memory in the model ?",
+    "author": "tavdog",
+    "state": "closed",
+    "created_at": "2024-09-03T19:52:44Z",
+    "updated_at": "2024-09-03T20:26:44Z",
+    "labels": [],
+    "body": "It doesn't seem to have a memory of the conversation.  Or does it ?",
+    "comments": [
+      {
+        "user": "jakobdylanc",
+        "body": "The bot can only see messages in the current reply chain. To continue a conversation you have to reply to the bot's message. This functionality is pretty powerful once you get used to it."
+      },
+      {
+        "user": "tavdog",
+        "body": "ah ok. so you reply to the message so it can reference it. nice."
+      },
+      {
+        "user": "jakobdylanc",
+        "body": "Yes :) and you'll find it's quite reliable, e.g. you can:\r\n- restart the bot entirely and still continue any previous conversations\r\n- continue a super old conversation from months ago\r\n- etc.\r\n\r\nIt should always \"just work\"."
+      }
+    ],
+    "repository": "jakobdylanc/llmcord"
+  },
+  {
+    "issue_number": 55,
+    "title": "Is there a way to make llmcord not log messages received?",
+    "author": "MrRubberDucky",
+    "state": "closed",
+    "created_at": "2024-08-29T12:12:05Z",
+    "updated_at": "2024-09-03T19:38:16Z",
+    "labels": [],
+    "body": "Heyo, great project! I'm curious if there's a way to get rid of Message received messages that include user's discord ID and their prompt. Even if it's just in-memory, I'd rather make my users feel that their private DM conversations are that, private.\r\n\r\nI looked around at the documentation and didn't see anything like this there so uh, if it's not a feature yet then would it be possible to implement such a thing? :3",
+    "comments": [
+      {
+        "user": "jakobdylanc",
+        "body": "Good point, I'll think about this. Since llmcord.py does not impose any prompting restrictions (rate limits, moderation, etc.) I figured every message should get logged so you can monitor for abuse, etc...\r\n\r\nFor now you can easily disable it by commenting out this 1 line in llmcord.py (by adding a # at the beginning):\r\nhttps://github.com/jakobdylanc/llmcord.py/blob/68d1ed0254a70042ff660016b8010d3d50f1d7f5/llmcord.py#L177\r\n\r\nOr you can keep the logging but with message content removed, by changing that line to:\r\n```python\r\nlogging.info(f\"Message received (user ID: {new_msg.author.id}, attachments: {len(new_msg.attachments)}, reply chain length: {len(reply_chain)})\")\r\n```"
+      },
+      {
+        "user": "jakobdylanc",
+        "body": "I'm curious to know more people's thoughts on this. Maybe I should just remove message content from the logging messages entirely? Maybe replace it with \"character count\" so you at least know the size of the message."
+      },
+      {
+        "user": "tavdog",
+        "body": "could just pipe the output to /dev/null."
+      }
+    ],
+    "repository": "jakobdylanc/llmcord"
+  },
+  {
+    "issue_number": 57,
+    "title": "Sorry for it, but i want to ask smthing (The bot is a bit stupid)",
+    "author": "Inklare",
+    "state": "closed",
+    "created_at": "2024-08-30T13:49:29Z",
+    "updated_at": "2024-08-30T14:05:54Z",
+    "labels": [],
+    "body": "Why is this bot dumber than if I turn to a regular model (I mean to gemma 2 via terminal for example). It can't solve 5+5*30...\r\nCan i fix it?",
+    "comments": [
+      {
+        "user": "jakobdylanc",
+        "body": "You could try writing a better system prompt that's more suited to your task. You could also try adjusting API parameters that affect the LLMs behavior like \"temperature\" and \"top_p\" (google around to learn more).\n\nIf you're seeing better performance with the same LLM in a different frontend, it's just a matter of copying whatever system prompt / API parameters that frontend is using. There's nothing else to it really.\n\n(Besides stuff like RAG but I don't think that applies here)"
+      },
+      {
+        "user": "Inklare",
+        "body": "> You could try writing a better system prompt that's more suited to your task. You could also try adjusting API parameters that affect the LLMs behavior like \"temperature\" and \"top_p\" (google around to learn more).\r\n> \r\n> If you're seeing better performance with the same LLM in a different frontend, it's just a matter of copying whatever system prompt / API parameters that frontend is using. There's nothing else to it really.\r\n> \r\n> (Besides stuff like RAG but I don't think that applies here)\r\n\r\nI set temperature to 0.3 and this fixed the problem, thank you"
+      }
+    ],
+    "repository": "jakobdylanc/llmcord"
+  },
+  {
+    "issue_number": 56,
+    "title": "I got an error when try it with my ollama gemma2:2b model",
+    "author": "Inklare",
+    "state": "closed",
+    "created_at": "2024-08-30T13:09:54Z",
+    "updated_at": "2024-08-30T13:14:54Z",
+    "labels": [],
+    "body": "2024-08-30 16:07:18,677 INFO: HTTP Request: POST http://127.0.0.1:11434/chat/completions \"HTTP/1.1 404 Not Found\"\r\n2024-08-30 16:07:18,678 ERROR: Error while generating response\r\nTraceback (most recent call last):\r\n  File \"D:\\Microsoft VS code projects\\llmcord.py-main\\llmcord.py\", line 188, in on_message\r\n    async for curr_chunk in await openai_client.chat.completions.create(**kwargs):\r\n                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\mokch\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python311\\site-packages\\openai\\resources\\chat\\completions.py\", line 1339, in create\r\n    return await self._post(\r\n           ^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\mokch\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python311\\site-packages\\openai\\_base_client.py\", line 1816, in post\r\n    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\mokch\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python311\\site-packages\\openai\\_base_client.py\", line 1510, in request\r\n    return await self._request(\r\n           ^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\mokch\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python311\\site-packages\\openai\\_base_client.py\", line 1611, in _request\r\n    raise self._make_status_error_from_response(err.response) from None\r\nopenai.NotFoundError: 404 page not found",
+    "comments": [
+      {
+        "user": "jakobdylanc",
+        "body": "It looks like you have the ollama base_url set incorrectly. It should be:\n\n\"http://localhost:11434/v1\"\n\nMake sure you have that \"/v1\" at the end. "
+      },
+      {
+        "user": "Inklare",
+        "body": "> It looks like you have the ollama base_url set incorrectly. It should be:\r\n> \r\n> \"http://localhost:11434/v1\"\r\n> \r\n> Make sure you have that \"/v1\" at the end.\r\n\r\nOOH, THANK YOU VERY MUCH"
+      }
+    ],
+    "repository": "jakobdylanc/llmcord"
+  },
+  {
+    "issue_number": 52,
+    "title": "Retreival-Augmented Generation (Suggestion/Development support)",
+    "author": "JurassikLizard",
+    "state": "closed",
+    "created_at": "2024-07-30T01:00:41Z",
+    "updated_at": "2024-08-12T11:39:33Z",
+    "labels": [],
+    "body": "I'm going to be implementing a base for RAG using this project.\r\n\r\nI was thinking of offering to PR it into this repo.\r\nAre there any design/project structure guidelines to cohere too?\r\n\r\nThanks!\r\n- Jurassik",
+    "comments": [
+      {
+        "user": "jakobdylanc",
+        "body": "Sounds cool! I'm curious to know more details.\r\n\r\nI'd say don't worry about guidelines; just have fun with it, send the PR and then I can give feedback."
+      }
+    ],
+    "repository": "jakobdylanc/llmcord"
+  },
+  {
+    "issue_number": 42,
+    "title": "possible to change formatting of text?",
+    "author": "chaowss",
+    "state": "closed",
+    "created_at": "2024-05-28T02:22:23Z",
+    "updated_at": "2024-08-11T01:30:05Z",
+    "labels": [],
+    "body": "text comes out as embed, is there a way to do it so it doesn't? ",
+    "comments": [
+      {
+        "user": "jakobdylanc",
+        "body": "I chose to use embeds because of their various advantages like:\r\n- Much higher character limit (4096) vs. regular messages (2000)\r\n- A \"color\" parameter that I use as a helpful indicator for streaming status (orange=generating, green=done)\r\n- Extra fields that I use for user warning messages (e.g. `⚠️ Only using last 20 messages` when MAX_MESSAGES is exceeded)\r\n\r\nCan I ask, why don't you want embeds?"
+      },
+      {
+        "user": "chaowss",
+        "body": "@jakobdylanc my use case is I want to have a quirky llm chatbot in my channel, but I want it to look and feel like a human. Ideally, the only difference would be the \"bot\" flag. It feels like embeds are a bit harder to read and takes a discord user out of the usual chat flow."
+      },
+      {
+        "user": "jakobdylanc",
+        "body": "I don't plan on making embeds optional due to the advantages I listed above. I'd also have to make streamed responses optional, because otherwise the bot's messages still wouldn't look \"human\". And without streamed responses you need an entirely different way to handle the case where the bot's message gets too long for a single message. You'd think \"just split it up!\" but you risk cutting words in half without a custom splitting function.\r\n\r\nSo yeah, in the interest of simplicity, I don't want to open this can of worms :)"
+      }
+    ],
+    "repository": "jakobdylanc/llmcord"
+  },
+  {
+    "issue_number": 50,
+    "title": "Ability to use plain text instead?",
+    "author": "pixelqiwi",
+    "state": "closed",
+    "created_at": "2024-07-10T00:42:36Z",
+    "updated_at": "2024-08-10T13:48:42Z",
+    "labels": [],
+    "body": "The title. Like, I get that you can show more info with the embeds, i.e. the colour of it and the title and whatnot, but would it be possible to use plain text messages for the LLM responses so it looks more believable in the context of a discord chat? ",
+    "comments": [
+      {
+        "user": "jakobdylanc",
+        "body": "When you say \"more believable\" do you mean no streamed responses either? E.g. just a regular message that sends all at once?"
+      },
+      {
+        "user": "pixelqiwi",
+        "body": "possibly, yes"
+      },
+      {
+        "user": "jakobdylanc",
+        "body": "Yeah, I think in order to do it perfectly I'd have to make streamed responses optional too. This is just another thing that I'm indecisive on exactly how to implement. I want to make sure I do it right the first time so I don't have to change my mind later.\r\n\r\nI could add 2 new boolean config options, \"USE_STREAMED_RESPONSES\" and \"USE_EMBEDS\". But I see little use in them being separate since I think most users would want them both either enabled or disabled. If it was just 1 config option, what would it be called? I've also considered creating an entirely separate \"llmcord-lite.py\" file that is a bare minimum version of llmcord.py, e.g. no embeds or streamed responses. But I don't like duplication.\r\n\r\nThere's also some finer details that makes implementing all of this a little tricky, at least without it being sloppy at first.\r\n\r\nSo...I'm indecisive about it. Open to thoughts."
+      }
+    ],
+    "repository": "jakobdylanc/llmcord"
+  },
+  {
+    "issue_number": 30,
+    "title": "Option to send as regular text",
+    "author": "hw-0",
+    "state": "closed",
+    "created_at": "2024-04-16T19:13:37Z",
+    "updated_at": "2024-08-10T13:47:35Z",
+    "labels": [],
+    "body": "Hello, I was messing around with your bot and comparing it to [chrisrude's oobabot](https://github.com/chrisrude/oobabot) plugin (when it was functional) for textgen webui. One thing that I think would enhance this software would be giving the bot the option to send as regular text like in oobabot or have the option to send it as embeds like what is currently possible in this software.",
+    "comments": [
+      {
+        "user": "jakobdylanc",
+        "body": "Thanks for the suggestion! You're actually the second person to request this.\n\nI'm curious, what downsides do you see in embeds? What makes you want this in general?"
+      },
+      {
+        "user": "hw-0",
+        "body": "In general, I don't really see any downsides to using the embeds I think they are actually quite useful for people who might not realize they're talking to a bot (lol) or for using it as intelligent QA replying. For me personally the reason I prefer using chat based compared to embeds is due to it feeling more natural if you're using it more as a chatbot. Where as with the embeds sometimes it feels more like QA than a natural chat. That's why I think there should be an option to have either as it can be more versatile in specific use cases."
+      },
+      {
+        "user": "jakobdylanc",
+        "body": "I chose to use embeds because of their various advantages like:\n- Much higher character limit (4096) vs. regular messages (2000)\n- A \"color\" parameter that I use as a helpful indicator for streaming status (orange=generating, green=done)\n- Extra fields that I use for user warning messages (e.g. \"⚠️ Only using last 20 messages\" when MAX_MESSAGES is exceeded)\n\nThe character limit alone makes me strongly prefer embeds. I see your points though."
+      }
+    ],
+    "repository": "jakobdylanc/llmcord"
+  },
+  {
+    "issue_number": 34,
+    "title": "Would it be possible to support different models for images vs. text?",
+    "author": "RustyReich",
+    "state": "closed",
+    "created_at": "2024-04-26T19:47:21Z",
+    "updated_at": "2024-07-19T07:42:18Z",
+    "labels": [],
+    "body": "I would like to be able to use a vision model only when the message content includes an image, while using a non-vision model for messages which only include text. Would this be possible?",
+    "comments": [
+      {
+        "user": "jakobdylanc",
+        "body": "This is a good suggestion. Definitely possible. I'd have to think more on how to implement this as cleanly as possible. I'm thinking a separate \"VISION_LLM\" config option, in addition to \"LLM\".\r\n\r\nRegarding the functionality, I think the vision model should be used whenever images are present ANYWHERE in the current conversation, not just the latest message."
+      },
+      {
+        "user": "RustyReich",
+        "body": "> Regarding the functionality, I think the vision model should be used whenever images are present ANYWHERE in the current conversation, not just the latest message.\r\n\r\nI agree, as you may want to continue a discussion about an image that was sent several messages back in the conversation."
+      },
+      {
+        "user": "JzJad",
+        "body": "May want to check out this: https://github.com/zhaobenny/bz-cogs/tree/main/aiuser (Uses a different model for vision vs text)\r\nI am using it with ollama for a one off questions bot, as it has issues with following a conversation (Yours does an excellent job btw.)\r\nSo making this a cog would be awesome too."
+      }
+    ],
+    "repository": "jakobdylanc/llmcord"
+  },
+  {
+    "issue_number": 51,
+    "title": "Model not found in completion cost map",
+    "author": "Marshall2HD",
+    "state": "closed",
+    "created_at": "2024-07-19T04:07:29Z",
+    "updated_at": "2024-07-19T04:28:07Z",
+    "labels": [],
+    "body": "I get the following error:\r\n```\r\nlitellm_logging.py:1271 - Model=bakllava not found in completion cost map. Setting 'response_cost' to None\r\n2024-07-18 23:54:58,548 WARNING: Model=bakllava not found in completion cost map. Setting 'response_cost' to None\r\n```\r\n\r\nMy current settings are:\r\n```\r\n\"llm_settings\": {\r\n                \"llm\": \"ollama/bakllava\",\r\n                \"local_server_url\": \"http://localhost:11434\",\r\n                \"extra_api_parameters\": {\r\n                        \"max_tokens\": 4096,\r\n                        \"temperature\": 0.8,\r\n                        \"frequency_penalty\": 1.17647\r\n                },\r\n```\r\n",
+    "comments": [
+      {
+        "user": "Marshall2HD",
+        "body": "Fixed it by adding:\r\n```diff\r\n\"llm_settings\": {\r\n                \"llm\": \"ollama/bakllava\",\r\n                \"local_server_url\": \"http://localhost:11434\",\r\n                \"extra_api_parameters\": {\r\n                        \"max_tokens\": 4096,\r\n                        \"temperature\": 0.8,\r\n                        \"frequency_penalty\": 1.17647\r\n+                        \"input_cost_per_token\": 0.0,\r\n+                        \"output_cost_per_token\": 0.0,\r\n+                        \"litellm_provider\": \"ollama\",\r\n+                        \"max_input_tokens\": 32000,\r\n+                        \"max_output_tokens\": 8191,\r\n+                        \"mode\": \"chat\"\r\n                },\r\n```"
+      }
+    ],
+    "repository": "jakobdylanc/llmcord"
+  },
+  {
+    "issue_number": 48,
+    "title": "Can't see images",
+    "author": "pixelqiwi",
+    "state": "closed",
+    "created_at": "2024-06-25T07:15:48Z",
+    "updated_at": "2024-06-25T10:03:21Z",
+    "labels": [],
+    "body": "After loading a model with vision capabilities into LM Studio and sending it an image through Discord it says that it can't see images. \r\nIs this a limitation on the LM Studio's side or am I actually doing something wrong?",
+    "comments": [
+      {
+        "user": "jakobdylanc",
+        "body": "What are you setting LLM to? It should be \"local/openai/vision-model\"."
+      },
+      {
+        "user": "pixelqiwi",
+        "body": "Ah, yes, my dumb ass was using \"local/openai/model\", no wonder then. Apologies."
+      }
+    ],
+    "repository": "jakobdylanc/llmcord"
+  }
+]

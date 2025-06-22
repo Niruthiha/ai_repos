@@ -1,0 +1,307 @@
+[
+  {
+    "issue_number": 15,
+    "title": "No such file or directory",
+    "author": "hamzasand",
+    "state": "closed",
+    "created_at": "2024-08-20T09:36:07Z",
+    "updated_at": "2025-04-28T10:21:31Z",
+    "labels": [],
+    "body": "(verbi1) hamza@Hamza:~/Desktop/verbi/Verbi$ python run_voice_assistant.py\r\npygame 2.5.2 (SDL 2.28.2, Python 3.12.3)\r\nHello from the pygame community. https://www.pygame.org/contribute.html\r\nALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.rear\r\nALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.center_lfe\r\nALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.side\r\nALSA lib pcm_route.c:878:(find_matching_chmap) Found no matching channel map\r\nALSA lib pcm_route.c:878:(find_matching_chmap) Found no matching channel map\r\nALSA lib pcm_route.c:878:(find_matching_chmap) Found no matching channel map\r\nALSA lib pcm_route.c:878:(find_matching_chmap) Found no matching channel map\r\nALSA lib dlmisc.c:339:(snd_dlobj_cache_get0) Cannot open shared library libasound_module_pcm_pipewire.so (/home/hamza/miniconda3/envs/verbi1/lib/alsa-lib/libasound_module_pcm_pipewire.so: cannot open shared object file: No such file or directory)\r\nALSA lib dlmisc.c:339:(snd_dlobj_cache_get0) Cannot open shared library libasound_module_pcm_pipewire.so (/home/hamza/miniconda3/envs/verbi1/lib/alsa-lib/libasound_module_pcm_pipewire.so: cannot open shared object file: No such file or directory)\r\nALSA lib dlmisc.c:339:(snd_dlobj_cache_get0) Cannot open shared library libasound_module_pcm_pipewire.so (/home/hamza/miniconda3/envs/verbi1/lib/alsa-lib/libasound_module_pcm_pipewire.so: cannot open shared object file: No such file or directory)\r\nALSA lib dlmisc.c:339:(snd_dlobj_cache_get0) Cannot open shared library libasound_module_pcm_pipewire.so (/home/hamza/miniconda3/envs/verbi1/lib/alsa-lib/libasound_module_pcm_pipewire.so: cannot open shared object file: No such file or directory)\r\nALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.rear\r\nALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.center_lfe\r\nALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.side\r\nALSA lib pcm_route.c:878:(find_matching_chmap) Found no matching channel map\r\nALSA lib pcm_route.c:878:(find_matching_chmap) Found no matching channel map\r\nALSA lib pcm_route.c:878:(find_matching_chmap) Found no matching channel map\r\nALSA lib pcm_route.c:878:(find_matching_chmap) Found no matching channel map\r\nALSA lib dlmisc.c:339:(snd_dlobj_cache_get0) Cannot open shared library libasound_module_pcm_pipewire.so (/home/hamza/miniconda3/envs/verbi1/lib/alsa-lib/libasound_module_pcm_pipewire.so: cannot open shared object file: No such file or directory)\r\nALSA lib dlmisc.c:339:(snd_dlobj_cache_get0) Cannot open shared library libasound_module_pcm_pipewire.so (/home/hamza/miniconda3/envs/verbi1/lib/alsa-lib/libasound_module_pcm_pipewire.so: cannot open shared object file: No such file or directory)\r\nALSA lib dlmisc.c:339:(snd_dlobj_cache_get0) Cannot open shared library libasound_module_pcm_pipewire.so (/home/hamza/miniconda3/envs/verbi1/lib/alsa-lib/libasound_module_pcm_pipewire.so: cannot open shared object file: No such file or directory)\r\nALSA lib dlmisc.c:339:(snd_dlobj_cache_get0) Cannot open shared library libasound_module_pcm_pipewire.so (/home/hamza/miniconda3/envs/verbi1/lib/alsa-lib/libasound_module_pcm_pipewire.so: cannot open shared object file: No such file or directory)\r\n2024-08-20 14:17:50,993 - INFO - Calibrating for ambient noise...\r\n2024-08-20 14:17:51,993 - INFO - Recording started\r\n2024-08-20 14:17:54,878 - INFO - Recording complete\r\n2024-08-20 14:17:55,013 - ERROR - Failed to record audio: Encoding failed. ffmpeg/avlib returned error code: 1\r\n\r\nCommand:['ffmpeg', '-y', '-f', 'wav', '-i', '/tmp/tmpt_sh66x4', '-b:a', '128k', '-ar', '22050', '-ac', '1', '-f', 'mp3', '/tmp/tmpduzg0yak']\r\n\r\nOutput from ffmpeg/avlib:\r\n\r\nffmpeg version n4.3.1 Copyright (c) 2000-2020 the FFmpeg developers\r\n  built with gcc 7 (Ubuntu 7.5.0-3ubuntu1~18.04)\r\n  configuration: --prefix= --prefix=/usr --disable-debug --disable-doc --disable-static --enable-cuda --enable-cuda-sdk --enable-cuvid --enable-libdrm --enable-ffplay --enable-gnutls --enable-gpl --enable-libass --enable-libfdk-aac --enable-libfontconfig --enable-libfreetype --enable-libmp3lame --enable-libnpp --enable-libopencore_amrnb --enable-libopencore_amrwb --enable-libopus --enable-libpulse --enable-sdl2 --enable-libspeex --enable-libtheora --enable-libtwolame --enable-libv4l2 --enable-libvorbis --enable-libvpx --enable-libx264 --enable-libx265 --enable-libxcb --enable-libxvid --enable-nonfree --enable-nvenc --enable-omx --enable-openal --enable-opencl --enable-runtime-cpudetect --enable-shared --enable-vaapi --enable-vdpau --enable-version3 --enable-xlib\r\n  libavutil      56. 51.100 / 56. 51.100\r\n  libavcodec     58. 91.100 / 58. 91.100\r\n  libavformat    58. 45.100 / 58. 45.100\r\n  libavdevice    58. 10.100 / 58. 10.100\r\n  libavfilter     7. 85.100 /  7. 85.100\r\n  libswscale      5.  7.100 /  5.  7.100\r\n  libswresample   3.  7.100 /  3.  7.100\r\n  libpostproc    55.  7.100 / 55.  7.100\r\n/tmp/tmpt_sh66x4: No such file or directory\r\n\r\n2024-08-20 14:17:56,618 - INFO - HTTP Request: POST https://api.openai.com/v1/audio/transcriptions \"HTTP/1.1 400 Bad Request\"\r\n2024-08-20 14:17:56,621 - ERROR - Failed to transcribe audio: Error code: 400 - {'error': {'message': \"Invalid file format. Supported formats: ['flac', 'm4a', 'mp3', 'mp4', 'mpeg', 'mpga', 'oga', 'ogg', 'wav', 'webm']\", 'type': 'invalid_request_error', 'param': None, 'code': None}}\r\n2024-08-20 14:17:56,621 - ERROR - An error occurred: Error in transcribing audio\r\n2024-08-20 14:17:56,621 - INFO - Deleted file: test.mp3\r\nALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.rear\r\nALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.center_lfe\r\nALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.side\r\nALSA lib pcm_route.c:878:(find_matching_chmap) Found no matching channel map\r\nALSA lib pcm_route.c:878:(find_matching_chmap) Found no matching channel map\r\nALSA lib pcm_route.c:878:(find_matching_chmap) Found no matching channel map\r\nALSA lib pcm_route.c:878:(find_matching_chmap) Found no matching channel map\r\nALSA lib dlmisc.c:339:(snd_dlobj_cache_get0) Cannot open shared library libasound_module_pcm_pipewire.so (/home/hamza/miniconda3/envs/verbi1/lib/alsa-lib/libasound_module_pcm_pipewire.so: cannot open shared object file: No such file or directory)\r\nALSA lib dlmisc.c:339:(snd_dlobj_cache_get0) Cannot open shared library libasound_module_pcm_pipewire.so (/home/hamza/miniconda3/envs/verbi1/lib/alsa-lib/libasound_module_pcm_pipewire.so: cannot open shared object file: No such file or directory)\r\nALSA lib dlmisc.c:339:(snd_dlobj_cache_get0) Cannot open shared library libasound_module_pcm_pipewire.so (/home/hamza/miniconda3/envs/verbi1/lib/alsa-lib/libasound_module_pcm_pipewire.so: cannot open shared object file: No such file or directory)\r\nALSA lib dlmisc.c:339:(snd_dlobj_cache_get0) Cannot open shared library libasound_module_pcm_pipewire.so (/home/hamza/miniconda3/envs/verbi1/lib/alsa-lib/libasound_module_pcm_pipewire.so: cannot open shared object file: No such file or directory)",
+    "comments": [
+      {
+        "user": "SmartManoj",
+        "body": "Relevant issue: https://github.com/ValveSoftware/steam-runtime/issues/643"
+      }
+    ],
+    "repository": "PromtEngineer/Verbi"
+  },
+  {
+    "issue_number": 21,
+    "title": "More TTS options will be great.",
+    "author": "razvanab",
+    "state": "open",
+    "created_at": "2024-08-26T19:18:29Z",
+    "updated_at": "2025-04-22T15:16:29Z",
+    "labels": [],
+    "body": "More TTS options will be great.\r\n\r\nhttps://github.com/suno-ai/bark\r\nhttps://github.com/coqui-ai/TTS\r\nhttps://github.com/rhasspy/piper\r\nhttps://github.com/huggingface/parler-tts\r\n\r\nOr any other TTS in which you can clone your voice.",
+    "comments": [
+      {
+        "user": "Niko-La",
+        "body": "parler-tts is underrated "
+      },
+      {
+        "user": "razvanab",
+        "body": "> parler-tts is underrated\r\n\r\nTrue but kind of hard to train with new voices."
+      },
+      {
+        "user": "ali-ghamdan",
+        "body": "i think using the new groq tts would be awesome"
+      }
+    ],
+    "repository": "PromtEngineer/Verbi"
+  },
+  {
+    "issue_number": 31,
+    "title": "Audio recording fails due to missing ffmpeg",
+    "author": "canberkvarli",
+    "state": "closed",
+    "created_at": "2025-03-07T05:03:46Z",
+    "updated_at": "2025-03-07T05:06:36Z",
+    "labels": [],
+    "body": "After following the installation steps and setting up the required API keys, I encountered an error when running python run_voice_assistant.py. The error indicates that the application cannot locate ffmpeg, resulting in failed audio recordings.\n\n## Error Log:\n\n```\n2025-03-06 20:59:34,233 - ERROR - Failed to record audio: [Errno 2] No such file or directory: 'ffmpeg'\n2025-03-06 20:59:40,061 - ERROR - Failed to record audio: [Errno 2] No such file or directory: 'ffmpeg'\n```\n\n## Steps to Reproduce:\n\nFollow installation instructions.\n\nCreate API keys for OpenAI, Groq, and Deepgram.\n\nExecute python run_voice_assistant.py.\n\n## Expected Behavior:\nAudio should be recorded successfully without errors.\n\n## Actual Behavior:\nAudio recording fails repeatedly, logging an error indicating ffmpeg is missing.\n\n## Environment:\n\nPython 3.10.4\n\nmacOS M1 2020\n\nLibraries: pygame 2.5.2, pydub",
+    "comments": [],
+    "repository": "PromtEngineer/Verbi"
+  },
+  {
+    "issue_number": 30,
+    "title": "Text to speech error",
+    "author": "dkum7",
+    "state": "open",
+    "created_at": "2025-03-01T23:20:07Z",
+    "updated_at": "2025-03-02T10:29:45Z",
+    "labels": [],
+    "body": "I'm getting this error when I run the Verbi  the voice says  \"error in generating response\").  I'm using melotts . Any suggestion.\n\n2025-03-01 17:55:36,523 - ERROR - Failed to convert text to speech: 500 Server Error: Internal Server Error for url: http://localhost:5150/generate-audio/\n2025-03-01 17:55:39,214 - INFO - Calibrating for ambient noise...\n2025-03-01 17:55:40,217 - INFO - Recording started\n2025-03-01 17:55:45,496 - INFO - Recording complete\n2025-03-01 17:55:46,150 - INFO - No transcription was returned. Starting recording again.\n\n======on TTS console-----\n > Text split to sentences.\nHello! How can I assist you today? Do you have any specific requests or would you like me to suggest some options based on your schedule, \n     | 0/3 [00:00<?, ?it/s]\nINFO:     127.0.0.1:50050 - \"POST /generate-audio/ HTTP/1.1\" 500 Internal Server Error\n",
+    "comments": [
+      {
+        "user": "dkum7",
+        "body": "it's fixed by running this and downloading it\n>>> import nltk\n>>> nltk.download()"
+      }
+    ],
+    "repository": "PromtEngineer/Verbi"
+  },
+  {
+    "issue_number": 29,
+    "title": "python setup.py egg_info did not run successfully.",
+    "author": "1Krosx1",
+    "state": "open",
+    "created_at": "2025-02-06T16:54:10Z",
+    "updated_at": "2025-02-06T16:54:10Z",
+    "labels": [],
+    "body": " Preparing metadata (setup.py) ... error\n  error: subprocess-exited-with-error\n\n  × python setup.py egg_info did not run successfully.\n  │ exit code: 1\n  ╰─> [91 lines of output]\n      Skipping Cython compilation\n\n\n      WARNING, No \"Setup\" File Exists, Running \"buildconfig/config.py\"\n      Using WINDOWS configuration...\n\n      Traceback (most recent call last):\n        File \"C:\\Users\\ADMIN\\AppData\\Local\\Temp\\pip-install-1t58u_oh\\pygame_0ad3797417684a81ab0471262ebca2c6\\buildconfig\\config_win.py\", line 336, in configure\n          from . import vstools\n        File \"C:\\Users\\ADMIN\\AppData\\Local\\Temp\\pip-install-1t58u_oh\\pygame_0ad3797417684a81ab0471262ebca2c6\\buildconfig\\vstools.py\", line 2, in <module>\n          from distutils.msvccompiler import MSVCCompiler, get_build_architecture\n      ModuleNotFoundError: No module named 'distutils.msvccompiler'\n\n      During handling of the above exception, another exception occurred:\n\n      Traceback (most recent call last):\n        File \"<string>\", line 2, in <module>\n          exec(compile('''\n          ~~~~^^^^^^^^^^^^\n          # This is <pip-setuptools-caller> -- a caller that pip uses to run setup.py\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n          ...<31 lines>...\n          exec(compile(setup_py_code, filename, \"exec\"))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n          ''' % ('C:\\\\Users\\\\ADMIN\\\\AppData\\\\Local\\\\Temp\\\\pip-install-1t58u_oh\\\\pygame_0ad3797417684a81ab0471262ebca2c6\\\\setup.py',), \"<pip-setuptools-caller>\", \"exec\"))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        File \"<pip-setuptools-caller>\", line 34, in <module>\n        File \"C:\\Users\\ADMIN\\AppData\\Local\\Temp\\pip-install-1t58u_oh\\pygame_0ad3797417684a81ab0471262ebca2c6\\setup.py\", line 409, in <module>\n          buildconfig.config.main(AUTO_CONFIG)\n          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^\n        File \"C:\\Users\\ADMIN\\AppData\\Local\\Temp\\pip-install-1t58u_oh\\pygame_0ad3797417684a81ab0471262ebca2c6\\buildconfig\\config.py\", line 231, in main\n          deps = CFG.main(**kwds, auto_config=auto)\n        File \"C:\\Users\\ADMIN\\AppData\\Local\\Temp\\pip-install-1t58u_oh\\pygame_0ad3797417684a81ab0471262ebca2c6\\buildconfig\\config_win.py\", line 493, in main\n          return setup_prebuilt_sdl2(prebuilt_dir)\n        File \"C:\\Users\\ADMIN\\AppData\\Local\\Temp\\pip-install-1t58u_oh\\pygame_0ad3797417684a81ab0471262ebca2c6\\buildconfig\\config_win.py\", line 453, in setup_prebuilt_sdl2\n          DEPS.configure()\n          ~~~~~~~~~~~~~~^^\n        File \"C:\\Users\\ADMIN\\AppData\\Local\\Temp\\pip-install-1t58u_oh\\pygame_0ad3797417684a81ab0471262ebca2c6\\buildconfig\\config_win.py\", line 338, in configure\n          from buildconfig import vstools\n        File \"C:\\Users\\ADMIN\\AppData\\Local\\Temp\\pip-install-1t58u_oh\\pygame_0ad3797417684a81ab0471262ebca2c6\\buildconfig\\vstools.py\", line 2, in <module>\n          from distutils.msvccompiler import MSVCCompiler, get_build_architecture\n      ModuleNotFoundError: No module named 'distutils.msvccompiler'\n      Making dir :prebuilt_downloads:\n      Downloading... https://www.libsdl.org/release/SDL2-devel-2.28.3-VC.zip 0d3af96d6745c1473f8eca305af53680365ea442\n      Unzipping :prebuilt_downloads\\SDL2-devel-2.28.3-VC.zip:\n      Downloading... https://www.libsdl.org/projects/SDL_image/release/SDL2_image-devel-2.0.5-VC.zip 137f86474691f4e12e76e07d58d5920c8d844d5b\n      Unzipping :prebuilt_downloads\\SDL2_image-devel-2.0.5-VC.zip:\n      Downloading... https://github.com/libsdl-org/SDL_ttf/releases/download/release-2.20.1/SDL2_ttf-devel-2.20.1-VC.zip 371606aceba450384428fd2852f73d2f6290b136\n      Unzipping :prebuilt_downloads\\SDL2_ttf-devel-2.20.1-VC.zip:\n      Downloading... https://github.com/libsdl-org/SDL_mixer/releases/download/release-2.6.2/SDL2_mixer-devel-2.6.2-VC.zip 000e3ea8a50261d46dbd200fb450b93c59ed4482\n      Unzipping :prebuilt_downloads\\SDL2_mixer-devel-2.6.2-VC.zip:\n      Downloading... https://github.com/pygame/pygame/releases/download/2.1.3.dev4/prebuilt-x64-pygame-2.1.4-20220319.zip 16b46596744ce9ef80e7e40fa72ddbafef1cf586\n      Unzipping :prebuilt_downloads\\prebuilt-x64-pygame-2.1.4-20220319.zip:\n      copying into .\\prebuilt-x64\n      Path for SDL: prebuilt-x64\\SDL2-2.28.3\n      ...Library directory for SDL: prebuilt-x64/SDL2-2.28.3/lib/x64\n      ...Include directory for SDL: prebuilt-x64/SDL2-2.28.3/include\n      Path for FONT: prebuilt-x64\\SDL2_ttf-2.20.1\n      ...Library directory for FONT: prebuilt-x64/SDL2_ttf-2.20.1/lib/x64\n      ...Include directory for FONT: prebuilt-x64/SDL2_ttf-2.20.1/include\n      Path for IMAGE: prebuilt-x64\\SDL2_image-2.0.5\n      ...Library directory for IMAGE: prebuilt-x64/SDL2_image-2.0.5/lib/x64\n      ...Include directory for IMAGE: prebuilt-x64/SDL2_image-2.0.5/include\n      Path for MIXER: prebuilt-x64\\SDL2_mixer-2.6.2\n      ...Library directory for MIXER: prebuilt-x64/SDL2_mixer-2.6.2/lib/x64\n      ...Include directory for MIXER: prebuilt-x64/SDL2_mixer-2.6.2/include\n      Path for PORTMIDI: prebuilt-x64\n      ...Library directory for PORTMIDI: prebuilt-x64/lib\n      ...Include directory for PORTMIDI: prebuilt-x64/include\n      DLL for SDL2: prebuilt-x64/SDL2-2.28.3/lib/x64/SDL2.dll\n      DLL for SDL2_ttf: prebuilt-x64/SDL2_ttf-2.20.1/lib/x64/SDL2_ttf.dll\n      DLL for SDL2_image: prebuilt-x64/SDL2_image-2.0.5/lib/x64/SDL2_image.dll\n      DLL for SDL2_mixer: prebuilt-x64/SDL2_mixer-2.6.2/lib/x64/SDL2_mixer.dll\n      DLL for portmidi: prebuilt-x64/lib/portmidi.dll\n      Path for FREETYPE: prebuilt-x64\n      ...Library directory for FREETYPE: prebuilt-x64/lib\n      ...Include directory for FREETYPE: prebuilt-x64/include\n      Path for PNG not found.\n      ...Found include dir but no library dir in prebuilt-x64.\n      Path for JPEG not found.\n      ...Found include dir but no library dir in prebuilt-x64.\n      DLL for freetype: prebuilt-x64/lib/freetype.dll\n      DLL for png: prebuilt-x64/SDL2_image-2.0.5/lib/x64/libpng16-16.dll\n\n      ---\n      For help with compilation see:\n          https://www.pygame.org/wiki/CompileWindows\n      To contribute to pygame development see:\n          https://www.pygame.org/contribute.html\n      ---\n\n      [end of output]\n\n  note: This error originates from a subprocess, and is likely not a problem with pip.\nerror: metadata-generation-failed\n\n× Encountered error while generating package metadata.\n╰─> See above for output.\n\nnote: This is an issue with the package mentioned above, not pip.\nhint: See above for details.",
+    "comments": [],
+    "repository": "PromtEngineer/Verbi"
+  },
+  {
+    "issue_number": 7,
+    "title": "get error",
+    "author": "xhorizont",
+    "state": "open",
+    "created_at": "2024-06-04T12:28:20Z",
+    "updated_at": "2025-01-31T01:57:55Z",
+    "labels": [],
+    "body": "Failed to record audio: [WinError 2] The system cannot find the file specified",
+    "comments": [
+      {
+        "user": "jachenms",
+        "body": "I have th\r\n![image](https://github.com/user-attachments/assets/15d3620e-3865-490b-a8fd-f1cdbac22ed6)\r\ne sames error , how to solve the erroe"
+      },
+      {
+        "user": "SmartManoj",
+        "body": "Is the mic working properly?"
+      },
+      {
+        "user": "shoryasethia",
+        "body": "> Failed to record audio: [WinError 2] The system cannot find the file specified\n\nHave you figured this out? Is yes, do let me know the fix\n\n\n[EDIT] See the fix below."
+      }
+    ],
+    "repository": "PromtEngineer/Verbi"
+  },
+  {
+    "issue_number": 28,
+    "title": "OpenRouter: DeepSeek-v3",
+    "author": "keithofaptos",
+    "state": "open",
+    "created_at": "2024-12-31T05:55:10Z",
+    "updated_at": "2024-12-31T05:55:10Z",
+    "labels": [],
+    "body": "Steps to run OpenRouter: DeepSeek-v3",
+    "comments": [],
+    "repository": "PromtEngineer/Verbi"
+  },
+  {
+    "issue_number": 13,
+    "title": "Do you think is possible to Mimic the Advance Voice com Openai?",
+    "author": "rubenssoto",
+    "state": "open",
+    "created_at": "2024-08-16T12:45:09Z",
+    "updated_at": "2024-12-07T13:37:06Z",
+    "labels": [],
+    "body": "I would like to know if it is possible to mimic the openai advanced voice, I would like to test but I dont have a clue how to do that.",
+    "comments": [
+      {
+        "user": "SmartManoj",
+        "body": "Yes. [Setup Instructions](https://github.com/PromtEngineer/Verbi#setup-instructions--)"
+      }
+    ],
+    "repository": "PromtEngineer/Verbi"
+  },
+  {
+    "issue_number": 5,
+    "title": "Add Azure OpenAI",
+    "author": "xhorizont",
+    "state": "open",
+    "created_at": "2024-05-29T11:02:29Z",
+    "updated_at": "2024-12-07T13:36:08Z",
+    "labels": [],
+    "body": "How can I add Azure OpenAI credencials?",
+    "comments": [
+      {
+        "user": "SmartManoj",
+        "body": "Using [litellm](https://litellm.vercel.app/), you can add. [Added](https://github.com/SmartManoj/Verbi/commit/98c1872bf14ae34b3ad942209eb8d2d40c8eefb1) for Gemini"
+      }
+    ],
+    "repository": "PromtEngineer/Verbi"
+  },
+  {
+    "issue_number": 26,
+    "title": "ModuleNotFoundError: No module named 'melo'",
+    "author": "ctxadm",
+    "state": "open",
+    "created_at": "2024-10-11T10:10:16Z",
+    "updated_at": "2024-12-07T12:15:31Z",
+    "labels": [],
+    "body": "(venv) (base) D:\\VERBI\\Verbi-main>py voice_assistant\\local_tts_api.py\r\n\r\nTraceback (most recent call last):\r\n\r\n  File \"D:\\VERBI\\Verbi-main\\voice_assistant\\local_tts_api.py\", line 3, in <module>\r\n\r\n    from melo.api import TTS\r\n\r\nModuleNotFoundError: No module named 'melo'",
+    "comments": [
+      {
+        "user": "SmartManoj",
+        "body": "[MeloTTS guide](https://github.com/PromtEngineer/Verbi#:~:text=%F0%9F%8E%A4%20Install%20Local%20TTS%20%2D%20MeloTTS)"
+      }
+    ],
+    "repository": "PromtEngineer/Verbi"
+  },
+  {
+    "issue_number": 20,
+    "title": "error ",
+    "author": "jachenms",
+    "state": "open",
+    "created_at": "2024-08-26T01:24:00Z",
+    "updated_at": "2024-11-08T13:29:32Z",
+    "labels": [],
+    "body": "![image](https://github.com/user-attachments/assets/9cb18b6a-c482-4c02-badf-6347b55f3d6b)\r\n appreciated to help me to solve the issue as soon as possible",
+    "comments": [
+      {
+        "user": "PromtEngineer",
+        "body": "@jachenms have you added your GROQ_API_KEY to the .env file? "
+      },
+      {
+        "user": "jachenms",
+        "body": "![image](https://github.com/user-attachments/assets/347f9937-bef0-4705-acd7-d40cc9065197)\r\n sure have defined, need run ollama 3.1 ? "
+      },
+      {
+        "user": "jachenms",
+        "body": "![image](https://github.com/user-attachments/assets/d5b49c0d-73ca-4036-b5d6-10150ec049b3)\r\n I get groq api key from the groq cloud ? is it right ?"
+      }
+    ],
+    "repository": "PromtEngineer/Verbi"
+  },
+  {
+    "issue_number": 18,
+    "title": "Instructions to use Melotts in docker from Verbi",
+    "author": "Seneko",
+    "state": "open",
+    "created_at": "2024-08-22T10:17:17Z",
+    "updated_at": "2024-09-18T13:59:04Z",
+    "labels": [],
+    "body": "I have installed Melotts in docker on win 11 and installed Verbi locally on pc. Melo UI works in Gradio, Verbi works using groq however I cant succeed to use Melo locally, voice assistant api calls endpoint /generate-audio/ , which doesnt exist in container on the docker. \r\nAnyone could assist if they assisted to run it in above mentioned way?",
+    "comments": [
+      {
+        "user": "austingreisman",
+        "body": "I'm also having this issue outside of the container. I'm getting a `INFO:     127.0.0.1:59933 - \"POST /generate-audio/ HTTP/1.1\" 500 Internal Server Error` when attempting to chat with Verbi from another terminal running `python voice_assistant/local_tts_api.py`\r\n"
+      },
+      {
+        "user": "austingreisman",
+        "body": "My issue was not having the proper `nltk` files required by Melotts. I fixed this by running a python instance, then running the following commands\r\n```python\r\n>>> import nltk\r\n>>> nltk.download()\r\n```\r\n"
+      }
+    ],
+    "repository": "PromtEngineer/Verbi"
+  },
+  {
+    "issue_number": 25,
+    "title": "Add gemini flash suport",
+    "author": "Spritan",
+    "state": "open",
+    "created_at": "2024-09-14T12:42:24Z",
+    "updated_at": "2024-09-14T20:57:48Z",
+    "labels": [],
+    "body": null,
+    "comments": [
+      {
+        "user": "Sumit189",
+        "body": "😄 I have made changes to use gemini flash\r\n\r\nhttps://github.com/PromtEngineer/Verbi/pull/24/files"
+      }
+    ],
+    "repository": "PromtEngineer/Verbi"
+  },
+  {
+    "issue_number": 10,
+    "title": "(install error) ERROR: Could not build wheels for PyAudio, which is required to install pyproject.toml-based projects",
+    "author": "replete",
+    "state": "closed",
+    "created_at": "2024-06-06T12:18:59Z",
+    "updated_at": "2024-08-26T04:49:55Z",
+    "labels": [],
+    "body": "OS: MacOS 14.5 Sonoma \r\nHardware: Intel\r\nPython: 3.12.3\r\nshell: bash\r\n\r\nThis error appears after the `pip3 install -r requirements.txt` step.\r\n\r\nThe solution was to start over but beforehand install `portaudio` via homebrew: `brew install portaudio`\r\n\r\n```bash\r\n...\r\nDownloading shellingham-1.5.4-py2.py3-none-any.whl (9.8 kB)\r\nDownloading iniconfig-2.0.0-py3-none-any.whl (5.9 kB)\r\nDownloading pure_eval-0.2.2-py3-none-any.whl (11 kB)\r\nDownloading wcwidth-0.2.13-py2.py3-none-any.whl (34 kB)\r\nDownloading markdown_it_py-3.0.0-py3-none-any.whl (87 kB)\r\n   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 87.5/87.5 kB 2.7 MB/s eta 0:00:00\r\nDownloading six-1.16.0-py2.py3-none-any.whl (11 kB)\r\nDownloading mdurl-0.1.2-py3-none-any.whl (10.0 kB)\r\nBuilding wheels for collected packages: PyAudio\r\n  Building wheel for PyAudio (pyproject.toml) ... error\r\n  error: subprocess-exited-with-error\r\n\r\n  × Building wheel for PyAudio (pyproject.toml) did not run successfully.\r\n  │ exit code: 1\r\n  ╰─> [18 lines of output]\r\n      running bdist_wheel\r\n      running build\r\n      running build_py\r\n      creating build\r\n      creating build/lib.macosx-13.0-x86_64-cpython-312\r\n      creating build/lib.macosx-13.0-x86_64-cpython-312/pyaudio\r\n      copying src/pyaudio/__init__.py -> build/lib.macosx-13.0-x86_64-cpython-312/pyaudio\r\n      running build_ext\r\n      building 'pyaudio._portaudio' extension\r\n      creating build/temp.macosx-13.0-x86_64-cpython-312\r\n      creating build/temp.macosx-13.0-x86_64-cpython-312/src\r\n      creating build/temp.macosx-13.0-x86_64-cpython-312/src/pyaudio\r\n      clang -fno-strict-overflow -Wsign-compare -Wunreachable-code -fno-common -dynamic -DNDEBUG -g -O3 -Wall -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.sdk -DMACOS=1 -I/usr/local/include -I/usr/include -I/opt/homebrew/include -I/Users/phil/dev/Verbi/venv/include -I/usr/local/opt/python@3.12/Frameworks/Python.framework/Versions/3.12/include/python3.12 -c src/pyaudio/device_api.c -o build/temp.macosx-13.0-x86_64-cpython-312/src/pyaudio/device_api.o\r\n      src/pyaudio/device_api.c:9:10: fatal error: 'portaudio.h' file not found\r\n      #include \"portaudio.h\"\r\n               ^~~~~~~~~~~~~\r\n      1 error generated.\r\n      error: command '/usr/bin/clang' failed with exit code 1\r\n      [end of output]\r\n\r\n  note: This error originates from a subprocess, and is likely not a problem with pip.\r\n  ERROR: Failed building wheel for PyAudio\r\nFailed to build PyAudio\r\nERROR: Could not build wheels for PyAudio, which is required to install pyproject.toml-based projects\r\n(venv)\r\n```",
+    "comments": [
+      {
+        "user": "replete",
+        "body": "following this:\r\n```bash\r\n$ python3 run_voice_assistant.py\r\npygame 2.5.2 (SDL 2.28.3, Python 3.12.3)\r\nHello from the pygame community. https://www.pygame.org/contribute.html\r\nTraceback (most recent call last):\r\n  File \"/Users/phil/dev/Verbi/run_voice_assistant.py\", line 6, in <module>\r\n    from voice_assistant.audio import record_audio, play_audio\r\n  File \"/Users/phil/dev/Verbi/voice_assistant/audio.py\", line 7, in <module>\r\n    import pydub\r\nModuleNotFoundError: No module named 'pydub'\r\n(venv)\r\n```\r\n\r\n(I got it working, just a headsup)\r\n"
+      },
+      {
+        "user": "rapatapa",
+        "body": "pip install pydub"
+      },
+      {
+        "user": "replete",
+        "body": "> (I got it working, just a headsup)\r\n\r\n@rapatapa "
+      }
+    ],
+    "repository": "PromtEngineer/Verbi"
+  },
+  {
+    "issue_number": 17,
+    "title": "Stop playback with ESC key",
+    "author": "kaziu007",
+    "state": "open",
+    "created_at": "2024-08-21T23:06:11Z",
+    "updated_at": "2024-08-21T23:06:11Z",
+    "labels": [],
+    "body": "if you want to stop the playback with the ESC key you might want to use this change in the code.Works on macos.\r\n\r\nvoice_assistant/audio.py:\r\n    \r\n[...]\r\ndef play_audio(file_path):\r\n    \"\"\"\r\n    Play an audio file using pygame.\r\n    \r\n    Args:\r\n    file_path (str): The path to the audio file to play.\r\n    \"\"\"\r\n    try:\r\n        pygame.init()\r\n        pygame.mixer.init()\r\n        screen = pygame.display.set_mode((1, 1))  # Create a small window to capture events\r\n        pygame.display.set_caption(\"Audio Player\")\r\n\r\n        pygame.mixer.music.load(file_path)\r\n        pygame.mixer.music.play()\r\n        \r\n        print(\"Press ESC to stop playback.\")\r\n        \r\n        running = True\r\n        while running:\r\n            for event in pygame.event.get():\r\n                if event.type == pygame.QUIT:\r\n                    running = False\r\n                    pygame.mixer.music.stop()\r\n                elif event.type == pygame.KEYDOWN:\r\n                    if event.key == pygame.K_ESCAPE:\r\n                        running = False\r\n                        pygame.mixer.music.stop()\r\n                        print(\"Playback stopped.\")\r\n\r\n            if not pygame.mixer.music.get_busy():\r\n                running = False\r\n            \r\n            time.sleep(0.1)  # Small delay to reduce CPU usage\r\n            \r\n        pygame.mixer.quit()\r\n    except pygame.error as e:\r\n        logging.error(f\"Failed to play audio: {e}\")\r\n    except Exception as e:\r\n        logging.error(f\"An unexpected error occurred while playing audio: {e}\")\r\n[...]",
+    "comments": [],
+    "repository": "PromtEngineer/Verbi"
+  },
+  {
+    "issue_number": 16,
+    "title": "👍 RuntimeWarning: Couldn't find ffmpeg or avconv",
+    "author": "Seneko",
+    "state": "closed",
+    "created_at": "2024-08-20T14:13:18Z",
+    "updated_at": "2024-08-21T16:53:21Z",
+    "labels": [],
+    "body": "RuntimeWarning: Couldn't find ffmpeg or avconv - defaulting to ffmpeg, but may not work\r\n  warn(\"Couldn't find ffmpeg or avconv - defaulting to ffmpeg, but may not work\", RuntimeWarning)\r\n\r\nInstallation on WIN11 and vs code. \r\n\r\nSolved the issue by installing additionally :\r\n\r\n**pip install ffmpeg-downloader\r\nffdl install --add-path**\r\n\r\n****Closed and opened vs code and worked as a charm. ",
+    "comments": [
+      {
+        "user": "Seneko",
+        "body": "Solved by above solution."
+      }
+    ],
+    "repository": "PromtEngineer/Verbi"
+  },
+  {
+    "issue_number": 14,
+    "title": "Implement Dynamic Voice Response with Interruption Handling for LLM Outputs",
+    "author": "leonardonhesi",
+    "state": "open",
+    "created_at": "2024-08-18T13:05:13Z",
+    "updated_at": "2024-08-18T13:09:10Z",
+    "labels": [],
+    "body": "We propose implementing a feature that allows the LLM model to stream its response in smaller chunks (or using a similar strategy), enabling voice playback to begin as soon as the user starts speaking. If the user interrupts the response, playback will pause, and the response flow will be dynamically adjusted.\r\n\r\nThis enhancement aims to optimize both cost and processing time by avoiding the need to process or pay for the entire response when an interruption occurs.\r\n\r\n**Key Objectives:**\r\n- Implement response streaming or chunking for LLM outputs.\r\n- Detect user interruptions and pause the playback accordingly.\r\n- Dynamically adjust the response flow based on user interactions.\r\n- Optimize resource usage by processing only necessary portions of the response.\r\n\r\nThis feature would improve user experience and efficiency, especially in scenarios where immediate and responsive interactions are crucial.",
+    "comments": [
+      {
+        "user": "leonardonhesi",
+        "body": "Additionally, we aim to transform our AI assistant into an active participant in meetings. During meetings, the assistant should be able to respond to queries (using tools that retrieve information from systems, the web, and BI), recall past points discussed, and provide timely comments throughout the meeting. The assistant will wait for a command with its name to begin interacting and should assist in maintaining a summarized action plan and topics already discussed. The system should function effectively in voice-based meeting rooms."
+      }
+    ],
+    "repository": "PromtEngineer/Verbi"
+  }
+]

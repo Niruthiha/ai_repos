@@ -1,0 +1,953 @@
+[
+  {
+    "issue_number": 1176,
+    "title": "[Bug]: 使用第三方汇聚API时，出现不兼容Claude的情况。",
+    "author": "crosswk",
+    "state": "open",
+    "created_at": "2024-12-05T01:40:05Z",
+    "updated_at": "2025-04-12T12:52:31Z",
+    "labels": [
+      "bug"
+    ],
+    "body": "### 这个bug是否已存在现有issue了？\n\n- [X] 我确认没有已有issue，且已阅读**常见问题**。\n\n### 错误表现\n\n使用GPT模型没有问题，使用Claude相关模型会有报错。\r\n已经使用12.04号更新的版本依然会有报错。\r\n\n\n### 复现操作\n\n实现了两个厂商的汇聚API，对于Claude模型都有报错。\r\n测试Chat-Next和Lobe没有报错。\r\n麻烦有空可以看下。\r\n\r\n我设置的两个厂商是：\"openai_api_base\": \"https://api.xiaoai.plus/v1\",和\"openai_api_base\": \"https://s.lconai.com/v1\",\r\n\n\n### 错误日志\n\n```shell\n2024-12-05 01:28:46,180 [INFO] [base_model.py:615] 用户的输入为：output\"test\"\r\nTraceback (most recent call last):\r\n  File \"/chu/Dev-ChuanhuChatGPT/ChuanhuChatGPT/modules/models/OpenAIVision.py\", line 244, in _decode_chat_response\r\n    if chunk_length > 6 and \"delta\" in chunk[\"choices\"][0]:\r\nIndexError: list index out of range\r\nERROR: {'id': '', 'object': 'chat.completion.chunk', 'created': 1733362128, 'model': 'claude-3-5-sonnet-20240620', 'system_fingerprint': '', 'choices': [], 'usage': {'prompt_tokens': 21, 'completion_tokens': 0, 'total_tokens': 21, 'prompt_tokens_details': {'cached_tokens': 0, 'text_tokens': 0, 'audio_tokens': 0, 'image_tokens': 0}, 'completion_tokens_details': {'text_tokens': 0, 'audio_tokens': 0}}}\r\nTraceback (most recent call last):\r\n  File \"/chu/Dev-ChuanhuChatGPT/ChuanhuChatGPT/modules/models/OpenAIVision.py\", line 244, in _decode_chat_response\r\n    if chunk_length > 6 and \"delta\" in chunk[\"choices\"][0]:\r\nIndexError: list index out of range\r\nERROR: {'id': '', 'object': 'chat.completion.chunk', 'created': 1733362128, 'model': 'claude-3-5-sonnet-20240620', 'system_fingerprint': '', 'choices': [], 'usage': {'prompt_tokens': 21, 'completion_tokens': 0, 'total_tokens': 21, 'prompt_tokens_details': {'cached_tokens': 0, 'text_tokens': 0, 'audio_tokens': 0, 'image_tokens': 0}, 'completion_tokens_details': {'text_tokens': 0, 'audio_tokens': 0}}}\r\nJSON解析错误,收到的内容: data: [DONE]\r\n2024-12-05 01:28:50,696 [INFO] [base_model.py:703] 回答为：\r\n2024-12-05 01:28:50,696 [INFO] [base_model.py:709] Tokens per second：4.882235892234999\n```\n\n\n### 运行环境\n\n- OS: \r\n- Browser: \r\n- Gradio version: \r\n- Python version: \r\n\n\n### 帮助解决\n\n- [X] 我愿意协助解决！\n\n### 补充说明\n\n![image](https://github.com/user-attachments/assets/149329dd-f94d-47e5-b3eb-6550da643af3)\r\n",
+    "comments": [
+      {
+        "user": "crosswk",
+        "body": "还有另外一个报错，和Bug1169好像是一样的。\r\n\r\n2024-12-05 01:22:39,715 [INFO] [base_model.py:612] 用户的输入为：output \"test\"\r\nTraceback (most recent call last):\r\n  File \"/chu/Dev-ChuanhuChatGPT/Prive-ChuanhuChatGPT-Dev/modules/models/OpenAIVision.py\", line 250, in _decode_chat_response\r\n    finish_reason = chunk[\"finish_details\"]\r\nKeyError: 'finish_details'\r\nERROR: {'id': 'chatcmpl-luqhKNsLen3OwAZ6pYJseOL0ekQKh', 'object': 'chat.completion.chunk', 'created': 1733361763, 'model': 'claude-3-5-sonnet-20240620', 'choices': [{'index': 0, 'delta': {'content': 'Here'}}]}\r\nTraceback (most recent call last):\r\n  File \"/chu/Dev-ChuanhuChatGPT/Prive-ChuanhuChatGPT-Dev/modules/models/OpenAIVision.py\", line 250, in _decode_chat_response\r\n    finish_reason = chunk[\"finish_details\"]\r\nKeyError: 'finish_details'\r\nERROR: {'id': 'chatcmpl-luqhKNsLen3OwAZ6pYJseOL0ekQKh', 'object': 'chat.completion.chunk', 'created': 1733361763, 'model': 'claude-3-5-sonnet-20240620', 'choices': [{'index': 0, 'delta': {'content': '\\'s a simple way to output \"test\"'}}]}\r\nTraceback (most recent call last):\r\n  File \"/chu/Dev-ChuanhuChatGPT/Prive-ChuanhuChatGPT-Dev/modules/models/OpenAIVision.py\", line 250, in _decode_chat_response\r\n    finish_reason = chunk[\"finish_details\"]\r\nKeyError: 'finish_details'\r\nERROR: {'id': 'chatcmpl-luqhKNsLen3OwAZ6pYJseOL0ekQKh', 'object': 'chat.completion.chunk', 'created': 1733361763, 'model': 'claude-3-5-sonnet-20240620', 'choices': [{'index': 0, 'delta': {'content': ' in a few common programming languages:\\n\\n```python\\nprint(\"test'}}]}\r\nTraceback (most recent call last):\r\n  File \"/chu/Dev-ChuanhuChatGPT/Prive-ChuanhuChatGPT-Dev/modules/models/OpenAIVision.py\", line 250, in _decode_chat_response\r\n    finish_reason = chunk[\"finish_details\"]\r\nKeyError: 'finish_details'\r\nERROR: {'id': 'chatcmpl-luqhKNsLen3OwAZ6pYJseOL0ekQKh', 'object': 'chat.completion.chunk', 'created': 1733361763, 'model': 'claude-3-5-sonnet-20240620', 'choices': [{'index': 0, 'delta': {'content': '\")\\n```\\n\\n```javascript\\nconsole.log'}}]}\r\nTraceback (most recent call last):\r\n  File \"/chu/Dev-ChuanhuChatGPT/Prive-ChuanhuChatGPT-Dev/modules/models/OpenAIVision.py\", line 250, in _decode_chat_response\r\n    finish_reason = chunk[\"finish_details\"]\r\nKeyError: 'finish_details'\r\nERROR: {'id': 'chatcmpl-luqhKNsLen3OwAZ6pYJseOL0ekQKh', 'object': 'chat.completion.chunk', 'created': 1733361763, 'model': 'claude-3-5-sonnet-20240620', 'choices': [{'index': 0, 'delta': {'content': '(\"test\");\\n```\\n\\n```java\\nSystem'}}]}\r\nTraceback (most recent call last):\r\n  File \"/chu/Dev-ChuanhuChatGPT/Prive-ChuanhuChatGPT-Dev/modules/models/OpenAIVision.py\", line 250, in _decode_chat_response\r\n    finish_reason = chunk[\"finish_details\"]\r\nKeyError: 'finish_details'\r\nERROR: {'id': 'chatcmpl-luqhKNsLen3OwAZ6pYJseOL0ekQKh', 'object': 'chat.completion.chunk', 'created': 1733361763, 'model': 'claude-3-5-sonnet-20240620', 'choices': [{'index': 0, 'delta': {'content': '.out.println(\"test\");\\n```\\n\\nChoose'}}]}\r\nTraceback (most recent call last):\r\n  File \"/chu/Dev-ChuanhuChatGPT/Prive-ChuanhuChatGPT-Dev/modules/models/OpenAIVision.py\", line 250, in _decode_chat_response\r\n    finish_reason = chunk[\"finish_details\"]\r\nKeyError: 'finish_details'\r\nERROR: {'id': 'chatcmpl-luqhKNsLen3OwAZ6pYJseOL0ekQKh', 'object': 'chat.completion.chunk', 'created': 1733361763, 'model': 'claude-3-5-sonnet-20240620', 'choices': [{'index': 0, 'delta': {'content': ' the language that best fits your needs! Let me know if you'}}]}\r\nTraceback (most recent call last):\r\n  File \"/chu/Dev-ChuanhuChatGPT/Prive-ChuanhuChatGPT-Dev/modules/models/OpenAIVision.py\", line 250, in _decode_chat_response\r\n    finish_reason = chunk[\"finish_details\"]\r\nKeyError: 'finish_details'\r\nERROR: {'id': 'chatcmpl-luqhKNsLen3OwAZ6pYJseOL0ekQKh', 'object': 'chat.completion.chunk', 'created': 1733361763, 'model': 'claude-3-5-sonnet-20240620', 'choices': [{'index': 0, 'delta': {'content': \"'d like to see examples in any other programming languages.\"}}]}\r\nJSON解析错误,收到的内容: data: [DONE]\r\n"
+      },
+      {
+        "user": "umiskky",
+        "body": "> ### 这个bug是否已存在现有issue了？\r\n> * [x]  我确认没有已有issue，且已阅读**常见问题**。\r\n> \r\n> ### 错误表现\r\n> 使用GPT模型没有问题，使用Claude相关模型会有报错。 已经使用12.04号更新的版本依然会有报错。\r\n> \r\n> ### 复现操作\r\n> 实现了两个厂商的汇聚API，对于Claude模型都有报错。 测试Chat-Next和Lobe没有报错。 麻烦有空可以看下。\r\n> \r\n> 我设置的两个厂商是：\"openai_api_base\": \"[https://api.xiaoai.plus/v1\",和\"openai_api_base](https://api.xiaoai.plus/v1%22,%E5%92%8C%22openai_api_base)\": \"https://s.lconai.com/v1\",\r\n> \r\n> ### 错误日志\r\n> ```shell\r\n> 2024-12-05 01:28:46,180 [INFO] [base_model.py:615] 用户的输入为：output\"test\"\r\n> Traceback (most recent call last):\r\n>   File \"/chu/Dev-ChuanhuChatGPT/ChuanhuChatGPT/modules/models/OpenAIVision.py\", line 244, in _decode_chat_response\r\n>     if chunk_length > 6 and \"delta\" in chunk[\"choices\"][0]:\r\n> IndexError: list index out of range\r\n> ERROR: {'id': '', 'object': 'chat.completion.chunk', 'created': 1733362128, 'model': 'claude-3-5-sonnet-20240620', 'system_fingerprint': '', 'choices': [], 'usage': {'prompt_tokens': 21, 'completion_tokens': 0, 'total_tokens': 21, 'prompt_tokens_details': {'cached_tokens': 0, 'text_tokens': 0, 'audio_tokens': 0, 'image_tokens': 0}, 'completion_tokens_details': {'text_tokens': 0, 'audio_tokens': 0}}}\r\n> Traceback (most recent call last):\r\n>   File \"/chu/Dev-ChuanhuChatGPT/ChuanhuChatGPT/modules/models/OpenAIVision.py\", line 244, in _decode_chat_response\r\n>     if chunk_length > 6 and \"delta\" in chunk[\"choices\"][0]:\r\n> IndexError: list index out of range\r\n> ERROR: {'id': '', 'object': 'chat.completion.chunk', 'created': 1733362128, 'model': 'claude-3-5-sonnet-20240620', 'system_fingerprint': '', 'choices': [], 'usage': {'prompt_tokens': 21, 'completion_tokens': 0, 'total_tokens': 21, 'prompt_tokens_details': {'cached_tokens': 0, 'text_tokens': 0, 'audio_tokens': 0, 'image_tokens': 0}, 'completion_tokens_details': {'text_tokens': 0, 'audio_tokens': 0}}}\r\n> JSON解析错误,收到的内容: data: [DONE]\r\n> 2024-12-05 01:28:50,696 [INFO] [base_model.py:703] 回答为：\r\n> 2024-12-05 01:28:50,696 [INFO] [base_model.py:709] Tokens per second：4.882235892234999\r\n> ```\r\n> \r\n> ### 运行环境\r\n> * OS:\r\n> * Browser:\r\n> * Gradio version:\r\n> * Python version:\r\n> \r\n> ### 帮助解决\r\n> * [x]  我愿意协助解决！\r\n> \r\n> ### 补充说明\r\n> ![image](https://private-user-images.githubusercontent.com/61004708/392621116-149329dd-f94d-47e5-b3eb-6550da643af3.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzU4MDAyMzYsIm5iZiI6MTczNTc5OTkzNiwicGF0aCI6Ii82MTAwNDcwOC8zOTI2MjExMTYtMTQ5MzI5ZGQtZjk0ZC00N2U1LWIzZWItNjU1MGRhNjQzYWYzLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTAxMDIlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwMTAyVDA2Mzg1NlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWIwZTBiNTVmZjhkYmFmMGQyZTZkMGJlNDg4MDA0OGQxMTg0MmQxYzAxNGYxMGI3OTliYzE0YTliNmI0MGIxOTYmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.pYnsSbp2-dmpHI7SIPOhGADtjANgXYhwzIWXIKjTtRE)\r\n\r\n我也有类似的错误，也是没有回答输出"
+      },
+      {
+        "user": "GaiZhenbiao",
+        "body": "我看一下"
+      }
+    ],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 1183,
+    "title": "[功能请求]:  是否开发支持deepseeker的功能",
+    "author": "enci2022",
+    "state": "open",
+    "created_at": "2025-02-26T07:05:14Z",
+    "updated_at": "2025-04-12T12:28:30Z",
+    "labels": [
+      "feature request"
+    ],
+    "body": "### 相关问题\n\n是否开发支持deepseeker的功能？；另外chuanhuchatgpt有2个月没更新了，还会继续过呢更新吗？\n\n### 可能的解决办法\n\n如果可以，我愿协助开发\n\n### 帮助开发\n\n- [ ] 我愿意协助开发！\n\n### 补充说明\n\n_No response_",
+    "comments": [
+      {
+        "user": "GaiZhenbiao",
+        "body": "DeepSeek的API格式与OpenAI相同，可以使用配置文件的自定义功能加入DeepSeek模型。也许我应该写一个文档示例？"
+      },
+      {
+        "user": "changqian9",
+        "body": "谢谢 感觉加一个文档会更大降低使用门槛，要不是看issues我也以为不支持"
+      },
+      {
+        "user": "enci2022",
+        "body": "谢谢，建议加一个deepseeker的py文件把。"
+      }
+    ],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 1103,
+    "title": "[Bug]: 国内ip访问今天巨特么卡",
+    "author": "hengyanqwe",
+    "state": "closed",
+    "created_at": "2024-04-18T02:18:43Z",
+    "updated_at": "2025-03-13T09:39:18Z",
+    "labels": [],
+    "body": "### 这个bug是否已存在现有issue了？\r\n\r\n- [X] 我确认没有已有issue，且已阅读**常见问题**。\r\n\r\n### 错误表现\r\n\r\n![image](https://github.com/GaiZhenbiao/ChuanhuChatGPT/assets/68996932/c5712d26-1683-44ca-b36f-b13416b2c99a)\r\n![image](https://github.com/GaiZhenbiao/ChuanhuChatGPT/assets/68996932/2c0b0504-d91f-4e65-a609-efe640bbf911)\r\n\r\n我f12看了下，有几个cdn特别慢，22秒才加载完成，能不能保存在本地引用？不然用个代理平台还得翻墙=-=。\r\n\r\n### 复现操作\r\n\r\n![image](https://github.com/GaiZhenbiao/ChuanhuChatGPT/assets/68996932/9a4eb2f2-7e07-4308-9b57-40a8c64e0158)\r\n![image](https://github.com/GaiZhenbiao/ChuanhuChatGPT/assets/68996932/06c2d3e4-3319-4622-8218-b79fe18ff362)\r\n\r\n\r\n### 错误日志\r\n\r\n_No response_\r\n\r\n### 运行环境\r\n\r\n- OS: \r\n- Browser: \r\n- Gradio version: \r\n- Python version: \r\n\r\n\r\n### 帮助解决\r\n\r\n- [ ] 我愿意协助解决！\r\n\r\n### 补充说明\r\n\r\n_No response_",
+    "comments": [
+      {
+        "user": "laxfer",
+        "body": "可以本地化这几个文件，这个CDN不稳定，时快时慢，fancybox.css这个css放到/ChuanhuChatGPT/web_assets/stylesheet这里，marked.min.js和fancybox.umd.js下载放到/ChuanhuChatGPT/web_assets/javascript放到这里，修改/ChuanhuChatGPT/modules/webui.py中第54行\r\ndef reload_javascript():\r\n    js = javascript_html()\r\n    js += '<script async type=\"module\" src=\"https://cdn.jsdelivr.net/npm/marked/marked.min.js\"></script>'\r\n    js += '<script async type=\"module\" src=\"https://spin.js.org/spin.umd.js\"></script><link type=\"text/css\" href=\"https://spin.js.org/spin.css\" rel=\"stylesheet\" />'\r\n    js += '<script async src=\"https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js\"></script><link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css\" />'\r\n   修改为\r\ndef reload_javascript():\r\n    js = javascript_html()\r\n    js += '<script async type=\"module\" src=\"/file=web_assets/javascript/marked.min.js\"></script>'\r\n    js += '<script async type=\"module\" src=\"https://spin.js.org/spin.umd.js\"></script><link type=\"text/css\" href=\"https://spin.js.org/spin.css\" rel=\"stylesheet\" />'\r\n    js += '<script async src=\"/file=web_assets/javascript/fancybox.umd.js\"></script><link rel=\"stylesheet\" href=\"/file=web_assets/stylesheet/fancybox.css\" />'\r\n    "
+      },
+      {
+        "user": "zonefile",
+        "body": "`cdn.jsdelivr.net/npm` 可以替换为 `s4.zstatic.net/npm`"
+      },
+      {
+        "user": "Francklin",
+        "body": "可以使用npm.webcache.cn替换 cdn.jsdelivr.net/npm"
+      }
+    ],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 1181,
+    "title": "[本地部署]: http访问正常，可套反向代理使用https时登录界面css丢失，且无法登录",
+    "author": "Azusa-mikan",
+    "state": "open",
+    "created_at": "2025-02-05T06:58:22Z",
+    "updated_at": "2025-03-12T12:19:38Z",
+    "labels": [
+      "question",
+      "localhost deployment"
+    ],
+    "body": "### 是否已存在现有反馈与解答？\n\n- [x] 我确认没有已有issue或discussion，且已阅读**常见问题**。\n\n### 是否是一个代理配置相关的疑问？\n\n- [x] 我确认这不是一个代理配置相关的疑问。\n\n### 错误描述\n\n无反向代理直接访问http正常\n\n前些日子买了1年泛域名证书，就想着给贵项目加个https\n然后我就按照 wiki 配置了反向代理\n能访问，但页面css丢失\n\n![Image](https://github.com/user-attachments/assets/44eab6c3-1982-46a3-a993-9e55038605fb)\n\nF12网络选项卡\n\n![Image](https://github.com/user-attachments/assets/ef1ea1f7-f9fc-4183-8a1a-91a534571c45)\n\n点击登录时会有无响应的login\n\n![Image](https://github.com/user-attachments/assets/e8646854-5b7d-4fa7-94cc-36a34e0e8a26)\n\n请求URL是：我访问的域名+/login\n引用站点策略是：strict-origin-when-cross-origin\n\n请求标头\n\n![Image](https://github.com/user-attachments/assets/15f00f5c-5f3b-47d0-9120-139acb0f0811)\n\n无任何预览\n\n### 复现操作\n\nhttp访问正常无问题\n\n在1panel面板新建一个反向代理网站\n最终指向：内网192.168.1.104:10101\n\n根据wiki给的反向代理配置修改配置文件\n\n站点配置：\n\n![Image](https://github.com/user-attachments/assets/00b5496a-a6df-4886-9946-6dce41a404e6)\n\n全局配置：\n\n![Image](https://github.com/user-attachments/assets/c066e035-f156-42f1-89c3-6d5a02e252ec)\n\n### 错误日志\n\n```shell\nnginx日志：\n\n36.248.157.232 - - [05/Feb/2025:06:54:06 +0000] \"GET / HTTP/2.0\" 200 1752 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:06 +0000] \"GET /assets/index-D6iiusuW.js HTTP/2.0\" 200 12410 \"https://exple/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:06 +0000] \"GET /file=web_assets/javascript/ChuanhuChat.js?1731738015.0 HTTP/2.0\" 401 30 \"https://exple/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:06 +0000] \"GET /file=web_assets/javascript/chat-history.js?1731738015.0 HTTP/2.0\" 401 30 \"https://exple/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:06 +0000] \"GET /file=web_assets/javascript/fake-gradio.js?1731738015.0 HTTP/2.0\" 401 30 \"https://exple/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:06 +0000] \"GET /file=web_assets/javascript/external-scripts.js?1731738015.0 HTTP/2.0\" 401 30 \"https://exple/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:06 +0000] \"GET /file=web_assets/javascript/sliders.js?1731738015.0 HTTP/2.0\" 401 30 \"https://exple/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:06 +0000] \"GET /file=web_assets/javascript/message-button.js?1731738015.0 HTTP/2.0\" 401 30 \"https://exple/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:06 +0000] \"GET /file=web_assets/javascript/chat-list.js?1731738015.0 HTTP/2.0\" 401 30 \"https://exple/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:06 +0000] \"GET /file=web_assets/javascript/localization.js?1731738015.0 HTTP/2.0\" 401 30 \"https://exple/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:06 +0000] \"GET /file=web_assets/javascript/updater.js?1731738015.0 HTTP/2.0\" 401 30 \"https://exple/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:06 +0000] \"GET /file=web_assets/javascript/file-input.js?1731738015.0 HTTP/2.0\" 401 30 \"https://exple/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:06 +0000] \"GET /file=web_assets/stylesheet/chatbot.css?1731738015.0 HTTP/2.0\" 401 30 \"https://exple/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:06 +0000] \"GET /file=web_assets/stylesheet/override-gradio.css?1731738015.0 HTTP/2.0\" 401 30 \"https://exple/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:06 +0000] \"GET /file=web_assets/stylesheet/ChuanhuChat.css?1731738015.0 HTTP/2.0\" 401 30 \"https://exple/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:06 +0000] \"GET /file=web_assets/stylesheet/custom-components.css?1731738015.0 HTTP/2.0\" 401 30 \"https://exple/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:06 +0000] \"GET /file=web_assets/javascript/user-info.js?1731738015.0 HTTP/2.0\" 401 30 \"https://exple/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:06 +0000] \"GET /file=web_assets/stylesheet/markdown.css?1731738015.0 HTTP/2.0\" 401 30 \"https://exple/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:06 +0000] \"GET /file=web_assets/javascript/webui.js?1731738015.0 HTTP/2.0\" 401 30 \"https://exple/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:06 +0000] \"GET /file=web_assets/javascript/utils.js?1731738015.0 HTTP/2.0\" 401 30 \"https://exple/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:06 +0000] \"GET /assets/index-Ds_LdHYW.css HTTP/2.0\" 200 6235 \"https://exple/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:06 +0000] \"GET /assets/svelte/svelte.js HTTP/2.0\" 200 33087 \"https://exple/assets/index-D6iiusuW.js\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:06 +0000] \"GET /assets/_commonjsHelpers-BosuxZz1.js HTTP/2.0\" 200 745 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:06 +0000] \"GET /assets/Index-B4pUrfBk.css HTTP/2.0\" 200 3627 \"https://exple/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:06 +0000] \"GET /assets/Index-DvJ399W-.js HTTP/2.0\" 200 46634 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:06 +0000] \"GET /favicon.ico HTTP/2.0\" 200 76550 \"https://exple/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:06 +0000] \"GET /assets/index-Ds_LdHYW.css HTTP/2.0\" 200 6235 \"https://exple/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:07 +0000] \"GET /assets/Index-B0JJ6p9c.css HTTP/2.0\" 200 424 \"https://exple/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:07 +0000] \"GET /assets/Login-CiRbhdJk.js HTTP/2.0\" 200 2321 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:07 +0000] \"GET /assets/Index-DDCF2BFd.js HTTP/2.0\" 200 791 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:07 +0000] \"GET /assets/Textbox-OSHpBx5r.js HTTP/2.0\" 200 4038 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:07 +0000] \"GET /assets/Info-Cs8uP4Sq.js HTTP/2.0\" 200 784 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:07 +0000] \"GET /assets/Check-Ck0iADAu.js HTTP/2.0\" 200 606 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:07 +0000] \"GET /assets/Index-INgKs-Lw.js HTTP/2.0\" 200 1091 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:07 +0000] \"GET /assets/Login-BCwzjozv.css HTTP/2.0\" 200 578 \"https://exple/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:07 +0000] \"GET /assets/Copy-ZPOKSMtK.js HTTP/2.0\" 200 686 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:07 +0000] \"GET /assets/Example-Cj3ii62O.css HTTP/2.0\" 200 149 \"https://exple/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:07 +0000] \"GET /assets/BlockTitle-BG3S3JH7.js HTTP/2.0\" 200 1127 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:07 +0000] \"GET /assets/Textbox-D8IAzrZj.css HTTP/2.0\" 200 554 \"https://exple/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n36.248.157.232 - - [05/Feb/2025:06:54:07 +0000] \"GET /assets/Index-CptIZeFZ.css HTTP/2.0\" 200 497 \"https://exple/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\" \"-\"\n\n贵项目没有任何报错\n```\n\n### 运行环境\n\n```markdown\n运行贵项目使用的\n- OS: Windows 10 22H2\n- Browser: Microsoft Edge\n- Gradio version: 4.29.0\n- Python version: 3.9\n反向代理使用的\n- OS: Debian/GNU Linux 11.7\n- 1Panel: v1.10.23-lts\n- OpenResty(nginx): 1.21.4.3-3-3-focal\n```\n\n### 补充说明\n\n_No response_",
+    "comments": [
+      {
+        "user": "shiyanghong",
+        "body": "走默认443端口"
+      },
+      {
+        "user": "Azusa-mikan",
+        "body": "> 走默认443端口\n\n这是必须的吗？"
+      }
+    ],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 1184,
+    "title": "[Bug]: DeepSeek官方API接入返回报错",
+    "author": "weisong82",
+    "state": "closed",
+    "created_at": "2025-02-28T02:54:47Z",
+    "updated_at": "2025-03-09T17:00:18Z",
+    "labels": [
+      "bug"
+    ],
+    "body": "### 这个bug是否已存在现有issue了？\n\n- [x] 我确认没有已有issue，且已阅读**常见问题**。\n\n### 错误表现\n\n2.配置完成，调用私有化部署过DeepSeek-R1-14B可以正常使用，\n然后把配置里面url,key换成了官方的地址和key，就报错。\n\n\n### 复现操作\n\n\n\t\"extra_model_metadata\": {\n\t\t  \"DeepSeek-R1\": {\n\t\t\t\t\"model_name\": \"deepseek-reasoner\",\n\t\t\t\t\"description\": \"This is DeepSeek's powerful open source LLM.\",\n\t\t\t\t\"model_type\": \"OpenAIVision\",\n\t\t\t\t\"multimodal\": false,\n\t\t\t\t\"api_host\": \"https://api.deepseek.com/v1\",\n\t\t\t\t\"api_key\": \"sk-355xxxxxxx\",\n\t\t\t\t\"token_limit\": 32760,\n\t\t\t\t\"temperature\": 0.6,\n\t\t\t\t\"system\": \"You are a helpful AI assistant.\",\n\t\t\t\t\"placeholder\": {\n\t\t\t\t\t\"logo\": \"https://avatars.githubusercontent.com/u/148330874\"\n\t\t\t\t}\n\t\t  }\n\t}\n\n### 错误日志\n\n```shell\nJSON解析错误,收到的内容: {\"error\":{\"message\":\"deepseek-reasoner does not support successive user or assistant messages (messages[1] and messages[2] in your input). You should interleave the user/assistant messages in the message sequence.\",\"type\":\"invalid_request_error\",\"param\":null,\"code\":\"invalid_request_error\"}}\nTraceback (most recent call last):\n  File \"/Users/weisong/code/AI/ChuanhuChatGPT/modules/models/base_model.py\", line 686, in predict\n    for chatbot, status_text in iter:\n  File \"/Users/weisong/code/AI/ChuanhuChatGPT/modules/models/base_model.py\", line 378, in stream_next_chatbot\n    for partial_text in stream_iter:\n  File \"/Users/weisong/code/AI/ChuanhuChatGPT/modules/models/OpenAIVision.py\", line 50, in get_answer_stream_iter\n    for i in iter:\n  File \"/Users/weisong/code/AI/ChuanhuChatGPT/modules/models/OpenAIVision.py\", line 263, in _decode_chat_response\n    raise Exception(error_msg)\nException: {\"error\":{\"message\":\"deepseek-reasoner does not support successive user or assistant messages (messages[1] and messages[2] in your input). You should interleave the user/assistant messages in the message sequence.\",\"type\":\"invalid_request_error\",\"param\":null,\"code\":\"invalid_request_error\"}}\n```\n\n### 运行环境\n\n- OS:  win/mac 都试过\n- Browser: \n- Gradio version: \n- Python version: \n\n\n### 帮助解决\n\n- [ ] 我愿意协助解决！\n\n### 补充说明\n\n_No response_",
+    "comments": [
+      {
+        "user": "weisong82",
+        "body": "\"error\":{\"message\":\"deepseek-reasoner does not support successive user or assistant messages (messages[1] and messages[2] in your input). You should interleave the user/assistant messages in the message sequence.\""
+      },
+      {
+        "user": "lingmiao",
+        "body": "这个模型不对\"model_name\": \"deepseek-reasoner\","
+      },
+      {
+        "user": "weisong82",
+        "body": "> 这个模型不对\"model_name\": \"deepseek-reasoner\",\n\nhttps://api-docs.deepseek.com/\n\n* To be compatible with OpenAI, you can also use https://api.deepseek.com/v1 as the base_url. But note that the v1 here has NO relationship with the model's version.\n\n* The deepseek-chat model has been upgraded to DeepSeek-V3. The API remains unchanged. You can invoke DeepSeek-V3 by specifying model='deepseek-chat'.\n\n* deepseek-reasoner is the latest [reasoning model](https://api-docs.deepseek.com/guides/reasoning_model), DeepSeek-R1, released by DeepSeek. You can invoke DeepSeek-R1 by specifying model='deepseek-reasoner'."
+      }
+    ],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 1177,
+    "title": "[Bug]: 有时出现空消息且页面无报错",
+    "author": "hengyanqwe",
+    "state": "closed",
+    "created_at": "2024-12-17T03:00:47Z",
+    "updated_at": "2025-02-26T14:22:08Z",
+    "labels": [
+      "bug"
+    ],
+    "body": "### 这个bug是否已存在现有issue了？\n\n- [X] 我确认没有已有issue，且已阅读**常见问题**。\n\n### 错误表现\n\n![image](https://github.com/user-attachments/assets/bb3113b6-845e-45a8-bb56-553942345235)\r\n\n\n### 复现操作\n\n不断打开新对话跟gpt打招呼，有时就会出现\n\n### 错误日志\n\n```shell\n2024-12-17 10:56:08,092 [INFO] [_client.py:1026] HTTP Request: GET https://api.gradio.app/gradio-messaging/en \"HTTP/1.1 200 OK\"\r\n2024-12-17 10:56:09,521 [INFO] [config.py:118] 已设置可用模型：['GPT3.5 Turbo', 'GPT-4o', 'o1-preview']\r\n2024-12-17 10:56:09,521 [INFO] [config.py:123] 已添加额外的模型：[]\r\n2024-12-17 10:56:09,521 [INFO] [config.py:202] OpenAI API Base set to: https://api.zhizengzeng.com/v1\r\n2024-12-17 10:56:09,521 [INFO] [config.py:331] 默认模型设置为了：GPT3.5 Turbo\r\n2024-12-17 10:56:10,612 [INFO] [utils.py:160] NumExpr defaulting to 1 threads.\r\nfatal: detected dubious ownership in repository at '/home/ChuanhuChatGPT'\r\nTo add an exception for this directory, call:\r\n\r\n\tgit config --global --add safe.directory /home/ChuanhuChatGPT\r\nfatal: detected dubious ownership in repository at '/home/ChuanhuChatGPT'\r\nTo add an exception for this directory, call:\r\n\r\n\tgit config --global --add safe.directory /home/ChuanhuChatGPT\r\n2024-12-17 10:57:02,404 [INFO] [ChuanhuChatbot.py:506] Get User Name: chen_ql\r\n2024-12-17 10:57:02,405 [INFO] [models.py:38] 正在加载 OpenAI 模型: GPT3.5 Turbo\r\n2024-12-17 10:57:02,408 [INFO] [models.py:149] 模型设置为了： GPT3.5 Turbo\r\n2024-12-17 10:59:22,113 [INFO] [models.py:38] 正在加载 OpenAI 模型: GPT-4o\r\n2024-12-17 10:59:22,115 [INFO] [models.py:149] 模型设置为了： GPT-4o\r\n2024-12-17 10:59:30,542 [INFO] [base_model.py:615] 用户chen_ql的输入为：\u001b[34m你好\u001b[0m\r\n2024-12-17 10:59:32,372 [INFO] [base_model.py:703] 回答为：\u001b[34m你好！有什么我可以帮助你的吗？\u001b[0m\r\n2024-12-17 10:59:32,372 [INFO] [base_model.py:709] Tokens per second：16.959412610912512\r\n2024-12-17 10:59:37,105 [INFO] [base_model.py:615] 用户chen_ql的输入为：\u001b[34m你好\u001b[0m\r\nTraceback (most recent call last):\r\n  File \"/home/ChuanhuChatGPT/modules/models/OpenAIVision.py\", line 250, in _decode_chat_response\r\n    finish_reason = chunk[\"finish_details\"]\r\nKeyError: 'finish_details'\r\nTraceback (most recent call last):\r\n  File \"/home/ChuanhuChatGPT/modules/models/OpenAIVision.py\", line 250, in _decode_chat_response\r\n    finish_reason = chunk[\"finish_details\"]\r\nKeyError: 'finish_details'\r\nTraceback (most recent call last):\r\n  File \"/home/ChuanhuChatGPT/modules/models/OpenAIVision.py\", line 250, in _decode_chat_response\r\n    finish_reason = chunk[\"finish_details\"]\r\nKeyError: 'finish_details'\r\nTraceback (most recent call last):\r\n  File \"/home/ChuanhuChatGPT/modules/models/OpenAIVision.py\", line 250, in _decode_chat_response\r\n    finish_reason = chunk[\"finish_details\"]\r\nKeyError: 'finish_details'\r\nTraceback (most recent call last):\r\n  File \"/home/ChuanhuChatGPT/modules/models/OpenAIVision.py\", line 250, in _decode_chat_response\r\n    finish_reason = chunk[\"finish_details\"]\r\nKeyError: 'finish_details'\r\nTraceback (most recent call last):\r\n  File \"/home/ChuanhuChatGPT/modules/models/OpenAIVision.py\", line 250, in _decode_chat_response\r\n    finish_reason = chunk[\"finish_details\"]\r\nKeyError: 'finish_details'\r\nTraceback (most recent call last):\r\n  File \"/home/ChuanhuChatGPT/modules/models/OpenAIVision.py\", line 250, in _decode_chat_response\r\n    finish_reason = chunk[\"finish_details\"]\r\nKeyError: 'finish_details'\r\nTraceback (most recent call last):\r\n  File \"/home/ChuanhuChatGPT/modules/models/OpenAIVision.py\", line 250, in _decode_chat_response\r\n    finish_reason = chunk[\"finish_details\"]\r\nKeyError: 'finish_details'\r\nTraceback (most recent call last):\r\n  File \"/home/ChuanhuChatGPT/modules/models/OpenAIVision.py\", line 250, in _decode_chat_response\r\n    finish_reason = chunk[\"finish_details\"]\r\nKeyError: 'finish_details'\r\nTraceback (most recent call last):\r\n  File \"/home/ChuanhuChatGPT/modules/models/OpenAIVision.py\", line 250, in _decode_chat_response\r\n    finish_reason = chunk[\"finish_details\"]\r\nKeyError: 'finish_details'\r\nTraceback (most recent call last):\r\n  File \"/home/ChuanhuChatGPT/modules/models/OpenAIVision.py\", line 250, in _decode_chat_response\r\n    finish_reason = chunk[\"finish_details\"]\r\nKeyError: 'finish_details'\r\n2024-12-17 10:59:41,836 [INFO] [base_model.py:703] 回答为：\u001b[34m\u001b[0m\r\n2024-12-17 10:59:41,836 [INFO] [base_model.py:709] Tokens per second：4.439494087378722\n```\n\n\n### 运行环境\n\n- OS: \r\n- Browser: \r\n- Gradio version: \r\n- Python version: \r\n\n\n### 帮助解决\n\n- [ ] 我愿意协助解决！\n\n### 补充说明\n\n_No response_",
+    "comments": [
+      {
+        "user": "hengyanqwe",
+        "body": "提议：加一条browserconsole的配置，输出接收到的json信息，不然我都不好排查是川虎chat的原因还是api提供商的原因"
+      },
+      {
+        "user": "crosswk",
+        "body": "和已有的Bug1169、Bug1176是一样的，我按照Bug1169作者的描述，加了几行代码，暂时解决了这个问题。"
+      }
+    ],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 1175,
+    "title": "[功能请求]: 移动端部署怎么实现的？",
+    "author": "zhangtianhong-1998",
+    "state": "closed",
+    "created_at": "2024-11-21T11:14:58Z",
+    "updated_at": "2025-02-26T14:20:11Z",
+    "labels": [],
+    "body": "### 相关问题\n\n移动端部署怎么实现的？是基于网页端还是构建了一个本地的app\n\n### 可能的解决办法\n\n想了解一下\n\n### 帮助开发\n\n- [ ] 我愿意协助开发！\n\n### 补充说明\n\n_No response_",
+    "comments": [
+      {
+        "user": "Keldos-Li",
+        "body": "你好！移动端和网页端是一致的，整个网页是响应式布局，所以在不同尺寸的窗口中均能适配。\r\n\r\n在确定后端可用的情况下，可以将网页保存为应用，这在手机上可以有和独立app一致的体验。"
+      }
+    ],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 1179,
+    "title": "[功能请求]: 可以考虑加一个Gemini的baseurl配置吗？",
+    "author": "hengyanqwe",
+    "state": "closed",
+    "created_at": "2024-12-24T01:25:35Z",
+    "updated_at": "2025-02-26T11:02:28Z",
+    "labels": [
+      "feature request"
+    ],
+    "body": "### 相关问题\n\n可以考虑加一个Gemini的baseurl配置吗？\n\n### 可能的解决办法\n\n像\"openai_api_base\": \"https://api.zhizengzeng.com\",一样加个\"gemini_api_base\": \"https://api.zhizengzeng.com\",\n\n### 帮助开发\n\n- [ ] 我愿意协助开发！\n\n### 补充说明\n\n_No response_",
+    "comments": [
+      {
+        "user": "GaiZhenbiao",
+        "body": "现在可以在`config.json`中设置`google_genai_api_host`\n\nhttps://github.com/GaiZhenbiao/ChuanhuChatGPT/commit/eece834d7f131754efe2a12a2863886c4124cc33"
+      }
+    ],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 1178,
+    "title": "[功能请求]:  高价收购基于该项目二次开发的商业系统，公司内部使用，绝不对外开放",
+    "author": "RolloTomasiii",
+    "state": "open",
+    "created_at": "2024-12-19T04:33:12Z",
+    "updated_at": "2025-02-02T00:46:27Z",
+    "labels": [
+      "feature request"
+    ],
+    "body": "### 相关问题\n\n_No response_\n\n### 可能的解决办法\n\n1\n\n### 帮助开发\n\n- [ ] 我愿意协助开发！\n\n### 补充说明\n\n_No response_",
+    "comments": [
+      {
+        "user": "RolloTomasiii",
+        "body": "q"
+      },
+      {
+        "user": "crosswk",
+        "body": "感觉这个项目还是很有潜力的，相对Lobe，我更喜欢这个项目，Lobe都成功商业化了，这个更有商业化的前景，但是感觉作者目前没有把更多的精力放在这个项目了。"
+      },
+      {
+        "user": "leopeng1995",
+        "body": "因为这种项目社区有很多，如果有商业化需求的公司很可能就自己开发了，而且这类项目琐碎的细节特别多，基于一个相对成熟做二次开发是最好的。"
+      }
+    ],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 1114,
+    "title": "[本地部署]: chatglm2-6b本地模型无法使用，确认是在models/文件夹下",
+    "author": "MoonShadow1976",
+    "state": "open",
+    "created_at": "2024-05-06T15:47:31Z",
+    "updated_at": "2024-11-16T13:15:04Z",
+    "labels": [
+      "question",
+      "localhost deployment"
+    ],
+    "body": "### 是否已存在现有反馈与解答？\n\n- [X] 我确认没有已有issue或discussion，且已阅读**常见问题**。\n\n### 是否是一个代理配置相关的疑问？\n\n- [X] 我确认这不是一个代理配置相关的疑问。\n\n### 错误描述\n\nai提示说是值与MODEL_METADATA字典不匹配，但是并没有字符上的异常。\n\n### 复现操作\n\n正常部署，创建虚拟环境，git抓取并配置使用chatglm2-6b模型。\r\n![image](https://github.com/GaiZhenbiao/ChuanhuChatGPT/assets/154309554/59f6e06e-d583-48d9-a825-9acb5e6831cd)\r\n\n\n### 错误日志\n\n```shell\nOpening ChuanhuChatGPT...\r\nvenv \"F:\\APPLICATION\\amaconda\\envs\\ChuanhuChat\\Python.exe\"\r\n2024-05-06 23:31:39,573 [INFO] [_client.py:1026] HTTP Request: GET https://api.gradio.app/gradio-messaging/en \"HTTP/1.1 200 OK\"\r\n2024-05-06 23:31:40,834 [INFO] [config.py:327] 默认模型设置为了：chatglm2-6b\r\n2024-05-06 23:31:42,142 [INFO] [utils.py:148] Note: NumExpr detected 12 cores but \"NUMEXPR_MAX_THREADS\" not set, so enforcing safe limit of 8.\r\n2024-05-06 23:31:42,143 [INFO] [utils.py:161] NumExpr defaulting to 8 threads.\r\nTraceback (most recent call last):\r\n  File \"F:\\CodeAPP\\MapGBT\\ChuanhuChatGPT\\ChuanhuChatbot.py\", line 204, in <module>\r\n    value=i18n(MODEL_METADATA[MODELS[DEFAULT_MODEL]][\"description\"]),\r\nKeyError: 'chatglm2-6b'\n```\n\n\n### 运行环境\n\n```markdown\n- OS: windows 11 23H2\r\n- Browser: edge\r\n- Gradio version: 4.26.0\r\n- Python version: 3.10.14\n```\n\n\n### 补充说明\n\ncuda版本3.11",
+    "comments": [
+      {
+        "user": "panp4n",
+        "body": "一样的问题，请问解决了吗？"
+      },
+      {
+        "user": "MoonShadow1976",
+        "body": "> 一样的问题，请问解决了吗？\r\n\r\n没，我改用ollama了"
+      },
+      {
+        "user": "phoenixlucky",
+        "body": "我都也是这个问题"
+      }
+    ],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 1174,
+    "title": "[Bug]: 1. 大模型回答时无法滚动  2. 回答时切换聊天窗口回答文本位置会发生混乱",
+    "author": "TownsendWu",
+    "state": "closed",
+    "created_at": "2024-11-04T08:52:05Z",
+    "updated_at": "2024-11-13T16:23:47Z",
+    "labels": [
+      "bug"
+    ],
+    "body": "### 这个bug是否已存在现有issue了？\n\n- [X] 我确认没有已有issue，且已阅读**常见问题**。\n\n### 错误表现\n\n**模型：** azure openai\r\n### bug1\r\n**表现：** 大模型回答时，聊天界面无法滚动\r\n\r\n### bug2\r\n**表现：** 大模型回答时，切换聊天窗口会导致聊天界面混乱\r\n**截图：**\r\n![image](https://github.com/user-attachments/assets/8706afef-1707-45da-8662-d29e757fc947)\r\n\n\n### 复现操作\n\n1. 正常提问\n\n### 错误日志\n\n```shell\n无\n```\n\n\n### 运行环境\n\n- OS:  ubuntu 22\r\n- Browser:  Chrome\r\n- Gradio version:  4.29.0\r\n- Python version:  3.9\r\n\n\n### 帮助解决\n\n- [X] 我愿意协助解决！\n\n### 补充说明\n\n_No response_",
+    "comments": [
+      {
+        "user": "Keldos-Li",
+        "body": "我也没太搞明白为啥第一个问题为什么会出现。\r\n\r\n不过第二个问题的一个解决办法是，在生成时禁用切换聊天窗口。我觉得这个解决办法是可以接受的，可以避免很多潜在的bug。"
+      },
+      {
+        "user": "Keldos-Li",
+        "body": "第一个问题的原因是回答时上方会有一个透明的gradio层用来提示状态，现已后置。"
+      },
+      {
+        "user": "Keldos-Li",
+        "body": "如有更多反馈，欢迎继续回复或提交新的 issue  (´・ω・`)"
+      }
+    ],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 5,
+    "title": "已解决：报错openai.error.APIConnectionError ",
+    "author": "Kuzoa",
+    "state": "closed",
+    "created_at": "2023-03-03T15:43:26Z",
+    "updated_at": "2024-10-24T04:51:02Z",
+    "labels": [],
+    "body": "返回错误信息：\r\nraise error.APIConnectionError(\r\nopenai.error.APIConnectionError: Error communicating with OpenAI: HTTPSConnectionPool(host='api.openai.com', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:1131)')))\r\n\r\n我试过更换API KEY、使用全局代理都显示这个错误。\r\n\r\nChatgpt说：该代码中使用了Python的raise语句来抛出APIConnectionError异常，这是一个自定义的异常类，表示与OpenAI API通讯时发生了错误。其中的错误信息包括了请求的URL地址以及导致错误的具体原因。从错误信息中可以看出，这个异常是由OpenAI API返回的，表明与该API的通讯过程中出现了SSLError（SSL错误）的异常，而具体的错误原因是违反了SSL协议。因此，这是一个由于与OpenAI API通讯时出现SSL连接问题而导致的异常。",
+    "comments": [
+      {
+        "user": "Kuzoa",
+        "body": "只更改过API KEY没动过其他"
+      },
+      {
+        "user": "travellerse",
+        "body": "被墙了，挂代理"
+      },
+      {
+        "user": "travellerse",
+        "body": "检查一下代理设置"
+      }
+    ],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 1173,
+    "title": "[Bug]: Azure OpenAI 回复失败",
+    "author": "g-wellsa",
+    "state": "open",
+    "created_at": "2024-10-22T09:52:19Z",
+    "updated_at": "2024-10-23T12:06:13Z",
+    "labels": [
+      "bug"
+    ],
+    "body": "### 这个bug是否已存在现有issue了？\n\n- [X] 我确认没有已有issue，且已阅读**常见问题**。\n\n### 错误表现\n\n2024-10-22 17:46:45,174 [INFO] [models.py:149] 模型设置为了： Azure OpenAI\r\n2024-10-22 17:46:50,863 [INFO] [base_model.py:615] 用户的输入为：who are you\r\nE:\\workspace\\ChuanhuChatGPT\\ChuanhuChat\\Lib\\site-packages\\langchain_core\\_api\\deprecation.py:119: LangChainDeprecationWarning: The method `BaseChatModel.__call__` was deprecated in langchain-core 0.1.7 and will be removed in 0.3.0. Use invoke instead.\r\n  warn_deprecated(\r\nException in thread Thread-9 (thread_func):\r\nTraceback (most recent call last):\r\n  File \"D:\\software\\anaconda3\\Lib\\threading.py\", line 1038, in _bootstrap_inner\r\n    self.run()\r\n  File \"D:\\software\\anaconda3\\Lib\\threading.py\", line 975, in run\r\n    self._target(*self._args, **self._kwargs)\r\n  File \"E:\\workspace\\ChuanhuChatGPT\\modules\\models\\base_model.py\", line 1240, in thread_func\r\n    self.model(\r\n  File \"E:\\workspace\\ChuanhuChatGPT\\ChuanhuChat\\Lib\\site-packages\\langchain_core\\_api\\deprecation.py\", line 148, in warning_emitting_wrapper\r\n    return wrapped(*args, **kwargs)\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"E:\\workspace\\ChuanhuChatGPT\\ChuanhuChat\\Lib\\site-packages\\langchain_core\\language_models\\chat_models.py\", line 808, in __call__\r\n    generation = self.generate(\r\n                 ^^^^^^^^^^^^^^\r\n  File \"E:\\workspace\\ChuanhuChatGPT\\ChuanhuChat\\Lib\\site-packages\\langchain_core\\language_models\\chat_models.py\", line 421, in generate\r\n    raise e\r\n  File \"E:\\workspace\\ChuanhuChatGPT\\ChuanhuChat\\Lib\\site-packages\\langchain_core\\language_models\\chat_models.py\", line 411, in generate\r\n    self._generate_with_cache(\r\n  File \"E:\\workspace\\ChuanhuChatGPT\\ChuanhuChat\\Lib\\site-packages\\langchain_core\\language_models\\chat_models.py\", line 632, in _generate_with_cache\r\n    result = self._generate(\r\n             ^^^^^^^^^^^^^^^\r\n  File \"E:\\workspace\\ChuanhuChatGPT\\ChuanhuChat\\Lib\\site-packages\\langchain_community\\chat_models\\openai.py\", line 434, in _generate\r\n    return generate_from_stream(stream_iter)\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"E:\\workspace\\ChuanhuChatGPT\\ChuanhuChat\\Lib\\site-packages\\langchain_core\\language_models\\chat_models.py\", line 67, in generate_from_stream\r\n    for chunk in stream:\r\n  File \"E:\\workspace\\ChuanhuChatGPT\\ChuanhuChat\\Lib\\site-packages\\langchain_community\\chat_models\\openai.py\", line 398, in _stream\r\n    for chunk in self.completion_with_retry(\r\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"E:\\workspace\\ChuanhuChatGPT\\ChuanhuChat\\Lib\\site-packages\\langchain_community\\chat_models\\openai.py\", line 356, in completion_with_retry\r\n    return self.client.create(**kwargs)\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"E:\\workspace\\ChuanhuChatGPT\\ChuanhuChat\\Lib\\site-packages\\openai\\_utils\\_utils.py\", line 275, in wrapper\r\n    return func(*args, **kwargs)\r\n           ^^^^^^^^^^^^^^^^^^^^^\r\n  File \"E:\\workspace\\ChuanhuChatGPT\\ChuanhuChat\\Lib\\site-packages\\openai\\resources\\chat\\completions.py\", line 667, in create\r\n    return self._post(\r\n           ^^^^^^^^^^^\r\n  File \"E:\\workspace\\ChuanhuChatGPT\\ChuanhuChat\\Lib\\site-packages\\openai\\_base_client.py\", line 1213, in post\r\n    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))\r\n                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"E:\\workspace\\ChuanhuChatGPT\\ChuanhuChat\\Lib\\site-packages\\openai\\_base_client.py\", line 902, in request\r\n    return self._request(\r\n           ^^^^^^^^^^^^^^\r\n  File \"E:\\workspace\\ChuanhuChatGPT\\ChuanhuChat\\Lib\\site-packages\\openai\\_base_client.py\", line 993, in _request\r\n    raise self._make_status_error_from_response(err.response) from None\r\nopenai.NotFoundError: Error code: 404 - {'error': {'code': '404', 'message': 'Resource not found'}}\n\n### 复现操作\n\n流程ok\n\n### 错误日志\n\n```shell\n2024-10-22 17:46:45,174 [INFO] [models.py:149] 模型设置为了： Azure OpenAI\r\n2024-10-22 17:46:50,863 [INFO] [base_model.py:615] 用户的输入为：who are you\r\nE:\\workspace\\ChuanhuChatGPT\\ChuanhuChat\\Lib\\site-packages\\langchain_core\\_api\\deprecation.py:119: LangChainDeprecationWarning: The method `BaseChatModel.__call__` was deprecated in langchain-core 0.1.7 and will be removed in 0.3.0. Use invoke instead.\r\n  warn_deprecated(\r\nException in thread Thread-9 (thread_func):\r\nTraceback (most recent call last):\r\n  File \"D:\\software\\anaconda3\\Lib\\threading.py\", line 1038, in _bootstrap_inner\r\n    self.run()\r\n  File \"D:\\software\\anaconda3\\Lib\\threading.py\", line 975, in run\r\n    self._target(*self._args, **self._kwargs)\r\n  File \"E:\\workspace\\ChuanhuChatGPT\\modules\\models\\base_model.py\", line 1240, in thread_func\r\n    self.model(\r\n  File \"E:\\workspace\\ChuanhuChatGPT\\ChuanhuChat\\Lib\\site-packages\\langchain_core\\_api\\deprecation.py\", line 148, in warning_emitting_wrapper\r\n    return wrapped(*args, **kwargs)\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"E:\\workspace\\ChuanhuChatGPT\\ChuanhuChat\\Lib\\site-packages\\langchain_core\\language_models\\chat_models.py\", line 808, in __call__\r\n    generation = self.generate(\r\n                 ^^^^^^^^^^^^^^\r\n  File \"E:\\workspace\\ChuanhuChatGPT\\ChuanhuChat\\Lib\\site-packages\\langchain_core\\language_models\\chat_models.py\", line 421, in generate\r\n    raise e\r\n  File \"E:\\workspace\\ChuanhuChatGPT\\ChuanhuChat\\Lib\\site-packages\\langchain_core\\language_models\\chat_models.py\", line 411, in generate\r\n    self._generate_with_cache(\r\n  File \"E:\\workspace\\ChuanhuChatGPT\\ChuanhuChat\\Lib\\site-packages\\langchain_core\\language_models\\chat_models.py\", line 632, in _generate_with_cache\r\n    result = self._generate(\r\n             ^^^^^^^^^^^^^^^\r\n  File \"E:\\workspace\\ChuanhuChatGPT\\ChuanhuChat\\Lib\\site-packages\\langchain_community\\chat_models\\openai.py\", line 434, in _generate\r\n    return generate_from_stream(stream_iter)\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"E:\\workspace\\ChuanhuChatGPT\\ChuanhuChat\\Lib\\site-packages\\langchain_core\\language_models\\chat_models.py\", line 67, in generate_from_stream\r\n    for chunk in stream:\r\n  File \"E:\\workspace\\ChuanhuChatGPT\\ChuanhuChat\\Lib\\site-packages\\langchain_community\\chat_models\\openai.py\", line 398, in _stream\r\n    for chunk in self.completion_with_retry(\r\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"E:\\workspace\\ChuanhuChatGPT\\ChuanhuChat\\Lib\\site-packages\\langchain_community\\chat_models\\openai.py\", line 356, in completion_with_retry\r\n    return self.client.create(**kwargs)\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"E:\\workspace\\ChuanhuChatGPT\\ChuanhuChat\\Lib\\site-packages\\openai\\_utils\\_utils.py\", line 275, in wrapper\r\n    return func(*args, **kwargs)\r\n           ^^^^^^^^^^^^^^^^^^^^^\r\n  File \"E:\\workspace\\ChuanhuChatGPT\\ChuanhuChat\\Lib\\site-packages\\openai\\resources\\chat\\completions.py\", line 667, in create\r\n    return self._post(\r\n           ^^^^^^^^^^^\r\n  File \"E:\\workspace\\ChuanhuChatGPT\\ChuanhuChat\\Lib\\site-packages\\openai\\_base_client.py\", line 1213, in post\r\n    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))\r\n                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"E:\\workspace\\ChuanhuChatGPT\\ChuanhuChat\\Lib\\site-packages\\openai\\_base_client.py\", line 902, in request\r\n    return self._request(\r\n           ^^^^^^^^^^^^^^\r\n  File \"E:\\workspace\\ChuanhuChatGPT\\ChuanhuChat\\Lib\\site-packages\\openai\\_base_client.py\", line 993, in _request\r\n    raise self._make_status_error_from_response(err.response) from None\r\nopenai.NotFoundError: Error code: 404 - {'error': {'code': '404', 'message': 'Resource not found'}}\n```\n\n\n### 运行环境\n\n- OS: \r\n- Browser: \r\n- Gradio version: \r\n- Python version: \r\n\n\n### 帮助解决\n\n- [ ] 我愿意协助解决！\n\n### 补充说明\n\n_No response_",
+    "comments": [
+      {
+        "user": "GaiZhenbiao",
+        "body": "微软停止了中国区个人Azure OpenAI的服务"
+      },
+      {
+        "user": "g-wellsa",
+        "body": "> 微软停止了中国区个人Azure OpenAI的服务\r\n\r\nno no no 我在chatbox 上都可以\r\n"
+      }
+    ],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 1169,
+    "title": "[Bug]: 使用自定义 OpenAI API 时，流式输出的最后一条会被丢弃，导致回答不完整",
+    "author": "jwang-paradise",
+    "state": "open",
+    "created_at": "2024-09-24T04:03:45Z",
+    "updated_at": "2024-10-22T02:28:14Z",
+    "labels": [
+      "bug"
+    ],
+    "body": "### 这个bug是否已存在现有issue了？\n\n- [X] 我确认没有已有issue，且已阅读**常见问题**。\n\n### 错误表现\n\n### Bug现象\r\n流式输出末尾不完整\r\n\r\n#### 控制台log\r\n\r\n```\r\n2024-09-24 10:40:59,532 [DEBUG] [OpenAIVision.py:160] [{'role': 'user', 'content': 'hi'}]\r\n2024-09-24 10:41:00,515 [INFO] [base_model.py:703] 回答为：Hello! ... . How can I assis\r\n```\r\n末尾 `assis` 被截断。\r\n\r\n#### 流式 response 内容\r\n\r\n我手动在`OpenAIVisionClient._decode_chat_response()` [#L238](https://github.com/GaiZhenbiao/ChuanhuChatGPT/blob/3856d4f559f7ec5570ace6a92f0cc4017b5595cb/modules/models/OpenAIVision.py#L238) 添加了 log: \r\n`logging.warning(f\"***** {chunk['choices'][0]}\")`\r\n```\r\n2024-09-24 10:41:00,432 [DEBUG] [OpenAIVision.py:246] ***** {'index': 0, 'delta': {'content': 'How '}, 'finish_reason': None}\r\n2024-09-24 10:41:00,448 [DEBUG] [OpenAIVision.py:246] ***** {'index': 0, 'delta': {'content': 'can '}, 'finish_reason': None}\r\n2024-09-24 10:41:00,469 [DEBUG] [OpenAIVision.py:246] ***** {'index': 0, 'delta': {'content': 'I assi'}, 'finish_reason': None}\r\n2024-09-24 10:41:00,482 [DEBUG] [OpenAIVision.py:246] ***** {'index': 0, 'delta': {'content': 's'}, 'finish_reason': None}\r\n2024-09-24 10:41:00,515 [DEBUG] [OpenAIVision.py:246] ***** {'index': 0, 'delta': {'content': 't you today?'}, 'finish_reason': 'stop'}\r\n```\r\n\r\n可见，最后一条（包含 'finish_reason': 'stop' 的一条）response 的 delta.content 丢失了。\r\n\r\n虽然 OpenAI 官方API中可能不会遇到此问题，但是建议可以考虑此情况，加强对 API 的兼容性\r\n\r\n### 解决办法\r\n我暂时的解决方法，在 [OpenAIVision.py#L251](https://github.com/GaiZhenbiao/ChuanhuChatGPT/blob/3856d4f559f7ec5570ace6a92f0cc4017b5595cb/modules/models/OpenAIVision.py#L251) 添加判断，如果有 content:\r\n```python\r\nif finish_reason == \"stop\":\r\n    if (\"content\" in chunk[\"choices\"][0][\"delta\"] and chunk[\"choices\"][0][\"delta\"][\"content\"] is not None):\r\n        yield chunk[\"choices\"][0][\"delta\"][\"content\"]\r\n```\n\n### 复现操作\n\n1. 正常本地部署 (pip)\r\n2. 通过 OpenAI API 连接本地大模型\r\n3. 随意提问\n\n### 错误日志\n\n_No response_\n\n### 运行环境\n\n- OS: Windows 10\r\n- Browser: /\r\n- Gradio version: /\r\n- Python version: 3.11\n\n### 帮助解决\n\n- [X] 我愿意协助解决！\n\n### 补充说明\n\n_No response_",
+    "comments": [
+      {
+        "user": "hyyz17200",
+        "body": "我也有类似的问题\r\n\r\n`Oct 21 22:23:33  python[493862]:   File \"/media/mydata/ChuanhuChatGPT/modules/models/OpenAIVision.py\", line 250, in _decode_chat_response\r\nOct 21 22:23:33  python[493862]:     finish_reason = chunk[\"finish_details\"]\r\nOct 21 22:23:33  python[493862]:                     ~~~~~^^^^^^^^^^^^^^^^^^\r\nOct 21 22:23:33  python[493862]: KeyError: 'finish_details'\r\nOct 21 22:23:33  python[493862]: Traceback (most recent call last):\r\nOct 21 22:23:33  python[493862]:   File \"/media/mydata/ChuanhuChatGPT/modules/models/OpenAIVision.py\", line 250, in _decode_chat_response\r\nOct 21 22:23:33  python[493862]:     finish_reason = chunk[\"finish_details\"]\r\nOct 21 22:23:33  python[493862]:                     ~~~~~^^^^^^^^^^^^^^^^^^\r\nOct 21 22:23:33  python[493862]: KeyError: 'finish_details'\r\nOct 21 22:23:33  python[493862]: Traceback (most recent call last):\r\nOct 21 22:23:33  python[493862]:   File \"/media/mydata/ChuanhuChatGPT/modules/models/OpenAIVision.py\", line 250, in _decode_chat_response\r\nOct 21 22:23:33  python[493862]:     finish_reason = chunk[\"finish_details\"]\r\nOct 21 22:23:33  python[493862]:                     ~~~~~^^^^^^^^^^^^^^^^^^\r\nOct 21 22:23:33  python[493862]: KeyError: 'finish_details'\r\nOct 21 22:23:33  python[493862]: Traceback (most recent call last):\r\nOct 21 22:23:33  python[493862]:   File \"/media/mydata/ChuanhuChatGPT/modules/models/OpenAIVision.py\", line 250, in _decode_chat_response\r\nOct 21 22:23:33  python[493862]:     finish_reason = chunk[\"finish_details\"]\r\nOct 21 22:23:33  python[493862]:                     ~~~~~^^^^^^^^^^^^^^^^^^\r\nOct 21 22:23:33  python[493862]: KeyError: 'finish_details'\r\nOct 21 22:23:33  python[493862]: Traceback (most recent call last):\r\nOct 21 22:23:33  python[493862]:   File \"/media/mydata/ChuanhuChatGPT/modules/models/OpenAIVision.py\", line 250, in _decode_chat_response\r\nOct 21 22:23:33  python[493862]:     finish_reason = chunk[\"finish_details\"]\r\nOct 21 22:23:33  python[493862]:                     ~~~~~^^^^^^^^^^^^^^^^^^\r\nOct 21 22:23:33  python[493862]: KeyError: 'finish_details'\r\nOct 21 22:23:33  python[493862]: Traceback (most recent call last):\r\nOct 21 22:23:33  python[493862]:   File \"/media/mydata/ChuanhuChatGPT/modules/models/OpenAIVision.py\", line 250, in _decode_chat_response\r\nOct 21 22:23:33  python[493862]:     finish_reason = chunk[\"finish_details\"]\r\nOct 21 22:23:33  python[493862]:                     ~~~~~^^^^^^^^^^^^^^^^^^\r\nOct 21 22:23:33  python[493862]: KeyError: 'finish_details'\r\nOct 21 22:23:33  python[493862]: Traceback (most recent call last):\r\nOct 21 22:23:33  python[493862]:   File \"/media/mydata/ChuanhuChatGPT/modules/models/OpenAIVision.py\", line 250, in _decode_chat_response`"
+      }
+    ],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 1168,
+    "title": "[Bug]: 使用docker + nginx部署后 样式有问题",
+    "author": "cone387",
+    "state": "open",
+    "created_at": "2024-09-23T06:58:57Z",
+    "updated_at": "2024-09-29T01:07:54Z",
+    "labels": [
+      "question"
+    ],
+    "body": "### 这个bug是否已存在现有issue了？\n\n- [x] 我确认没有已有issue，且已阅读**常见问题**。\n\n### 错误表现\n\n![image](https://github.com/user-attachments/assets/71bae7e8-f478-44f2-a7f1-b094cbc6f673)\r\n![image](https://github.com/user-attachments/assets/5410a534-4e96-49ed-b9dd-1e06811007ae)\r\n![image](https://github.com/user-attachments/assets/2197f09e-c024-487a-9b80-a4f8660350ac)\r\n\n\n### 复现操作\n\n1. docker拉取镜像启动成功\r\n2. nginx配置\r\n3. 访问界面就是这样用不了\n\n### 错误日志\n\n_No response_\n\n### 运行环境\n\n- OS: \r\n- Browser: \r\n- Gradio version: \r\n- Python version: \r\n\n\n### 帮助解决\n\n- [x] 我愿意协助解决！\n\n### 补充说明\n\n_No response_",
+    "comments": [],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 1161,
+    "title": "[远程部署]: 界面打开后显示Connection errored out",
+    "author": "peilongchencc",
+    "state": "closed",
+    "created_at": "2024-09-14T04:37:24Z",
+    "updated_at": "2024-09-27T13:53:56Z",
+    "labels": [
+      "question",
+      "server deployment"
+    ],
+    "body": "### 是否已存在现有反馈与解答？\n\n- [X] 我确认没有已有issue或discussion，且已阅读**常见问题**。\n\n### 是否是一个代理配置相关的疑问？\n\n- [X] 我确认这不是一个代理配置相关的疑问。\n\n### 错误描述\n\n终端 `python ChuanhuChatbot.py` 启动服务后，界面报错:\r\n\r\n![image](https://github.com/user-attachments/assets/faae3cf3-b78e-467c-b5db-8b6ba4d565de)\r\n\n\n### 复现操作\n\n我的操作如下:\r\n\r\n1. 拉取项目(2024年9月13日拉取)\r\n\r\n```bash\r\ngit clone https://github.com/GaiZhenbiao/ChuanhuChatGPT.git\r\ncd ChuanhuChatGPT\r\n```\r\n\r\n2. 创建虚拟环境、安装依赖项： \r\n\r\n```bash\r\nconda create -n chuanhu python=3.10\r\nconda activate chuanhu\r\npip install -r requirements.txt\r\n```\r\n\r\n3. 配置 config.json，我的内容如下:\r\n\r\n> 我已尝试，如果设置登录账号和密码，进入主页也会显示相同错误。\r\n\r\n```json\r\n{\r\n    \"openai_api_key\": \"sk-xxxxxxxxx\",\r\n    \"language\": \"auto\",\r\n    \"users\": [],\r\n\r\n    \"https_proxy\": \"http://127.0.0.1:7890\",\r\n    \"http_proxy\": \"http://127.0.0.1:7890\",\r\n\r\n    \"server_name\": \"0.0.0.0\",\r\n    \"server_port\": 7860,\r\n    \"share\": false\r\n}\r\n```\r\n\r\n4. 启动服务:\r\n\r\n```bash\r\npython ChuanhuChatbot.py\r\n```\r\n\r\n稍作等待，浏览器自动打开 `http://localhost:7860/` ，但提示 **Connection errored out**。\n\n### 错误日志\n\n```shell\n(chuanhu) root@iZ2zea5v77oawjy2qz7c20Z:/data/ChuanhuChatGPT# python ChuanhuChatbot.py \r\n2024-09-14 11:58:59,013 [INFO] [_client.py:1038] HTTP Request: GET https://api.gradio.app/gradio-messaging/en \"HTTP/1.1 200 OK\"\r\n2024-09-14 11:58:59,427 [INFO] [config.py:330] 默认模型设置为了：GPT-4o-mini\r\n2024-09-14 11:59:00,160 [INFO] [utils.py:161] NumExpr defaulting to 4 threads.\r\nRunning on local URL:  http://0.0.0.0:7860\r\n\r\nTo create a public link, set `share=True` in `launch()`.\r\n2024-09-14 11:59:01,285 [INFO] [utils.py:643] Your IP region: Japan。\r\nIMPORTANT: You are using gradio version 4.26.0, however version 4.29.0 is available, please upgrade.\r\n--------\r\nERROR:    Exception in ASGI application\r\nTraceback (most recent call last):\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/type_adapter.py\", line 190, in __init__\r\n    core_schema = _getattr_no_parents(type, '__pydantic_core_schema__')\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/type_adapter.py\", line 98, in _getattr_no_parents\r\n    raise AttributeError(attribute)\r\nAttributeError: __pydantic_core_schema__\r\n\r\nDuring handling of the above exception, another exception occurred:\r\n\r\nTraceback (most recent call last):\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/uvicorn/protocols/http/h11_impl.py\", line 406, in run_asgi\r\n    result = await app(  # type: ignore[func-returns-value]\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/uvicorn/middleware/proxy_headers.py\", line 70, in __call__\r\n    return await self.app(scope, receive, send)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/fastapi/applications.py\", line 1054, in __call__\r\n    await super().__call__(scope, receive, send)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/starlette/applications.py\", line 113, in __call__\r\n    await self.middleware_stack(scope, receive, send)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/starlette/middleware/errors.py\", line 187, in __call__\r\n    raise exc\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/starlette/middleware/errors.py\", line 165, in __call__\r\n    await self.app(scope, receive, _send)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/gradio/route_utils.py\", line 695, in __call__\r\n    await self.simple_response(scope, receive, send, request_headers=headers)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/gradio/route_utils.py\", line 711, in simple_response\r\n    await self.app(scope, receive, send)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/starlette/middleware/exceptions.py\", line 62, in __call__\r\n    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/starlette/_exception_handler.py\", line 62, in wrapped_app\r\n    raise exc\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/starlette/_exception_handler.py\", line 51, in wrapped_app\r\n    await app(scope, receive, sender)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/starlette/routing.py\", line 715, in __call__\r\n    await self.middleware_stack(scope, receive, send)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/starlette/routing.py\", line 735, in app\r\n    await route.handle(scope, receive, send)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/starlette/routing.py\", line 288, in handle\r\n    await self.app(scope, receive, send)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/starlette/routing.py\", line 76, in app\r\n    await wrap_app_handling_exceptions(app, request)(scope, receive, send)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/starlette/_exception_handler.py\", line 62, in wrapped_app\r\n    raise exc\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/starlette/_exception_handler.py\", line 51, in wrapped_app\r\n    await app(scope, receive, sender)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/starlette/routing.py\", line 73, in app\r\n    response = await f(request)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/fastapi/routing.py\", line 291, in app\r\n    solved_result = await solve_dependencies(\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/fastapi/dependencies/utils.py\", line 639, in solve_dependencies\r\n    ) = await request_body_to_args(  # body_params checked above\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/fastapi/dependencies/utils.py\", line 813, in request_body_to_args\r\n    fields_to_extract = get_cached_model_fields(first_field.type_)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/fastapi/_compat.py\", line 657, in get_cached_model_fields\r\n    return get_model_fields(model)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/fastapi/_compat.py\", line 284, in get_model_fields\r\n    return [\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/fastapi/_compat.py\", line 285, in <listcomp>\r\n    ModelField(field_info=field_info, name=name)\r\n  File \"<string>\", line 6, in __init__\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/fastapi/_compat.py\", line 110, in __post_init__\r\n    self._type_adapter: TypeAdapter[Any] = TypeAdapter(\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/type_adapter.py\", line 192, in __init__\r\n    core_schema = _get_schema(type, config_wrapper, parent_depth=_parent_depth + 1)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/type_adapter.py\", line 81, in _get_schema\r\n    schema = gen.generate_schema(type_)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py\", line 468, in generate_schema\r\n    schema = self._generate_schema(obj)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py\", line 700, in _generate_schema\r\n    schema = self._post_process_generated_schema(self._generate_schema_inner(obj))\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py\", line 707, in _generate_schema_inner\r\n    return self._annotated_schema(obj)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py\", line 1586, in _annotated_schema\r\n    schema = self._apply_annotations(source_type, annotations)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py\", line 1654, in _apply_annotations\r\n    schema = get_inner_schema(source_type)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_schema_generation_shared.py\", line 82, in __call__\r\n    schema = self._handler(__source_type)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py\", line 1736, in new_handler\r\n    schema = metadata_get_schema(source, get_inner_schema)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py\", line 1732, in <lambda>\r\n    lambda source, handler: handler(source)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_schema_generation_shared.py\", line 82, in __call__\r\n    schema = self._handler(__source_type)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py\", line 1635, in inner_handler\r\n    schema = self._generate_schema(obj)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py\", line 700, in _generate_schema\r\n    schema = self._post_process_generated_schema(self._generate_schema_inner(obj))\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py\", line 727, in _generate_schema_inner\r\n    return self.match_type(obj)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py\", line 810, in match_type\r\n    return self._match_generic_type(obj, origin)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py\", line 834, in _match_generic_type\r\n    return self._union_schema(obj)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py\", line 1036, in _union_schema\r\n    choices.append(self.generate_schema(arg))\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py\", line 468, in generate_schema\r\n    schema = self._generate_schema(obj)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py\", line 700, in _generate_schema\r\n    schema = self._post_process_generated_schema(self._generate_schema_inner(obj))\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py\", line 727, in _generate_schema_inner\r\n    return self.match_type(obj)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py\", line 814, in match_type\r\n    return self._unknown_type_schema(obj)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py\", line 366, in _unknown_type_schema\r\n    raise PydanticSchemaGenerationError(\r\npydantic.errors.PydanticSchemaGenerationError: Unable to generate pydantic-core schema for <class 'starlette.requests.Request'>. Set `arbitrary_types_allowed=True` in the model_config to ignore this error or implement `__get_pydantic_core_schema__` on your type to fully support it.\r\n\r\nIf you got this error by calling handler(<some type>) within `__get_pydantic_core_schema__` then you likely need to call `handler.generate_schema(<some type>)` since we do not call `__get_pydantic_core_schema__` on `<some type>` otherwise to avoid infinite recursion.\r\n\r\nFor further information visit https://errors.pydantic.dev/2.5/u/schema-for-unknown-type\r\nERROR:    Exception in ASGI application\r\nTraceback (most recent call last):\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/type_adapter.py\", line 190, in __init__\r\n    core_schema = _getattr_no_parents(type, '__pydantic_core_schema__')\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/type_adapter.py\", line 98, in _getattr_no_parents\r\n    raise AttributeError(attribute)\r\nAttributeError: __pydantic_core_schema__\r\n\r\nDuring handling of the above exception, another exception occurred:\r\n\r\nTraceback (most recent call last):\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/uvicorn/protocols/http/h11_impl.py\", line 406, in run_asgi\r\n    result = await app(  # type: ignore[func-returns-value]\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/uvicorn/middleware/proxy_headers.py\", line 70, in __call__\r\n    return await self.app(scope, receive, send)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/fastapi/applications.py\", line 1054, in __call__\r\n    await super().__call__(scope, receive, send)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/starlette/applications.py\", line 113, in __call__\r\n    await self.middleware_stack(scope, receive, send)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/starlette/middleware/errors.py\", line 187, in __call__\r\n    raise exc\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/starlette/middleware/errors.py\", line 165, in __call__\r\n    await self.app(scope, receive, _send)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/gradio/route_utils.py\", line 695, in __call__\r\n    await self.simple_response(scope, receive, send, request_headers=headers)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/gradio/route_utils.py\", line 711, in simple_response\r\n    await self.app(scope, receive, send)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/starlette/middleware/exceptions.py\", line 62, in __call__\r\n    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/starlette/_exception_handler.py\", line 62, in wrapped_app\r\n    raise exc\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/starlette/_exception_handler.py\", line 51, in wrapped_app\r\n    await app(scope, receive, sender)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/starlette/routing.py\", line 715, in __call__\r\n    await self.middleware_stack(scope, receive, send)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/starlette/routing.py\", line 735, in app\r\n    await route.handle(scope, receive, send)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/starlette/routing.py\", line 288, in handle\r\n    await self.app(scope, receive, send)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/starlette/routing.py\", line 76, in app\r\n    await wrap_app_handling_exceptions(app, request)(scope, receive, send)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/starlette/_exception_handler.py\", line 62, in wrapped_app\r\n    raise exc\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/starlette/_exception_handler.py\", line 51, in wrapped_app\r\n    await app(scope, receive, sender)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/starlette/routing.py\", line 73, in app\r\n    response = await f(request)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/fastapi/routing.py\", line 291, in app\r\n    solved_result = await solve_dependencies(\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/fastapi/dependencies/utils.py\", line 639, in solve_dependencies\r\n    ) = await request_body_to_args(  # body_params checked above\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/fastapi/dependencies/utils.py\", line 813, in request_body_to_args\r\n    fields_to_extract = get_cached_model_fields(first_field.type_)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/fastapi/_compat.py\", line 657, in get_cached_model_fields\r\n    return get_model_fields(model)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/fastapi/_compat.py\", line 284, in get_model_fields\r\n    return [\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/fastapi/_compat.py\", line 285, in <listcomp>\r\n    ModelField(field_info=field_info, name=name)\r\n  File \"<string>\", line 6, in __init__\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/fastapi/_compat.py\", line 110, in __post_init__\r\n    self._type_adapter: TypeAdapter[Any] = TypeAdapter(\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/type_adapter.py\", line 192, in __init__\r\n    core_schema = _get_schema(type, config_wrapper, parent_depth=_parent_depth + 1)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/type_adapter.py\", line 81, in _get_schema\r\n    schema = gen.generate_schema(type_)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py\", line 468, in generate_schema\r\n    schema = self._generate_schema(obj)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py\", line 700, in _generate_schema\r\n    schema = self._post_process_generated_schema(self._generate_schema_inner(obj))\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py\", line 707, in _generate_schema_inner\r\n    return self._annotated_schema(obj)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py\", line 1586, in _annotated_schema\r\n    schema = self._apply_annotations(source_type, annotations)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py\", line 1654, in _apply_annotations\r\n    schema = get_inner_schema(source_type)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_schema_generation_shared.py\", line 82, in __call__\r\n    schema = self._handler(__source_type)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py\", line 1736, in new_handler\r\n    schema = metadata_get_schema(source, get_inner_schema)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py\", line 1732, in <lambda>\r\n    lambda source, handler: handler(source)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_schema_generation_shared.py\", line 82, in __call__\r\n    schema = self._handler(__source_type)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py\", line 1635, in inner_handler\r\n    schema = self._generate_schema(obj)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py\", line 700, in _generate_schema\r\n    schema = self._post_process_generated_schema(self._generate_schema_inner(obj))\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py\", line 727, in _generate_schema_inner\r\n    return self.match_type(obj)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py\", line 810, in match_type\r\n    return self._match_generic_type(obj, origin)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py\", line 834, in _match_generic_type\r\n    return self._union_schema(obj)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py\", line 1036, in _union_schema\r\n    choices.append(self.generate_schema(arg))\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py\", line 468, in generate_schema\r\n    schema = self._generate_schema(obj)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py\", line 700, in _generate_schema\r\n    schema = self._post_process_generated_schema(self._generate_schema_inner(obj))\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py\", line 727, in _generate_schema_inner\r\n    return self.match_type(obj)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py\", line 814, in match_type\r\n    return self._unknown_type_schema(obj)\r\n  File \"/root/anaconda3/envs/chuanhu/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py\", line 366, in _unknown_type_schema\r\n    raise PydanticSchemaGenerationError(\r\npydantic.errors.PydanticSchemaGenerationError: Unable to generate pydantic-core schema for <class 'starlette.requests.Request'>. Set `arbitrary_types_allowed=True` in the model_config to ignore this error or implement `__get_pydantic_core_schema__` on your type to fully support it.\r\n\r\nIf you got this error by calling handler(<some type>) within `__get_pydantic_core_schema__` then you likely need to call `handler.generate_schema(<some type>)` since we do not call `__get_pydantic_core_schema__` on `<some type>` otherwise to avoid infinite recursion.\r\n\r\nFor further information visit https://errors.pydantic.dev/2.5/u/schema-for-unknown-type\n```\n\n\n### 运行环境\n\n- OS:  ubuntu 22.04\r\n- Server:  Alibaba Cloud ubuntu 22.04\r\n- Gradio version:  4.26.0\r\n- Python version:  3.10.14\r\n- Browser:  Chrome浏览器\n\n### 补充说明\n\n我已查看查看[疑难杂症解决](https://github.com/GaiZhenbiao/ChuanhuChatGPT/wiki/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98)页面，没有符合我的错误场景。\r\n\r\n我已尽可能查看相似issue和disscusion，例如 #89 、#100、#287、#309、#528，发现与我的错误场景都不同。\r\n\r\n个人尝试：\r\n\r\n1. 配置Nginx\r\n\r\n配置Nginx后，运行程序，依旧提示相同错误(**Connection errored out**)，终端错误日志相同。\r\n\r\n```conf\r\n(chuanhu) root@iZ2zea5v77oawjy2qz7c20Z:/data/ChuanhuChatGPT# cat /etc/nginx/sites-available/www.peilongchencc.cn \r\nserver {\r\n    listen 80;  # 监听 80 端口，用于处理 HTTP 请求\r\n    server_name peilongchencc.cn www.peilongchencc.cn;  # 定义服务器的域名，允许通过 peilongchencc.cn 和 www.peilongchencc.cn 访问\r\n\r\n    # 将所有 HTTP 请求永久重定向到 HTTPS\r\n    # 301 状态码表示永久重定向，$host 代表请求的主机，$request_uri 代表请求的 URI\r\n    return 301 https://$host$request_uri;\r\n}\r\n\r\nserver {\r\n    listen 443 ssl;  # 监听 443 端口，启用 SSL（即 HTTPS）\r\n    server_name peilongchencc.cn www.peilongchencc.cn;  # 定义服务器的域名，允许通过 peilongchencc.cn 和 www.peilongchencc.cn 访问\r\n\r\n    # SSL 证书配置，用于加密 HTTPS 连接\r\n    ssl_certificate /etc/letsencrypt/live/www.peilongchencc.cn/fullchain.pem;  # 定义 SSL 证书的完整链路径\r\n    ssl_certificate_key /etc/letsencrypt/live/www.peilongchencc.cn/privkey.pem;  # 定义 SSL 证书的私钥路径\r\n\r\n    # 配置 WebSocket 代理\r\n    location / {\r\n        # 将所有请求代理到本地 7860 端口上的应用\r\n        proxy_pass http://localhost:7860;\r\n\r\n        # 支持 WebSocket 连接，WebSocket 升级需要设置 HTTP/1.1 协议\r\n        proxy_http_version 1.1;  # 使用 HTTP 1.1 协议支持 WebSocket\r\n        proxy_set_header Upgrade $http_upgrade;  # 设置 Upgrade 头，用于处理 WebSocket 升级\r\n        proxy_set_header Connection \"upgrade\";  # 将连接类型设置为 \"upgrade\" 以启用 WebSocket\r\n\r\n        # 保留客户端的真实请求信息\r\n        proxy_set_header Host $host;  # 保留客户端的 Host 头信息\r\n        proxy_set_header X-Real-IP $remote_addr;  # 传递客户端的真实 IP 地址\r\n        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;  # 传递代理链中的客户端 IP 地址\r\n        proxy_set_header X-Forwarded-Proto $scheme;  # 保留客户端的协议（HTTP 或 HTTPS）\r\n\r\n        # 防止超时(任何一个时刻超过 60 秒没有数据传输)\r\n        # 如果超过 60 秒没有数据传输，则可能触发超时错误，proxy_read_timeout 和 proxy_send_timeout 用于防止此类问题\r\n        # 以流式输出举例，如果程序一直在输出内容，超过60s也不会报错。\r\n        proxy_read_timeout 60s;  # 允许 Nginx 等待后端服务器的响应，最长不超过 60 秒\r\n        proxy_send_timeout 60s;  # 允许 Nginx 发送数据到后端服务器的时间限制，最长不超过 60 秒\r\n    }\r\n}\r\n(chuanhu) root@iZ2zea5v77oawjy2qz7c20Z:/data/ChuanhuChatGPT# \r\n```\r\n\r\n2. 尝试修改服务端口，例如 `http://localhost:8866`、`http://localhost:8867` 均无效。\r\n\r\n3. 尝试将 `pydantic` 升级到最新版本，无效。\r\n\r\n4. 尝试将 `gradio` 升级到最新版本，无效。\r\n\r\nPs: 由于终端已经提示 **\"Your IP region: Japan。\"**，因此我没有在Clash配置文件中添加[常见问题](https://github.com/GaiZhenbiao/ChuanhuChatGPT/wiki/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98)中的配置。\r\n",
+    "comments": [
+      {
+        "user": "peilongchencc",
+        "body": "@GaiZhenbiao \r\n麻烦您有空帮忙看一下"
+      },
+      {
+        "user": "GaiZhenbiao",
+        "body": "请查看wiki中关于服务器部署的部分，你这应该是nginx没有配置websocket导致的。"
+      },
+      {
+        "user": "Keldos-Li",
+        "body": "不过这个issue真的提得赏心悦目）"
+      }
+    ],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 1170,
+    "title": "[Bug]: The chat stuck with error when i talk with uploaded image file ",
+    "author": "noxonsu",
+    "state": "closed",
+    "created_at": "2024-09-25T07:02:13Z",
+    "updated_at": "2024-09-25T14:10:24Z",
+    "labels": [
+      "bug"
+    ],
+    "body": "### 这个bug是否已存在现有issue了？\n\n- [X] 我确认没有已有issue，且已阅读**常见问题**。\n\n### 错误表现\n\nwhen i talk with uploaded image\r\n\r\n![image](https://github.com/user-attachments/assets/003becf7-9ae1-4050-a270-89aec6c76f11)\r\n\r\n\r\n\r\n```\r\n\r\nRunning on local URL:  http://127.0.0.1:7862\r\n\r\nTo create a public link, set `share=True` in `launch()`.\r\n2024-09-25 09:00:47,696 [INFO] [models.py:38] 正在加载 OpenAI 模型: GPT-4o\r\n2024-09-25 09:00:47,697 [INFO] [models.py:149] Model is set to:  GPT-4o\r\n2024-09-25 09:01:02,046 [INFO] [base_model.py:615] 用户的输入为：translete this\r\n2024-09-25 09:01:03,949 [INFO] [base_model.py:703] 回答为：The text translates to \"Version issue brought by api (#1167)\" in English.\r\n2024-09-25 09:01:03,949 [INFO] [base_model.py:709] Tokens per second：20.525676002261644\r\nTraceback (most recent call last):\r\n  File \"/usr/local/lib/python3.8/dist-packages/gradio/queueing.py\", line 566, in process_events\r\n    response = await route_utils.call_process_api(\r\n  File \"/usr/local/lib/python3.8/dist-packages/gradio/route_utils.py\", line 270, in call_process_api\r\n    output = await app.get_blocks().process_api(\r\n  File \"/usr/local/lib/python3.8/dist-packages/gradio/blocks.py\", line 1847, in process_api\r\n    result = await self.call_function(\r\n  File \"/usr/local/lib/python3.8/dist-packages/gradio/blocks.py\", line 1445, in call_function\r\n    prediction = await utils.async_iteration(iterator)\r\n  File \"/usr/local/lib/python3.8/dist-packages/gradio/utils.py\", line 629, in async_iteration\r\n    return await iterator.__anext__()\r\n  File \"/usr/local/lib/python3.8/dist-packages/gradio/utils.py\", line 622, in __anext__\r\n    return await anyio.to_thread.run_sync(\r\n  File \"/usr/local/lib/python3.8/dist-packages/anyio/to_thread.py\", line 56, in run_sync\r\n    return await get_async_backend().run_sync_in_worker_thread(\r\n  File \"/usr/local/lib/python3.8/dist-packages/anyio/_backends/_asyncio.py\", line 2144, in run_sync_in_worker_thread\r\n    return await future\r\n  File \"/usr/local/lib/python3.8/dist-packages/anyio/_backends/_asyncio.py\", line 851, in run\r\n    result = context.run(func, *args)\r\n  File \"/usr/local/lib/python3.8/dist-packages/gradio/utils.py\", line 605, in run_sync_iterator_async\r\n    return next(iterator)\r\n  File \"/usr/local/lib/python3.8/dist-packages/gradio/utils.py\", line 788, in gen_wrapper\r\n    response = next(iterator)\r\n  File \"/root/chuanchu2/ChuanhuChatGPT/modules/utils.py\", line 43, in predict\r\n    for i in iter:\r\n  File \"/root/chuanchu2/ChuanhuChatGPT/modules/models/base_model.py\", line 734, in predict\r\n    self.auto_save(chatbot)\r\n  File \"/root/chuanchu2/ChuanhuChatGPT/modules/models/base_model.py\", line 983, in auto_save\r\n    save_file(self.history_file_path, self)\r\n  File \"/root/chuanchu2/ChuanhuChatGPT/modules/utils.py\", line 415, in save_file\r\n    chatbot = [(history[i][\"content\"], history[i + 1][\"content\"]) for i in range(0, len(history), 2)]\r\n  File \"/root/chuanchu2/ChuanhuChatGPT/modules/utils.py\", line 415, in <listcomp>\r\n    chatbot = [(history[i][\"content\"], history[i + 1][\"content\"]) for i in range(0, len(history), 2)]\r\nIndexError: list index out of range\r\n\r\n\r\n```\n\n### 复现操作\n\n1. upload image to chat window\r\n2. ask something\r\n3. you got error\n\n### 错误日志\n\n_No response_\n\n### 运行环境\n\nhttps://github.com/GaiZhenbiao/ChuanhuChatGPT/commit/3856d4f559f7ec5570ace6a92f0cc4017b5595cb\n\n### 帮助解决\n\n- [ ] 我愿意协助解决！\n\n### 补充说明\n\n_No response_",
+    "comments": [
+      {
+        "user": "GaiZhenbiao",
+        "body": "it should be fixed now."
+      }
+    ],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 1171,
+    "title": "[Bug]: 调用Ollama模型在回复过程中无法取消终止回复",
+    "author": "GuokaiLiu",
+    "state": "open",
+    "created_at": "2024-09-25T12:53:02Z",
+    "updated_at": "2024-09-25T12:53:02Z",
+    "labels": [
+      "bug"
+    ],
+    "body": "### 这个bug是否已存在现有issue了？\n\n- [X] 我确认没有已有issue，且已阅读**常见问题**。\n\n### 错误表现\n\n如图，在调用Ollama的过程中，无法点击右下角红色的按钮，停止模型的回复。\r\n\r\n<img width=\"951\" alt=\"image\" src=\"https://github.com/user-attachments/assets/c2674d54-7da5-4782-b204-94cdd08ed556\">\r\n\n\n### 复现操作\n\n1. 正常部署模型\n\n### 错误日志\n\n```shell\n不会报错，但对话窗口会卡住，直到模型全部回复结束\n```\n\n\n### 运行环境\n\n- OS: RHEL 8.8\r\n- Browser: Edge\r\n- Gradio version: 4.29.0\r\n- Python version: 3.10\r\n\n\n### 帮助解决\n\n- [X] 我愿意协助解决！\n\n### 补充说明\n\n**config.json**\r\n\r\n{\r\n    // 各配置具体说明，见 [https://github.com/GaiZhenbiao/ChuanhuChatGPT/wiki/使用教程#配置-configjson]\r\n\r\n    //== API 配置 ==\r\n    // ⭐️ 这里填写的Ollama\r\n    \"openai_api_key\": \"Ollama\", // 你的 OpenAI API Key，一般必填，若空缺则需在图形界面中填入API Key\r\n    \"google_genai_api_key\": \"\", // 你的 Google Gemini API Key ，用于 Google Gemini 对话模型\r\n    \"xmchat_api_key\": \"\", // 你的 xmchat API Key，用于 XMChat 对话模型\r\n    \"minimax_api_key\": \"\", // 你的 MiniMax API Key，用于 MiniMax 对话模型\r\n    \"minimax_group_id\": \"\", // 你的 MiniMax Group ID，用于 MiniMax 对话模型\r\n    \"midjourney_proxy_api_base\": \"https://xxx/mj\", // 你的 https://github.com/novicezk/midjourney-proxy 代理地址\r\n    \"midjourney_proxy_api_secret\": \"\", // 你的 MidJourney Proxy API Secret，用于鉴权访问 api，可选\r\n    \"midjourney_discord_proxy_url\": \"\", // 你的 MidJourney Discord Proxy URL，用于对生成对图进行反代，可选\r\n    \"midjourney_temp_folder\": \"./tmp\", // 你的 MidJourney 临时文件夹，用于存放生成的图片，填空则关闭自动下载切图（直接显示MJ的四宫格图）\r\n    \"spark_appid\": \"\", // 你的 讯飞星火大模型 API AppID，用于讯飞星火大模型对话模型\r\n    \"spark_api_key\": \"\", // 你的 讯飞星火大模型 API Key，用于讯飞星火大模型对话模型\r\n    \"spark_api_secret\": \"\", // 你的 讯飞星火大模型 API Secret，用于讯飞星火大模型对话模型\r\n    \"claude_api_secret\":\"\",// 你的 Claude API Secret，用于 Claude 对话模型\r\n    \"ernie_api_key\": \"\",// 你的文心一言在百度云中的API Key，用于文心一言对话模型\r\n    \"ernie_secret_key\": \"\",// 你的文心一言在百度云中的Secret Key，用于文心一言对话模型\r\n    \"ollama_host\": \"\", // 你的 Ollama Host，用于 Ollama 对话模型\r\n    \"huggingface_auth_token\": \"\", // 你的 Hugging Face API Token，用于访问有限制的模型\r\n    \"groq_api_key\": \"\", // 你的 Groq API Key，用于 Groq 对话模型(https://console.groq.com/)\r\n\r\n    //== Azure ==\r\n    \"openai_api_type\": \"openai\", // 可选项：azure, openai\r\n    \"azure_openai_api_key\": \"\", // 你的 Azure OpenAI API Key，用于 Azure OpenAI 对话模型\r\n    \"azure_openai_api_base_url\": \"\", // 你的 Azure Base URL\r\n    \"azure_openai_api_version\": \"2023-05-15\", // 你的 Azure OpenAI API 版本\r\n    \"azure_deployment_name\": \"\", // 你的 Azure OpenAI Chat 模型 Deployment 名称\r\n    \"azure_embedding_deployment_name\": \"\", // 你的 Azure OpenAI Embedding 模型 Deployment 名称\r\n    \"azure_embedding_model_name\": \"text-embedding-ada-002\", // 你的 Azure OpenAI Embedding 模型名称\r\n\r\n    //== 基础配置 ==\r\n    \"language\": \"auto\", // 界面语言，可选\"auto\", \"zh_CN\", \"en_US\", \"ja_JP\", \"ko_KR\", \"sv_SE\", \"ru_RU\", \"vi_VN\"\r\n    \"users\": [], // 用户列表，[[\"用户名1\", \"密码1\"], [\"用户名2\", \"密码2\"], ...]\r\n    \"local_embedding\": false, //是否在本地编制索引\r\n    \"hide_history_when_not_logged_in\": false, //未登录情况下是否不展示对话历史\r\n    \"check_update\": true, //是否启用检查更新\r\n    \"default_model\": \"Ollama\", // 默认模型\r\n    \"chat_name_method_index\": 2, // 选择对话名称的方法。0: 使用日期时间命名；1: 使用第一条提问命名，2: 使用模型自动总结\r\n    \"bot_avatar\": \"default\", // 机器人头像，可填写本地或网络图片链接，或者\"none\"（不显示头像）\r\n    \"user_avatar\": \"default\", // 用户头像，可填写本地或网络图片链接，或者\"none\"（不显示头像）\r\n\r\n    //== API 用量 ==\r\n    \"show_api_billing\": false, //是否显示OpenAI API用量（启用需要填写sensitive_id）\r\n    \"sensitive_id\": \"\", // 你 OpenAI 账户的 Sensitive ID，用于查询 API 用量\r\n    \"usage_limit\": 120, // 该 OpenAI API Key 的当月限额，单位：美元，用于计算百分比和显示上限\r\n    \"legacy_api_usage\": false, // 是否使用旧版 API 用量查询接口（OpenAI现已关闭该接口，但是如果你在使用第三方 API，第三方可能仍然支持此接口）\r\n\r\n    //== 川虎助理设置 ==\r\n    \"GOOGLE_CSE_ID\": \"\", //谷歌搜索引擎ID，用于川虎助理Pro模式，获取方式请看 https://stackoverflow.com/questions/37083058/programmatically-searching-google-in-python-using-custom-search\r\n    \"GOOGLE_API_KEY\": \"\", //谷歌API Key，用于川虎助理Pro模式\r\n    \"WOLFRAM_ALPHA_APPID\": \"\", //Wolfram Alpha API Key，用于川虎助理Pro模式，获取方式请看 https://products.wolframalpha.com/api/\r\n    \"SERPAPI_API_KEY\": \"\", //SerpAPI API Key，用于川虎助理Pro模式，获取方式请看 https://serpapi.com/\r\n\r\n    //== 文档处理与显示 ==\r\n    \"latex_option\": \"default\", // LaTeX 公式渲染策略，可选\"default\", \"strict\", \"all\"或者\"disabled\"\r\n    \"advance_docs\": {\r\n        \"pdf\": {\r\n            \"two_column\": false, // 是否认为PDF是双栏的\r\n            \"formula_ocr\": true // 是否使用OCR识别PDF中的公式\r\n        }\r\n    },\r\n\r\n    //== 高级配置 ==\r\n    // 是否多个API Key轮换使用\r\n    \"multi_api_key\": false,\r\n    \"hide_my_key\": false, // 如果你想在UI中隐藏 API 密钥输入框，将此值设置为 true\r\n    // \"available_models\": [\"GPT3.5 Turbo\", \"GPT4 Turbo\", \"GPT4 Vision\"], // 可用的模型列表，将覆盖默认的可用模型列表\r\n    // \"extra_models\": [\"模型名称3\", \"模型名称4\", ...], // 额外的模型，将添加到可用的模型列表之后\r\n    // \"api_key_list\": [\r\n    //     \"sk-xxxxxxxxxxxxxxxxxxxxxxxx1\",\r\n    //     \"sk-xxxxxxxxxxxxxxxxxxxxxxxx2\",\r\n    //     \"sk-xxxxxxxxxxxxxxxxxxxxxxxx3\"\r\n    // ],\r\n    // 自定义OpenAI API Base\r\n    // \"openai_api_base\": \"https://api.openai.com\",\r\n    // 自定义使用代理（请替换代理URL）\r\n    // \"https_proxy\": \"http://127.0.0.1:1079\",\r\n    // \"http_proxy\": \"http://127.0.0.1:1079\",\r\n    // 自定义端口、自定义ip（请替换对应内容）\r\n    \"server_name\": \"0.0.0.0\",\r\n    \"server_port\": 7860,\r\n    // 如果要share到gradio，设置为true\r\n    // \"share\": false,\r\n    //如果不想自动打开浏览器，设置为false\r\n    //\"autobrowser\": false\r\n    // ⭐️ 用户界面中将会显示的模型\r\n    \"available_models\": [\"qwen2:7b\", \"llama3.1:8b\"], \r\n\t\r\n\t// ⭐️ 手动添加的Ollama模型，api_host与model_name需要和Ollama对应上\r\n    \"extra_model_metadata\": { //\r\n        \"qwen2:7b\": {\r\n            \"model_name\": \"qwen2:7b\",\r\n            \"description\": \"An expert of mean jokes, who answers all user questions in a humorous and mean way.\",\r\n            \"model_type\": \"OpenAIVision\",\r\n            \"multimodal\": false,\r\n            // \"api_host\": \"http://localhost:11434/v1/chat/completions\",\r\n            \"api_host\": \"http://localhost:11434\",\r\n            \"token_limit\": 4096,\r\n            \"max_generation\": 4096,\r\n            \"system\": \"You are an expert of mean jokes. You Answer all user questions in a humorous and mean way, pretending you are Elon Musk.\",\r\n            \"placeholder\": {\r\n                \"logo\": \"https://wallpaperaccess.com/full/9170621.png\",\r\n                \"slogan\": \"I am NOT politically correct\",\r\n                \"question_1\": \"How can I get X Premium+?\",\r\n                \"question_2\": \"Roast me pls\",\r\n                \"question_3\": \"What's the true nature of the universe\",\r\n                \"question_4\": \"Ai is biased\",\r\n            }\r\n        },\r\n        \r\n        \"llama3.1:8b\": {\r\n            \"model_name\": \"llama3.1:8b\",\r\n            \"description\": \"An expert of mean jokes, who answers all user questions in a humorous and mean way.\",\r\n            \"model_type\": \"OpenAIVision\",\r\n            \"multimodal\": false,\r\n            // \"api_host\": \"http://localhost:11434/v1/chat/completions\",\r\n            \"api_host\": \"http://localhost:11434\",\r\n            \"token_limit\": 4096,\r\n            \"max_generation\": 4096,\r\n            \"system\": \"You are an expert of mean jokes. You Answer all user questions in a humorous and mean way, pretending you are Elon Musk.\",\r\n            \"placeholder\": {\r\n                \"logo\": \"https://wallpaperaccess.com/full/9170621.png\",\r\n                \"slogan\": \"I am NOT politically correct\",\r\n                \"question_1\": \"How can I get X Premium+?\",\r\n                \"question_2\": \"Roast me pls\",\r\n                \"question_3\": \"What's the true nature of the universe\",\r\n                \"question_4\": \"Ai is biased\",\r\n            }\r\n        },\r\n    },\r\n    \r\n}\r\n\r\n",
+    "comments": [],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 1165,
+    "title": "[Docker]: 构建失败ImportError: cannot import name 'lower_char' ",
+    "author": "BigDataMao",
+    "state": "closed",
+    "created_at": "2024-09-21T15:46:31Z",
+    "updated_at": "2024-09-23T10:26:02Z",
+    "labels": [
+      "question",
+      "docker deployment"
+    ],
+    "body": "### 是否已存在现有反馈与解答？\n\n- [X] 我确认没有已有issue或discussion，且已阅读**常见问题**。\n\n### 是否是一个代理配置相关的疑问？\n\n- [X] 我确认这不是一个代理配置相关的疑问。\n\n### 错误描述\n\ndocker建构失败\r\n具体报错\r\nTraceback (most recent call last):\r\n\r\n  File \"/app/ChuanhuChatbot.py\", line 12, in <module>\r\n\r\n    from modules.overwrites import patch_gradio\r\n\r\n  File \"/app/modules/overwrites.py\", line 5, in <module>\r\n\r\n    from multipart.multipart import MultipartState, CR, LF, HYPHEN, COLON, lower_char, LOWER_A, LOWER_Z, SPACE, FLAG_PART_BOUNDARY, FLAG_LAST_BOUNDARY, join_bytes\r\n\r\nImportError: cannot import name 'lower_char' from 'multipart.multipart' (/root/.local/lib/python3.10/site-packages/multipart/multipart.py)\n\n### 复现操作\n\n在zeabur.com上自动构建会出现这个问题\n\n### 错误日志\n\n_No response_\n\n### 运行环境\n\n- OS: \r\n- Docker version: \r\n- Gradio version: \r\n- Python version: \r\n\n\n### 补充说明\n\n_No response_",
+    "comments": [
+      {
+        "user": "BigDataMao",
+        "body": "已复查,不是dockerfile问题,是main分支代码问题"
+      },
+      {
+        "user": "GaiZhenbiao",
+        "body": "我看看"
+      },
+      {
+        "user": "BigDataMao",
+        "body": "python-multipart==0.0.9可以解决此问题\r\n但似乎还有其他问题\r\nraise PydanticSchemaGenerationError(\r\npydantic.errors.PydanticSchemaGenerationError: Unable to generate pydantic-core schema for <class 'starlette.requests.Request'>. Set `arbitrary_types_allowed=True` in the model_config to ignore this error or implement `__get_pydantic_core_schema__` on your type to fully support it."
+      }
+    ],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 1163,
+    "title": "[Bug]: GPT o1-mini 模型回复内容，前端显示格式问题",
+    "author": "crosswk",
+    "state": "closed",
+    "created_at": "2024-09-18T14:14:33Z",
+    "updated_at": "2024-09-18T17:04:58Z",
+    "labels": [
+      "bug",
+      "📌 confirmed"
+    ],
+    "body": "### 这个bug是否已存在现有issue了？\n\n- [X] 我确认没有已有issue，且已阅读**常见问题**。\n\n### 错误表现\n\n目前使用o1-mini模型回答问题后，前端首先会显示正常的markdown格式，然后会自动刷新一次，回复的内容都会成为一个段落，这一整个段落很难阅读。\r\n![2024-09-18 22 09 09](https://github.com/user-attachments/assets/10118852-83ef-4e66-9148-30bc02643325)\r\n![2024-09-18 22 09 20](https://github.com/user-attachments/assets/e3a361a7-a39b-4536-9b76-2f175f7bb6c7)\r\n\n\n### 复现操作\n\nlatest\n\n### 错误日志\n\n```shell\n只有截图文件，没有错误日志。\n```\n\n\n### 运行环境\n\nlatest\n\n### 帮助解决\n\n- [X] 我愿意协助解决！\n\n### 补充说明\n\nlatest",
+    "comments": [
+      {
+        "user": "crosswk",
+        "body": "上面截图的API，是o1-mini逆向的api测试结果，使用正常的API效果也是一样的。首先会刷新一个正常的格式，然后自动刷新一下，回复的内容都会挤到一个段落中。"
+      },
+      {
+        "user": "GaiZhenbiao",
+        "body": "还真是，我看看怎么回事"
+      }
+    ],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 1160,
+    "title": "[Bug]: o1-mini模型对话报错",
+    "author": "crosswk",
+    "state": "closed",
+    "created_at": "2024-09-14T03:23:25Z",
+    "updated_at": "2024-09-15T13:00:01Z",
+    "labels": [
+      "bug"
+    ],
+    "body": "### 这个bug是否已存在现有issue了？\n\n- [X] 我确认没有已有issue，且已阅读**常见问题**。\n\n### 错误表现\n\no1-mini不支持system字段了。\n\n### 复现操作\n\n正常部署最新版本\n\n### 错误日志\n\n```shell\n前端报错：\r\n☹️发生了错误：Unsupported value: 'messages[0].role' does not support 'system' with this model. (request id: 2024091403134518573335634751935)\r\n\r\n\r\n后端报错：\r\nException: {\"error\":{\"message\":\"Unsupported value: 'messages[0].role' does not support 'system' with this model. (request id: 2024091403134518573335634751935)\",\"type\":\"invalid_request_error\",\"param\":\"messages[0].role\",\"code\":\"unsupported_value\"}}\n```\n\n\n### 运行环境\n\n- OS: \r\n- Browser: \r\n- Gradio version: \r\n- Python version: \r\n \n\n### 帮助解决\n\n- [ ] 我愿意协助解决！\n\n### 补充说明\n\n_No response_",
+    "comments": [
+      {
+        "user": "GaiZhenbiao",
+        "body": "应该修复了"
+      },
+      {
+        "user": "crosswk",
+        "body": "o1还不支持流式传输了，能否选择这个模型是，自动关闭流式传输。Unsupported value: 'stream' does not support true with this model. Only the default (false) value is supported. (request id: 202409140926411873031618470080) @GaiZhenbiao "
+      },
+      {
+        "user": "GaiZhenbiao",
+        "body": "在 https://github.com/GaiZhenbiao/ChuanhuChatGPT/commit/226a9b21daa7f43569b40e057ed766f703c47c6a 中，o1 模型的流式传输功能被默认关闭"
+      }
+    ],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 910,
+    "title": "[Bug]: azure 模型下知识库问答报错",
+    "author": "stockcoder",
+    "state": "closed",
+    "created_at": "2023-10-08T10:28:03Z",
+    "updated_at": "2024-09-11T07:33:14Z",
+    "labels": [
+      "bug"
+    ],
+    "body": "### 这个bug是否已存在现有issue了？\n\n- [X] 我确认没有已有issue，且已阅读**常见问题**。\n\n### 错误表现\n\n2023-10-08 15:38:18,860 [INFO] [index_func.py:125] 构建索引中……\r\n2023-10-08 15:38:26,338 [WARNING] [before_sleep.py:65] Retrying langchain.embeddings.openai.embed_with_retry.<locals>._embed_with_retry in 4.0 seconds as it raised APIConnectionError: Error communicating with OpenAI: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer')).\r\n2023-10-08 15:38:30,670 [WARNING] [before_sleep.py:65] Retrying langchain.embeddings.openai.embed_with_retry.<locals>._embed_with_retry in 4.0 seconds as it raised APIConnectionError: Error communicating with OpenAI: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer')).\r\n2023-10-08 15:38:34,986 [WARNING] [before_sleep.py:65] Retrying langchain.embeddings.openai.embed_with_retry.<locals>._embed_with_retry in 4.0 seconds as it raised APIConnectionError: Error communicating with OpenAI: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer')).\r\n2023-10-08 15:38:39,309 [WARNING] [before_sleep.py:65] Retrying langchain.embeddings.openai.embed_with_retry.<locals>._embed_with_retry in 8.0 seconds as it raised APIConnectionError: Error communicating with OpenAI: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer')).\r\n2023-10-08 15:38:47,653 [WARNING] [before_sleep.py:65] Retrying langchain.embeddings.openai.embed_with_retry.<locals>._embed_with_retry in 10.0 seconds as it raised APIConnectionError: Error communicating with OpenAI: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer')).\r\n2023-10-08 15:38:57,992 [ERROR] [index_func.py:136] 索引构建失败！Error communicating with OpenAI: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))\n\n### 复现操作\n\n不提供其它 key，只配置azure 的，也正确提供了azure_embedding_deployment_name，聊天可以正常使用，但是上传文档知识库似乎链接的还是 openai 的\n\n### 错误日志\n\n_No response_\n\n### 运行环境\n\n- OS: \r\n- Browser: \r\n- Gradio version: \r\n- Python version: \r\n\n\n### 帮助解决\n\n- [ ] 我愿意协助解决！\n\n### 补充说明\n\n_No response_",
+    "comments": [
+      {
+        "user": "GaiZhenbiao",
+        "body": "你可以把配置信息发到我的邮箱，我解决一下：`chefs-vernier.0q@icloud.com`"
+      },
+      {
+        "user": "TigrisRiva",
+        "body": "遇到相同的问题。配置我仔细检查了没有问题\r\n 索引构建失败！Error code: 404 - {'error': {'code': '404', 'message': 'Resource not found'}}\r\n"
+      },
+      {
+        "user": "TigrisRiva",
+        "body": "完整信息：\r\n 加载索引中……\r\n/usr/local/lib/python3.9/site-packages/langchain/embeddings/openai.py:320: UserWarning: If you have openai>=1.0.0 installed and are using Azure, please use the `AzureOpenAIEmbeddings` class.\r\n  warnings.warn(\r\n2023-12-13 01:31:08,698 [INFO] [index_func.py:25] loading file: 简易待办.txt\r\n2023-12-13 01:31:08,700 [INFO] [index_func.py:126] 构建索引中……\r\n2023-12-13 01:31:09,017 [ERROR] [index_func.py:137] 索引构建失败！Error code: 404 - {'error': {'code': '404', 'message': 'Resource not found'}}\r\n"
+      }
+    ],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 1159,
+    "title": "> > 这个问题很好，很多人都有类似的需求，可惜作者一直没有回复。即使最新版本的Knowledgebase，好像也不能保存，上传之后，第二次再进入的时候，就要重新上传。",
+    "author": "rzrhu",
+    "state": "open",
+    "created_at": "2024-09-07T14:24:12Z",
+    "updated_at": "2024-09-07T14:24:12Z",
+    "labels": [],
+    "body": "              > > 这个问题很好，很多人都有类似的需求，可惜作者一直没有回复。即使最新版本的Knowledgebase，好像也不能保存，上传之后，第二次再进入的时候，就要重新上传。\r\n> \r\n> 第二次进入重新上传文件的时候不会重新索引，而是自动会匹配呀（应该\r\n\r\n![image](https://github.com/GaiZhenbiao/ChuanhuChatGPT/assets/46100050/f411ea95-4744-4468-a19c-f39ae83d952d)\r\n![image](https://github.com/GaiZhenbiao/ChuanhuChatGPT/assets/46100050/4ce04ee1-0dcf-4fca-b644-4f5726d3e426)\r\n![image](https://github.com/GaiZhenbiao/ChuanhuChatGPT/assets/46100050/4befc448-b6c8-4c83-b2c0-9022fcd554e7)\r\n\r\n建立文件IO索引呀，每次保存到固定位置，下次刷新页面或构建完知识库加到对应的Dropdown choices内\r\n\r\n_Originally posted by @Kilig947 in https://github.com/GaiZhenbiao/ChuanhuChatGPT/issues/875#issuecomment-1790330123_\r\n            ",
+    "comments": [],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 992,
+    "title": "[Bug]: 使用vision模型识别图片时，无法生成答案",
+    "author": "Scolism",
+    "state": "closed",
+    "created_at": "2023-12-16T12:45:28Z",
+    "updated_at": "2024-09-05T09:19:32Z",
+    "labels": [
+      "bug",
+      "📌 confirmed"
+    ],
+    "body": "### 这个bug是否已存在现有issue了？\r\n\r\n- [X] 我确认没有已有issue，且已阅读**常见问题**。\r\n\r\n### 错误表现\r\n\r\n答案框为空, 使用了第三方API，可能存在json解析问题。\r\n\r\n### 复现操作\r\n\r\n![1](https://github.com/GaiZhenbiao/ChuanhuChatGPT/assets/43903287/92114ba9-f798-4643-98d5-590c911726f0)\r\n![2](https://github.com/GaiZhenbiao/ChuanhuChatGPT/assets/43903287/5f7080d8-02d9-4161-8346-eb5c1c0c94c9)\r\n\r\n\r\n### 错误日志\r\n\r\n_No response_\r\n\r\n### 运行环境\r\n\r\n_No response_\r\n\r\n### 帮助解决\r\n\r\n- [ ] 我愿意协助解决！ 愿意提供API和token协助解决。\r\n\r\n### 补充说明\r\n\r\n_No response_",
+    "comments": [
+      {
+        "user": "Scolism",
+        "body": "\r\n\r\n\r\n> 我也遇到了同样的问题。答案应该是生成了的，你的截图里在 ‘content’ 后面也能看到生成的答案变成了一个一个单个的字，最后报错我这边是 “JSON解析错误,收到的内容: data: [DONE]“，在 OpenAI 网站那边也能看到模型被调用了，就是答案显出不出来。之前用 GPT4 Vision 都没有这个问题，就是今天更新了最新版本后出现的。\r\n\r\n我也看到了单个字的答案，但是连起来的话，答案也太短了。"
+      },
+      {
+        "user": "GaiZhenbiao",
+        "body": "我修复一下"
+      },
+      {
+        "user": "Scolism",
+        "body": "> 我修复一下\r\n\r\n谢谢大佬！"
+      }
+    ],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 1157,
+    "title": "[功能请求]: 建议增加外部api调用功能",
+    "author": "HelloXMFJ",
+    "state": "open",
+    "created_at": "2024-09-04T15:44:06Z",
+    "updated_at": "2024-09-04T15:44:06Z",
+    "labels": [
+      "feature request"
+    ],
+    "body": "### 相关问题\n\n建议增加外部应用可调用的API\n\n### 可能的解决办法\n\n建议增加外部应用可调用的API\n\n### 帮助开发\n\n- [ ] 我愿意协助开发！\n\n### 补充说明\n\n_No response_",
+    "comments": [],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 1156,
+    "title": "[本地部署]: ubuntu18.04本地部署遇到python问题",
+    "author": "txarmux",
+    "state": "closed",
+    "created_at": "2024-08-28T11:04:47Z",
+    "updated_at": "2024-08-28T11:24:58Z",
+    "labels": [
+      "question",
+      "localhost deployment"
+    ],
+    "body": "### 是否已存在现有反馈与解答？\n\n- [X] 我确认没有已有issue或discussion，且已阅读**常见问题**。\n\n### 是否是一个代理配置相关的疑问？\n\n- [X] 我确认这不是一个代理配置相关的疑问。\n\n### 错误描述\n\npython3.10 ChuanhuChatbot.py 运行出错\n\n### 复现操作\n\n正常本地部署，内容还没修改\n\n### 错误日志\n\n```shell\nubuntu@ubuntu:~/chatgpt-web$ python3.10 ChuanhuChatbot.py \r\nTraceback (most recent call last):\r\n  File \"/home/ubuntu/chatgpt-web/ChuanhuChatbot.py\", line 10, in <module>\r\n    from modules.overwrites import *\r\n  File \"/home/ubuntu/chatgpt-web/modules/overwrites.py\", line 4, in <module>\r\n    from llama_index import Prompt\r\nImportError: cannot import name 'Prompt' from 'llama_index' (unknown location)\r\n2024-08-28 10:53:44,265 [INFO] [_client.py:1038] HTTP Request: GET https://api.gradio.app/gradio-messaging/en \"HTTP/1.1 200 OK\"\r\nubuntu@ubuntu:~/chatgpt-web$\n```\n\n\n### 运行环境\n\n```markdown\n- OS: ubuntu18.04\r\n- Browser: Edge\r\n- Gradio version: 1.3.0\r\n- Python version: 3.10\n```\n\n\n### 补充说明\n\n_No response_",
+    "comments": [
+      {
+        "user": "GaiZhenbiao",
+        "body": "请使用最新的主线代码。你用的应该是很久之前的版本了"
+      }
+    ],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 1134,
+    "title": "Incorrect API key provided",
+    "author": "Xtaiyang",
+    "state": "open",
+    "created_at": "2024-05-23T10:19:58Z",
+    "updated_at": "2024-08-24T09:43:14Z",
+    "labels": [
+      "invalid"
+    ],
+    "body": "### 这个bug是否已存在现有issue了？\n\n- [ ] 我确认没有已有issue，且已阅读**常见问题**。\n\n### 错误表现\n\n☹️发生了错误：{ “error”: { “message”: “Incorrect API key provided: sk-L*******************************************4HZ5. You can find your API key at [https://platform.openai.com/account/api-keys.”](https://platform.openai.com/account/api-keys.%E2%80%9D), “type”: “invalid_request_error”, “param”: null, “code”: “invalid_api_key” }}\r\n\n\n### 复现操作\n\n正常完成部署\r\n部署后直接使用（默认为gpt-3.5-turbo），没有任何问题。\r\n切换为gpt-4，使用时出现以上报错。（报错之后，在OpenAI Translator以及OpenAI后台检查过，我的key正常的并且是有权限使用gpt-4的）\n\n### 错误日志\n\n_No response_\n\n### 运行环境\n\n- OS: \r\n- Browser: \r\n- Gradio version: \r\n- Python version: \r\n\n\n### 帮助解决\n\n- [X] 我愿意协助解决！\n\n### 补充说明\n\n_No response_",
+    "comments": [
+      {
+        "user": "Xtaiyang",
+        "body": "就是用着用着有时候就会这么显示\r\n"
+      },
+      {
+        "user": "ThorinKong",
+        "body": "我也有这种情况，我是同时设置了GPT4o和Gemini，有时候用一阵子Gemini，再从前端切换回GPT4o后，发送给openAI的apikey就变成了Gemini的key，之后就报错Incorrect API key provided。重启后端后就又正常了"
+      }
+    ],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 1136,
+    "title": "[功能请求]: 希望支持通义千问API , 以及讯飞星火的Spark Pro以及Spark3.5 Max",
+    "author": "Morpheusr",
+    "state": "closed",
+    "created_at": "2024-05-30T06:53:35Z",
+    "updated_at": "2024-08-21T05:47:56Z",
+    "labels": [
+      "feature request",
+      "🤖 model"
+    ],
+    "body": "### 相关问题\n\n无\n\n### 可能的解决办法\n\n通义千问支持类openai格式的调用 ( ? )\n\n### 帮助开发\n\n- [ ] 我愿意协助开发！\n\n### 补充说明\n\n_No response_",
+    "comments": [],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 1154,
+    "title": "[本地部署]: 宝塔的虚拟环境，安装报错",
+    "author": "ft4710403",
+    "state": "open",
+    "created_at": "2024-08-20T03:41:43Z",
+    "updated_at": "2024-08-20T04:17:50Z",
+    "labels": [
+      "question",
+      "localhost deployment"
+    ],
+    "body": "### 是否已存在现有反馈与解答？\n\n- [X] 我确认没有已有issue或discussion，且已阅读**常见问题**。\n\n### 是否是一个代理配置相关的疑问？\n\n- [X] 我确认这不是一个代理配置相关的疑问。\n\n### 错误描述\n\nCollecting primp>=0.6.0 (from duckduckgo-search>=5.3.0->-r requirements.txt (line 25))\r\n  Downloading https://pypi.tuna.tsinghua.edu.cn/packages/3f/39/e19361a629083228a0df97ac718965ab27626e2173a073f8a31736115ca9/primp-0.6.0.tar.gz (79 kB)\r\n  Installing build dependencies ... done\r\n  Getting requirements to build wheel ... done\r\n  Preparing metadata (pyproject.toml) ... error\r\n  error: subprocess-exited-with-error\r\n  \r\n  × Preparing metadata (pyproject.toml) did not run successfully.\r\n  │ exit code: 1\r\n  ╰─> [6 lines of output]\r\n      \r\n      Cargo, the Rust package manager, is not installed or is not on PATH.\r\n      This package requires Rust and Cargo to compile extensions. Install it through\r\n      the system's package manager or via https://rustup.rs/\r\n      \r\n      Checking for Rust toolchain....\r\n      [end of output]\r\n  \r\n  note: This error originates from a subprocess, and is likely not a problem with pip.\r\nerror: metadata-generation-failed\r\n\r\n× Encountered error while generating package metadata.\r\n╰─> See above for output.\r\n\r\nnote: This is an issue with the package mentioned above, not pip.\r\nhint: See above for details.\n\n### 复现操作\n\n宝塔面板的python项目：\r\npython版本：3.10.12\r\npip安装模块报错\n\n### 错误日志\n\n_No response_\n\n### 运行环境\n\n```markdown\n- OS: \r\n- Browser: \r\n- Gradio version: \r\n- Python version: 3.10.12\n```\n\n\n### 补充说明\n\n_No response_",
+    "comments": [
+      {
+        "user": "ft4710403",
+        "body": "后来我把docker里面的python支持库：root\\.local\\lib\\python3.10\\site-packages\r\n直接拷贝到宝塔虚拟环境运行，还是报错：\r\n\r\n是不是因为我的环境没联网呢，用的代理，代理配置如下：\r\n#export no_proxy=\"localhost, 127.0.0.1, ::1\"\r\n\r\nexport http_proxy='http://XXXX:8888'\r\nexport https_proxy='http://XXXX:8888'\r\nexport ALL_PROXY='socks5://XXXX:8888'\r\n#source /etc/environment\r\n\r\n\r\n\r\n[root@localhost ChuanhuChatGPT]# python3 ChuanhuChatbot.py \r\n2024-08-20 12:15:01,780 [INFO] [config.py:330] 默认模型设置为了：GPT-4o-mini\r\n2024-08-20 12:15:02,056 [INFO] [_client.py:1026] HTTP Request: GET https://api.gradio.app/gradio-messaging/en \"HTTP/1.1 200 OK\"\r\nfatal: unknown date format iso-strict\r\nRunning on local URL:  http://127.0.0.1:8889\r\nIMPORTANT: You are using gradio version 4.26.0, however version 4.29.0 is available, please upgrade.\r\n--------\r\n2024-08-20 12:15:05,557 [INFO] [utils.py:643] **您的IP区域：中国。请立即检查代理设置，在不受支持的地区使用API可能导致账号被封禁。**\r\nTraceback (most recent call last):\r\n  File \"/www/server/pyporject_evn/ChuanhuChatGPT_venv/lib/python3.10/site-packages/httpx/_transports/default.py\", line 69, in map_httpcore_exceptions\r\n    yield\r\n  File \"/www/server/pyporject_evn/ChuanhuChatGPT_venv/lib/python3.10/site-packages/httpx/_transports/default.py\", line 233, in handle_request\r\n    resp = self._pool.handle_request(req)\r\n  File \"/www/server/pyporject_evn/ChuanhuChatGPT_venv/lib/python3.10/site-packages/httpcore/_sync/connection_pool.py\", line 216, in handle_request\r\n    raise exc from None\r\n  File \"/www/server/pyporject_evn/ChuanhuChatGPT_venv/lib/python3.10/site-packages/httpcore/_sync/connection_pool.py\", line 196, in handle_request\r\n    response = connection.handle_request(\r\n  File \"/www/server/pyporject_evn/ChuanhuChatGPT_venv/lib/python3.10/site-packages/httpcore/_sync/http_proxy.py\", line 207, in handle_request\r\n    return self._connection.handle_request(proxy_request)\r\n  File \"/www/server/pyporject_evn/ChuanhuChatGPT_venv/lib/python3.10/site-packages/httpcore/_sync/connection.py\", line 101, in handle_request\r\n    return self._connection.handle_request(request)\r\n  File \"/www/server/pyporject_evn/ChuanhuChatGPT_venv/lib/python3.10/site-packages/httpcore/_sync/http11.py\", line 143, in handle_request\r\n    raise exc\r\n  File \"/www/server/pyporject_evn/ChuanhuChatGPT_venv/lib/python3.10/site-packages/httpcore/_sync/http11.py\", line 113, in handle_request\r\n    ) = self._receive_response_headers(**kwargs)\r\n  File \"/www/server/pyporject_evn/ChuanhuChatGPT_venv/lib/python3.10/site-packages/httpcore/_sync/http11.py\", line 186, in _receive_response_headers\r\n    event = self._receive_event(timeout=timeout)\r\n  File \"/www/server/pyporject_evn/ChuanhuChatGPT_venv/lib/python3.10/site-packages/httpcore/_sync/http11.py\", line 238, in _receive_event\r\n    raise RemoteProtocolError(msg)\r\nhttpcore.RemoteProtocolError: Server disconnected without sending a response.\r\n\r\nThe above exception was the direct cause of the following exception:\r\n\r\nTraceback (most recent call last):\r\n  File \"/data/ChuanhuChatGPT/ChuanhuChatbot.py\", line 820, in <module>\r\n    demo.queue().launch(\r\n  File \"/www/server/pyporject_evn/ChuanhuChatGPT_venv/lib/python3.10/site-packages/gradio/blocks.py\", line 2209, in launch\r\n    httpx.get(\r\n  File \"/www/server/pyporject_evn/ChuanhuChatGPT_venv/lib/python3.10/site-packages/httpx/_api.py\", line 198, in get\r\n    return request(\r\n  File \"/www/server/pyporject_evn/ChuanhuChatGPT_venv/lib/python3.10/site-packages/httpx/_api.py\", line 106, in request\r\n    return client.request(\r\n  File \"/www/server/pyporject_evn/ChuanhuChatGPT_venv/lib/python3.10/site-packages/httpx/_client.py\", line 827, in request\r\n    return self.send(request, auth=auth, follow_redirects=follow_redirects)\r\n  File \"/www/server/pyporject_evn/ChuanhuChatGPT_venv/lib/python3.10/site-packages/httpx/_client.py\", line 914, in send\r\n    response = self._send_handling_auth(\r\n  File \"/www/server/pyporject_evn/ChuanhuChatGPT_venv/lib/python3.10/site-packages/httpx/_client.py\", line 942, in _send_handling_auth\r\n    response = self._send_handling_redirects(\r\n  File \"/www/server/pyporject_evn/ChuanhuChatGPT_venv/lib/python3.10/site-packages/httpx/_client.py\", line 979, in _send_handling_redirects\r\n    response = self._send_single_request(request)\r\n  File \"/www/server/pyporject_evn/ChuanhuChatGPT_venv/lib/python3.10/site-packages/httpx/_client.py\", line 1015, in _send_single_request\r\n    response = transport.handle_request(request)\r\n  File \"/www/server/pyporject_evn/ChuanhuChatGPT_venv/lib/python3.10/site-packages/httpx/_transports/default.py\", line 232, in handle_request\r\n    with map_httpcore_exceptions():\r\n  File \"/www/server/pyporject_evn/ChuanhuChatGPT_venv/lib/python3.10/contextlib.py\", line 153, in __exit__\r\n    self.gen.throw(typ, value, traceback)\r\n  File \"/www/server/pyporject_evn/ChuanhuChatGPT_venv/lib/python3.10/site-packages/httpx/_transports/default.py\", line 86, in map_httpcore_exceptions\r\n    raise mapped_exc(message) from exc\r\nhttpx.RemoteProtocolError: Server disconnected without sending a response.\r\n[root@localhost ChuanhuChatGPT]# "
+      }
+    ],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 1152,
+    "title": "[Bug]: 反向代理不能登录",
+    "author": "ft4710403",
+    "state": "open",
+    "created_at": "2024-08-19T02:00:25Z",
+    "updated_at": "2024-08-19T16:29:21Z",
+    "labels": [],
+    "body": "### 这个bug是否已存在现有issue了？\n\n- [X] 我确认没有已有issue，且已阅读**常见问题**。\n\n### 错误表现\n\n反向代理出去以后，经过测试，不管http://ip 、https://ip   、https://域名  都不能登录。 gradio已经更新到了4.26.0\n\n### 复现操作\n\ndocker 通过内网可以正常登录，但是如果用反向代理出去以后，经过测试，不管http://ip 、https://ip   、https://域名  都不能登录。 gradio已经更新到了4.26.0\n\n### 错误日志\n\n```shell\n抓包看了一下：\r\nPOST https://xxxx:8269/login HTTP/1.1\r\nHost: xxxx:8269\r\nConnection: keep-alive\r\nContent-Length: 249\r\nsec-ch-ua: \"Not)A;Brand\";v=\"99\", \"Google Chrome\";v=\"127\", \"Chromium\";v=\"127\"\r\nContent-Type: multipart/form-data; boundary=----WebKitFormBoundaryQuXvNbRk4FJvyTkP\r\nDNT: 1\r\nsec-ch-ua-mobile: ?0\r\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36\r\nsec-ch-ua-platform: \"Windows\"\r\nAccept: */*\r\nOrigin: https://xxxx:8269\r\nSec-Fetch-Site: same-origin\r\nSec-Fetch-Mode: cors\r\nSec-Fetch-Dest: empty\r\nReferer: https://xxxx:8269/\r\nAccept-Encoding: gzip, deflate, br, zstd\r\nAccept-Language: zh-CN,zh-TW;q=0.9,zh-HK;q=0.8,zh;q=0.7\r\nCookie: _CrPoSt=cHJvdG9jb2w9aHR0cHM6OyBwb3J0PTUwMDE7IHBhdGhuYW1lPS87; _SSID=XRxfG0UlfElnYpL618BgVw7-yQ3JtRzWCUp9iAmoISA; did=YM1tAlVLHhaCltEIzrNofI9QFzi6IcyOrsWO4kVtGrkzwsDHLjGITn2iXIJXxkmC3bx92XThabg7oOnaDBKx_w; order=id%20desc; serverType=nginx; file_recycle_status=true; pro_end=-1; ltd_end=-1; stay_login=1; gpadminpassport=cm9vdHw3NjEwMGZiMDI1NTg1MzM5YTY5Nzc0Y2M2MmM5YjU2NQ==; sites_path=/www/wwwroot; force=0; soft_remarks=%7B%22list%22%3A%5B%22%u66F4%u6362%u6388%u6743IP%22%2C%225%u5206%u949F%u6781%u901F%u54CD%u5E94%22%2C%2215%u5929%u65E0%u7406%u7531%u9000%u6B3E%22%2C%2230+%u6B3E%u4ED8%u8D39%u63D2%u4EF6%22%2C%2220+%u4F01%u4E1A%u7248%u4E13%u4EAB%u529F%u80FD%22%2C%221000%u6761%u514D%u8D39%u77ED%u4FE1%uFF08%u5E74%u4ED8%uFF09%22%2C%222%u5F20SSL%u5546%u7528%u8BC1%u4E66%uFF08%u5E74%u4ED8%uFF09%22%2C%22%u4E13%u4EAB%u4F01%u4E1A%u670D%u52A1%u7FA4%uFF08%u5E74%u4ED8%uFF09%22%5D%2C%22pro_list%22%3A%5B%22%u66F4%u6362%u6388%u6743IP%22%2C%22%u5BA2%u670D%u4F18%u5148%u54CD%u5E94%22%2C%2215+%u6B3E%u4ED8%u8D39%u63D2%u4EF6%22%2C%2215%u5929%u65E0%u7406%u7531%u9000%u6B3E%22%2C%22%u5546%u7528%u9632%u706B%u5899%u6388%u6743%22%5D%2C%22kfqq%22%3A%223007255432%22%2C%22kf%22%3A%22http%3A//q.url.cn/CDfQPS%3F_type%3Dwpa%26qidian%3Dtrue%22%2C%22qun%22%3A%22%22%2C%22activity_list%22%3A%5B%22%3Cspan%20style%3D%5C%22color%3A%23D98704%3Bpadding-right%3A10px%5C%22%3E618%u7279%u60E0%u6D3B%u52A8%uFF0C6%u67089%u65E5-%206%u670818%u65E5%uFF0C%u6700%u9AD8%u51CF15000%u5143%3C/span%3E%3Ca%20style%3D%5C%22text-decoration%3Anone%3B%5C%22%20href%3D%5C%22https%3A//www.bt.cn/618%5C%22%20rel%3D%5C%22noreferrer%5C%22%20%20target%3D%5C%22_blank%5C%22%20class%3D%5C%22btlink%5C%22%3E%u70B9%u51FB%u7ACB%u5373%u67E5%u770B%3E%3E%3C/a%3E%22%5D%2C%22kf_list%22%3A%5B%7B%22qq%22%3A%223007255432%22%2C%22kf%22%3A%22http%3A//q.url.cn/CDfQPS%3F_type%3Dwpa%26qidian%3Dtrue%22%7D%2C%7B%22qq%22%3A%222927440070%22%2C%22kf%22%3A%22http%3A//wpa.qq.com/msgrd%3Fv%3D3%26uin%3D2927440070%26site%3Dqq%26menu%3Dyes%26from%3Dmessage%26isappinstalled%3D0%22%7D%5D%2C%22wx_list%22%3A%5B%7B%22ps%22%3A%22%u5728%u7EBF%u5BA2%u670D%22%2C%22kf%22%3A%22https%3A//www.bt.cn/new/wechat_customer%22%7D%5D%2C%22vips_list%22%3A%7B%22%u591A%u5BF9%u4E00%u6280%u672F%u652F%u6301%22%3A%7B%22pro%22%3A0%2C%22ltd%22%3A0%2C%22vltd%22%3A1%7D%2C%22%u5168%u5E745%u6B21%u5B89%u5168%u6392%u67E5%22%3A%7B%22pro%22%3A0%2C%22ltd%22%3A0%2C%22vltd%22%3A1%7D%2C%225%u5206%u949F%u6025%u901F%u54CD%u5E94%22%3A%7B%22pro%22%3A0%2C%22ltd%22%3A1%2C%22vltd%22%3A1%7D%2C%2230+%u6B3E%u4ED8%u8D39%u63D2%u4EF6%22%3A%7B%22pro%22%3A0%2C%22ltd%22%3A1%2C%22vltd%22%3A1%7D%2C%2220+%u4F01%u4E1A%u7248%u4E13%u4EAB%u529F%u80FD%22%3A%7B%22pro%22%3A0%2C%22ltd%22%3A1%2C%22vltd%22%3A1%7D%2C%221000%u6761%u514D%u8D39%u77ED%u4FE1%28%u5E74%u4ED8%29%22%3A%7B%22pro%22%3A0%2C%22ltd%22%3A1%2C%22vltd%22%3A1%7D%2C%222%u5F20SSL%u5546%u7528%u8BC1%u4E66%28%u5E74%u4ED8%29%22%3A%7B%22pro%22%3A0%2C%22ltd%22%3A1%2C%22vltd%22%3A1%7D%2C%22%u4E13%u4EAB%u4F01%u4E1A%u670D%u52A1%u7FA4%28%u5E74%u4ED8%29%22%3A%7B%22pro%22%3A0%2C%22ltd%22%3A1%2C%22vltd%22%3A1%7D%2C%22WAF%u9632%u706B%u5899%22%3A%7B%22pro%22%3A1%2C%22ltd%22%3A1%2C%22vltd%22%3A1%7D%2C%22%u66F4%u6362%u6388%u6743IP%22%3A%7B%22pro%22%3A1%2C%22ltd%22%3A1%2C%22vltd%22%3A1%7D%2C%22%u5BA2%u670D%u4F18%u5148%u54CD%u5E94%22%3A%7B%22pro%22%3A1%2C%22ltd%22%3A1%2C%22vltd%22%3A1%7D%2C%2215+%u6B3E%u4ED8%u8D39%u63D2%u4EF6%22%3A%7B%22pro%22%3A1%2C%22ltd%22%3A1%2C%22vltd%22%3A1%7D%2C%2215%u5929%u65E0%u7406%u7531%u9000%u6B3E%22%3A%7B%22pro%22%3A1%2C%22ltd%22%3A1%2C%22vltd%22%3A1%7D%7D%7D; load_search=undefined; load_page=1; p-1=1; id=lzNbsFYJLV6iiZ1nzlInDXu7D8benYgw-gxWTjr2XBwgeDUvKO--0yFGu6ybCWnJNLfGdmU80QeHAZphF5-nPo; bt_user_info=%7B%22status%22%3Atrue%2C%22msg%22%3A%22%u83B7%u53D6%u6210%u529F%21%22%2C%22data%22%3A%7B%22username%22%3A%22186****2815%22%7D%7D; distribution=centos7; LOBE_LOCALE=zh-CN; rank=list; Path=/data/python/www/select; litewait-v1-userauth-nonsec8818=LlBS50jLCkTcW5Wn8Tu9QM3qHK3%2FbJgA63%2B8qFsgx1Y%3D; memos.access-token=eyJhbGciOiJIUzI1NiIsImtpZCI6InYxIiwidHlwIjoiSldUIn0.eyJuYW1lIjoiIiwiaXNzIjoibWVtb3MiLCJzdWIiOiIxIiwiYXVkIjpbInVzZXIuYWNjZXNzLXRva2VuIl0sImV4cCI6NDg3NzMwNjU1MywiaWF0IjoxNzIzNzA2NTUzfQ.agU1sSQSrRmy7rD3uyRGK5o7-wpgWKV2qEC4tdeqZng; LOBE_THEME_PRIMARY_COLOR=undefined; LOBE_THEME_NEUTRAL_COLOR=undefined; c3d6b257a6a672b2ae144d3f99fd1c3c_ssl=c7ce34bc-0c5d-4001-a001-dc1cf2f3f7b3.-xrSwf_8mQXZBf6dMlL-bbf2Lsc; _csrf=wk-mlGa8nbGH0QrC_VSlClfP; pnull=1; softType=-1; load_type=-1; io=k7NPB8T6v06moPnCAAFp; remember_web_59ba36addc2b2f9401580f014c7f58ea4e30989d=eyJpdiI6ImJUMFlpTndxWW5iU1ExbTJncWxtUVE9PSIsInZhbHVlIjoiVTd6dEdUQ2lVeWJWM0VSZHArTVExSU5RMVlpejBUcHFqSlBVSzl4M2Zsd1REQ3V0L3FUYkdCN29weHExa29mK3lmbTluaFdJd01lMDJmTE5hNVBQTXVpUXNMR3BnNzZjdS9tMXpRczBLSHh0M21VaGxsYlpqU0tFMUpmSWZEUXAvRFVCVko5R0wrU2lnakp6V0UxdlBnQUk1SGtYekkyWnRmYjk2eE9wanZnWm91TUIzdmdncm94a3hNaEU5TndIZHBwUGtRaUlQckpYMHpkbTVIb0R3SllHU1dlTU1OdmhlbTBkUTJNdW9kWT0iLCJtYWMiOiJmMDc4NTFiNzJjMTM3YWE1NTYyODhiODFmMzRlMDRmZmU3ZTE4NWNlMWE1NTk3YzBjOTY4MzlmMWUyYjg5MjYxIiwidGFnIjoiIn0%3D; XSRF-TOKEN=eyJpdiI6Ik1NSVBsbFBZaGFlRXhuaVIrR0ljYVE9PSIsInZhbHVlIjoiTWdFTU5RYWdRaGRuZjVkVTlRc0RUWFN5a1d0VmMyKzNRU1Bqd3h4bGVobUlFNHE2K0p3YTZHdVNDck5NOERaVjkwRUZ5R1I1LysrbzQyN0ZZN0lOQ1pLVWlNWE53QW5EbXRTeStkQjl1b0RBQW1YMVg5VDYzQ0lyUEl0Z0l1OTgiLCJtYWMiOiJmY2NhYWUwN2M2YzExYWQ3ZTEzNzllZTYwZGRlOTU0Yjk3YzZlZmNkYWI5Mjg1ZGUwNDc2ZTA1MTllMTMyN2E3IiwidGFnIjoiIn0%3D; heimdall_session=eyJpdiI6IjZoRkx4RE1OdlR5WUhXSXVRNU9MeHc9PSIsInZhbHVlIjoicWVqeG5uaGRoYmhvb1orZkNUTzRVd3V3RW04aWh4UmpveTQ1T2JONk0vMlpuMlpENTl5UEQzTmFvZVIxbkExbVBHTld6bC8vRG8relN0MGVScTMydVFudHRXUEVFZ1hiTDR1bjRLTm1LaWswUkJrQzNOL3R2bGNJcWFNRU50L0giLCJtYWMiOiI2MDY0NDNiZWVkMDU2MGJjZGQ3YmE5NjEzMjUxYTVmNzFkMGJlZjhjNjM3YzY2NDFlNDc5ZWYyM2ViYTZlNzJmIiwidGFnIjoiIn0%3D\r\n\r\n------WebKitFormBoundaryQuXvNbRk4FJvyTkP\r\nContent-Disposition: form-data; name=\"username\"\r\n\r\nadmin\r\n------WebKitFormBoundaryQuXvNbRk4FJvyTkP\r\nContent-Disposition: form-data; name=\"password\"\r\n\r\nadmintest\r\n------WebKitFormBoundaryQuXvNbRk4FJvyTkP--\n```\n\n\n### 运行环境\n\n- OS: \r\n- Browser: chrome127.0.6533.120\r\n- Gradio version: \r\n- Python version: \r\n\n\n### 帮助解决\n\n- [X] 我愿意协助解决！\n\n### 补充说明\n\n_No response_",
+    "comments": [
+      {
+        "user": "GaiZhenbiao",
+        "body": "请查阅项目Wiki中关于公网访问的部分"
+      }
+    ],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 68,
+    "title": "ws连接超时",
+    "author": "whoisavicii",
+    "state": "closed",
+    "created_at": "2023-03-08T03:14:23Z",
+    "updated_at": "2024-08-14T14:27:56Z",
+    "labels": [
+      "docker deployment"
+    ],
+    "body": "![image](https://user-images.githubusercontent.com/62868358/223610446-db7e9a61-221f-4153-a75a-42172c96302f.png)\r\n您好，我部署在了国外的vps上，启动后发现ws连接都是超时的，知道是啥情况吗\r\n",
+    "comments": [
+      {
+        "user": "GaiZhenbiao",
+        "body": "应该是Nginx配置错误；检查一下？"
+      },
+      {
+        "user": "whoisavicii",
+        "body": "没有 我直接python chuanhuchatgpt.py启动的"
+      },
+      {
+        "user": "GaiZhenbiao",
+        "body": "检查一下服务器端口放行吧"
+      }
+    ],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 1076,
+    "title": "[Bug]: 输出内容包含数学公式，无法以LaTeX 格式正常显示",
+    "author": "chaoyi1987",
+    "state": "closed",
+    "created_at": "2024-03-13T09:34:33Z",
+    "updated_at": "2024-08-13T14:07:03Z",
+    "labels": [
+      "invalid"
+    ],
+    "body": "### 这个bug是否已存在现有issue了？\n\n- [X] 我确认没有已有issue，且已阅读**常见问题**。\n\n### 错误表现\n\n当我输入问题：请详细解释一下正态分布的概率密度函数的意义，尽可能举例说明，数学公式使用$$，返回如下内容\r\n![1710322329413](https://github.com/GaiZhenbiao/ChuanhuChatGPT/assets/10733836/1fd650d9-a51f-4db1-b4d2-23b2663050dc)\r\n我希望返回的样式是如下的：\r\n![1710322414848](https://github.com/GaiZhenbiao/ChuanhuChatGPT/assets/10733836/deeb2699-cd1d-4a89-b9bd-302e92d4ae40)\r\n\n\n### 复现操作\n\n输入问题：请详细解释一下正态分布的概率密度函数的意义，尽可能举例说明，数学公式使用$$\n\n### 错误日志\n\n_No response_\n\n### 运行环境\n\n- OS: \r\n- Browser: \r\n- Gradio version: \r\n- Python version: \r\n\n\n### 帮助解决\n\n- [ ] 我愿意协助解决！\n\n### 补充说明\n\n_No response_",
+    "comments": [
+      {
+        "user": "Keldos-Li",
+        "body": "你好，我这里测试是完全正常的：\r\n![image](https://github.com/GaiZhenbiao/ChuanhuChatGPT/assets/23137268/877658f0-8a76-4373-af23-b7805551d6f6)\r\n\r\n请你确认一下配置中的 _[设置 LaTeX 渲染参数](https://github.com/GaiZhenbiao/ChuanhuChatGPT/wiki/%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B#%E8%AE%BE%E7%BD%AE-latex-%E6%B8%B2%E6%9F%93%E5%8F%82%E6%95%B0)_ 选项，如果可能，也可以导出聊天记录的json文件以供我们排查。"
+      },
+      {
+        "user": "Keldos-Li",
+        "body": "如果仍有问题，请继续回复。"
+      },
+      {
+        "user": "chaoyi1987",
+        "body": "![1723393883355](https://github.com/user-attachments/assets/081d235d-1670-4880-8deb-b5cd106ca5dd)\r\n这个是config.json配置文件的截图\r\n[正态分布讲解.json](https://github.com/user-attachments/files/16574549/default.json)\r\n这个是我导出聊天记录的json文件\r\n![1723393953972](https://github.com/user-attachments/assets/e92fffbb-f15b-42f3-bf70-7299e509a957)\r\nlatex显示还是有异常，我现在用的版本是当前最新的版本"
+      }
+    ],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 1151,
+    "title": "[功能请求]: 是否能使用sess格式的apikey进行对话？",
+    "author": "NachtPraise",
+    "state": "open",
+    "created_at": "2024-08-13T13:08:49Z",
+    "updated_at": "2024-08-13T13:08:49Z",
+    "labels": [
+      "feature request"
+    ],
+    "body": "### 相关问题\n\n_No response_\n\n### 可能的解决办法\n\n现在的3.5key都是sess格式的，想问问能不能用\n\n### 帮助开发\n\n- [ ] 我愿意协助开发！\n\n### 补充说明\n\n_No response_",
+    "comments": [],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 1131,
+    "title": "[其他]: 前端页面中关于代码运行结果的部分是不是显示的太过于暗",
+    "author": "kasperlmc",
+    "state": "closed",
+    "created_at": "2024-05-20T02:23:44Z",
+    "updated_at": "2024-08-02T07:00:27Z",
+    "labels": [
+      "question"
+    ],
+    "body": "### 是否已存在现有反馈与解答？\n\n- [X] 我确认没有已有issue或discussion，且已阅读**常见问题**。\n\n### 错误描述\n\n![屏幕截图 2024-05-20 102112](https://github.com/GaiZhenbiao/ChuanhuChatGPT/assets/30788155/f5325dbb-c17c-400e-9fd7-c90e79275d94)\r\n前端页面中关于代码运行结果的部分的显示不够明显\n\n### 复现操作\n\n正常部署运行\n\n### 错误日志\n\n_No response_\n\n### 运行环境\n\n- OS: centos7.6\r\n- Browser: Chrome\r\n- Gradio version: 4.26.0\r\n- Python version: 3.8.6\r\n(或您的其他运行环境信息)\r\n\n\n### 补充说明\n\n_No response_",
+    "comments": [],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 1146,
+    "title": "[Bug]: Azure OpenAI调用失败",
+    "author": "ZhengQinyu",
+    "state": "closed",
+    "created_at": "2024-07-24T06:08:08Z",
+    "updated_at": "2024-08-02T06:33:25Z",
+    "labels": [
+      "bug"
+    ],
+    "body": "### 这个bug是否已存在现有issue了？\n\n- [X] 我确认没有已有issue，且已阅读**常见问题**。\n\n### 错误表现\n\n调用 Azure OpenAI 打印了日志，但是页面上没有返回消息；这里的逻辑我看不大懂，但是按照之前的代码我添加了self.callback就可以了，请问这里是不是这样子修复一下？\r\n```\r\n    def on_llm_new_token(\r\n        self,\r\n        token: str,\r\n        *,\r\n        chunk: Optional[Union[GenerationChunk, ChatGenerationChunk]] = None,\r\n        run_id: UUID,\r\n        parent_run_id: Optional[UUID] = None,\r\n        **kwargs: Any,\r\n    ) -> Any:\r\n        \"\"\"Run on new LLM token. Only available when streaming is enabled.\r\n\r\n        Args:\r\n            token (str): The new token.\r\n            chunk (GenerationChunk | ChatGenerationChunk): The new generated chunk,\r\n            containing content and other information.\r\n        \"\"\"\r\n        logging.info(f\"### CHUNK ###: {chunk}\")\r\n        # 添加了这行就可以了\r\n        self.callback(token)   \r\n```\n\n### 复现操作\n\n1、正常部署\r\n2、选择 Azure OpenAI 模型\n\n### 错误日志\n\n```shell\n2024-07-24 14:02:28,200 [INFO] [base_model.py:131] ### CHUNK ###: text='。' message=AIMessageChunk(content='。')\r\n2024-07-24 14:02:28,201 [INFO] [base_model.py:131] ### CHUNK ###: text='有' message=AIMessageChunk(content='有')\r\n2024-07-24 14:02:28,201 [INFO] [base_model.py:131] ### CHUNK ###: text='什' message=AIMessageChunk(content='什')\r\n2024-07-24 14:02:28,203 [INFO] [base_model.py:131] ### CHUNK ###: text='么' message=AIMessageChunk(content='么')\r\n2024-07-24 14:02:28,203 [INFO] [base_model.py:131] ### CHUNK ###: text='我' message=AIMessageChunk(content='我')\r\n2024-07-24 14:02:28,204 [INFO] [base_model.py:131] ### CHUNK ###: text='可以' message=AIMessageChunk(content='可以')\r\n2024-07-24 14:02:28,205 [INFO] [base_model.py:131] ### CHUNK ###: text='帮' message=AIMessageChunk(content='帮')\r\n2024-07-24 14:02:28,206 [INFO] [base_model.py:131] ### CHUNK ###: text='助' message=AIMessageChunk(content='助')\r\n2024-07-24 14:02:28,207 [INFO] [base_model.py:131] ### CHUNK ###: text='你' message=AIMessageChunk(content='你')\r\n2024-07-24 14:02:28,209 [INFO] [base_model.py:131] ### CHUNK ###: text='的' message=AIMessageChunk(content='的')\r\n2024-07-24 14:02:28,210 [INFO] [base_model.py:131] ### CHUNK ###: text='吗' message=AIMessageChunk(content='吗')\r\n2024-07-24 14:02:28,212 [INFO] [base_model.py:131] ### CHUNK ###: text='？' message=AIMessageChunk(content='？')\r\n2024-07-24 14:02:28,213 [INFO] [base_model.py:131] ### CHUNK ###: generation_info={'finish_reason': 'stop'} message=AIMessageChunk(content='')\n```\n\n\n### 运行环境\n\n- OS: \r\n- Browser: \r\n- Gradio version: \r\n- Python version: \r\n\n\n### 帮助解决\n\n- [X] 我愿意协助解决！\n\n### 补充说明\n\n_No response_",
+    "comments": [],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 1107,
+    "title": "前台网页回答对话框显示空白，后台日志正常。",
+    "author": "wuminmin",
+    "state": "closed",
+    "created_at": "2024-04-21T07:57:16Z",
+    "updated_at": "2024-08-02T06:33:25Z",
+    "labels": [
+      "bug"
+    ],
+    "body": "### 这个bug是否已存在现有issue了？\n\n- [X] 我确认没有已有issue，且已阅读**常见问题**。\n\n### 错误表现\n\n后台日志显示收到了回单，前台网页显示空白\r\n\r\n前台：\r\n![微信截图_20240421154906](https://github.com/GaiZhenbiao/ChuanhuChatGPT/assets/16083471/1bf69746-cade-4f60-bc34-9d7a0722752e)\r\n\r\n后台：\r\n![image](https://github.com/GaiZhenbiao/ChuanhuChatGPT/assets/16083471/e668d391-f49b-4330-9264-c6b049908641)\r\n\n\n### 复现操作\n\n1 正常安装\r\n2 选择Aure OpenAI\r\n3 提出问题\r\n4 前台网页答复是空白的\n\n### 错误日志\n\n```shell\n2024-04-21 07:44:50,200 [INFO] [base_model.py:131] ### CHUNK ###: text='天' message=AIMessageChunk(content='天')\r\nchuanhuchatgpt-chuanhuchat-1  | 2024-04-21 07:44:50,201 [INFO] [base_model.py:131] ### CHUNK ###: text='的' message=AIMessageChunk(content='的')\r\nchuanhuchatgpt-chuanhuchat-1  | 2024-04-21 07:44:50,203 [INFO] [base_model.py:131] ### CHUNK ###: text='日期' message=AIMessageChunk(content='日期')\r\nchuanhuchatgpt-chuanhuchat-1  | 2024-04-21 07:44:50,206 [INFO] [base_model.py:131] ### CHUNK ###: text='是' message=AIMessageChunk(content='是')\r\nchuanhuchatgpt-chuanhuchat-1  | 2024-04-21 07:44:50,208 [INFO] [base_model.py:131] ### CHUNK ###: text='202' message=AIMessageChunk(content='202')\r\nchuanhuchatgpt-chuanhuchat-1  | 2024-04-21 07:44:50,209 [INFO] [base_model.py:131] ### CHUNK ###: text='4' message=AIMessageChunk(content='4')\r\nchuanhuchatgpt-chuanhuchat-1  | 2024-04-21 07:44:50,211 [INFO] [base_model.py:131] ### CHUNK ###: text='年' message=AIMessageChunk(content='年')\r\nchuanhuchatgpt-chuanhuchat-1  | 2024-04-21 07:44:50,213 [INFO] [base_model.py:131] ### CHUNK ###: text='4' message=AIMessageChunk(content='4')\r\nchuanhuchatgpt-chuanhuchat-1  | 2024-04-21 07:44:50,214 [INFO] [base_model.py:131] ### CHUNK ###: text='月' message=AIMessageChunk(content='月')\r\nchuanhuchatgpt-chuanhuchat-1  | 2024-04-21 07:44:50,215 [INFO] [base_model.py:131] ### CHUNK ###: text='21' message=AIMessageChunk(content='21')\r\nchuanhuchatgpt-chuanhuchat-1  | 2024-04-21 07:44:50,216 [INFO] [base_model.py:131] ### CHUNK ###: text='日' message=AIMessageChunk(content='日')\r\nchuanhuchatgpt-chuanhuchat-1  | 2024-04-21 07:44:50,217 [INFO] [base_model.py:131] ### CHUNK ###: text='[[' message=AIMessageChunk(content='[[')\r\nchuanhuchatgpt-chuanhuchat-1  | 2024-04-21 07:44:50,218 [INFO] [base_model.py:131] ### CHUNK ###: text='10' message=AIMessageChunk(conte\n```\n\n\n### 运行环境\n\ndocker  compose 安装\r\n\r\n代码版本\r\ngit log --oneline\r\n7231bea (HEAD -> main, origin/main, origin/HEAD) Merged GPT4-V into GPT4-Turbo to accommodate OpenAI's new API change.\r\n5881220 fix [Bug]: 配置\"hide_history_when_not_logged_in\": true后，界面报错 #1101\r\nfccd3de openai besed RAG uses text-embedding-3-large now.\r\n0c4dc56 feat: improved Chuanhu Assistant behaviour when handling file uploads\r\nc759290 (tag: 20240410) chore: specify python3.10 in Dockerfile\r\n094e66e added numexpr dependency\r\n3f4dde0 fixed file-based RAG\r\nbb92452 fix weird style caused by Gradio introducing prose in chatbot\r\n26c6692 removed chuanhu assistant model entry in example\r\n3fda5bb since available tools can be infered from config, Chuanhu Assistant now uses GPT 3.5 by default, and uses GPT4-Turbo (preview) in Pro mode\r\nfaf1d94 code clean up, bumped openai version\r\n\r\nDockerfile是仓库自带的\r\n\r\nconfig是自己的参数\r\n\r\ncompose.yml文件如下：\r\n\r\nversion: '3.8'\r\nservices:\r\n  chuanhuchat:\r\n    build: .\r\n    ports:\r\n      - \"7860:7860\"\r\n    volumes:\r\n      - .:/app\r\n      - ./config.json:/app/config.json\r\n    # environment:\r\n    #   - OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxxx\r\n\n\n### 帮助解决\n\n- [X] 我愿意协助解决！\n\n### 补充说明\n\n用docker正常安装，安装过程没有报错。",
+    "comments": [
+      {
+        "user": "Caleb66666",
+        "body": "同样遇到了这个问题，敢问后续有解掉吗？ @wuminmin "
+      },
+      {
+        "user": "wangfan002",
+        "body": "同问，tag 20240410就没有这个问题"
+      }
+    ],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 1138,
+    "title": "[功能请求]: 新版本gradio部署在服务器（docker方式）上报错",
+    "author": "Xtaiyang",
+    "state": "open",
+    "created_at": "2024-06-04T03:17:25Z",
+    "updated_at": "2024-08-02T02:35:10Z",
+    "labels": [],
+    "body": "### 相关问题\n\n![image](https://github.com/GaiZhenbiao/ChuanhuChatGPT/assets/97452846/178feb82-3a28-49f4-a209-46c06e13f5a4)\r\n\n\n### 可能的解决办法\n\n降版本才行\n\n### 帮助开发\n\n- [X] 我愿意协助开发！\n\n### 补充说明\n\n_No response_",
+    "comments": [
+      {
+        "user": "Xtaiyang",
+        "body": "解决方案：\r\n在运行 Gradio 应用程序之前，添加 export no_proxy=\"localhost,127.0.0.1\" 可以解决问题。\r\n"
+      }
+    ],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 1149,
+    "title": "[功能请求]: 是否支持GLM-4V国产视觉大模型？",
+    "author": "wpfnlp",
+    "state": "open",
+    "created_at": "2024-07-30T03:24:40Z",
+    "updated_at": "2024-08-02T02:12:31Z",
+    "labels": [
+      "feature request",
+      "🤖 model"
+    ],
+    "body": "### 相关问题\n\n我在Space中看到已经支持了GLM-4V国产视觉大模型，但是文档中如何配置呢？请问如何配置智源AI的GLM-4V模型的API KEY的接入呢？（不加载本地模型的方式。）\n\n### 可能的解决办法\n\n类似其它大模型的API KEY接入方式，可以接入GLM-4V视觉大模型的API KEY，如何操作？\n\n### 帮助开发\n\n- [ ] 我愿意协助开发！\n\n### 补充说明\n\n_No response_",
+    "comments": [],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 1140,
+    "title": "[远程部署]: 最新版本通过nginx反向代理时登陆等接口和theme.css 404",
+    "author": "s478264",
+    "state": "open",
+    "created_at": "2024-07-09T07:37:18Z",
+    "updated_at": "2024-07-23T11:57:31Z",
+    "labels": [
+      "question",
+      "server deployment"
+    ],
+    "body": "### 是否已存在现有反馈与解答？\n\n- [X] 我确认没有已有issue或discussion，且已阅读**常见问题**。\n\n### 是否是一个代理配置相关的疑问？\n\n- [X] 我确认这不是一个代理配置相关的疑问。\n\n### 错误描述\n\nnginx设置反向代理带了端口，访问时发现theme.css的url没端口，其他/login等接口也这样，老版本没问题，这个咋解决\n\n### 复现操作\n\n参考文档设置了nginx反向代理但是带端口\n\n### 错误日志\n\n_No response_\n\n### 运行环境\n\n- OS: centos7\r\n- Server: \r\n- Gradio version: 4.26.0\r\n- Python version: \r\n\n\n### 补充说明\n\n_No response_",
+    "comments": [
+      {
+        "user": "z-henry",
+        "body": "+1 反代后广域网接口不带端口号，局域网正常"
+      },
+      {
+        "user": "devotion-i",
+        "body": "+1 同样问题，带端口号不行。"
+      }
+    ],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 1144,
+    "title": "[功能请求]: 支持 GPT-4o Mini",
+    "author": "Wybxc",
+    "state": "closed",
+    "created_at": "2024-07-23T09:26:47Z",
+    "updated_at": "2024-07-23T10:23:38Z",
+    "labels": [
+      "feature request"
+    ],
+    "body": "### 相关问题\n\nOpenAI 关于推出 GPT4o Mini API 的通知：https://community.openai.com/t/introducing-gpt-4o-mini-in-the-api/871594\n\n### 可能的解决办法\n\n添加模型 GPT-4o Mini\n\n### 帮助开发\n\n- [X] 我愿意协助开发！\n\n### 补充说明\n\n_No response_",
+    "comments": [
+      {
+        "user": "GaiZhenbiao",
+        "body": "Added now https://github.com/GaiZhenbiao/ChuanhuChatGPT/commit/a7c3971860ae3185089d49d40689a7a2e0d9584d"
+      }
+    ],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 1092,
+    "title": "[功能请求]: 请求添加Kimi大模型的支持",
+    "author": "guoqingy",
+    "state": "open",
+    "created_at": "2024-04-01T08:13:39Z",
+    "updated_at": "2024-07-07T02:05:32Z",
+    "labels": [
+      "feature request",
+      "🤖 model"
+    ],
+    "body": "### 相关问题\n\nKimi 的长文本支持效果不错，希望能支持\n\n### 可能的解决办法\n\n\r\nKimi 使用 OpenAI 的 库，文档如下：\r\n[Kimi](https://platform.moonshot.cn/docs/api-reference#%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF)\n\n### 帮助开发\n\n- [ ] 我愿意协助开发！\n\n### 补充说明\n\n_No response_",
+    "comments": [],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 1119,
+    "title": "[本地部署]: 前端进度条显示问题",
+    "author": "Patrick-Ni",
+    "state": "open",
+    "created_at": "2024-05-12T03:10:45Z",
+    "updated_at": "2024-06-28T14:42:58Z",
+    "labels": [
+      "question",
+      "localhost deployment"
+    ],
+    "body": "### 是否已存在现有反馈与解答？\n\n- [X] 我确认没有已有issue或discussion，且已阅读**常见问题**。\n\n### 是否是一个代理配置相关的疑问？\n\n- [X] 我确认这不是一个代理配置相关的疑问。\n\n### 错误描述\n\n![image](https://github.com/GaiZhenbiao/ChuanhuChatGPT/assets/59468866/644c863b-be65-4102-bdbc-88fe8dcc4e4f)\r\n如图，我切换模型之后，希望可以单独去掉这几个加载框，而保留其他的，请问这该怎么设置呢？\n\n### 复现操作\n\n1.正常部署模型\r\n2.切换模型时发现progress进度条重复且位置不对\n\n### 错误日志\n\n_No response_\n\n### 运行环境\n\n```markdown\n- OS: Linux Centos 8\r\n- Browser: Chrome\r\n- Gradio version:  3.43.2\r\n- Python version: 3.10\n```\n\n\n### 补充说明\n\n_No response_",
+    "comments": [
+      {
+        "user": "GaiZhenbiao",
+        "body": "@Keldos-Li 有办法解决吗"
+      }
+    ],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 1117,
+    "title": "[Bug]: 自定义模型没有使用自定义api_host",
+    "author": "zodiacg",
+    "state": "closed",
+    "created_at": "2024-05-11T08:56:33Z",
+    "updated_at": "2024-06-28T14:40:17Z",
+    "labels": [
+      "bug"
+    ],
+    "body": "### 这个bug是否已存在现有issue了？\n\n- [X] 我确认没有已有issue，且已阅读**常见问题**。\n\n### 错误表现\n\n使用自定义模型添加模型：\r\n```json\r\n\"extra_model_metadata\": {\r\n        \"GLM-4\": {\r\n            \"model_type\": \"OpenAIVision\",\r\n            \"model_name\": \"glm-4\",\r\n            \"multimodal\": false,\r\n            \"api_host\": \"http://one-api:3000/\",\r\n            \"api_key\": \"sk-XXXXXXXXXXXXXXXXXX\",\r\n         }\r\n}\r\n```\r\n选择模型进行使用时，会报错：\r\n```\r\n{    \"error\": {        \"message\": \"Incorrect API key provided: sk-XX*****************************XXX. You can find your API key at https://platform.openai.com/account/api-keys.\",        \"type\": \"invalid_request_error\",        \"param\": null,        \"code\": \"invalid_api_key\"    }}\r\n```\r\n经检查发现OpenAPIVision中第40行处，虽然使用api_host生成了新的API URL，但并没有使用。实际使用中使用的是shared.state中的对应OpenAI原始URL\n\n### 复现操作\n\n1. Docker部署Chuanhu Chat和OneAPI\r\n3. 使用自定义模型添加模型：\r\n```json\r\n\"extra_model_metadata\": {\r\n        \"GLM-4\": {\r\n            \"model_type\": \"OpenAIVision\",\r\n            \"model_name\": \"glm-4\",\r\n            \"multimodal\": false,\r\n            \"api_host\": \"http://one-api:3000/\",\r\n            \"api_key\": \"sk-XXXXXXXXXXXXXXXXXX\",\r\n         }\r\n}\r\n```\r\n4. 使用时选择自定义模型\r\n5. 控制台报错Incorrect API key\n\n### 错误日志\n\n_No response_\n\n### 运行环境\n\n- OS: Ubuntu 22.04\r\n- Browser: Firefox\r\n- Gradio version: \r\n- Python version: \r\n\n\n### 帮助解决\n\n- [ ] 我愿意协助解决！\n\n### 补充说明\n\n_No response_",
+    "comments": [
+      {
+        "user": "GaiZhenbiao",
+        "body": "我看看"
+      },
+      {
+        "user": "vc12345679",
+        "body": "举例： extra_model_metadata 设置如下时\r\n```json\r\n\"extra_model_metadata\": {\r\n      \"DeepSeek V2\": {\r\n            \"model_name\": \"deepseek-chat\",\r\n            \"description\": \"This is DeepSeek's powerful open source LLM.\",\r\n            \"model_type\": \"OpenAIVision\",\r\n            \"multimodal\": false,\r\n            \"api_host\": \"https://api.deepseek.com\",\r\n            \"api_key\": \"sk-xxxxxxxx\",\r\n            \"token_limit\": 4096,\r\n            \"system\": \"You are a helpful AI assistant.\",\r\n            \"placeholder\": {\r\n                \"logo\": \"https://avatars.githubusercontent.com/u/148330874\",\r\n            }\r\n      },\r\n},\r\n```\r\nOpenAIVision.py 里 `__init__()`, `_get_response()`, `_single_query_at_once()` 三个函数中的变量分别为\r\n```\r\nself.api_host\t\t\t\thttps://api.deepseek.com\r\nself.chat_completion_url\t\thttps://api.deepseek.com/v1/chat/completions\r\nself.images_completion_url\t\thttps://api.deepseek.com/v1/images/generations\r\nself.openai_api_base\t\t\thttps://api.deepseek.com/v1\r\nself.balance_api_url\t\t\thttps://api.deepseek.com/dashboard/billing/credit_grants\r\nself.usage_api_url\t\t\thttps://api.deepseek.com/dashboard/billing/usage\r\nshared.state.chat_completion_url\thttps://api.openai.com/v1/chat/completions\r\nCHAT_COMPLETION_URL\t\t\thttps://api.openai.com/v1/chat/completions\r\n```\r\n但 `requests.post()` 时的 url 为 `shared.state.chat_completion_url`，应更正为 `self.chat_completion_url` #1125 。更正后运行正常\r\n\r\n![chat_DeepSeek-V2](https://github.com/GaiZhenbiao/ChuanhuChatGPT/assets/9109415/5971dc2e-c79e-418c-9e58-81905463824f)"
+      },
+      {
+        "user": "Keldos-Li",
+        "body": "closed via #1125"
+      }
+    ],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  },
+  {
+    "issue_number": 291,
+    "title": "[本地部署] 启动后报错 localhost not accessible",
+    "author": "dufu1991",
+    "state": "closed",
+    "created_at": "2023-03-22T07:52:20Z",
+    "updated_at": "2024-06-28T12:28:17Z",
+    "labels": [
+      "question"
+    ],
+    "body": "本地部署，启动了，看到 川虎的温馨提示：访问 http://localhost:7860 查看界面 \r\n网页也能打开一下，然后立即就报错了。\r\n\r\nTraceback (most recent call last):\r\n  File \"/Users/dufu/Downloads/ChuanhuChatGPT-main/ChuanhuChatbot.py\", line 451, in <module>\r\n    demo.queue().launch(share=False, favicon_path=\"./assets/favicon.png\")  # 改为 share=True 可以创建公开分享链接\r\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/gradio/blocks.py\", line 1514, in launch\r\n    raise ValueError(\r\nValueError: When localhost is not accessible, a shareable link must be created. Please set share=True.",
+    "comments": [
+      {
+        "user": "fuxin123z",
+        "body": "?"
+      },
+      {
+        "user": "MZhao-ouo",
+        "body": "长时间无回复，Closed"
+      },
+      {
+        "user": "Accurio",
+        "body": "如果使用代理服务器，需要设置 `HTTP_PROXY`、`HTTPS_PROXY` 和 `NO_PROXY` 环境变量。\r\n\r\n```Python\r\nimport os\r\nfrom urllib.request import getproxies\r\n\r\nproxies = getproxies()\r\nos.environ[\"http_proxy\"]  = proxies[\"http\"]\r\nos.environ[\"https_proxy\"] = proxies[\"https\"]\r\nos.environ[\"no_proxy\"]    = \"localhost, 127.0.0.1/8, ::1\"\r\n```\r\n"
+      }
+    ],
+    "repository": "GaiZhenbiao/ChuanhuChatGPT"
+  }
+]

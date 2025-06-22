@@ -1,0 +1,40 @@
+[
+  {
+    "issue_number": 9,
+    "title": "运行gptspeaker.py，报错module 'openai' has no attribute 'AsyncClient'",
+    "author": "cheruidonglu",
+    "state": "closed",
+    "created_at": "2025-06-14T08:52:29Z",
+    "updated_at": "2025-06-16T02:22:08Z",
+    "labels": [],
+    "body": "python3 gptspeaker.py\n报错\nEncountered exception. module 'openai' has no attribute 'AsyncClient'\n请问这个可能是什么原因？\n\n我的python版本是3.11\nopenai版本是0.28.1",
+    "comments": [
+      {
+        "user": "jackwuwei",
+        "body": "> python3 gptspeaker.py 报错 Encountered exception. module 'openai' has no attribute 'AsyncClient' 请问这个可能是什么原因？\n> \n> 我的python版本是3.11 openai版本是0.28.1\n\n你更新到最新的openai版本试试"
+      },
+      {
+        "user": "cheruidonglu",
+        "body": "> > python3 gptspeaker.py 报错 Encountered exception. module 'openai' has no attribute 'AsyncClient' 请问这个可能是什么原因？\n> > 我的python版本是3.11 openai版本是0.28.1\n> \n> 你更新到最新的openai版本试试\n\n更新到新版本可以了，谢谢！"
+      }
+    ],
+    "repository": "jackwuwei/gptspeaker"
+  },
+  {
+    "issue_number": 8,
+    "title": "Azure API的获取",
+    "author": "White-Lulu",
+    "state": "closed",
+    "created_at": "2025-02-06T19:00:14Z",
+    "updated_at": "2025-06-14T13:44:44Z",
+    "labels": [],
+    "body": "你好  Azure Cognitive Services现在集成在了Azure AI Services里。在官网搜索栏里需要搜索Azure AI Services（搜不到Azure Cognitive Services）再进Speech Services相关页面  ：з",
+    "comments": [
+      {
+        "user": "jackwuwei",
+        "body": "感谢提醒，我更新下readme"
+      }
+    ],
+    "repository": "jackwuwei/gptspeaker"
+  }
+]
